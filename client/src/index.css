@@ -1339,6 +1339,28 @@ div[class*="group-hover/service:block"] > div::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
+/* Custom scrollbar for chat */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 255, 0, 0.3);
+  border-radius: 20px;
+}
+
+.scrollbar-thumb-green-500\/30::-webkit-scrollbar-thumb {
+  background-color: rgba(34, 197, 94, 0.3);
+}
+
+.scrollbar-track-transparent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 @layer base {
   * {
     @apply border-border;
