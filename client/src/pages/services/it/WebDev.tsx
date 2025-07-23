@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { staggerContainer, fadeIn } from "@/lib/animations";
 import { Globe, ShoppingCart, Newspaper, Tag, Heart, Briefcase, Calendar, Code, Server, Shield, Smartphone, Database, Zap, Layers } from "lucide-react";
@@ -8,7 +9,7 @@ const WebDev = () => {
 
   const services = [
     {
-      icon: <Globe className="w-8 h-8 text-primary" />,
+      icon: <Globe className="w-8 h-8 text-green-400" />,
       title: "Website Builder Platform",
       description: "Create stunning, professional-grade websites with our intuitive drag-and-drop builder that requires no coding knowledge. Perfect for businesses, portfolios, and personal sites.",
       image: "/images/services/website-builder.jpg",
@@ -21,7 +22,7 @@ const WebDev = () => {
       ]
     },
     {
-      icon: <ShoppingCart className="w-8 h-8 text-primary" />,
+      icon: <ShoppingCart className="w-8 h-8 text-green-400" />,
       title: "eCommerce Store Platform",
       description: "Launch your fully-featured online store with multi-vendor support, secure payments, and comprehensive inventory management to scale your business.",
       image: "/images/services/ecommerce.jpg",
@@ -34,7 +35,7 @@ const WebDev = () => {
       ]
     },
     {
-      icon: <Newspaper className="w-8 h-8 text-primary" />,
+      icon: <Newspaper className="w-8 h-8 text-green-400" />,
       title: "Blog & News Publishing CMS",
       description: "Enterprise-grade content management system designed for publishers, bloggers, and media houses with advanced content scheduling and distribution features.",
       image: "/images/services/blog-cms.jpg",
@@ -47,7 +48,7 @@ const WebDev = () => {
       ]
     },
     {
-      icon: <Tag className="w-8 h-8 text-primary" />,
+      icon: <Tag className="w-8 h-8 text-green-400" />,
       title: "Classified Ads Portal",
       description: "Powerful classified marketplace solution with advanced search, geolocation, and monetization features to create your own Craigslist-style platform.",
       image: "/images/services/classified.jpg",
@@ -60,7 +61,7 @@ const WebDev = () => {
       ]
     },
     {
-      icon: <Heart className="w-8 h-8 text-primary" />,
+      icon: <Heart className="w-8 h-8 text-green-400" />,
       title: "Matrimony Portal",
       description: "Complete matrimonial matching platform with AI-powered recommendations, verified profiles, and secure communication channels for serious matchmaking.",
       image: "/images/services/matrimony.jpg",
@@ -73,7 +74,7 @@ const WebDev = () => {
       ]
     },
     {
-      icon: <Briefcase className="w-8 h-8 text-primary" />,
+      icon: <Briefcase className="w-8 h-8 text-green-400" />,
       title: "Job Recruitment Portal",
       description: "Comprehensive job board solution connecting employers with qualified candidates through intelligent matching algorithms and resume parsing technology.",
       image: "/images/services/job-portal.jpg",
@@ -86,7 +87,7 @@ const WebDev = () => {
       ]
     },
     {
-      icon: <Calendar className="w-8 h-8 text-primary" />,
+      icon: <Calendar className="w-8 h-8 text-green-400" />,
       title: "Event Management Portal",
       description: "End-to-end event planning and ticketing system with calendar integration, attendee management, and promotional tools for event organizers.",
       image: "/images/services/event-portal.jpg",
@@ -173,18 +174,20 @@ const WebDev = () => {
   ];
 
   return (
-    <div className="bg-background py-20">
+    <main className="min-h-screen bg-gradient-to-b from-zinc-900 to-black pt-24">
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.25 }}
-        className="container mx-auto px-4"
+        className="container mx-auto px-4 py-20"
       >
         {/* Hero Section */}
         <motion.div variants={fadeIn("up", "tween", 0.2, 1)} className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Professional Web Development & CMS Solutions</h1>
-          <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-600 bg-clip-text text-transparent">
+            Professional Web Development & CMS Solutions
+          </h1>
+          <p className="text-gray-300 text-lg max-w-3xl mx-auto">
             Transform your digital presence with our cutting-edge web development services. Since 2012, we've helped 500+ businesses 
             across 15 industries build scalable, secure, and high-performing web platforms that drive growth and engagement. 
             Whether you need a simple website or a complex web application, our full-stack expertise delivers results.
@@ -193,28 +196,28 @@ const WebDev = () => {
 
         {/* Stats Section */}
         <motion.div variants={fadeIn("up", "tween", 0.3, 1)} className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-          <div className="bg-card p-6 rounded-lg text-center border border-border">
-            <div className="text-3xl font-bold text-primary mb-2">12+</div>
-            <div className="text-muted-foreground">Years Experience</div>
+          <div className="bg-zinc-800/50 p-6 rounded-lg text-center border border-green-500/20">
+            <div className="text-3xl font-bold text-green-400 mb-2">12+</div>
+            <div className="text-gray-300">Years Experience</div>
           </div>
-          <div className="bg-card p-6 rounded-lg text-center border border-border">
-            <div className="text-3xl font-bold text-primary mb-2">500+</div>
-            <div className="text-muted-foreground">Projects Delivered</div>
+          <div className="bg-zinc-800/50 p-6 rounded-lg text-center border border-green-500/20">
+            <div className="text-3xl font-bold text-green-400 mb-2">500+</div>
+            <div className="text-gray-300">Projects Delivered</div>
           </div>
-          <div className="bg-card p-6 rounded-lg text-center border border-border">
-            <div className="text-3xl font-bold text-primary mb-2">98%</div>
-            <div className="text-muted-foreground">Client Satisfaction</div>
+          <div className="bg-zinc-800/50 p-6 rounded-lg text-center border border-green-500/20">
+            <div className="text-3xl font-bold text-green-400 mb-2">98%</div>
+            <div className="text-gray-300">Client Satisfaction</div>
           </div>
-          <div className="bg-card p-6 rounded-lg text-center border border-border">
-            <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-            <div className="text-muted-foreground">Support Available</div>
+          <div className="bg-zinc-800/50 p-6 rounded-lg text-center border border-green-500/20">
+            <div className="text-3xl font-bold text-green-400 mb-2">24/7</div>
+            <div className="text-gray-300">Support Available</div>
           </div>
         </motion.div>
 
         {/* Services Grid */}
         <motion.div variants={fadeIn("up", "tween", 0.4, 1)} className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-4">Our Web Development Services</h2>
-          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-10">
+          <h2 className="text-3xl font-bold text-center mb-4 text-white">Our Web Development Services</h2>
+          <p className="text-gray-300 text-center max-w-3xl mx-auto mb-10">
             We specialize in building custom web solutions tailored to your business needs. 
             From simple websites to complex web applications, our full-cycle development process ensures quality at every stage.
           </p>
@@ -224,7 +227,7 @@ const WebDev = () => {
               <motion.div
                 key={index}
                 variants={fadeIn("up", "tween", 0.2 * index, 1)}
-                className="bg-card rounded-lg overflow-hidden border border-border hover:border-primary/50 transition-colors"
+                className="bg-zinc-800/50 rounded-lg overflow-hidden border border-green-500/20 hover:border-green-500/50 transition-colors"
               >
                 <div className="h-48 relative">
                   <img
@@ -240,14 +243,14 @@ const WebDev = () => {
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     {service.icon}
-                    <h3 className="text-xl font-semibold">{service.title}</h3>
+                    <h3 className="text-xl font-semibold text-white">{service.title}</h3>
                   </div>
-                  <p className="text-muted-foreground mb-4">{service.description}</p>
+                  <p className="text-gray-300 mb-4">{service.description}</p>
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                        <span>{feature}</span>
+                        <div className="h-1.5 w-1.5 rounded-full bg-green-400" />
+                        <span className="text-gray-300">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -259,19 +262,19 @@ const WebDev = () => {
 
         {/* Technology Stack */}
         <motion.div variants={fadeIn("up", "tween", 0.5, 1)} className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-4">Our Technology Stack</h2>
-          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-10">
+          <h2 className="text-3xl font-bold text-center mb-4 text-white">Our Technology Stack</h2>
+          <p className="text-gray-300 text-center max-w-3xl mx-auto mb-10">
             We use cutting-edge technologies to build fast, secure, and scalable web applications.
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
             {technologies.map((tech, index) => (
-              <div key={index} className="bg-card p-4 rounded-lg border border-border text-center">
-                <div className="flex justify-center mb-3">
+              <div key={index} className="bg-zinc-800/50 p-4 rounded-lg border border-green-500/20 text-center">
+                <div className="flex justify-center mb-3 text-green-400">
                   {tech.icon}
                 </div>
-                <h4 className="font-medium mb-1">{tech.name}</h4>
-                <p className="text-muted-foreground text-sm">{tech.description}</p>
+                <h4 className="font-medium mb-1 text-white">{tech.name}</h4>
+                <p className="text-gray-400 text-sm">{tech.description}</p>
               </div>
             ))}
           </div>
@@ -279,21 +282,21 @@ const WebDev = () => {
 
         {/* Development Process */}
         <motion.div variants={fadeIn("up", "tween", 0.6, 1)} className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-4">Our Development Process</h2>
-          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-10">
+          <h2 className="text-3xl font-bold text-center mb-4 text-white">Our Development Process</h2>
+          <p className="text-gray-300 text-center max-w-3xl mx-auto mb-10">
             Transparent, collaborative, and efficient - our 6-phase process ensures your project's success from concept to launch.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {processSteps.map((step, index) => (
-              <div key={index} className="bg-card p-6 rounded-lg border border-border">
+              <div key={index} className="bg-zinc-800/50 p-6 rounded-lg border border-green-500/20">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-primary/10 text-primary rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                  <div className="bg-green-500/20 text-green-400 rounded-full w-10 h-10 flex items-center justify-center font-bold">
                     {index + 1}
                   </div>
-                  <h3 className="text-xl font-semibold">{step.title}</h3>
+                  <h3 className="text-xl font-semibold text-white">{step.title}</h3>
                 </div>
-                <p className="text-muted-foreground">{step.description}</p>
+                <p className="text-gray-300">{step.description}</p>
               </div>
             ))}
           </div>
@@ -301,16 +304,16 @@ const WebDev = () => {
 
         {/* FAQ Section */}
         <motion.div variants={fadeIn("up", "tween", 0.7, 1)} className="mt-20">
-          <h2 className="text-3xl font-bold text-center mb-4">Frequently Asked Questions</h2>
-          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-10">
+          <h2 className="text-3xl font-bold text-center mb-4 text-white">Frequently Asked Questions</h2>
+          <p className="text-gray-300 text-center max-w-3xl mx-auto mb-10">
             Get answers to common questions about our web development services and process.
           </p>
           
           <div className="max-w-4xl mx-auto space-y-6">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-card rounded-lg p-6 border border-border hover:border-primary/50 transition-colors">
-                <h3 className="text-xl font-semibold mb-3">{faq.question}</h3>
-                <p className="text-muted-foreground">{faq.answer}</p>
+              <div key={index} className="bg-zinc-800/50 rounded-lg p-6 border border-green-500/20 hover:border-green-500/50 transition-colors">
+                <h3 className="text-xl font-semibold mb-3 text-white">{faq.question}</h3>
+                <p className="text-gray-300">{faq.answer}</p>
               </div>
             ))}
           </div>
@@ -318,16 +321,16 @@ const WebDev = () => {
 
         {/* CTA Section */}
         <motion.div variants={fadeIn("up", "tween", 0.8, 1)} className="mt-20 text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Build Your Website?</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
+          <h2 className="text-3xl font-bold mb-6 text-white">Ready to Build Your Website?</h2>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
             Whether you have a project in mind or need guidance on your web strategy, our team is ready to help.
           </p>
-          <button className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+          <button className="bg-green-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-green-600 transition-colors">
             Get a Free Consultation
           </button>
         </motion.div>
       </motion.div>
-    </div>
+    </main>
   );
 };
 
