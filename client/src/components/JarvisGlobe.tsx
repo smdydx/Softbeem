@@ -1,12 +1,13 @@
+
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { motion } from 'framer-motion';
 
-interface JarvisGlobeProps {
+interface JarvisPrismProps {
   size?: number;
 }
 
-const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
+const JarvisPrism = ({ size = 300 }: JarvisPrismProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -20,7 +21,8 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     sceneRef.current = scene;
 
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 2000);
-    camera.position.z = 5;
+    camera.position.z = 8;
+    camera.position.y = 2;
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ 
@@ -37,21 +39,24 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     }
     containerRef.current.appendChild(renderer.domElement);
 
-    // Create the Earth sphere
-    const earthGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+    // Create the prism geometry
+    const prismGeometry = new THREE.CylinderGeometry(0, 2, 3, 6);
     
-    // Create a holographic material
-    const earthMaterial = new THREE.ShaderMaterial({
+    // Create holographic material for the prism
+    const prismMaterial = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        color1: { value: new THREE.Color(0x00FF00) }, // Primary green
+        color1: { value: new THREE.Color(0x00FF00) }, // Green
         color2: { value: new THREE.Color(0x32CD32) }, // Lime green
+        color3: { value: new THREE.Color(0x00FFFF) }, // Cyan
       },
       vertexShader: `
         varying vec3 vNormal;
+        varying vec3 vPosition;
         varying vec2 vUv;
         void main() {
           vNormal = normalize(normalMatrix * normal);
+          vPosition = position;
           vUv = uv;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
@@ -60,112 +65,126 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
         uniform float time;
         uniform vec3 color1;
         uniform vec3 color2;
+        uniform vec3 color3;
         varying vec3 vNormal;
+        varying vec3 vPosition;
         varying vec2 vUv;
         
         void main() {
-          // Create a grid pattern
-          float gridSize = 20.0;
-          vec2 grid = fract(vUv * gridSize);
-          float gridLine = max(
-            step(0.95, grid.x) * step(grid.x, 0.98),
-            step(0.95, grid.y) * step(grid.y, 0.98)
-          );
+          // Edge detection for wireframe effect
+          vec3 pos = vPosition;
+          float edge = 0.0;
           
-          // Create longitude/latitude lines
-          float latLine = step(0.97, abs(sin(vUv.y * 3.14159 * 8.0)));
-          float longLine = step(0.97, abs(sin(vUv.x * 3.14159 * 16.0)));
+          // Create geometric patterns
+          float pattern1 = sin(pos.y * 10.0 + time) * 0.5 + 0.5;
+          float pattern2 = cos(pos.x * 8.0 - time * 0.5) * 0.5 + 0.5;
+          float pattern3 = sin(length(pos.xz) * 12.0 + time * 2.0) * 0.5 + 0.5;
           
-          // Combine grid and long/lat lines
-          float lines = max(max(gridLine, latLine), longLine);
+          // Energy lines
+          float lines = step(0.9, sin(vUv.y * 20.0 + time * 3.0));
+          lines += step(0.95, sin(vUv.x * 15.0 - time * 2.0));
           
-          // Edge glow effect
-          float rim = 1.0 - max(0.0, dot(vNormal, vec3(0.0, 0.0, 1.0)));
-          rim = pow(rim, 2.0);
+          // Fresnel effect for glow
+          float fresnel = 1.0 - max(0.0, dot(vNormal, vec3(0.0, 0.0, 1.0)));
+          fresnel = pow(fresnel, 2.0);
           
-          // Pulsating effect
-          float pulse = 0.5 + 0.5 * sin(time * 0.5);
+          // Data stream effect
+          float dataStream = step(0.97, sin(vUv.y * 50.0 - time * 5.0));
           
-          // Data points that move
-          float dataPoint1 = step(0.98, sin(vUv.x * 50.0 + time) * sin(vUv.y * 50.0 + time * 0.7));
-          float dataPoint2 = step(0.98, cos(vUv.x * 40.0 - time * 0.3) * sin(vUv.y * 40.0 + time * 0.5));
-          float dataPoints = max(dataPoint1, dataPoint2);
+          // Color mixing
+          vec3 baseColor = mix(color1, color2, pattern1);
+          baseColor = mix(baseColor, color3, pattern2 * 0.3);
           
-          // Scanning line effect
-          float scanLine = step(0.98, sin(vUv.y * 3.14159 * 2.0 - time));
+          // Apply effects
+          vec3 finalColor = baseColor;
+          finalColor = mix(finalColor, vec3(1.0), lines * 0.8);
+          finalColor = mix(finalColor, color3, dataStream * 0.6);
+          finalColor += fresnel * color1 * 0.5;
           
-          // Combine all effects
-          vec3 baseColor = mix(color1, color2, rim);
-          vec3 finalColor = mix(baseColor * 0.5, baseColor, lines);
-          finalColor = mix(finalColor, vec3(1.0, 1.0, 1.0), dataPoints);
-          finalColor = mix(finalColor, vec3(1.0, 1.0, 1.0), scanLine * 0.5);
+          // Pulsating alpha
+          float pulse = 0.6 + 0.4 * sin(time * 0.8);
+          float alpha = pulse * (0.7 + fresnel * 0.3 + lines * 0.3);
           
-          // Apply pulsating opacity
-          float alpha = 0.7 + 0.3 * pulse;
-          // Stronger at edges
-          alpha = alpha * (0.6 + rim * 0.4);
-          
-          gl_FragColor = vec4(finalColor, alpha * (0.3 + lines * 0.7));
+          gl_FragColor = vec4(finalColor, alpha);
         }
       `,
       transparent: true,
       side: THREE.DoubleSide,
     });
 
-    const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-    scene.add(earth);
+    const prism = new THREE.Mesh(prismGeometry, prismMaterial);
+    scene.add(prism);
 
-    // Create stars
-    const starsGeometry = new THREE.BufferGeometry();
-    const starsMaterial = new THREE.PointsMaterial({
-      color: 0xffffff,
-      size: 0.02,
+    // Create wireframe overlay
+    const wireframeGeometry = new THREE.EdgesGeometry(prismGeometry);
+    const wireframeMaterial = new THREE.LineBasicMaterial({ 
+      color: 0x00FF00, 
+      transparent: true, 
+      opacity: 0.8 
+    });
+    const wireframe = new THREE.LineSegments(wireframeGeometry, wireframeMaterial);
+    scene.add(wireframe);
+
+    // Create floating particles around the prism
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesMaterial = new THREE.PointsMaterial({
+      color: 0x00FFFF,
+      size: 0.05,
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.8,
     });
 
-    const starsVertices = [];
-    for (let i = 0; i < 1000; i++) {
-      const x = THREE.MathUtils.randFloatSpread(10);
-      const y = THREE.MathUtils.randFloatSpread(10);
-      const z = THREE.MathUtils.randFloatSpread(10);
-      starsVertices.push(x, y, z);
+    const particlesVertices = [];
+    for (let i = 0; i < 500; i++) {
+      const radius = 4 + Math.random() * 2;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.random() * Math.PI;
+      
+      const x = radius * Math.sin(phi) * Math.cos(theta);
+      const y = radius * Math.cos(phi);
+      const z = radius * Math.sin(phi) * Math.sin(theta);
+      
+      particlesVertices.push(x, y, z);
     }
 
-    starsGeometry.setAttribute(
+    particlesGeometry.setAttribute(
       'position',
-      new THREE.Float32BufferAttribute(starsVertices, 3)
+      new THREE.Float32BufferAttribute(particlesVertices, 3)
     );
 
-    const stars = new THREE.Points(starsGeometry, starsMaterial);
-    scene.add(stars);
+    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particles);
 
-    // Holographic rings
-    const ringsGeometry = new THREE.RingGeometry(2.2, 2.3, 64);
-    const ringsMaterial = new THREE.MeshBasicMaterial({
-      color: 0xFF6E00,
+    // Create energy rings around the prism
+    const ring1Geometry = new THREE.RingGeometry(3.5, 3.7, 32);
+    const ring1Material = new THREE.MeshBasicMaterial({
+      color: 0x00FF00,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.4,
+    });
+    const ring1 = new THREE.Mesh(ring1Geometry, ring1Material);
+    ring1.rotation.x = Math.PI / 2;
+    scene.add(ring1);
+
+    const ring2Geometry = new THREE.RingGeometry(4.2, 4.4, 32);
+    const ring2Material = new THREE.MeshBasicMaterial({
+      color: 0x32CD32,
       side: THREE.DoubleSide,
       transparent: true,
       opacity: 0.3,
     });
-    const rings = new THREE.Mesh(ringsGeometry, ringsMaterial);
-    rings.rotation.x = Math.PI / 2;
-    scene.add(rings);
+    const ring2 = new THREE.Mesh(ring2Geometry, ring2Material);
+    ring2.rotation.x = Math.PI / 2;
+    scene.add(ring2);
 
-    const rings2Geometry = new THREE.RingGeometry(2.5, 2.55, 64);
-    const rings2Material = new THREE.MeshBasicMaterial({
-      color: 0xFFA500,
-      side: THREE.DoubleSide,
-      transparent: true,
-      opacity: 0.2,
-    });
-    const rings2 = new THREE.Mesh(rings2Geometry, rings2Material);
-    rings2.rotation.x = Math.PI / 2;
-    scene.add(rings2);
-
-    // Add ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    // Add lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
+
+    const pointLight = new THREE.PointLight(0x00FF00, 1, 100);
+    pointLight.position.set(5, 5, 5);
+    scene.add(pointLight);
 
     // Animation loop
     const clock = new THREE.Clock();
@@ -175,21 +194,37 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       
       const elapsedTime = clock.getElapsedTime();
       
-      // Rotate the earth
-      earth.rotation.y = elapsedTime * 0.1;
+      // Rotate the prism
+      prism.rotation.y = elapsedTime * 0.5;
+      prism.rotation.x = Math.sin(elapsedTime * 0.3) * 0.1;
       
-      // Pulse the rings
-      const pulse = Math.sin(elapsedTime * 0.5) * 0.1 + 0.9;
-      rings.scale.set(pulse, pulse, pulse);
-      rings2.scale.set(1.05 - pulse * 0.05, 1.05 - pulse * 0.05, 1.05 - pulse * 0.05);
+      // Rotate wireframe
+      wireframe.rotation.y = elapsedTime * 0.5;
+      wireframe.rotation.x = Math.sin(elapsedTime * 0.3) * 0.1;
+      
+      // Animate rings
+      ring1.rotation.z = elapsedTime * 0.3;
+      ring2.rotation.z = -elapsedTime * 0.2;
+      
+      // Pulse rings
+      const pulse1 = Math.sin(elapsedTime * 2) * 0.1 + 0.9;
+      const pulse2 = Math.cos(elapsedTime * 1.5) * 0.1 + 0.9;
+      ring1.scale.set(pulse1, pulse1, pulse1);
+      ring2.scale.set(pulse2, pulse2, pulse2);
       
       // Update shader time
-      if (earth.material instanceof THREE.ShaderMaterial) {
-        earth.material.uniforms.time.value = elapsedTime;
+      if (prism.material instanceof THREE.ShaderMaterial) {
+        prism.material.uniforms.time.value = elapsedTime;
       }
       
-      // Rotate the stars slowly
-      stars.rotation.y = elapsedTime * 0.02;
+      // Rotate particles
+      particles.rotation.y = elapsedTime * 0.1;
+      particles.rotation.x = elapsedTime * 0.05;
+      
+      // Camera orbit
+      camera.position.x = Math.sin(elapsedTime * 0.2) * 8;
+      camera.position.z = Math.cos(elapsedTime * 0.2) * 8;
+      camera.lookAt(0, 0, 0);
       
       // Render
       rendererRef.current.render(sceneRef.current, cameraRef.current);
@@ -216,23 +251,19 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
         containerRef.current.removeChild(rendererRef.current.domElement);
       }
       
-      if (earth.geometry) earth.geometry.dispose();
-      if (earth.material) {
-        if (Array.isArray(earth.material)) {
-          earth.material.forEach((m: THREE.Material) => m.dispose());
-        } else {
-          earth.material.dispose();
-        }
-      }
+      // Dispose geometries
+      prismGeometry.dispose();
+      wireframeGeometry.dispose();
+      particlesGeometry.dispose();
+      ring1Geometry.dispose();
+      ring2Geometry.dispose();
       
-      if (starsGeometry) starsGeometry.dispose();
-      if (starsMaterial) starsMaterial.dispose();
-      
-      if (ringsGeometry) ringsGeometry.dispose();
-      if (ringsMaterial) ringsMaterial.dispose();
-      
-      if (rings2Geometry) rings2Geometry.dispose();
-      if (rings2Material) rings2Material.dispose();
+      // Dispose materials
+      if (prismMaterial) prismMaterial.dispose();
+      if (wireframeMaterial) wireframeMaterial.dispose();
+      if (particlesMaterial) particlesMaterial.dispose();
+      if (ring1Material) ring1Material.dispose();
+      if (ring2Material) ring2Material.dispose();
       
       if (rendererRef.current) rendererRef.current.dispose();
     };
@@ -244,7 +275,7 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="jarvis-globe"
+      className="jarvis-prism"
       style={{ 
         width: size, 
         height: size, 
@@ -254,3 +285,5 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     />
   );
 };
+
+export default JarvisPrism;
