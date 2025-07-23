@@ -12,7 +12,7 @@ const WebDev = () => {
       icon: <Globe className="w-8 h-8 text-green-400" />,
       title: "Website Builder Platform",
       description: "Create stunning, professional-grade websites with our intuitive drag-and-drop builder that requires no coding knowledge. Perfect for businesses, portfolios, and personal sites.",
-      image: "/images/services/website-builder.jpg",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: [
         "Drag & Drop Interface with real-time preview",
         "100+ Responsive Templates for all industries",
@@ -25,7 +25,7 @@ const WebDev = () => {
       icon: <ShoppingCart className="w-8 h-8 text-green-400" />,
       title: "eCommerce Store Platform",
       description: "Launch your fully-featured online store with multi-vendor support, secure payments, and comprehensive inventory management to scale your business.",
-      image: "/images/services/ecommerce.jpg",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: [
         "Multi-Vendor Marketplace capabilities",
         "20+ Payment Gateway Integrations (Stripe, PayPal, etc.)",
@@ -38,7 +38,7 @@ const WebDev = () => {
       icon: <Newspaper className="w-8 h-8 text-green-400" />,
       title: "Blog & News Publishing CMS",
       description: "Enterprise-grade content management system designed for publishers, bloggers, and media houses with advanced content scheduling and distribution features.",
-      image: "/images/services/blog-cms.jpg",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: [
         "Advanced Rich Text Editor with media embedding",
         "Content Scheduling with calendar view",
@@ -51,7 +51,7 @@ const WebDev = () => {
       icon: <Tag className="w-8 h-8 text-green-400" />,
       title: "Classified Ads Portal",
       description: "Powerful classified marketplace solution with advanced search, geolocation, and monetization features to create your own Craigslist-style platform.",
-      image: "/images/services/classified.jpg",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: [
         "Ad Listing Management with expiration dates",
         "Category Navigation with filters",
@@ -64,7 +64,7 @@ const WebDev = () => {
       icon: <Heart className="w-8 h-8 text-green-400" />,
       title: "Matrimony Portal",
       description: "Complete matrimonial matching platform with AI-powered recommendations, verified profiles, and secure communication channels for serious matchmaking.",
-      image: "/images/services/matrimony.jpg",
+      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: [
         "Detailed Profile Management with verification",
         "AI-based Match Recommendations",
@@ -77,7 +77,7 @@ const WebDev = () => {
       icon: <Briefcase className="w-8 h-8 text-green-400" />,
       title: "Job Recruitment Portal",
       description: "Comprehensive job board solution connecting employers with qualified candidates through intelligent matching algorithms and resume parsing technology.",
-      image: "/images/services/job-portal.jpg",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: [
         "Advanced Job Posting System with rich formatting",
         "Resume Database with search functionality",
@@ -90,7 +90,7 @@ const WebDev = () => {
       icon: <Calendar className="w-8 h-8 text-green-400" />,
       title: "Event Management Portal",
       description: "End-to-end event planning and ticketing system with calendar integration, attendee management, and promotional tools for event organizers.",
-      image: "/images/services/event-portal.jpg",
+      image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: [
         "Event Creation with rich media and descriptions",
         "Ticket Management with multiple pricing tiers",
