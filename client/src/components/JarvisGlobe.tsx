@@ -64,17 +64,17 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
         varying vec2 vUv;
         
         void main() {
-          // Create a grid pattern
-          float gridSize = 20.0;
+          // Create a grid pattern with thinner lines and more gaps
+          float gridSize = 30.0; // More grid divisions
           vec2 grid = fract(vUv * gridSize);
           float gridLine = max(
-            step(0.95, grid.x) * step(grid.x, 0.98),
-            step(0.95, grid.y) * step(grid.y, 0.98)
+            step(0.98, grid.x) * step(grid.x, 0.985), // Much thinner lines
+            step(0.98, grid.y) * step(grid.y, 0.985)  // Much thinner lines
           );
           
-          // Create longitude/latitude lines
-          float latLine = step(0.97, abs(sin(vUv.y * 3.14159 * 8.0)));
-          float longLine = step(0.97, abs(sin(vUv.x * 3.14159 * 16.0)));
+          // Create longitude/latitude lines - much thinner
+          float latLine = step(0.99, abs(sin(vUv.y * 3.14159 * 12.0))); // More lines, thinner
+          float longLine = step(0.99, abs(sin(vUv.x * 3.14159 * 24.0))); // More lines, thinner
           
           // Combine grid and long/lat lines
           float lines = max(max(gridLine, latLine), longLine);
@@ -100,12 +100,12 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
           finalColor = mix(finalColor, vec3(1.0, 1.0, 1.0), dataPoints);
           finalColor = mix(finalColor, vec3(1.0, 1.0, 1.0), scanLine * 0.5);
           
-          // Apply pulsating opacity
-          float alpha = 0.7 + 0.3 * pulse;
+          // Apply pulsating opacity - more subtle
+          float alpha = 0.5 + 0.2 * pulse;
           // Stronger at edges
-          alpha = alpha * (0.6 + rim * 0.4);
+          alpha = alpha * (0.4 + rim * 0.3);
           
-          gl_FragColor = vec4(finalColor, alpha * (0.3 + lines * 0.7));
+          gl_FragColor = vec4(finalColor, alpha * (0.2 + lines * 0.4));
         }
       `,
       transparent: true,
