@@ -7,11 +7,13 @@ import { staggerContainer } from "@/lib/animations";
 import { useState, useEffect } from "react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 
 const Footer = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const { settings } = useSiteSettings();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,7 +96,12 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div onClick={() => window.location.href = '/'} className="cursor-pointer">
               <div className="flex items-center gap-4 mb-6">
-                <img src="/images/ramaera-logo.jpg" alt="Ramaera Logo" className="h-14 w-14 rounded-full border-2 border-orange-500/30" />
+                <img 
+                  src={settings.logoUrl || "/images/ramaera-logo.jpg"} 
+                  alt={`${settings.companyName || 'Ramaera'} Logo`} 
+                  className="h-14 w-14 rounded-full border-2"
+                  style={{ borderColor: `${settings.themeColor || '#ff6b35'}30` }}
+                />
               </div>
             </div>
             <p className="text-gray-400 mb-8 text-lg leading-relaxed">

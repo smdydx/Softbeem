@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 import { 
   PencilIcon, 
   TrashIcon, 
@@ -56,25 +58,36 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [editBlog, setEditBlog] = useState(null);
 
-  // Site content management states
-  const [headerContent, setHeaderContent] = useState({
-    logo: '/images/ramaera-logo.jpg',
-    title: 'Ramaera Industries',
-    navigation: []
+  // Site content management with real-time updates
+  const { settings, updateSettings, updateTheme, loading: settingsLoading } = useSiteSettings();
+  
+  const [themeSettings, setThemeSettings] = useState({
+    themeColor: '#00FF00',
+    fontFamily: 'Inter',
+    logoUrl: '/images/ramaera-logo.jpg',
+    companyName: 'Ramaera Industries'
   });
-  const [heroContent, setHeroContent] = useState({
-    title: '',
-    subtitle: '',
-    backgroundVideo: '',
-    ctaButton: ''
-  });
-  const [footerContent, setFooterContent] = useState({
-    company: '',
-    description: '',
-    links: [],
-    socialLinks: [],
-    copyright: ''
-  });
+  
+  const [serviceCategories, setServiceCategories] = useState([
+    {
+      id: 'blockchain',
+      name: 'Blockchain Services',
+      services: [
+        { id: 'smart-contracts', name: 'Smart Contract Development', price: '₹50,000' },
+        { id: 'token-dev', name: 'Token Development', price: '₹75,000' },
+        { id: 'nft-marketplace', name: 'NFT Marketplace', price: '₹1,00,000' }
+      ]
+    },
+    {
+      id: 'it-services',
+      name: 'IT Services',
+      services: [
+        { id: 'web-dev', name: 'Web Development', price: '₹25,000' },
+        { id: 'app-dev', name: 'App Development', price: '₹60,000' },
+        { id: 'cloud-services', name: 'Cloud Services', price: '₹40,000' }
+      ]
+    }
+  ]);
 
   // Sidebar menu structure
   const sidebarMenu = [
@@ -89,6 +102,7 @@ const Dashboard = () => {
       title: 'Content Management',
       icon: FileText,
       children: [
+        { id: 'theme', title: 'Theme Settings', icon: Settings },
         { id: 'header', title: 'Header Settings', icon: Layout },
         { id: 'hero', title: 'Hero Section', icon: Image },
         { id: 'footer', title: 'Footer Settings', icon: Globe },
@@ -112,12 +126,12 @@ const Dashboard = () => {
     },
     {
       id: 'services',
-      title: 'Services',
+      title: 'Services Management',
       icon: Settings,
       children: [
-        { id: 'it-services', title: 'IT Services', icon: CircuitBoard },
-        { id: 'blockchain', title: 'Blockchain', icon: Database },
-        { id: 'legal', title: 'Legal Services', icon: Shield }
+        { id: 'service-categories', title: 'Service Categories', icon: CircuitBoard },
+        { id: 'service-pricing', title: 'Service Pricing', icon: Database },
+        { id: 'service-content', title: 'Service Content', icon: Shield }
       ]
     },
     {
@@ -398,6 +412,136 @@ const Dashboard = () => {
                 </Card>
               ))}
             </div>
+          </div>
+        );
+
+      case 'theme':
+        return (
+          <div className="space-y-6">
+            <Card className="p-6 bg-blue-950/30 border-blue-500/20">
+              <h2 className="text-2xl font-bold mb-6 text-white">Theme Settings</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-blue-400 mb-2">Primary Theme Color</label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="color"
+                      value={themeSettings.themeColor}
+                      onChange={(e) => setThemeSettings({...themeSettings, themeColor: e.target.value})}
+                      className="w-20 h-10 p-1 bg-blue-900/20 border-blue-500/20"
+                    />
+                    <Input
+                      value={themeSettings.themeColor}
+                      onChange={(e) => setThemeSettings({...themeSettings, themeColor: e.target.value})}
+                      className="flex-1 bg-blue-900/20 border-blue-500/20"
+                      placeholder="#00FF00"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-blue-400 mb-2">Font Family</label>
+                  <Select 
+                    value={themeSettings.fontFamily} 
+                    onValueChange={(value) => setThemeSettings({...themeSettings, fontFamily: value})}
+                  >
+                    <SelectTrigger className="bg-blue-900/20 border-blue-500/20">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Inter">Inter</SelectItem>
+                      <SelectItem value="Roboto">Roboto</SelectItem>
+                      <SelectItem value="Open Sans">Open Sans</SelectItem>
+                      <SelectItem value="Lato">Lato</SelectItem>
+                      <SelectItem value="Montserrat">Montserrat</SelectItem>
+                      <SelectItem value="Orbitron">Orbitron (Tech Style)</SelectItem>
+                      <SelectItem value="Rajdhani">Rajdhani (Modern)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-blue-400 mb-2">Company Logo URL</label>
+                  <Input
+                    value={themeSettings.logoUrl}
+                    onChange={(e) => setThemeSettings({...themeSettings, logoUrl: e.target.value})}
+                    className="bg-blue-900/20 border-blue-500/20"
+                    placeholder="Logo image URL"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-blue-400 mb-2">Company Name</label>
+                  <Input
+                    value={themeSettings.companyName}
+                    onChange={(e) => setThemeSettings({...themeSettings, companyName: e.target.value})}
+                    className="bg-blue-900/20 border-blue-500/20"
+                    placeholder="Company name"
+                  />
+                </div>
+              </div>
+              
+              <Button 
+                onClick={() => updateTheme(themeSettings)} 
+                className="mt-6 bg-blue-600 hover:bg-blue-700"
+              >
+                <Save className="h-4 w-4 mr-2" />
+                Apply Theme Changes
+              </Button>
+            </Card>
+          </div>
+        );
+
+      case 'service-categories':
+        return (
+          <div className="space-y-6">
+            <Card className="p-6 bg-blue-950/30 border-blue-500/20">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-white">Service Categories Management</h2>
+                <Button className="bg-green-600 hover:bg-green-700">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add Category
+                </Button>
+              </div>
+              
+              <div className="space-y-4">
+                {serviceCategories.map((category, index) => (
+                  <Card key={category.id} className="p-4 bg-blue-900/20 border-blue-500/10">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-semibold text-white">{category.name}</h3>
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline" className="border-blue-500/50">
+                          <PencilIcon className="h-4 w-4" />
+                        </Button>
+                        <Button size="sm" variant="destructive">
+                          <TrashIcon className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                      {category.services.map((service) => (
+                        <div key={service.id} className="p-3 bg-black/20 rounded-lg border border-blue-500/10">
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <p className="text-white font-medium">{service.name}</p>
+                              <p className="text-blue-400 text-sm">{service.price}</p>
+                            </div>
+                            <Button size="sm" variant="ghost">
+                              <PencilIcon className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                      <Button className="p-3 border-2 border-dashed border-blue-500/30 hover:border-blue-500/50 bg-transparent">
+                        <Plus className="h-4 w-4 mr-2" />
+                        Add Service
+                      </Button>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </Card>
           </div>
         );
 

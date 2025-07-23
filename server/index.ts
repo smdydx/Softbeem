@@ -4,9 +4,19 @@ import { connectDB } from './db';
 import { registerRoutes } from "./routes";
 import { log } from "./vite";
 import fileUpload from 'express-fileupload';
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 
 const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -61,9 +71,20 @@ app.post('/api/upload', (req, res) => {
   });
 });
 
+// Socket.IO for real-time updates
+io.on('connection', (socket) => {
+  console.log('Client connected:', socket.id);
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected:', socket.id);
+  });
+});
+
+// Make io available to routes
+app.set('io', io);
 
 // Register routes and start server
-registerRoutes(app).then((server) => {
+registerRoutes(app, httpServer).then((server) => {
   const port = process.env.PORT || 5000;
 
   // Graceful shutdown handling
@@ -91,7 +112,7 @@ registerRoutes(app).then((server) => {
     }
   });
 
-  server.listen(port, '0.0.0.0', () => {
+  httpServer.listen(port, '0.0.0.0', () => {
     log(`[express] Server running at http://0.0.0.0:${port}`);
   });
 });

@@ -18,11 +18,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Link } from "react-router-dom";
+import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 
 const HeroSection = () => {
   const [typedText, setTypedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const isMobile = useIsMobile();
+  const { settings } = useSiteSettings();
 
   const services = [
     "Web Development",
@@ -125,9 +127,17 @@ const HeroSection = () => {
             transition={{ duration: 1, delay: 0.2, type: "spring", stiffness: 100 }}
             className="text-center lg:text-left"
           >
-            <h1 className="font-['Orbitron'] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-[#00FF00] via-[#008000] to-[#004400] digital-glow relative z-10 hover:scale-105 transition-transform duration-300 flex items-center gap-2 sm:gap-4 mb-4 justify-center lg:justify-start">
+            <h1 
+              className="font-bold tracking-wider bg-clip-text text-transparent digital-glow relative z-10 hover:scale-105 transition-transform duration-300 flex items-center gap-2 sm:gap-4 mb-4 justify-center lg:justify-start text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+              style={{ 
+                fontFamily: settings.fontFamily || 'Orbitron',
+                backgroundImage: `linear-gradient(to right, ${settings.themeColor || '#00FF00'}, ${settings.themeColor ? `${settings.themeColor}80` : '#008000'}, ${settings.themeColor ? `${settings.themeColor}40` : '#004400'})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
+            >
               <span className="text-6xl sm:text-8xl">&lt;/&gt;</span>
-              Softbeem
+              {settings.companyName || 'Softbeem'}
             </h1>
 
             <div className="flex flex-nowrap whitespace-nowrap gap-2 sm:gap-3 items-center justify-center lg:justify-start mb-6">

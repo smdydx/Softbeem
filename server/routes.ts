@@ -8,7 +8,9 @@ import { JobPosting, Career } from "./models/Career";
 import { Chat } from "./models/Chat";
 // Twilio import aur client initialization hata diya gaya hai
 
-export async function registerRoutes(app: Express): Promise<Server> {
+import { SiteSettings } from "./models/SiteSettings";
+
+export async function registerRoutes(app: Express, httpServer?: Server): Promise<Server> {
   // Meeting APIs
   app.post("/api/meetings", async (req, res) => {
     try {
@@ -45,7 +47,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  const httpServer = createServer(app);
+  if (!httpServer) {
+    httpServer = createServer(app);
+  }
 
   // Blog APIs
   app.get("/api/blogs", async (req, res) => {
@@ -198,42 +202,89 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin content management routes
-  app.put('/api/admin/header', async (req, res) => {
+  // Real-time site settings management
+  app.put('/api/admin/site-settings', async (req, res) => {
     try {
-      // Store header content in database or file system
-      // For now, we'll just return success
-      res.json({ success: true, message: 'Header content updated' });
+      const { settingKey, settingValue } = req.body;
+      const io = app.get('io');
+      
+      const settings = await SiteSettings.findOneAndUpdate(
+        { settingKey },
+        { settingValue, updatedAt: new Date() },
+        { upsert: true, new: true }
+      );
+      
+      // Emit real-time update to all connected clients
+      io.emit('siteSettingsUpdate', { settingKey, settingValue });
+      
+      res.json({ success: true, data: settings });
     } catch (error) {
-      res.status(500).json({ error: 'Failed to update header content' });
+      res.status(500).json({ error: 'Failed to update site settings' });
     }
   });
 
-  app.put('/api/admin/hero', async (req, res) => {
+  app.get('/api/admin/site-settings/:key?', async (req, res) => {
     try {
-      // Store hero content in database or file system
-      res.json({ success: true, message: 'Hero content updated' });
+      const { key } = req.params;
+      
+      if (key) {
+        const setting = await SiteSettings.findOne({ settingKey: key });
+        res.json({ data: setting?.settingValue || null });
+      } else {
+        const allSettings = await SiteSettings.find();
+        const settingsMap = {};
+        allSettings.forEach(setting => {
+          settingsMap[setting.settingKey] = setting.settingValue;
+        });
+        res.json({ data: settingsMap });
+      }
     } catch (error) {
-      res.status(500).json({ error: 'Failed to update hero content' });
+      res.status(500).json({ error: 'Failed to fetch site settings' });
     }
   });
 
-  app.put('/api/admin/footer', async (req, res) => {
+  // Bulk update for theme settings
+  app.put('/api/admin/theme-settings', async (req, res) => {
     try {
-      // Store footer content in database or file system
-      res.json({ success: true, message: 'Footer content updated' });
+      const { themeSettings } = req.body;
+      const io = app.get('io');
+      
+      const updatePromises = Object.keys(themeSettings).map(key => 
+        SiteSettings.findOneAndUpdate(
+          { settingKey: key },
+          { settingValue: themeSettings[key], updatedAt: new Date() },
+          { upsert: true, new: true }
+        )
+      );
+      
+      await Promise.all(updatePromises);
+      
+      // Emit theme update to all clients
+      io.emit('themeUpdate', themeSettings);
+      
+      res.json({ success: true, message: 'Theme settings updated' });
     } catch (error) {
-      res.status(500).json({ error: 'Failed to update footer content' });
+      res.status(500).json({ error: 'Failed to update theme settings' });
     }
   });
 
-  app.get('/api/admin/content/:section', async (req, res) => {
+  // Service management routes
+  app.put('/api/admin/services', async (req, res) => {
     try {
-      const { section } = req.params;
-      // Return content based on section
-      res.json({ content: {} });
+      const { services } = req.body;
+      const io = app.get('io');
+      
+      const settings = await SiteSettings.findOneAndUpdate(
+        { settingKey: 'services' },
+        { settingValue: services, updatedAt: new Date() },
+        { upsert: true, new: true }
+      );
+      
+      io.emit('servicesUpdate', services);
+      
+      res.json({ success: true, data: settings });
     } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch content' });
+      res.status(500).json({ error: 'Failed to update services' });
     }
   });
 
