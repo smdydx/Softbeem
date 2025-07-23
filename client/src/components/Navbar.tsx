@@ -309,7 +309,10 @@ const Navbar = () => {
               >
                 <Calendar className="w-6 h-6" />
               </button>
-            </div></old_str>
+            </div>
+            
+            {/* Mobile Nav Links */}
+            <div className="flex flex-col space-y-0 px-3 sm:px-4 py-2 pb-20 w-full"></old_str>
             {/* Mobile Nav Links */}
            <div className="flex flex-col space-y-0 px-3 sm:px-4 py-2 pb-20 w-full">
               {Array.isArray(navLinks) && navLinks.map((link, index) => {
