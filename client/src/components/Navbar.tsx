@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -68,7 +69,6 @@ const Navbar = () => {
     }
   };
 
-  // Mobile Submenu Handler
   const handleMobileSubmenuToggle = (title: string) => {
     setOpenMobileSubmenus((prev) =>
       prev.includes(title) ? prev.filter(item => item !== title) : [...prev, title]
@@ -81,10 +81,10 @@ const Navbar = () => {
         ? "bg-gradient-to-r from-black/98 via-zinc-900/98 to-black/98 backdrop-blur-xl border-b border-green-500/20 shadow-xl shadow-green-500/10"
         : "bg-gradient-to-r from-black/95 via-zinc-900/95 to-black/95 backdrop-blur-lg"
     }`}>
-      {/* ... (Other header content remains same) */}
       <div className="container mx-auto px-3 sm:px-4 lg:px-6 relative z-10">
         <div className="flex items-center justify-between bg-gradient-to-r from-zinc-900/50 via-transparent to-zinc-900/50 rounded-full px-3 sm:px-4 lg:px-6 py-2 backdrop-blur-sm border border-green-500/10">
-          {/* Logo and Desktop Nav */}
+          
+          {/* Logo */}
           <div className="flex items-center">
             <div onClick={() => window.location.href = '/'} className="cursor-pointer">
               <div className="font-bold text-white flex items-center">
@@ -94,6 +94,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center justify-center flex-1 space-x-2 lg:space-x-4 xl:space-x-8">
             {navLinks.map((link, index) => {
@@ -108,7 +109,8 @@ const Navbar = () => {
                       <ChevronDown className={`h-2 w-4 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                     </button>
-                    {/* Services Dropdown */}
+
+                    {/* Desktop Services Dropdown */}
                     <AnimatePresence>
                       {servicesDropdownOpen && (
                         <motion.div
@@ -129,7 +131,7 @@ const Navbar = () => {
                                   className={`w-full text-left p-3 rounded-md transition-colors duration-200 flex justify-between items-center ${
                                     activeServiceCategory === category
                                       ? "bg-primary/10 text-primary"
-                                      : "text-white hover:bg-zinc"
+                                      : "text-white hover:bg-zinc-800"
                                   }`}
                                 >
                                   <span className="capitalize">{category} Services</span>
@@ -137,6 +139,7 @@ const Navbar = () => {
                                 </button>
                               ))}
                             </div>
+
                             {/* Services List */}
                             <div className="w-2/3 p-4 bg-black">
                               <AnimatePresence mode="wait">
@@ -174,7 +177,8 @@ const Navbar = () => {
                                               </p>
                                             </div>
                                           </motion.button>
-                                          {/* Desktop submenu (opens on hover) */}
+
+                                          {/* Desktop submenu */}
                                           {service.submenu && (
                                             <div className="absolute left-full top-0 ml-2 min-w-[300px] z-50 hidden group-hover/service:block">
                                               <div className="bg-zinc-950/95 backdrop-blur-sm rounded-lg shadow-xl border border-green-500/20 p-4 max-h-[400px] overflow-y-auto">
@@ -216,16 +220,19 @@ const Navbar = () => {
                   </div>
                 );
               }
-              // Normal nav links
+
+              // Regular nav links
               return (
                 <div key={index} className="flex items-center gap-16">
                   <button
                     onClick={() => scrollToSection(link.href)}
                     className="relative text-white hover:text-primary font-medium transition-colors duration-300 group"
                   >
-                    {typeof link.name === 'string' ? link.name : ''}
+                    {link.name}
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                   </button>
+                  
+                  {/* Contact buttons for desktop */}
                   {link.name === "Contact Us" && (
                     <div className="hidden lg:flex items-center gap-3">
                       <a 
@@ -258,6 +265,7 @@ const Navbar = () => {
               );
             })}
           </nav>
+
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <Button
@@ -275,6 +283,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
       {/* Mobile Navigation */}
       <AnimatePresence>
         {isMobileMenuOpen && (
@@ -285,7 +294,7 @@ const Navbar = () => {
             transition={{ duration: 0.2 }}
             className="fixed top-16 sm:top-20 lg:top-24 left-0 right-0 bg-zinc-900/95 backdrop-blur-xl border-t border-green-500/20 overflow-y-auto max-h-[calc(100vh-4rem)] z-50 shadow-lg shadow-black/50"
           >
-            {/* Contact Options for Mobile */}
+            {/* Mobile Contact Options */}
             <div className="flex items-center justify-center gap-3 sm:gap-4 p-3 sm:p-4 border-b border-green-500/10">
               <a 
                 href="tel:+911169310715" 
@@ -313,125 +322,124 @@ const Navbar = () => {
 
             {/* Mobile Nav Links */}
             <div className="flex flex-col space-y-0 px-3 sm:px-4 py-2 pb-20 w-full">
-            {/* Mobile Nav Links */}
-           
-              {Array.isArray(navLinks) && navLinks.map((link, index) => {
-    if (link.name === "Services") {
-      return (
-        <div key={index} className="py-2">
-          <button
-            onClick={() => {
-              setServicesDropdownOpen(!servicesDropdownOpen);
-              setOpenMobileSubmenus([]);
-            }}
-            className="text-white hover:text-primary font-medium transition-colors duration-300 flex items-center justify-between w-full px-4"
-          >
-            <span>{link.name}</span>
-            <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
-          </button>
+              {navLinks.map((link, index) => {
+                if (link.name === "Services") {
+                  return (
+                    <div key={index} className="py-2">
+                      <button
+                        onClick={() => {
+                          setServicesDropdownOpen(!servicesDropdownOpen);
+                          setOpenMobileSubmenus([]);
+                        }}
+                        className="text-white hover:text-primary font-medium transition-colors duration-300 flex items-center justify-between w-full px-4"
+                      >
+                        <span>{link.name}</span>
+                        <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
 
-          <AnimatePresence>
-            {servicesDropdownOpen && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="pl-4 mt-2 border-l border-zinc-700 space-y-2 max-h-[70vh] overflow-y-auto"
-              >
-                {Object.keys(servicesData).map((category) => (
-                  <div key={category} className="mb-3">
-                    <h3 className="text-sm font-medium text-primary mb-2 capitalize">
-                      {category} Solutions
-                    </h3>
-                    <div className="space-y-2">
-                      {Array.isArray(servicesData[category as keyof typeof servicesData]) && servicesData[category as keyof typeof servicesData].map((service, idx) => {
-                        const isSubmenuOpen = openMobileSubmenus.includes(service.title);
-                        return (
-                          <div key={idx} className="relative">
-                            <button
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                if (service.submenu && Array.isArray(service.submenu)) {
-                                  handleMobileSubmenuToggle(service.title);
-                                } else if (service.path) {
-                                  window.location.href = service.path;
-                                  setIsMobileMenuOpen(false);
-                                }
-                              }}
-                              className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full text-left"
-                            >
-                              <div className="text-primary flex-shrink-0">
-                                <div className="h-6 w-6">{React.createElement(service.icon)}</div>
-                              </div>
-                              <div className="text-left flex-1">
-                                <h4 className="text-white group-hover:text-primary transition-colors flex items-center justify-between">
-                                  <span className="text-sm sm:text-base">{service.title}</span>
-                                  {service.submenu && Array.isArray(service.submenu) && (
-                                    <span className="ml-2 bg-green-500/10 p-1.5 sm:p-1 rounded flex-shrink-0 min-w-[32px] min-h-[32px] sm:min-w-[24px] sm:min-h-[24px] flex items-center justify-center">
-                                      <ChevronDown className={`h-3 w-3 sm:h-4 sm:w-4 transition-transform duration-200 ${isSubmenuOpen ? 'rotate-180' : ''}`} />
-                                    </span>
-                                  )}
-                                </h4>
-                                <p className="text-xs text-muted-foreground mt-1">
-                                  {service.features && service.features[0]}
-                                </p>
-                              </div>
-                            </button>
-
-                            <AnimatePresence>
-                              {service.submenu && Array.isArray(service.submenu) && isSubmenuOpen && (
-                                <motion.div
-                                  initial={{ opacity: 0, height: 0 }}
-                                  animate={{ opacity: 1, height: "auto" }}
-                                  exit={{ opacity: 0, height: 0 }}
-                                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                                  className="pl-6 mt-2 space-y-1 origin-top bg-zinc-800/50 rounded-lg py-2 overflow-hidden"
-                                >
-                                  {service.submenu.map((subItem, subIdx) => {
-                                    if (!subItem || typeof subItem !== 'object' || !subItem.title) return null;
+                      <AnimatePresence>
+                        {servicesDropdownOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="pl-4 mt-2 border-l border-zinc-700 space-y-2 max-h-[70vh] overflow-y-auto"
+                          >
+                            {Object.keys(servicesData).map((category) => (
+                              <div key={category} className="mb-3">
+                                <h3 className="text-sm font-medium text-primary mb-2 capitalize">
+                                  {category} Solutions
+                                </h3>
+                                <div className="space-y-2">
+                                  {servicesData[category as keyof typeof servicesData].map((service, idx) => {
+                                    const isSubmenuOpen = openMobileSubmenus.includes(service.title);
                                     return (
-                                      <motion.button
-                                        key={subIdx}
-                                        initial={{ opacity: 0, x: -10 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ duration: 0.2, delay: subIdx * 0.05 }}
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          if (subItem.path) {
-                                            window.location.href = subItem.path;
-                                          }
-                                          setIsMobileMenuOpen(false);
-                                          setOpenMobileSubmenus([]);
-                                        }}
-                                        className="flex items-center gap-2 w-full text-left p-3 sm:p-2 rounded-md hover:bg-zinc-700/50 transition-all duration-200 hover:translate-x-1 min-h-[44px] sm:min-h-[auto]"
-                                      >
-                                        <div className="text-primary/80 flex-shrink-0">
-                                          {subItem.icon && React.createElement(subItem.icon, {
-                                            className: "h-4 w-4 sm:h-4 sm:w-4 opacity-75"
-                                          })}
-                                        </div>
-                                        <span className="text-sm sm:text-sm text-white/90 hover:text-white">{subItem.title}</span>
-                                      </motion.button>
+                                      <div key={idx} className="relative">
+                                        <button
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            if (service.submenu && Array.isArray(service.submenu)) {
+                                              handleMobileSubmenuToggle(service.title);
+                                            } else if (service.path) {
+                                              window.location.href = service.path;
+                                              setIsMobileMenuOpen(false);
+                                            }
+                                          }}
+                                          className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full text-left"
+                                        >
+                                          <div className="text-primary flex-shrink-0">
+                                            <div className="h-6 w-6">{React.createElement(service.icon)}</div>
+                                          </div>
+                                          <div className="text-left flex-1">
+                                            <h4 className="text-white group-hover:text-primary transition-colors flex items-center justify-between">
+                                              <span className="text-sm sm:text-base">{service.title}</span>
+                                              {service.submenu && Array.isArray(service.submenu) && (
+                                                <span className="ml-2 bg-green-500/10 p-1.5 sm:p-1 rounded flex-shrink-0 min-w-[32px] min-h-[32px] sm:min-w-[24px] sm:min-h-[24px] flex items-center justify-center">
+                                                  <ChevronDown className={`h-3 w-3 sm:h-4 sm:w-4 transition-transform duration-200 ${isSubmenuOpen ? 'rotate-180' : ''}`} />
+                                                </span>
+                                              )}
+                                            </h4>
+                                            <p className="text-xs text-muted-foreground mt-1">
+                                              {service.features && service.features[0]}
+                                            </p>
+                                          </div>
+                                        </button>
+
+                                        <AnimatePresence>
+                                          {service.submenu && Array.isArray(service.submenu) && isSubmenuOpen && (
+                                            <motion.div
+                                              initial={{ opacity: 0, height: 0 }}
+                                              animate={{ opacity: 1, height: "auto" }}
+                                              exit={{ opacity: 0, height: 0 }}
+                                              transition={{ duration: 0.3, ease: "easeInOut" }}
+                                              className="pl-6 mt-2 space-y-1 origin-top bg-zinc-800/50 rounded-lg py-2 overflow-hidden"
+                                            >
+                                              {service.submenu.map((subItem, subIdx) => {
+                                                if (!subItem || typeof subItem !== 'object' || !subItem.title) return null;
+                                                return (
+                                                  <motion.button
+                                                    key={subIdx}
+                                                    initial={{ opacity: 0, x: -10 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    transition={{ duration: 0.2, delay: subIdx * 0.05 }}
+                                                    onClick={(e) => {
+                                                      e.stopPropagation();
+                                                      if (subItem.path) {
+                                                        window.location.href = subItem.path;
+                                                      }
+                                                      setIsMobileMenuOpen(false);
+                                                      setOpenMobileSubmenus([]);
+                                                    }}
+                                                    className="flex items-center gap-2 w-full text-left p-3 sm:p-2 rounded-md hover:bg-zinc-700/50 transition-all duration-200 hover:translate-x-1 min-h-[44px] sm:min-h-[auto]"
+                                                  >
+                                                    <div className="text-primary/80 flex-shrink-0">
+                                                      {subItem.icon && React.createElement(subItem.icon, {
+                                                        className: "h-4 w-4 sm:h-4 sm:w-4 opacity-75"
+                                                      })}
+                                                    </div>
+                                                    <span className="text-sm sm:text-sm text-white/90 hover:text-white">{subItem.title}</span>
+                                                  </motion.button>
+                                                );
+                                              })}
+                                            </motion.div>
+                                          )}
+                                        </AnimatePresence>
+                                      </div>
                                     );
                                   })}
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </div>
-                        );
-                      })}
+                                </div>
+                              </div>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
-                  </div>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      );
-    }
-                // Normal nav links
+                  );
+                }
+
+                // Regular nav links
                 return (
                   <button
                     key={index}
