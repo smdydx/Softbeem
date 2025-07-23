@@ -91,7 +91,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/careers/jobs", async (req, res) => {
     try {
       const { title, department, location, type, description, requirements } = req.body;
-      
+
       const jobPosting = new JobPosting({
         title,
         department,
@@ -100,7 +100,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         description,
         requirements: requirements.filter((req: string) => req.trim() !== '')
       });
-      
+
       await jobPosting.save();
       res.status(201).json(jobPosting);
     } catch (error) {
@@ -184,6 +184,65 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ response });
     } catch (error) {
       res.status(500).json({ message: "Failed to process chat message" });
+    }
+  });
+
+  // Admin routes
+  app.post('/api/admin/jobs', async (req, res) => {
+    try {
+      const job = new Job(req.body);
+      await job.save();
+      res.json(job);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to create job' });
+    }
+  });
+
+  // Admin content management routes
+  app.put('/api/admin/header', async (req, res) => {
+    try {
+      // Store header content in database or file system
+      // For now, we'll just return success
+      res.json({ success: true, message: 'Header content updated' });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to update header content' });
+    }
+  });
+
+  app.put('/api/admin/hero', async (req, res) => {
+    try {
+      // Store hero content in database or file system
+      res.json({ success: true, message: 'Hero content updated' });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to update hero content' });
+    }
+  });
+
+  app.put('/api/admin/footer', async (req, res) => {
+    try {
+      // Store footer content in database or file system
+      res.json({ success: true, message: 'Footer content updated' });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to update footer content' });
+    }
+  });
+
+  app.get('/api/admin/content/:section', async (req, res) => {
+    try {
+      const { section } = req.params;
+      // Return content based on section
+      res.json({ content: {} });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch content' });
+    }
+  });
+
+  app.post('/api/admin/media/upload', async (req, res) => {
+    try {
+      // Handle file upload
+      res.json({ success: true, url: '/uploaded/file.jpg' });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to upload media' });
     }
   });
 

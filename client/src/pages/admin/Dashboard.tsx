@@ -1,10 +1,10 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { 
@@ -21,95 +21,130 @@ import {
   XCircle,
   AlertCircle,
   Calendar,
+  Menu,
+  X,
+  Home,
+  Settings,
+  Image,
+  Globe,
+  Layout,
+  Database,
+  Mail,
+  Briefcase,
+  BookOpen,
+  Shield,
+  BarChart3,
+  ChevronDown,
+  ChevronRight,
+  Save,
+  Plus,
+  Minus
 } from "lucide-react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  
+  // State management
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [activeSection, setActiveSection] = useState('overview');
+  const [expandedCategories, setExpandedCategories] = useState({});
   const [contacts, setContacts] = useState([]);
   const [blogs, setBlogs] = useState([]);
   const [jobs, setJobs] = useState([]);
-  const [activeTab, setActiveTab] = useState('overview');
-
-  const fetchJobs = async () => {
-    try {
-      const response = await fetch('/api/careers/jobs');
-      if (response.ok) {
-        const jobsData = await response.json();
-        setJobs(jobsData);
-      }
-    } catch (error) {
-      console.error('Failed to fetch jobs:', error);
-      toast({
-        title: "Error",
-        description: "Failed to fetch jobs",
-        variant: "destructive"
-      });
-    }
-  };
-
-  const handleDeleteJob = async (jobId: string) => {
-    try {
-      const response = await fetch(`/api/careers/jobs/${jobId}`, {
-        method: 'DELETE'
-      });
-      if (response.ok) {
-        toast({
-          title: "Success",
-          description: "Job deleted successfully",
-        });
-        fetchJobs();
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to delete job",
-        variant: "destructive"
-      });
-    }
-  };
-  const [editBlog, setEditBlog] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [meetings, setMeetings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [editBlog, setEditBlog] = useState(null);
 
-  const handleJobSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const jobData = {
-      title: formData.get('title'),
-      department: formData.get('department'),
-      location: formData.get('location'),
-      type: formData.get('type'),
-      description: formData.get('description'),
-      requirements: formData.get('requirements').split('\n').filter(r => r.trim())
-    };
+  // Site content management states
+  const [headerContent, setHeaderContent] = useState({
+    logo: '/images/ramaera-logo.jpg',
+    title: 'Ramaera Industries',
+    navigation: []
+  });
+  const [heroContent, setHeroContent] = useState({
+    title: '',
+    subtitle: '',
+    backgroundVideo: '',
+    ctaButton: ''
+  });
+  const [footerContent, setFooterContent] = useState({
+    company: '',
+    description: '',
+    links: [],
+    socialLinks: [],
+    copyright: ''
+  });
 
-    try {
-      const response = await fetch('/api/careers/jobs', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(jobData)
-      });
-
-      if (response.ok) {
-        toast({
-          title: "Job Posted",
-          description: "The job has been posted successfully.",
-        });
-        e.target.reset();
-        fetchData();
-      }
-    } catch (error) {
-      console.error('Error posting job:', error);
-      toast({
-        title: "Error",
-        description: "Failed to post job. Please try again.",
-        variant: "destructive",
-      });
+  // Sidebar menu structure
+  const sidebarMenu = [
+    {
+      id: 'overview',
+      title: 'Dashboard Overview',
+      icon: Home,
+      children: []
+    },
+    {
+      id: 'content',
+      title: 'Content Management',
+      icon: FileText,
+      children: [
+        { id: 'header', title: 'Header Settings', icon: Layout },
+        { id: 'hero', title: 'Hero Section', icon: Image },
+        { id: 'footer', title: 'Footer Settings', icon: Globe },
+        { id: 'pages', title: 'Page Content', icon: BookOpen }
+      ]
+    },
+    {
+      id: 'media',
+      title: 'Media Library',
+      icon: Image,
+      children: [
+        { id: 'images', title: 'Images', icon: Image },
+        { id: 'videos', title: 'Videos', icon: Eye }
+      ]
+    },
+    {
+      id: 'blogs',
+      title: 'Blog Management',
+      icon: BookOpen,
+      children: []
+    },
+    {
+      id: 'services',
+      title: 'Services',
+      icon: Settings,
+      children: [
+        { id: 'it-services', title: 'IT Services', icon: CircuitBoard },
+        { id: 'blockchain', title: 'Blockchain', icon: Database },
+        { id: 'legal', title: 'Legal Services', icon: Shield }
+      ]
+    },
+    {
+      id: 'jobs',
+      title: 'Career Management',
+      icon: Briefcase,
+      children: []
+    },
+    {
+      id: 'schedule',
+      title: 'Meetings',
+      icon: Calendar,
+      children: []
+    },
+    {
+      id: 'messages',
+      title: 'Messages',
+      icon: MessageSquare,
+      children: []
+    },
+    {
+      id: 'analytics',
+      title: 'Analytics',
+      icon: BarChart3,
+      children: []
     }
-  };
-
-
-  const { toast } = useToast();
+  ];
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -161,21 +196,23 @@ const Dashboard = () => {
     }
   };
 
-  const handleMeetingStatus = async (id, status) => {
+  const fetchJobs = async () => {
     try {
-      await fetch(`/api/meetings/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status })
-      });
-      fetchData();
-      toast({
-        title: "Meeting status updated",
-        description: `Meeting has been ${status}`,
-      });
+      const response = await fetch('/api/careers/jobs');
+      if (response.ok) {
+        const jobsData = await response.json();
+        setJobs(jobsData);
+      }
     } catch (error) {
-      console.error('Failed to update meeting status:', error);
+      console.error('Failed to fetch jobs:', error);
     }
+  };
+
+  const toggleCategory = (categoryId) => {
+    setExpandedCategories(prev => ({
+      ...prev,
+      [categoryId]: !prev[categoryId]
+    }));
   };
 
   const handleBlogSubmit = async (e) => {
@@ -222,6 +259,100 @@ const Dashboard = () => {
     }
   };
 
+  const handleJobSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const jobData = {
+      title: formData.get('title'),
+      department: formData.get('department'),
+      location: formData.get('location'),
+      type: formData.get('type'),
+      description: formData.get('description'),
+      requirements: formData.get('requirements').split('\n').filter(r => r.trim())
+    };
+
+    try {
+      const response = await fetch('/api/careers/jobs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(jobData)
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Job Posted",
+          description: "The job has been posted successfully.",
+        });
+        e.target.reset();
+        fetchData();
+      }
+    } catch (error) {
+      console.error('Error posting job:', error);
+      toast({
+        title: "Error",
+        description: "Failed to post job. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleMeetingStatus = async (id, status) => {
+    try {
+      await fetch(`/api/meetings/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      fetchData();
+      toast({
+        title: "Meeting status updated",
+        description: `Meeting has been ${status}`,
+      });
+    } catch (error) {
+      console.error('Failed to update meeting status:', error);
+    }
+  };
+
+  const saveHeaderContent = async () => {
+    try {
+      await fetch('/api/admin/header', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(headerContent)
+      });
+      toast({
+        title: "Header Updated",
+        description: "Header content saved successfully",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to save header content",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const saveHeroContent = async () => {
+    try {
+      await fetch('/api/admin/hero', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(heroContent)
+      });
+      toast({
+        title: "Hero Section Updated",
+        description: "Hero content saved successfully",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to save hero content",
+        variant: "destructive",
+      });
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#000510] flex items-center justify-center">
@@ -240,155 +371,11 @@ const Dashboard = () => {
     activeUsers: meetings.length
   };
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'approved':
-        return 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
-      case 'rejected':
-        return 'bg-red-500/10 text-red-500 border-red-500/20';
-      default:
-        return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-[#000510] text-white">
-      <div className="max-w-[1400px] mx-auto p-6 pt-20"> {/* Added padding to push content below header */}
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8 bg-blue-950/30 p-4 sm:p-6 rounded-xl border border-blue-500/20 backdrop-blur-sm sticky top-0 z-10">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-              Admin Dashboard
-            </h1>
-            <div className="flex items-center gap-2 text-blue-400 mt-2">
-              <CircuitBoard className="h-4 w-4" />
-              <p className="text-sm">System Status: Online</p>
-            </div>
-          </div>
-
-          <Button 
-            variant="outline"
-            className="border-blue-500/50 hover:bg-blue-500/10"
-            onClick={() => {
-              localStorage.removeItem('adminAuth');
-              navigate('/admin/login');
-            }}
-          >
-            Logout
-          </Button>
-        </div>
-
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="bg-blue-950/30 border border-blue-500/20 p-1 rounded-lg w-full flex justify-start">
-            <TabsTrigger value="overview" className="flex-1 data-[state=active]:bg-blue-600">Overview</TabsTrigger>
-            <TabsTrigger value="jobs" className="flex-1 data-[state=active]:bg-blue-600">Jobs</TabsTrigger>
-            <TabsTrigger value="schedule" className="flex-1 data-[state=active]:bg-blue-600">Schedule</TabsTrigger>
-            <TabsTrigger value="blogs" className="flex-1 data-[state=active]:bg-blue-600">Blogs</TabsTrigger>
-            <TabsTrigger value="messages" className="flex-1 data-[state=active]:bg-blue-600">Messages</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="jobs">
-            <div className="grid gap-6">
-              <Card className="p-6 bg-blue-950/30 border-blue-500/20">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold">Current Job Listings</h2>
-                </div>
-                <div className="grid gap-4">
-                  {jobs.map((job: any) => (
-                    <div key={job._id} className="bg-blue-900/20 p-4 rounded-lg border border-blue-500/20">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="text-lg font-semibold text-white">{job.title}</h3>
-                          <p className="text-sm text-blue-400">{job.department}</p>
-                          <p className="text-sm text-gray-400">{job.location} • {job.type}</p>
-                        </div>
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => handleDeleteJob(job._id)}
-                        >
-                          <TrashIcon className="h-4 w-4 mr-2" />
-                          Delete
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-
-              <Card className="p-6 bg-blue-950/30 border-blue-500/20">
-                <h2 className="text-2xl font-bold mb-6">Post New Job</h2>
-                <form onSubmit={handleJobSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                    <Input
-                    name="title"
-                    placeholder="Job Title"
-                    className="bg-blue-900/20 border-blue-500/20"
-                    required
-                  />
-                  <Input
-                    name="department"
-                    placeholder="Department"
-                    className="bg-blue-900/20 border-blue-500/20"
-                    required
-                  />
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  <Input
-                    name="location"
-                    placeholder="Location"
-                    className="bg-blue-900/20 border-blue-500/20"
-                    required
-                  />
-                  <Input
-                    name="type"
-                    placeholder="Job Type (Full-time/Part-time)"
-                    className="bg-blue-900/20 border-blue-500/20"
-                    required
-                  />
-                </div>
-                <Textarea
-                  name="description"
-                  placeholder="Job Description"
-                  className="min-h-[100px] bg-blue-900/20 border-blue-500/20"
-                  required
-                />
-                <Textarea
-                  name="requirements"
-                  placeholder="Requirements (One per line)"
-                  className="min-h-[100px] bg-blue-900/20 border-blue-500/20"
-                  required
-                />
-                <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
-                  Post Job
-                </Button>
-              </form>
-            </Card>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {jobs.map((job) => (
-                <Card key={job._id} className="p-4 bg-blue-950/30 border-blue-500/20">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="font-semibold text-lg">{job.title}</h3>
-                      <p className="text-sm text-blue-400">{job.department}</p>
-                      <p className="text-sm text-gray-400">{job.location} • {job.type}</p>
-                    </div>
-                    <Button
-                      variant="destructive"
-                      size="icon"
-                      onClick={() => handleDeleteJob(job._id)}
-                    >
-                      <TrashIcon className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </Card>
-              ))}
-            </div>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="overview">
+  const renderContent = () => {
+    switch (activeSection) {
+      case 'overview':
+        return (
+          <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 { icon: Eye, label: 'Total Views', value: stats.totalViews, color: 'from-blue-400 to-blue-600' },
@@ -411,66 +398,93 @@ const Dashboard = () => {
                 </Card>
               ))}
             </div>
-          </TabsContent>
+          </div>
+        );
 
-          <TabsContent value="schedule">
-            <div className="space-y-4">
-              {meetings.map((meeting) => (
-                <Card key={meeting._id} className="p-6 bg-blue-950/30 border-blue-500/20 hover:border-blue-500/40 transition-all duration-300">
-                  <div className="flex justify-between items-start">
-                    <div className="space-y-2">
-                      <h3 className="text-xl font-semibold text-white">{meeting.name}</h3>
-                      <p className="text-blue-400">{meeting.email}</p>
-                      <div className="flex gap-4 text-sm text-gray-400">
-                        <div className="flex items-center gap-2">
-                          <Clock className="h-4 w-4" />
-                          <span>{meeting.time}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Calendar className="h-4 w-4" />
-                          <span>{new Date(meeting.date).toLocaleDateString()}</span>
-                        </div>
-                      </div>
-                      <p className="text-gray-300 mt-3">{meeting.purpose}</p>
-                    </div>
-                    <div className="flex flex-col items-end gap-3">
-                      <Badge className={`${getStatusColor(meeting.status)} px-4 py-1.5`}>
-                        {meeting.status.charAt(0).toUpperCase() + meeting.status.slice(1)}
-                      </Badge>
-                      {meeting.status === 'pending' && (
-                        <div className="flex gap-2">
-                          <Button
-                            onClick={() => handleMeetingStatus(meeting._id, 'approved')}
-                            className="bg-emerald-600 hover:bg-emerald-700"
-                            size="sm"
-                          >
-                            <CheckCircle2 className="h-4 w-4 mr-2" />
-                            Approve
-                          </Button>
-                          <Button
-                            onClick={() => handleMeetingStatus(meeting._id, 'rejected')}
-                            variant="destructive"
-                            size="sm"
-                          >
-                            <XCircle className="h-4 w-4 mr-2" />
-                            Reject
-                          </Button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
+      case 'header':
+        return (
+          <div className="space-y-6">
+            <Card className="p-6 bg-blue-950/30 border-blue-500/20">
+              <h2 className="text-2xl font-bold mb-6 text-white">Header Settings</h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-blue-400 mb-2">Logo URL</label>
+                  <Input
+                    value={headerContent.logo}
+                    onChange={(e) => setHeaderContent({...headerContent, logo: e.target.value})}
+                    className="bg-blue-900/20 border-blue-500/20"
+                    placeholder="Logo image URL"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-blue-400 mb-2">Company Title</label>
+                  <Input
+                    value={headerContent.title}
+                    onChange={(e) => setHeaderContent({...headerContent, title: e.target.value})}
+                    className="bg-blue-900/20 border-blue-500/20"
+                    placeholder="Company name"
+                  />
+                </div>
+                <Button onClick={saveHeaderContent} className="bg-blue-600 hover:bg-blue-700">
+                  <Save className="h-4 w-4 mr-2" />
+                  Save Header Settings
+                </Button>
+              </div>
+            </Card>
+          </div>
+        );
 
-          <TabsContent value="blogs">
-            <Card className="p-6 bg-blue-950/30 border-blue-500/20 mb-6">
-              <h2 className="text-2xl font-bold mb-6">
+      case 'hero':
+        return (
+          <div className="space-y-6">
+            <Card className="p-6 bg-blue-950/30 border-blue-500/20">
+              <h2 className="text-2xl font-bold mb-6 text-white">Hero Section</h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-blue-400 mb-2">Hero Title</label>
+                  <Input
+                    value={heroContent.title}
+                    onChange={(e) => setHeroContent({...heroContent, title: e.target.value})}
+                    className="bg-blue-900/20 border-blue-500/20"
+                    placeholder="Main hero title"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-blue-400 mb-2">Hero Subtitle</label>
+                  <Textarea
+                    value={heroContent.subtitle}
+                    onChange={(e) => setHeroContent({...heroContent, subtitle: e.target.value})}
+                    className="bg-blue-900/20 border-blue-500/20"
+                    placeholder="Hero subtitle/description"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-blue-400 mb-2">Background Video URL</label>
+                  <Input
+                    value={heroContent.backgroundVideo}
+                    onChange={(e) => setHeroContent({...heroContent, backgroundVideo: e.target.value})}
+                    className="bg-blue-900/20 border-blue-500/20"
+                    placeholder="Background video URL"
+                  />
+                </div>
+                <Button onClick={saveHeroContent} className="bg-blue-600 hover:bg-blue-700">
+                  <Save className="h-4 w-4 mr-2" />
+                  Save Hero Settings
+                </Button>
+              </div>
+            </Card>
+          </div>
+        );
+
+      case 'blogs':
+        return (
+          <div className="space-y-6">
+            <Card className="p-6 bg-blue-950/30 border-blue-500/20">
+              <h2 className="text-2xl font-bold mb-6 text-white">
                 {editBlog ? 'Edit Blog Post' : 'Create New Blog Post'}
               </h2>
               <form onSubmit={handleBlogSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Input
                     name="title"
                     placeholder="Blog Title"
@@ -519,7 +533,7 @@ const Dashboard = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {blogs.map((blog) => (
-                <Card key={blog._id} className="p-4 bg-blue-950/30 border-blue-500/20 hover:border-blue-500/40 transition-all duration-300">
+                <Card key={blog._id} className="p-4 bg-blue-950/30 border-blue-500/20">
                   <div className="flex gap-4">
                     {blog.image && (
                       <img 
@@ -531,7 +545,7 @@ const Dashboard = () => {
                     <div className="flex-1">
                       <div className="flex justify-between">
                         <div>
-                          <h3 className="font-semibold text-lg">{blog.title}</h3>
+                          <h3 className="font-semibold text-lg text-white">{blog.title}</h3>
                           <p className="text-sm text-blue-400">By {blog.author}</p>
                         </div>
                         <div className="flex gap-2">
@@ -548,13 +562,7 @@ const Dashboard = () => {
                             size="icon"
                             onClick={() => {
                               fetch(`/api/blogs/${blog._id}`, { method: 'DELETE' })
-                                .then(fetchData)
-                                .then(() => {
-                                  toast({
-                                    title: "Blog deleted",
-                                    description: "The blog post has been removed successfully.",
-                                  });
-                                });
+                                .then(fetchData);
                             }}
                           >
                             <TrashIcon className="h-4 w-4" />
@@ -566,29 +574,286 @@ const Dashboard = () => {
                 </Card>
               ))}
             </div>
-          </TabsContent>
+          </div>
+        );
 
-          <TabsContent value="messages">
+      case 'jobs':
+        return (
+          <div className="space-y-6">
+            <Card className="p-6 bg-blue-950/30 border-blue-500/20">
+              <h2 className="text-2xl font-bold mb-6 text-white">Post New Job</h2>
+              <form onSubmit={handleJobSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Input
+                    name="title"
+                    placeholder="Job Title"
+                    className="bg-blue-900/20 border-blue-500/20"
+                    required
+                  />
+                  <Input
+                    name="department"
+                    placeholder="Department"
+                    className="bg-blue-900/20 border-blue-500/20"
+                    required
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Input
+                    name="location"
+                    placeholder="Location"
+                    className="bg-blue-900/20 border-blue-500/20"
+                    required
+                  />
+                  <Input
+                    name="type"
+                    placeholder="Job Type"
+                    className="bg-blue-900/20 border-blue-500/20"
+                    required
+                  />
+                </div>
+                <Textarea
+                  name="description"
+                  placeholder="Job Description"
+                  className="min-h-[100px] bg-blue-900/20 border-blue-500/20"
+                  required
+                />
+                <Textarea
+                  name="requirements"
+                  placeholder="Requirements (One per line)"
+                  className="min-h-[100px] bg-blue-900/20 border-blue-500/20"
+                  required
+                />
+                <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
+                  Post Job
+                </Button>
+              </form>
+            </Card>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {contacts.map((contact) => (
-                <Card key={contact._id} className="p-6 bg-blue-950/30 border-blue-500/20 hover:border-blue-500/40 transition-all duration-300">
-                  <div className="flex flex-col gap-3">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="font-semibold text-lg">{contact.name}</h3>
-                        <p className="text-sm text-blue-400">{contact.email}</p>
-                      </div>
-                      <span className="text-sm text-gray-400">
-                        {new Date(contact.createdAt).toLocaleDateString()}
-                      </span>
+              {jobs.map((job) => (
+                <Card key={job._id} className="p-4 bg-blue-950/30 border-blue-500/20">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-semibold text-lg text-white">{job.title}</h3>
+                      <p className="text-sm text-blue-400">{job.department}</p>
+                      <p className="text-sm text-gray-400">{job.location} • {job.type}</p>
                     </div>
-                    <p className="text-gray-300 bg-blue-900/20 p-4 rounded-lg">{contact.message}</p>
+                    <Button
+                      variant="destructive"
+                      size="icon"
+                      onClick={() => {
+                        fetch(`/api/careers/jobs/${job._id}`, { method: 'DELETE' })
+                          .then(fetchJobs);
+                      }}
+                    >
+                      <TrashIcon className="h-4 w-4" />
+                    </Button>
                   </div>
                 </Card>
               ))}
             </div>
-          </TabsContent>
-        </Tabs>
+          </div>
+        );
+
+      case 'schedule':
+        return (
+          <div className="space-y-4">
+            {meetings.map((meeting) => (
+              <Card key={meeting._id} className="p-6 bg-blue-950/30 border-blue-500/20">
+                <div className="flex justify-between items-start">
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold text-white">{meeting.name}</h3>
+                    <p className="text-blue-400">{meeting.email}</p>
+                    <div className="flex gap-4 text-sm text-gray-400">
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        <span>{meeting.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-4 w-4" />
+                        <span>{new Date(meeting.date).toLocaleDateString()}</span>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 mt-3">{meeting.purpose}</p>
+                  </div>
+                  <div className="flex flex-col items-end gap-3">
+                    <Badge className={`px-4 py-1.5 ${
+                      meeting.status === 'approved' ? 'bg-emerald-500/10 text-emerald-500' :
+                      meeting.status === 'rejected' ? 'bg-red-500/10 text-red-500' :
+                      'bg-yellow-500/10 text-yellow-500'
+                    }`}>
+                      {meeting.status.charAt(0).toUpperCase() + meeting.status.slice(1)}
+                    </Badge>
+                    {meeting.status === 'pending' && (
+                      <div className="flex gap-2">
+                        <Button
+                          onClick={() => handleMeetingStatus(meeting._id, 'approved')}
+                          className="bg-emerald-600 hover:bg-emerald-700"
+                          size="sm"
+                        >
+                          <CheckCircle2 className="h-4 w-4 mr-2" />
+                          Approve
+                        </Button>
+                        <Button
+                          onClick={() => handleMeetingStatus(meeting._id, 'rejected')}
+                          variant="destructive"
+                          size="sm"
+                        >
+                          <XCircle className="h-4 w-4 mr-2" />
+                          Reject
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        );
+
+      case 'messages':
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {contacts.map((contact) => (
+              <Card key={contact._id} className="p-6 bg-blue-950/30 border-blue-500/20">
+                <div className="flex flex-col gap-3">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-semibold text-lg text-white">{contact.name}</h3>
+                      <p className="text-sm text-blue-400">{contact.email}</p>
+                    </div>
+                    <span className="text-sm text-gray-400">
+                      {new Date(contact.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <p className="text-gray-300 bg-blue-900/20 p-4 rounded-lg">{contact.message}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        );
+
+      default:
+        return <div className="text-white">Select a section from the sidebar</div>;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#000510] text-white flex">
+      {/* Sidebar */}
+      <div className={`${sidebarOpen ? 'w-80' : 'w-16'} bg-blue-950/40 border-r border-blue-500/20 transition-all duration-300 flex flex-col`}>
+        {/* Sidebar Header */}
+        <div className="p-4 border-b border-blue-500/20">
+          <div className="flex items-center justify-between">
+            {sidebarOpen && (
+              <h2 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+                Admin Panel
+              </h2>
+            )}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="text-blue-400 hover:bg-blue-500/10"
+            >
+              {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
+        </div>
+
+        {/* Sidebar Menu */}
+        <div className="flex-1 overflow-y-auto p-2">
+          {sidebarMenu.map((item) => (
+            <div key={item.id} className="mb-2">
+              <button
+                onClick={() => {
+                  if (item.children.length > 0) {
+                    toggleCategory(item.id);
+                  } else {
+                    setActiveSection(item.id);
+                  }
+                }}
+                className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
+                  activeSection === item.id ? 'bg-blue-600 text-white' : 'text-blue-400 hover:bg-blue-500/10'
+                }`}
+              >
+                <item.icon className="h-5 w-5 flex-shrink-0" />
+                {sidebarOpen && (
+                  <>
+                    <span className="flex-1 text-left">{item.title}</span>
+                    {item.children.length > 0 && (
+                      expandedCategories[item.id] ? 
+                        <ChevronDown className="h-4 w-4" /> : 
+                        <ChevronRight className="h-4 w-4" />
+                    )}
+                  </>
+                )}
+              </button>
+              
+              {/* Submenu */}
+              {sidebarOpen && item.children.length > 0 && expandedCategories[item.id] && (
+                <div className="ml-4 mt-2 space-y-1">
+                  {item.children.map((child) => (
+                    <button
+                      key={child.id}
+                      onClick={() => setActiveSection(child.id)}
+                      className={`w-full flex items-center gap-3 p-2 rounded-lg transition-all duration-200 ${
+                        activeSection === child.id ? 'bg-blue-600 text-white' : 'text-blue-400 hover:bg-blue-500/10'
+                      }`}
+                    >
+                      <child.icon className="h-4 w-4 flex-shrink-0" />
+                      <span className="flex-1 text-left text-sm">{child.title}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Sidebar Footer */}
+        <div className="p-4 border-t border-blue-500/20">
+          <Button 
+            variant="outline"
+            className="w-full border-blue-500/50 hover:bg-blue-500/10"
+            onClick={() => {
+              localStorage.removeItem('adminAuth');
+              navigate('/admin/login');
+            }}
+          >
+            {sidebarOpen ? 'Logout' : <X className="h-4 w-4" />}
+          </Button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 overflow-y-auto">
+        {/* Header */}
+        <div className="bg-blue-950/30 p-6 border-b border-blue-500/20 sticky top-0 z-10 backdrop-blur-sm">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+                {sidebarMenu.find(item => item.id === activeSection)?.title || 
+                 sidebarMenu.find(item => item.children.some(child => child.id === activeSection))?.children.find(child => child.id === activeSection)?.title ||
+                 'Dashboard'}
+              </h1>
+              <div className="flex items-center gap-2 text-blue-400 mt-1">
+                <CircuitBoard className="h-4 w-4" />
+                <p className="text-sm">System Status: Online</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <Badge className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
+                Real-time Updates
+              </Badge>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Area */}
+        <div className="p-6">
+          {renderContent()}
+        </div>
       </div>
     </div>
   );
