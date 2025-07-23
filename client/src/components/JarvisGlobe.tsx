@@ -168,50 +168,109 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
-    // Create service icons orbiting around the globe
+    // Create service icons orbiting around the globe with technology symbols
     const serviceIcons = [
-      { name: 'Blockchain', color: 0x00FF00, distance: 3 },
-      { name: 'Smart Contract', color: 0x32CD32, distance: 3.2 },
-      { name: 'Mobile App', color: 0x0097FB, distance: 3.4 },
-      { name: 'Web Dev', color: 0xFF6E00, distance: 3.6 },
-      { name: 'IT Services', color: 0xFFA500, distance: 3.8 },
-      { name: 'Legal', color: 0x9932CC, distance: 4.0 },
-      { name: 'Token', color: 0xFF4500, distance: 4.2 },
-      { name: 'Game Dev', color: 0x00CED1, distance: 4.4 }
+      { name: 'Blockchain', symbol: '₿', color: 0x00FF00, distance: 3 },
+      { name: 'Smart Contract', symbol: '⚡', color: 0x32CD32, distance: 3.2 },
+      { name: 'Mobile App', symbol: '📱', color: 0x0097FB, distance: 3.4 },
+      { name: 'Web Dev', symbol: '🌐', color: 0xFF6E00, distance: 3.6 },
+      { name: 'IT Services', symbol: '💻', color: 0xFFA500, distance: 3.8 },
+      { name: 'Legal', symbol: '⚖️', color: 0x9932CC, distance: 4.0 },
+      { name: 'Token', symbol: '🪙', color: 0xFF4500, distance: 4.2 },
+      { name: 'Game Dev', symbol: '🎮', color: 0x00CED1, distance: 4.4 }
     ];
 
     const orbitingElements = [];
     
     serviceIcons.forEach((service, index) => {
-      // Create a small sphere for each service
-      const iconGeometry = new THREE.SphereGeometry(0.08, 16, 16);
-      const iconMaterial = new THREE.MeshBasicMaterial({
+      // Create a plane geometry for the icon background
+      const iconBgGeometry = new THREE.PlaneGeometry(0.3, 0.3);
+      const iconBgMaterial = new THREE.MeshBasicMaterial({
         color: service.color,
         transparent: true,
-        opacity: 0.8
+        opacity: 0.2,
+        side: THREE.DoubleSide
+      });
+      const iconBgMesh = new THREE.Mesh(iconBgGeometry, iconBgMaterial);
+      
+      // Create a canvas texture for the technology symbol
+      const canvas = document.createElement('canvas');
+      const size = 128;
+      canvas.width = size;
+      canvas.height = size;
+      const context = canvas.getContext('2d');
+      
+      if (context) {
+        // Clear canvas
+        context.fillStyle = 'transparent';
+        context.fillRect(0, 0, size, size);
+        
+        // Create gradient background
+        const gradient = context.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+        gradient.addColorStop(0, `rgba(${(service.color >> 16) & 255}, ${(service.color >> 8) & 255}, ${service.color & 255}, 0.3)`);
+        gradient.addColorStop(1, `rgba(${(service.color >> 16) & 255}, ${(service.color >> 8) & 255}, ${service.color & 255}, 0.1)`);
+        context.fillStyle = gradient;
+        context.fillRect(0, 0, size, size);
+        
+        // Draw the technology symbol
+        context.fillStyle = `rgb(${(service.color >> 16) & 255}, ${(service.color >> 8) & 255}, ${service.color & 255})`;
+        context.font = 'bold 64px Arial';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillText(service.symbol, size/2, size/2);
+        
+        // Add glow effect
+        context.shadowColor = `rgb(${(service.color >> 16) & 255}, ${(service.color >> 8) & 255}, ${service.color & 255})`;
+        context.shadowBlur = 10;
+        context.fillText(service.symbol, size/2, size/2);
+      }
+      
+      // Create texture from canvas
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.needsUpdate = true;
+      
+      // Create the icon mesh with the texture
+      const iconGeometry = new THREE.PlaneGeometry(0.4, 0.4);
+      const iconMaterial = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        side: THREE.DoubleSide,
+        alphaTest: 0.01
       });
       const iconMesh = new THREE.Mesh(iconGeometry, iconMaterial);
       
-      // Create a glowing ring around each icon
-      const ringGeometry = new THREE.RingGeometry(0.1, 0.12, 16);
-      const ringMaterial = new THREE.MeshBasicMaterial({
+      // Create outer glowing ring
+      const outerRingGeometry = new THREE.RingGeometry(0.25, 0.28, 32);
+      const outerRingMaterial = new THREE.MeshBasicMaterial({
         color: service.color,
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.4
+        opacity: 0.6
       });
-      const ringMesh = new THREE.Mesh(ringGeometry, ringMaterial);
+      const outerRingMesh = new THREE.Mesh(outerRingGeometry, outerRingMaterial);
       
-      // Group icon and ring together
+      // Create inner glowing ring
+      const innerRingGeometry = new THREE.RingGeometry(0.22, 0.24, 32);
+      const innerRingMaterial = new THREE.MeshBasicMaterial({
+        color: 0xFFFFFF,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.3
+      });
+      const innerRingMesh = new THREE.Mesh(innerRingGeometry, innerRingMaterial);
+      
+      // Group all elements together
       const iconGroup = new THREE.Group();
+      iconGroup.add(iconBgMesh);
       iconGroup.add(iconMesh);
-      iconGroup.add(ringMesh);
+      iconGroup.add(outerRingMesh);
+      iconGroup.add(innerRingMesh);
       
       // Position the icon
       const angle = (index / serviceIcons.length) * Math.PI * 2;
       iconGroup.position.set(
         Math.cos(angle) * service.distance,
-        Math.sin(angle * 0.5) * 0.5, // Slight vertical variation
+        Math.sin(angle * 0.5) * 0.8, // More vertical variation
         Math.sin(angle) * service.distance
       );
       
@@ -219,8 +278,9 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       iconGroup.userData = {
         originalDistance: service.distance,
         angleOffset: angle,
-        speed: 0.3 + (index * 0.1), // Different speeds for each icon
-        verticalOffset: Math.sin(angle * 2) * 0.3
+        speed: 0.2 + (index * 0.05), // Slower, more varied speeds
+        verticalOffset: Math.sin(angle * 2) * 0.5,
+        originalScale: 1
       };
       
       scene.add(iconGroup);
@@ -256,23 +316,34 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
         const userData = element.userData;
         const currentAngle = userData.angleOffset + (elapsedTime * userData.speed);
         
-        // Smooth orbital motion
+        // Smooth orbital motion with floating effect
+        const floatOffset = Math.sin(elapsedTime * 2 + index) * 0.1;
         element.position.set(
           Math.cos(currentAngle) * userData.originalDistance,
-          Math.sin(currentAngle * 0.7) * 0.8 + userData.verticalOffset, // Elliptical vertical motion
+          Math.sin(currentAngle * 0.7) * 0.8 + userData.verticalOffset + floatOffset,
           Math.sin(currentAngle) * userData.originalDistance
         );
         
-        // Rotate the individual icons
-        element.rotation.y = elapsedTime * 2;
-        element.rotation.x = Math.sin(elapsedTime + index) * 0.2;
+        // Gentle rotation of the entire icon group
+        element.rotation.z = Math.sin(elapsedTime * 0.5 + index) * 0.1;
         
-        // Pulsing effect for the icons
-        const pulseFactor = 0.8 + Math.sin(elapsedTime * 3 + index) * 0.2;
-        element.scale.set(pulseFactor, pulseFactor, pulseFactor);
+        // Enhanced pulsing effect with breathing animation
+        const pulseFactor = 0.9 + Math.sin(elapsedTime * 2 + index * 0.7) * 0.3;
+        const breathingFactor = 0.95 + Math.sin(elapsedTime * 0.8 + index) * 0.05;
+        const finalScale = pulseFactor * breathingFactor;
+        element.scale.set(finalScale, finalScale, finalScale);
         
-        // Make icons face the camera
+        // Make icons face the camera for better visibility
         element.lookAt(cameraRef.current.position);
+        
+        // Animate individual children for more dynamic effect
+        element.children.forEach((child, childIndex) => {
+          if (childIndex === 2 || childIndex === 3) { // Rings
+            child.rotation.z += 0.01 * (childIndex === 2 ? 1 : -1);
+            const ringPulse = 0.8 + Math.sin(elapsedTime * 4 + index + childIndex) * 0.2;
+            child.scale.set(ringPulse, ringPulse, ringPulse);
+          }
+        });
       });
       
       // Render
