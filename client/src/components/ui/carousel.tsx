@@ -138,6 +138,7 @@ const Carousel = React.forwardRef<
           className={cn("relative", className)}
           role="region"
           aria-roledescription="carousel"
+          data-autoplay={opts?.autoplay}
           {...props}
         >
           {children}
