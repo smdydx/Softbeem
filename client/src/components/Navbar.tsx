@@ -69,9 +69,9 @@ const Navbar = () => {
   };
 
   // Mobile Submenu Handler
-   const handleMobileSubmenuToggle = (title: string) => {
+  const handleMobileSubmenuToggle = (title: string) => {
     setOpenMobileSubmenus((prev) =>
-      prev.includes(title) ? [] : [title]
+      prev.includes(title) ? prev.filter(item => item !== title) : [...prev, title]
     );
   };
 
@@ -367,7 +367,7 @@ const Navbar = () => {
                                   {service.title}
                                   {service.submenu && (
                                     <span className="ml-2 bg-green-500/10 p-1 rounded">
-                                      <ChevronDown className="h-4 w-4" />
+                                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isSubmenuOpen ? 'rotate-180' : ''}`} />
                                     </span>
                                   )}
                                 </h4>
@@ -378,11 +378,12 @@ const Navbar = () => {
                             </button>
 
                             <AnimatePresence>
-                              {service.submenu && (
+                              {service.submenu && isSubmenuOpen && (
                                 <motion.div
                                   initial={{ opacity: 0, height: 0 }}
                                   animate={{ opacity: 1, height: "auto" }}
                                   exit={{ opacity: 0, height: 0 }}
+                                  transition={{ duration: 0.2 }}
                                   className="pl-6 mt-2 space-y-2 origin-top bg-zinc-800/50 rounded-lg py-2"
                                 >
                                 {Array.isArray(service.submenu) && service.submenu.map((subItem, subIdx) => {
