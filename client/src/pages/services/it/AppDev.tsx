@@ -68,22 +68,22 @@ const AppDev = () => {
     {
       title: "E-commerce",
       description: "Feature-rich shopping apps with payment integration",
-      image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg"
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Healthcare",
       description: "HIPAA-compliant medical and healthcare solutions",
-      image: "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg"
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Finance",
       description: "Secure and reliable fintech applications",
-      image: "https://images.pexels.com/photos/534216/pexels-photo-534216.jpeg"
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Education",
       description: "Interactive learning and education platforms",
-      image: "https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg"
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     }
   ];
 

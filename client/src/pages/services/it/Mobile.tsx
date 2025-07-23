@@ -10,55 +10,55 @@ const Mobile = () => {
     {
       title: "Grocery Delivery App",
       description: "User-friendly grocery shopping and delivery platform with real-time tracking",
-      image: "/images/services/grocery-app.jpg",
+      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Multiple Store Integration", "Real-time Order Tracking", "Secure Payment Gateway", "Smart Cart Management"]
     },
     {
       title: "Medicine Delivery App",
       description: "HIPAA-compliant healthcare and medicine delivery solution",
-      image: "/images/services/medicine-app.jpg",
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Prescription Upload", "Medicine Reminders", "Pharmacy Network", "Secure Health Data"]
     },
     {
       title: "Taxi Booking App",
       description: "Advanced ride-hailing platform with driver-passenger matching",
-      image: "/images/services/taxi-app.jpg",
+      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Real-time Tracking", "Fare Calculator", "Driver Verification", "Route Optimization"]
     },
     {
       title: "Food Delivery App",
       description: "Complete restaurant marketplace and delivery management system",
-      image: "/images/services/food-app.jpg",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Restaurant Dashboard", "Order Management", "Live Tracking", "Rating System"]
     },
     {
       title: "Online Learning App",
       description: "Interactive EdTech platform for seamless learning experience",
-      image: "/images/services/edtech-app.jpg",
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Video Lectures", "Progress Tracking", "Quiz System", "Live Sessions"]
     },
     {
       title: "Dating & Social App",
       description: "Feature-rich social connection platform with advanced matching",
-      image: "/images/services/dating-app.jpg",
+      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Smart Matching", "Real-time Chat", "Profile Verification", "Privacy Controls"]
     },
     {
       title: "Fitness Tracking App",
       description: "Comprehensive health and fitness monitoring solution",
-      image: "/images/services/fitness-app.jpg",
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Workout Plans", "Progress Analytics", "Diet Tracking", "Community Features"]
     },
     {
       title: "Laundry Service App",
       description: "On-demand laundry service booking and management platform",
-      image: "/images/services/laundry-app.jpg",
+      image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Service Scheduling", "Price Calculator", "Status Updates", "Delivery Tracking"]
     },
     {
       title: "Property Rental App",
       description: "Advanced real estate listing and rental management system",
-      image: "/images/services/property-app.jpg",
+      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Property Listings", "Virtual Tours", "Booking System", "Payment Integration"]
     }
   ];
@@ -124,7 +124,7 @@ const Mobile = () => {
                   alt={service.title}
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    e.currentTarget.src = '/images/services/app-placeholder.jpg';
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
                   }}
                 />
               </div>

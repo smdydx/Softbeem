@@ -24,21 +24,21 @@ const GameDev = () => {
       title: "Mobile Games",
       description: "Cross-platform mobile game development for iOS and Android with optimized performance for various devices.",
       longDescription: "We create engaging mobile games that leverage touch controls, mobile-specific features, and monetization strategies. Our games are optimized for performance across a wide range of devices, ensuring smooth gameplay even on lower-end hardware.",
-      image: "https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg",
+      image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       icon: <Smartphone className="w-6 h-6 text-primary" />
     },
     {
       title: "Console Games",
       description: "High-performance console game development for PlayStation, Xbox, and Nintendo platforms.",
       longDescription: "Our team has experience developing for all major console platforms, with expertise in platform-specific optimizations, controller input systems, and certification requirements. We can help bring your vision to living rooms worldwide.",
-      image: "https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg",
+      image: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       icon: <Monitor className="w-6 h-6 text-primary" />
     },
     {
       title: "VR Games",
       description: "Immersive virtual reality experiences for Oculus, HTC Vive, PlayStation VR, and other platforms.",
       longDescription: "We design VR experiences that prioritize comfort, immersion, and intuitive interaction. From room-scale adventures to seated experiences, we understand the unique challenges and opportunities of virtual reality development.",
-      image: "https://images.pexels.com/photos/2007647/pexels-photo-2007647.jpeg",
+      image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       icon: <Server className="w-6 h-6 text-primary" />
     }
   ];

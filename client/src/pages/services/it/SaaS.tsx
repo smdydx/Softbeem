@@ -14,7 +14,7 @@ const SaaS = () => {
           name: "CRM Software",
           description: "Complete customer relationship management solution to grow your sales and improve customer satisfaction",
           longDescription: "Our CRM software helps businesses manage customer interactions, track sales opportunities, and automate marketing campaigns. With advanced analytics and reporting, you'll gain valuable insights to drive growth.",
-          image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg",
+          image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
           features: ["Lead Management", "Sales Pipeline", "Customer Support", "Analytics Dashboard", "Marketing Automation", "Mobile Access"],
           icon: <Users className="w-6 h-6 text-blue-500" />
         },
@@ -22,7 +22,7 @@ const SaaS = () => {
           name: "ERP Software",
           description: "Enterprise resource planning system to integrate all your business processes",
           longDescription: "Our ERP solution connects finance, HR, manufacturing, supply chain, services, procurement, and more. Get real-time visibility across your entire organization with our modular, scalable platform.",
-          image: "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg",
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
           features: ["Finance Management", "Supply Chain", "HR Management", "Project Planning", "Inventory Control", "Business Intelligence"],
           icon: <Layers className="w-6 h-6 text-blue-500" />
         }
@@ -36,7 +36,7 @@ const SaaS = () => {
           name: "School Management ERP",
           description: "Complete education institution management system for modern schools",
           longDescription: "From student admissions to alumni management, our school ERP handles all academic and administrative processes. Automate attendance, examinations, fee collection, and communication with parents.",
-          image: "https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg",
+          image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
           features: ["Student Management", "Attendance System", "Fee Management", "Academic Planning", "Library Management", "Parent Portal"],
           icon: <BarChart2 className="w-6 h-6 text-blue-500" />
         },
@@ -44,7 +44,7 @@ const SaaS = () => {
           name: "Hospital Management ERP",
           description: "Comprehensive healthcare facility management system",
           longDescription: "Streamline patient care, medical records, appointments, billing, and inventory management. Our HIPAA-compliant solution improves efficiency and patient outcomes while reducing administrative burdens.",
-          image: "https://images.pexels.com/photos/247786/pexels-photo-247786.jpeg",
+          image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
           features: ["Patient Records", "Appointment System", "Billing & Insurance", "Pharmacy Management", "Lab Integration", "Staff Scheduling"],
           icon: <Shield className="w-6 h-6 text-blue-500" />
         },
@@ -52,7 +52,7 @@ const SaaS = () => {
           name: "Hotel & Property Management",
           description: "Complete hospitality management solution for hotels and resorts",
           longDescription: "Manage reservations, housekeeping, front desk operations, and revenue all from one platform. Our solution integrates with OTAs, payment gateways, and restaurant POS systems for seamless operations.",
-          image: "https://images.pexels.com/photos/1838554/pexels-photo-1838554.jpeg",
+          image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
           features: ["Booking System", "Room Management", "Guest Services", "Revenue Management", "Housekeeping", "Multi-property Support"],
           icon: <Database className="w-6 h-6 text-blue-500" />
         }
@@ -66,7 +66,7 @@ const SaaS = () => {
           name: "POS Software",
           description: "Advanced point of sale system for retail businesses of all sizes",
           longDescription: "Our retail POS system handles sales, inventory, customer management, and reporting. With support for multiple payment methods, barcode scanning, and eCommerce integration, it's the complete solution for modern retailers.",
-          image: "https://images.pexels.com/photos/1602726/pexels-photo-1602726.jpeg",
+          image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
           features: ["Sales Management", "Inventory Control", "Customer Database", "Reports & Analytics", "Multi-store Support", "Mobile POS"],
           icon: <Monitor className="w-6 h-6 text-blue-500" />
         },
@@ -74,7 +74,7 @@ const SaaS = () => {
           name: "Restaurant POS",
           description: "Comprehensive restaurant management and billing system",
           longDescription: "From quick-service to fine dining, our restaurant POS streamlines operations with table management, kitchen display, online ordering, and inventory control. Reduce wait times and improve customer experience.",
-          image: "https://images.pexels.com/photos/687824/pexels-photo-687824.jpeg",
+          image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
           features: ["Order Management", "Kitchen Display", "Table Management", "Menu Control", "Staff Performance", "Customer Loyalty"],
           icon: <Settings className="w-6 h-6 text-blue-500" />
         },
@@ -82,7 +82,7 @@ const SaaS = () => {
           name: "Salon & Spa Management",
           description: "Complete solution for beauty and wellness businesses",
           longDescription: "Manage appointments, staff, services, and retail products with our specialized salon software. Clients can book online, staff can track commissions, and owners get real-time business insights.",
-          image: "https://images.pexels.com/photos/3992874/pexels-photo-3992874.jpeg",
+          image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
           features: ["Appointment Booking", "Staff Management", "Service Menu", "Customer Database", "Marketing Tools", "Mobile App"],
           icon: <Smartphone className="w-6 h-6 text-blue-500" />
         }

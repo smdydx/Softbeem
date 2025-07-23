@@ -9,42 +9,42 @@ const CloudServices = () => {
       icon: <Cloud className="w-8 h-8 text-primary" />,
       title: "Web Hosting Services",
       description: "Reliable and scalable web hosting solutions for your applications",
-      image: "/images/services/web-hosting.jpg",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["High Uptime", "SSD Storage", "Auto Scaling", "24/7 Support"]
     },
     {
       icon: <Database className="w-8 h-8 text-primary" />,
       title: "Cloud Storage Services",
       description: "Secure and redundant cloud storage for your data",
-      image: "/images/services/cloud-storage.jpg",
+      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Data Encryption", "Automated Backups", "File Versioning", "Access Control"]
     },
     {
       icon: <Shield className="w-8 h-8 text-primary" />,
       title: "VPN Services",
       description: "Secure browsing solutions for privacy and security",
-      image: "/images/services/vpn-service.jpg",
+      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["End-to-end Encryption", "Multiple Locations", "No-logs Policy", "High Speed"]
     },
     {
       icon: <Mail className="w-8 h-8 text-primary" />,
       title: "Email Hosting Services",
       description: "Professional email hosting with advanced features",
-      image: "/images/services/email-hosting.jpg",
+      image: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["Custom Domain", "Spam Protection", "Large Storage", "Mobile Access"]
     },
     {
       icon: <Network className="w-8 h-8 text-primary" />,
       title: "Blockchain Node Hosting",
       description: "Dedicated node hosting for blockchain networks",
-      image: "/images/services/blockchain-hosting.jpg",
+      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["High Availability", "Performance Monitoring", "Security Measures", "Technical Support"]
     },
     {
       icon: <Monitor className="w-8 h-8 text-primary" />,
       title: "Remote Desktop Services",
       description: "Secure and reliable remote desktop solutions",
-      image: "/images/services/remote-desktop.jpg",
+      image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: ["High Performance", "Multi-device Access", "Data Security", "Custom Configuration"]
     }
   ];
@@ -101,7 +101,7 @@ const CloudServices = () => {
                   alt={service.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
-                    e.currentTarget.src = '/images/services/cloud-storage.jpg';
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
