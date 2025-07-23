@@ -288,6 +288,155 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     }
   });
 
+  // Get all service categories
+  app.get('/api/admin/service-categories', async (req, res) => {
+    try {
+      const settings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
+      res.json({ success: true, data: settings?.settingValue || [] });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch service categories' });
+    }
+  });
+
+  // Update service categories
+  app.put('/api/admin/service-categories', async (req, res) => {
+    try {
+      const { categories } = req.body;
+      const io = app.get('io');
+      
+      const settings = await SiteSettings.findOneAndUpdate(
+        { settingKey: 'serviceCategories' },
+        { settingValue: categories, updatedAt: new Date() },
+        { upsert: true, new: true }
+      );
+      
+      io.emit('serviceCategoriesUpdate', categories);
+      
+      res.json({ success: true, data: settings });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to update service categories' });
+    }
+  });
+
+  // Add new service category
+  app.post('/api/admin/service-categories', async (req, res) => {
+    try {
+      const { category } = req.body;
+      const io = app.get('io');
+      
+      const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
+      const categories = existingSettings?.settingValue || [];
+      
+      categories.push(category);
+      
+      const settings = await SiteSettings.findOneAndUpdate(
+        { settingKey: 'serviceCategories' },
+        { settingValue: categories, updatedAt: new Date() },
+        { upsert: true, new: true }
+      );
+      
+      io.emit('serviceCategoriesUpdate', categories);
+      
+      res.json({ success: true, data: settings });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to add service category' });
+    }
+  });
+
+  // Delete service category
+  app.delete('/api/admin/service-categories/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const io = app.get('io');
+      
+      const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
+      const categories = existingSettings?.settingValue || [];
+      
+      const updatedCategories = categories.filter(cat => cat.id !== id);
+      
+      const settings = await SiteSettings.findOneAndUpdate(
+        { settingKey: 'serviceCategories' },
+        { settingValue: updatedCategories, updatedAt: new Date() },
+        { upsert: true, new: true }
+      );
+      
+      io.emit('serviceCategoriesUpdate', updatedCategories);
+      
+      res.json({ success: true, data: settings });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to delete service category' });
+    }
+  });
+
+  // Update individual service
+  app.put('/api/admin/services/:categoryId/:serviceId', async (req, res) => {
+    try {
+      const { categoryId, serviceId } = req.params;
+      const { service } = req.body;
+      const io = app.get('io');
+      
+      const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
+      const categories = existingSettings?.settingValue || [];
+      
+      const updatedCategories = categories.map(cat => {
+        if (cat.id === categoryId) {
+          return {
+            ...cat,
+            services: cat.services.map(svc => 
+              svc.id === serviceId ? { ...svc, ...service } : svc
+            )
+          };
+        }
+        return cat;
+      });
+      
+      const settings = await SiteSettings.findOneAndUpdate(
+        { settingKey: 'serviceCategories' },
+        { settingValue: updatedCategories, updatedAt: new Date() },
+        { upsert: true, new: true }
+      );
+      
+      io.emit('serviceCategoriesUpdate', updatedCategories);
+      
+      res.json({ success: true, data: settings });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to update service' });
+    }
+  });
+
+  // Delete individual service
+  app.delete('/api/admin/services/:categoryId/:serviceId', async (req, res) => {
+    try {
+      const { categoryId, serviceId } = req.params;
+      const io = app.get('io');
+      
+      const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
+      const categories = existingSettings?.settingValue || [];
+      
+      const updatedCategories = categories.map(cat => {
+        if (cat.id === categoryId) {
+          return {
+            ...cat,
+            services: cat.services.filter(svc => svc.id !== serviceId)
+          };
+        }
+        return cat;
+      });
+      
+      const settings = await SiteSettings.findOneAndUpdate(
+        { settingKey: 'serviceCategories' },
+        { settingValue: updatedCategories, updatedAt: new Date() },
+        { upsert: true, new: true }
+      );
+      
+      io.emit('serviceCategoriesUpdate', updatedCategories);
+      
+      res.json({ success: true, data: settings });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to delete service' });
+    }
+  });
+
   app.post('/api/admin/media/upload', async (req, res) => {
     try {
       // Handle file upload

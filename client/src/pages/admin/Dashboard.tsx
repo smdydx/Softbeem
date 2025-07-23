@@ -40,7 +40,10 @@ import {
   ChevronRight,
   Save,
   Plus,
-  Minus
+  Minus,
+  Upload,
+  Code,
+  Smartphone
 } from "lucide-react";
 
 const Dashboard = () => {
@@ -67,27 +70,99 @@ const Dashboard = () => {
     logoUrl: '/images/ramaera-logo.jpg',
     companyName: 'Ramaera Industries'
   });
+
+  const [headerContent, setHeaderContent] = useState({
+    logo: '/images/ramaera-logo.jpg',
+    title: 'Ramaera Industries'
+  });
+
+  const [heroContent, setHeroContent] = useState({
+    title: 'Leading Technology Solutions',
+    subtitle: 'Empowering businesses with cutting-edge blockchain and IT solutions',
+    backgroundVideo: '/video/hero-backvideo.mp4'
+  });
   
   const [serviceCategories, setServiceCategories] = useState([
     {
       id: 'blockchain',
       name: 'Blockchain Services',
+      description: 'Complete blockchain development solutions',
+      icon: 'Code',
       services: [
-        { id: 'smart-contracts', name: 'Smart Contract Development', price: '₹50,000' },
-        { id: 'token-dev', name: 'Token Development', price: '₹75,000' },
-        { id: 'nft-marketplace', name: 'NFT Marketplace', price: '₹1,00,000' }
+        { 
+          id: 'smart-contracts', 
+          name: 'Smart Contract Development', 
+          price: '₹50,000',
+          description: 'Custom smart contract development with security audit',
+          features: ['Security Audit', 'Gas Optimization', 'Testing Suite'],
+          image: '/images/smartcontract.jpg',
+          path: '/services/blockchain/smart-contracts'
+        },
+        { 
+          id: 'token-dev', 
+          name: 'Token Development', 
+          price: '₹75,000',
+          description: 'ERC-20, ERC-721, and custom token development',
+          features: ['Multi-chain Support', 'Custom Features', 'Audit Included'],
+          image: '/images/tokenpic.jpg',
+          path: '/services/blockchain/token'
+        },
+        { 
+          id: 'nft-marketplace', 
+          name: 'NFT Marketplace', 
+          price: '₹1,50,000',
+          description: 'Complete NFT marketplace with trading features',
+          features: ['Minting', 'Trading', 'Royalties', 'Wallet Integration'],
+          image: '/images/cryptopic.jpg',
+          path: '/services/blockchain/nft'
+        }
       ]
     },
     {
       id: 'it-services',
       name: 'IT Services',
+      description: 'Comprehensive IT solutions for modern businesses',
+      icon: 'Smartphone',
       services: [
-        { id: 'web-dev', name: 'Web Development', price: '₹25,000' },
-        { id: 'app-dev', name: 'App Development', price: '₹60,000' },
-        { id: 'cloud-services', name: 'Cloud Services', price: '₹40,000' }
+        { 
+          id: 'web-dev', 
+          name: 'Web Development', 
+          price: '₹25,000',
+          description: 'Modern responsive websites with latest technologies',
+          features: ['Responsive Design', 'SEO Optimized', 'Fast Loading'],
+          image: '/images/services/website-builder.jpg',
+          path: '/services/it/web-dev'
+        },
+        { 
+          id: 'app-dev', 
+          name: 'App Development', 
+          price: '₹60,000',
+          description: 'Native and cross-platform mobile applications',
+          features: ['iOS & Android', 'Cross-platform', 'App Store Deploy'],
+          image: '/images/devimage.jpg',
+          path: '/services/it/app-dev'
+        }
       ]
     }
   ]);
+
+  // New service form state
+  const [newService, setNewService] = useState({
+    categoryId: '',
+    name: '',
+    price: '',
+    description: '',
+    features: [''],
+    image: '',
+    path: ''
+  });
+
+  const [editingService, setEditingService] = useState(null);
+  const [newCategory, setNewCategory] = useState({
+    name: '',
+    description: '',
+    icon: 'Code'
+  });
 
   // Sidebar menu structure
   const sidebarMenu = [
@@ -130,7 +205,7 @@ const Dashboard = () => {
       icon: Settings,
       children: [
         { id: 'service-categories', title: 'Service Categories', icon: CircuitBoard },
-        { id: 'service-pricing', title: 'Service Pricing', icon: Database },
+        { id: 'service-items', title: 'Individual Services', icon: Database },
         { id: 'service-content', title: 'Service Content', icon: Shield }
       ]
     },
@@ -227,6 +302,125 @@ const Dashboard = () => {
       ...prev,
       [categoryId]: !prev[categoryId]
     }));
+  };
+
+  // Service Management Functions
+  const addNewCategory = () => {
+    if (!newCategory.name.trim()) {
+      toast({
+        title: "Error",
+        description: "Category name is required",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const newCat = {
+      id: newCategory.name.toLowerCase().replace(/\s+/g, '-'),
+      name: newCategory.name,
+      description: newCategory.description,
+      icon: newCategory.icon,
+      services: []
+    };
+
+    setServiceCategories([...serviceCategories, newCat]);
+    setNewCategory({ name: '', description: '', icon: 'Code' });
+    
+    toast({
+      title: "Success",
+      description: "Category added successfully",
+    });
+  };
+
+  const deleteCategory = (categoryId) => {
+    setServiceCategories(serviceCategories.filter(cat => cat.id !== categoryId));
+    toast({
+      title: "Success",
+      description: "Category deleted successfully",
+    });
+  };
+
+  const addNewService = () => {
+    if (!newService.categoryId || !newService.name.trim()) {
+      toast({
+        title: "Error",
+        description: "Category and service name are required",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const service = {
+      id: newService.name.toLowerCase().replace(/\s+/g, '-'),
+      name: newService.name,
+      price: newService.price,
+      description: newService.description,
+      features: newService.features.filter(f => f.trim()),
+      image: newService.image,
+      path: newService.path
+    };
+
+    setServiceCategories(prev => 
+      prev.map(cat => 
+        cat.id === newService.categoryId 
+          ? { ...cat, services: [...cat.services, service] }
+          : cat
+      )
+    );
+
+    setNewService({
+      categoryId: '',
+      name: '',
+      price: '',
+      description: '',
+      features: [''],
+      image: '',
+      path: ''
+    });
+
+    toast({
+      title: "Success",
+      description: "Service added successfully",
+    });
+  };
+
+  const updateService = (categoryId, serviceId, updatedService) => {
+    setServiceCategories(prev =>
+      prev.map(cat =>
+        cat.id === categoryId
+          ? {
+              ...cat,
+              services: cat.services.map(service =>
+                service.id === serviceId ? { ...service, ...updatedService } : service
+              )
+            }
+          : cat
+      )
+    );
+
+    setEditingService(null);
+    toast({
+      title: "Success",
+      description: "Service updated successfully",
+    });
+  };
+
+  const deleteService = (categoryId, serviceId) => {
+    setServiceCategories(prev =>
+      prev.map(cat =>
+        cat.id === categoryId
+          ? {
+              ...cat,
+              services: cat.services.filter(service => service.id !== serviceId)
+            }
+          : cat
+      )
+    );
+
+    toast({
+      title: "Success",
+      description: "Service deleted successfully",
+    });
   };
 
   const handleBlogSubmit = async (e) => {
@@ -329,11 +523,7 @@ const Dashboard = () => {
 
   const saveHeaderContent = async () => {
     try {
-      await fetch('/api/admin/header', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(headerContent)
-      });
+      await updateTheme(headerContent);
       toast({
         title: "Header Updated",
         description: "Header content saved successfully",
@@ -349,11 +539,7 @@ const Dashboard = () => {
 
   const saveHeroContent = async () => {
     try {
-      await fetch('/api/admin/hero', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(heroContent)
-      });
+      await updateTheme(heroContent);
       toast({
         title: "Hero Section Updated",
         description: "Hero content saved successfully",
@@ -495,25 +681,64 @@ const Dashboard = () => {
       case 'service-categories':
         return (
           <div className="space-y-6">
+            {/* Add New Category */}
+            <Card className="p-6 bg-blue-950/30 border-blue-500/20">
+              <h3 className="text-xl font-bold text-white mb-4">Add New Category</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Input
+                  placeholder="Category Name"
+                  value={newCategory.name}
+                  onChange={(e) => setNewCategory({...newCategory, name: e.target.value})}
+                  className="bg-blue-900/20 border-blue-500/20"
+                />
+                <Input
+                  placeholder="Description"
+                  value={newCategory.description}
+                  onChange={(e) => setNewCategory({...newCategory, description: e.target.value})}
+                  className="bg-blue-900/20 border-blue-500/20"
+                />
+                <div className="flex gap-2">
+                  <Select value={newCategory.icon} onValueChange={(value) => setNewCategory({...newCategory, icon: value})}>
+                    <SelectTrigger className="bg-blue-900/20 border-blue-500/20">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Code">Code</SelectItem>
+                      <SelectItem value="Smartphone">Smartphone</SelectItem>
+                      <SelectItem value="Shield">Shield</SelectItem>
+                      <SelectItem value="Globe">Globe</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button onClick={addNewCategory} className="bg-green-600 hover:bg-green-700">
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
+            {/* Existing Categories */}
             <Card className="p-6 bg-blue-950/30 border-blue-500/20">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-white">Service Categories Management</h2>
-                <Button className="bg-green-600 hover:bg-green-700">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Category
-                </Button>
               </div>
               
               <div className="space-y-4">
                 {serviceCategories.map((category, index) => (
                   <Card key={category.id} className="p-4 bg-blue-900/20 border-blue-500/10">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-white">{category.name}</h3>
+                      <div>
+                        <h3 className="text-lg font-semibold text-white">{category.name}</h3>
+                        <p className="text-blue-400 text-sm">{category.description}</p>
+                      </div>
                       <div className="flex gap-2">
                         <Button size="sm" variant="outline" className="border-blue-500/50">
                           <PencilIcon className="h-4 w-4" />
                         </Button>
-                        <Button size="sm" variant="destructive">
+                        <Button 
+                          size="sm" 
+                          variant="destructive"
+                          onClick={() => deleteCategory(category.id)}
+                        >
                           <TrashIcon className="h-4 w-4" />
                         </Button>
                       </div>
@@ -522,23 +747,245 @@ const Dashboard = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                       {category.services.map((service) => (
                         <div key={service.id} className="p-3 bg-black/20 rounded-lg border border-blue-500/10">
-                          <div className="flex justify-between items-center">
-                            <div>
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="flex-1">
                               <p className="text-white font-medium">{service.name}</p>
                               <p className="text-blue-400 text-sm">{service.price}</p>
+                              <p className="text-gray-400 text-xs mt-1">{service.description}</p>
                             </div>
-                            <Button size="sm" variant="ghost">
-                              <PencilIcon className="h-3 w-3" />
-                            </Button>
+                            <div className="flex gap-1">
+                              <Button 
+                                size="sm" 
+                                variant="ghost"
+                                onClick={() => setEditingService({...service, categoryId: category.id})}
+                              >
+                                <PencilIcon className="h-3 w-3" />
+                              </Button>
+                              <Button 
+                                size="sm" 
+                                variant="ghost"
+                                onClick={() => deleteService(category.id, service.id)}
+                              >
+                                <TrashIcon className="h-3 w-3" />
+                              </Button>
+                            </div>
                           </div>
+                          {service.features && (
+                            <div className="text-xs text-gray-500">
+                              Features: {service.features.join(', ')}
+                            </div>
+                          )}
                         </div>
                       ))}
-                      <Button className="p-3 border-2 border-dashed border-blue-500/30 hover:border-blue-500/50 bg-transparent">
-                        <Plus className="h-4 w-4 mr-2" />
-                        Add Service
-                      </Button>
                     </div>
                   </Card>
+                ))}
+              </div>
+            </Card>
+          </div>
+        );
+
+      case 'service-items':
+        return (
+          <div className="space-y-6">
+            {/* Add New Service */}
+            <Card className="p-6 bg-blue-950/30 border-blue-500/20">
+              <h3 className="text-xl font-bold text-white mb-4">
+                {editingService ? 'Edit Service' : 'Add New Service'}
+              </h3>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Select 
+                    value={editingService?.categoryId || newService.categoryId} 
+                    onValueChange={(value) => editingService ? 
+                      setEditingService({...editingService, categoryId: value}) : 
+                      setNewService({...newService, categoryId: value})
+                    }
+                  >
+                    <SelectTrigger className="bg-blue-900/20 border-blue-500/20">
+                      <SelectValue placeholder="Select Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {serviceCategories.map(cat => (
+                        <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  <Input
+                    placeholder="Service Name"
+                    value={editingService?.name || newService.name}
+                    onChange={(e) => editingService ? 
+                      setEditingService({...editingService, name: e.target.value}) : 
+                      setNewService({...newService, name: e.target.value})
+                    }
+                    className="bg-blue-900/20 border-blue-500/20"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input
+                    placeholder="Price (e.g., ₹50,000)"
+                    value={editingService?.price || newService.price}
+                    onChange={(e) => editingService ? 
+                      setEditingService({...editingService, price: e.target.value}) : 
+                      setNewService({...newService, price: e.target.value})
+                    }
+                    className="bg-blue-900/20 border-blue-500/20"
+                  />
+                  
+                  <Input
+                    placeholder="Path (e.g., /services/blockchain/smart-contracts)"
+                    value={editingService?.path || newService.path}
+                    onChange={(e) => editingService ? 
+                      setEditingService({...editingService, path: e.target.value}) : 
+                      setNewService({...newService, path: e.target.value})
+                    }
+                    className="bg-blue-900/20 border-blue-500/20"
+                  />
+                </div>
+
+                <Textarea
+                  placeholder="Service Description"
+                  value={editingService?.description || newService.description}
+                  onChange={(e) => editingService ? 
+                    setEditingService({...editingService, description: e.target.value}) : 
+                    setNewService({...newService, description: e.target.value})
+                  }
+                  className="bg-blue-900/20 border-blue-500/20"
+                />
+
+                <Input
+                  placeholder="Image URL"
+                  value={editingService?.image || newService.image}
+                  onChange={(e) => editingService ? 
+                    setEditingService({...editingService, image: e.target.value}) : 
+                    setNewService({...newService, image: e.target.value})
+                  }
+                  className="bg-blue-900/20 border-blue-500/20"
+                />
+
+                <div>
+                  <label className="block text-sm font-medium text-blue-400 mb-2">Features</label>
+                  {(editingService?.features || newService.features).map((feature, index) => (
+                    <div key={index} className="flex gap-2 mb-2">
+                      <Input
+                        placeholder="Feature"
+                        value={feature}
+                        onChange={(e) => {
+                          const newFeatures = [...(editingService?.features || newService.features)];
+                          newFeatures[index] = e.target.value;
+                          if (editingService) {
+                            setEditingService({...editingService, features: newFeatures});
+                          } else {
+                            setNewService({...newService, features: newFeatures});
+                          }
+                        }}
+                        className="flex-1 bg-blue-900/20 border-blue-500/20"
+                      />
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          const newFeatures = (editingService?.features || newService.features).filter((_, i) => i !== index);
+                          if (editingService) {
+                            setEditingService({...editingService, features: newFeatures});
+                          } else {
+                            setNewService({...newService, features: newFeatures});
+                          }
+                        }}
+                      >
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => {
+                      const newFeatures = [...(editingService?.features || newService.features), ''];
+                      if (editingService) {
+                        setEditingService({...editingService, features: newFeatures});
+                      } else {
+                        setNewService({...newService, features: newFeatures});
+                      }
+                    }}
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Feature
+                  </Button>
+                </div>
+
+                <div className="flex gap-4">
+                  {editingService ? (
+                    <>
+                      <Button 
+                        onClick={() => {
+                          const { categoryId, ...serviceData } = editingService;
+                          updateService(categoryId, editingService.id, serviceData);
+                        }}
+                        className="bg-blue-600 hover:bg-blue-700"
+                      >
+                        Update Service
+                      </Button>
+                      <Button 
+                        variant="outline"
+                        onClick={() => setEditingService(null)}
+                        className="border-blue-500/50"
+                      >
+                        Cancel
+                      </Button>
+                    </>
+                  ) : (
+                    <Button onClick={addNewService} className="bg-green-600 hover:bg-green-700">
+                      <Plus className="h-4 w-4 mr-2" />
+                      Add Service
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </Card>
+
+            {/* Services List */}
+            <Card className="p-6 bg-blue-950/30 border-blue-500/20">
+              <h3 className="text-xl font-bold text-white mb-4">All Services</h3>
+              <div className="space-y-4">
+                {serviceCategories.map(category => (
+                  <div key={category.id}>
+                    <h4 className="text-lg font-semibold text-blue-400 mb-2">{category.name}</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {category.services.map(service => (
+                        <Card key={service.id} className="p-4 bg-blue-900/20 border-blue-500/10">
+                          <div className="flex justify-between items-start mb-2">
+                            <div>
+                              <h5 className="font-medium text-white">{service.name}</h5>
+                              <p className="text-blue-400 text-sm">{service.price}</p>
+                            </div>
+                            <div className="flex gap-1">
+                              <Button 
+                                size="sm" 
+                                variant="ghost"
+                                onClick={() => setEditingService({...service, categoryId: category.id})}
+                              >
+                                <PencilIcon className="h-3 w-3" />
+                              </Button>
+                              <Button 
+                                size="sm" 
+                                variant="ghost"
+                                onClick={() => deleteService(category.id, service.id)}
+                              >
+                                <TrashIcon className="h-3 w-3" />
+                              </Button>
+                            </div>
+                          </div>
+                          {service.image && (
+                            <img src={service.image} alt={service.name} className="w-full h-20 object-cover rounded mb-2" />
+                          )}
+                          <p className="text-gray-400 text-xs">{service.description}</p>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </Card>
