@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import JarvisGlobe from "./JarvisGlobe";
+import ServiceIcons from "./ServiceIcons";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Popover,
@@ -225,9 +226,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex justify-center items-center"
+            className="flex flex-col justify-center items-center"
           >
             <JarvisGlobe size={isMobile ? 280 : 400} />
+            <ServiceIcons />
           </motion.div>
         </div>
       </div>

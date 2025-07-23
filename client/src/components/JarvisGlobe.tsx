@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { motion } from 'framer-motion';
+import { Code, Smartphone, FileText, Shield, Coins, Server, Globe as GlobeIcon, Gamepad2 } from 'lucide-react';
 
 interface JarvisGlobeProps {
   size?: number;
@@ -167,6 +168,65 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
+    // Create service icons orbiting around the globe
+    const serviceIcons = [
+      { name: 'Blockchain', color: 0x00FF00, distance: 3 },
+      { name: 'Smart Contract', color: 0x32CD32, distance: 3.2 },
+      { name: 'Mobile App', color: 0x0097FB, distance: 3.4 },
+      { name: 'Web Dev', color: 0xFF6E00, distance: 3.6 },
+      { name: 'IT Services', color: 0xFFA500, distance: 3.8 },
+      { name: 'Legal', color: 0x9932CC, distance: 4.0 },
+      { name: 'Token', color: 0xFF4500, distance: 4.2 },
+      { name: 'Game Dev', color: 0x00CED1, distance: 4.4 }
+    ];
+
+    const orbitingElements = [];
+    
+    serviceIcons.forEach((service, index) => {
+      // Create a small sphere for each service
+      const iconGeometry = new THREE.SphereGeometry(0.08, 16, 16);
+      const iconMaterial = new THREE.MeshBasicMaterial({
+        color: service.color,
+        transparent: true,
+        opacity: 0.8
+      });
+      const iconMesh = new THREE.Mesh(iconGeometry, iconMaterial);
+      
+      // Create a glowing ring around each icon
+      const ringGeometry = new THREE.RingGeometry(0.1, 0.12, 16);
+      const ringMaterial = new THREE.MeshBasicMaterial({
+        color: service.color,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.4
+      });
+      const ringMesh = new THREE.Mesh(ringGeometry, ringMaterial);
+      
+      // Group icon and ring together
+      const iconGroup = new THREE.Group();
+      iconGroup.add(iconMesh);
+      iconGroup.add(ringMesh);
+      
+      // Position the icon
+      const angle = (index / serviceIcons.length) * Math.PI * 2;
+      iconGroup.position.set(
+        Math.cos(angle) * service.distance,
+        Math.sin(angle * 0.5) * 0.5, // Slight vertical variation
+        Math.sin(angle) * service.distance
+      );
+      
+      // Store service info for animation
+      iconGroup.userData = {
+        originalDistance: service.distance,
+        angleOffset: angle,
+        speed: 0.3 + (index * 0.1), // Different speeds for each icon
+        verticalOffset: Math.sin(angle * 2) * 0.3
+      };
+      
+      scene.add(iconGroup);
+      orbitingElements.push(iconGroup);
+    });
+
     // Animation loop
     const clock = new THREE.Clock();
     
@@ -190,6 +250,30 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       
       // Rotate the stars slowly
       stars.rotation.y = elapsedTime * 0.02;
+      
+      // Animate orbiting service icons
+      orbitingElements.forEach((element, index) => {
+        const userData = element.userData;
+        const currentAngle = userData.angleOffset + (elapsedTime * userData.speed);
+        
+        // Smooth orbital motion
+        element.position.set(
+          Math.cos(currentAngle) * userData.originalDistance,
+          Math.sin(currentAngle * 0.7) * 0.8 + userData.verticalOffset, // Elliptical vertical motion
+          Math.sin(currentAngle) * userData.originalDistance
+        );
+        
+        // Rotate the individual icons
+        element.rotation.y = elapsedTime * 2;
+        element.rotation.x = Math.sin(elapsedTime + index) * 0.2;
+        
+        // Pulsing effect for the icons
+        const pulseFactor = 0.8 + Math.sin(elapsedTime * 3 + index) * 0.2;
+        element.scale.set(pulseFactor, pulseFactor, pulseFactor);
+        
+        // Make icons face the camera
+        element.lookAt(cameraRef.current.position);
+      });
       
       // Render
       rendererRef.current.render(sceneRef.current, cameraRef.current);
@@ -233,6 +317,28 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       
       if (rings2Geometry) rings2Geometry.dispose();
       if (rings2Material) rings2Material.dispose();
+      
+      // Clean up orbiting elements
+      orbitingElements.forEach(element => {
+        if (element.geometry) element.geometry.dispose();
+        if (element.material) {
+          if (Array.isArray(element.material)) {
+            element.material.forEach((m: THREE.Material) => m.dispose());
+          } else {
+            element.material.dispose();
+          }
+        }
+        element.children.forEach(child => {
+          if (child.geometry) child.geometry.dispose();
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach((m: THREE.Material) => m.dispose());
+            } else {
+              child.material.dispose();
+            }
+          }
+        });
+      });
       
       if (rendererRef.current) rendererRef.current.dispose();
     };
