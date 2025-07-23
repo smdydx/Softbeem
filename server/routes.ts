@@ -9,6 +9,7 @@ import { Chat } from "./models/Chat";
 // Twilio import aur client initialization hata diya gaya hai
 
 import { SiteSettings } from "./models/SiteSettings";
+import { Job } from "./models/Job"; // Import Job model
 
 export async function registerRoutes(app: Express, httpServer?: Server): Promise<Server> {
   // Meeting APIs
@@ -164,15 +165,6 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     }
   });
 
-  app.get("/api/meetings", async (req, res) => {
-    try {
-      const meetings = await Meeting.find().sort({ createdAt: -1 });
-      res.json(meetings);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch meetings" });
-    }
-  });
-
   // Chat API endpoint
   app.post('/api/chat', async (req, res) => {
     try {
@@ -207,16 +199,16 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     try {
       const { settingKey, settingValue } = req.body;
       const io = app.get('io');
-      
+
       const settings = await SiteSettings.findOneAndUpdate(
         { settingKey },
         { settingValue, updatedAt: new Date() },
         { upsert: true, new: true }
       );
-      
+
       // Emit real-time update to all connected clients
       io.emit('siteSettingsUpdate', { settingKey, settingValue });
-      
+
       res.json({ success: true, data: settings });
     } catch (error) {
       res.status(500).json({ error: 'Failed to update site settings' });
@@ -226,7 +218,7 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
   app.get('/api/admin/site-settings/:key?', async (req, res) => {
     try {
       const { key } = req.params;
-      
+
       if (key) {
         const setting = await SiteSettings.findOne({ settingKey: key });
         res.json({ data: setting?.settingValue || null });
@@ -248,7 +240,7 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     try {
       const { themeSettings } = req.body;
       const io = app.get('io');
-      
+
       const updatePromises = Object.keys(themeSettings).map(key => 
         SiteSettings.findOneAndUpdate(
           { settingKey: key },
@@ -256,12 +248,12 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
           { upsert: true, new: true }
         )
       );
-      
+
       await Promise.all(updatePromises);
-      
+
       // Emit theme update to all clients
       io.emit('themeUpdate', themeSettings);
-      
+
       res.json({ success: true, message: 'Theme settings updated' });
     } catch (error) {
       res.status(500).json({ error: 'Failed to update theme settings' });
@@ -273,15 +265,15 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     try {
       const { services } = req.body;
       const io = app.get('io');
-      
+
       const settings = await SiteSettings.findOneAndUpdate(
         { settingKey: 'services' },
         { settingValue: services, updatedAt: new Date() },
         { upsert: true, new: true }
       );
-      
+
       io.emit('servicesUpdate', services);
-      
+
       res.json({ success: true, data: settings });
     } catch (error) {
       res.status(500).json({ error: 'Failed to update services' });
@@ -303,15 +295,15 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     try {
       const { categories } = req.body;
       const io = app.get('io');
-      
+
       const settings = await SiteSettings.findOneAndUpdate(
         { settingKey: 'serviceCategories' },
         { settingValue: categories, updatedAt: new Date() },
         { upsert: true, new: true }
       );
-      
+
       io.emit('serviceCategoriesUpdate', categories);
-      
+
       res.json({ success: true, data: settings });
     } catch (error) {
       res.status(500).json({ error: 'Failed to update service categories' });
@@ -323,20 +315,20 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     try {
       const { category } = req.body;
       const io = app.get('io');
-      
+
       const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
       const categories = existingSettings?.settingValue || [];
-      
+
       categories.push(category);
-      
+
       const settings = await SiteSettings.findOneAndUpdate(
         { settingKey: 'serviceCategories' },
         { settingValue: categories, updatedAt: new Date() },
         { upsert: true, new: true }
       );
-      
+
       io.emit('serviceCategoriesUpdate', categories);
-      
+
       res.json({ success: true, data: settings });
     } catch (error) {
       res.status(500).json({ error: 'Failed to add service category' });
@@ -348,20 +340,20 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     try {
       const { id } = req.params;
       const io = app.get('io');
-      
+
       const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
       const categories = existingSettings?.settingValue || [];
-      
+
       const updatedCategories = categories.filter(cat => cat.id !== id);
-      
+
       const settings = await SiteSettings.findOneAndUpdate(
         { settingKey: 'serviceCategories' },
         { settingValue: updatedCategories, updatedAt: new Date() },
         { upsert: true, new: true }
       );
-      
+
       io.emit('serviceCategoriesUpdate', updatedCategories);
-      
+
       res.json({ success: true, data: settings });
     } catch (error) {
       res.status(500).json({ error: 'Failed to delete service category' });
@@ -374,10 +366,10 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
       const { categoryId, serviceId } = req.params;
       const { service } = req.body;
       const io = app.get('io');
-      
+
       const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
       const categories = existingSettings?.settingValue || [];
-      
+
       const updatedCategories = categories.map(cat => {
         if (cat.id === categoryId) {
           return {
@@ -389,15 +381,15 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
         }
         return cat;
       });
-      
+
       const settings = await SiteSettings.findOneAndUpdate(
         { settingKey: 'serviceCategories' },
         { settingValue: updatedCategories, updatedAt: new Date() },
         { upsert: true, new: true }
       );
-      
+
       io.emit('serviceCategoriesUpdate', updatedCategories);
-      
+
       res.json({ success: true, data: settings });
     } catch (error) {
       res.status(500).json({ error: 'Failed to update service' });
@@ -409,10 +401,10 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     try {
       const { categoryId, serviceId } = req.params;
       const io = app.get('io');
-      
+
       const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
       const categories = existingSettings?.settingValue || [];
-      
+
       const updatedCategories = categories.map(cat => {
         if (cat.id === categoryId) {
           return {
@@ -422,15 +414,15 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
         }
         return cat;
       });
-      
+
       const settings = await SiteSettings.findOneAndUpdate(
         { settingKey: 'serviceCategories' },
         { settingValue: updatedCategories, updatedAt: new Date() },
         { upsert: true, new: true }
       );
-      
+
       io.emit('serviceCategoriesUpdate', updatedCategories);
-      
+
       res.json({ success: true, data: settings });
     } catch (error) {
       res.status(500).json({ error: 'Failed to delete service' });
@@ -477,6 +469,13 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     const { setupVite } = await import('./vite');
     await setupVite(app, httpServer);
   }
+
+    async function uploadFile(file: any): Promise<string> {
+        // Implement your file upload logic here
+        // This is a placeholder implementation
+        console.log("Simulating file upload for:", file.name);
+        return Promise.resolve(`/uploads/${file.name}`);
+    }
 
   return httpServer;
 }
