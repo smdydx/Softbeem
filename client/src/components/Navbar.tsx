@@ -316,7 +316,7 @@ const Navbar = () => {
                 onClick={() => window.location.href = '/schedule'} 
                 className="flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all border border-green-500/30 min-w-[48px] min-h-[48px]"
               >
-                <Calendar className="w-10 h-10" />
+                <Calendar className="w-8 h-8" />
               </button>
             </div>
 
