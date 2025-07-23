@@ -196,11 +196,6 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
-const HeroSection = () => {
-  const isMobile = useIsMobile();
-  const [currentIcon, setCurrentIcon] = useState(0);
-  const floatingIcons = [
     <Database className="h-6 w-6 text-primary" />,
     <ServerCog className="h-6 w-6 text-[#FF3366]" />,
     <Rocket className="h-6 w-6 text-yellow-500" />,
