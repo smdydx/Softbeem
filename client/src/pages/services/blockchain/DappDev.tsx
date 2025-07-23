@@ -21,28 +21,28 @@ const DappDev = () => {
       title: "Custom dApp Development",
       description: "End-to-end dApp solutions tailored for your specific industry needs. We handle everything from smart contract development to frontend implementation.",
       features: ["Industry-specific solutions", "Full-stack development", "Custom UI/UX design"],
-      image: "https://images.pexels.com/photos/8370776/pexels-photo-8370776.jpeg"
+      image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=500&h=300&fit=crop"
     },
     {
       icon: <Shield className="w-6 h-6" />,
       title: "Smart Contract Development",
       description: "Secure, audited, and optimized smart contracts for various blockchain platforms. Our contracts undergo rigorous testing and security audits.",
       features: ["Security audits", "Gas optimization", "Multi-chain support"],
-      image: "https://images.pexels.com/photos/8369651/pexels-photo-8369651.jpeg"
+      image: "https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=500&h=300&fit=crop"
     },
     {
       icon: <Zap className="w-6 h-6" />,
       title: "DeFi Solutions",
       description: "Complete DeFi platform development including DEXs, lending protocols, and yield farming solutions with advanced features.",
       features: ["Automated market makers", "Yield optimization", "Cross-chain bridges"],
-      image: "https://images.pexels.com/photos/8369815/pexels-photo-8369815.jpeg"
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=500&h=300&fit=crop"
     },
     {
       icon: <Globe className="w-6 h-6" />,
       title: "NFT Marketplaces",
       description: "Feature-rich NFT marketplace development with minting, trading, and auction capabilities across multiple chains.",
       features: ["Multi-chain support", "Auction system", "Royalty management"],
-      image: "https://images.pexels.com/photos/8369813/pexels-photo-8369813.jpeg"
+      image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=500&h=300&fit=crop"
     },
   ];
 
@@ -74,13 +74,13 @@ const DappDev = () => {
       name: "John Smith",
       role: "CTO, DeFi Protocol",
       content: "Their dApp development expertise helped us launch our DeFi platform ahead of schedule. The team's technical knowledge and attention to security were impressive.",
-      company: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg"
+      company: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces"
     },
     {
       name: "Sarah Johnson",
       role: "Founder, NFT Marketplace",
       content: "Working with them was a game-changer for our NFT marketplace. Their understanding of both technical and business aspects made the development process smooth.",
-      company: "https://images.pexels.com/photos/8370776/pexels-photo-8370776.jpeg"
+      company: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=faces"
     }
   ];
 

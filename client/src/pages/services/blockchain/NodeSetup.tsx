@@ -20,7 +20,7 @@ const NodeSetup = () => {
     {
       title: "Node Infrastructure",
       description: "Enterprise-grade blockchain node setup and configuration",
-      image: "https://images.pexels.com/photos/8370776/pexels-photo-8370776.jpeg",
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500&h=300&fit=crop",
       points: [
         "High-Availability Architecture",
         "Load Balancing",
@@ -31,7 +31,7 @@ const NodeSetup = () => {
     {
       title: "Security Implementation",
       description: "Military-grade security measures for node protection",
-      image: "https://images.pexels.com/photos/8369651/pexels-photo-8369651.jpeg",
+      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=500&h=300&fit=crop",
       points: [
         "DDoS Protection",
         "SSL/TLS Encryption",
@@ -42,7 +42,7 @@ const NodeSetup = () => {
     {
       title: "Performance Optimization",
       description: "Optimized node performance for maximum efficiency",
-      image: "https://images.pexels.com/photos/8369815/pexels-photo-8369815.jpeg",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop",
       points: [
         "Resource Optimization",
         "Network Latency Reduction",
@@ -53,7 +53,7 @@ const NodeSetup = () => {
     {
       title: "Maintenance & Support",
       description: "Comprehensive maintenance and support services",
-      image: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg",
+      image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=500&h=300&fit=crop",
       points: [
         "Proactive Maintenance",
         "Version Updates",

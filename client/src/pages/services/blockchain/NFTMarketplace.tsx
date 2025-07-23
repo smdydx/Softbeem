@@ -135,7 +135,7 @@ const NFTMarketplace = () => {
         >
           <div className="absolute inset-0">
             <img 
-              src="https://images.pexels.com/photos/5980586/pexels-photo-5980586.jpeg" 
+              src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=400&fit=crop" 
               alt="NFT Marketplace"
               className="w-full h-full object-cover opacity-20"
             />
@@ -191,7 +191,7 @@ const NFTMarketplace = () => {
               >
                 <div className="absolute inset-0">
                   <img 
-                    src={feature.image} 
+                    src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=500&h=300&fit=crop" 
                     alt={feature.title}
                     className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity"
                   />

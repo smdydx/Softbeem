@@ -21,19 +21,19 @@ const BlockExplorer = () => {
       icon: <Database className="w-6 h-6" />,
       title: "Transaction Tracking",
       description: "Real-time transaction monitoring and history with advanced filtering capabilities",
-      image: "https://images.pexels.com/photos/8370776/pexels-photo-8370776.jpeg",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop",
     },
     {
       icon: <Shield className="w-6 h-6" />,
       title: "Smart Contract Analysis",
       description: "Detailed contract verification, interaction tracking, and code analysis tools",
-      image: "https://images.pexels.com/photos/8369651/pexels-photo-8369651.jpeg",
+      image: "https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=500&h=300&fit=crop",
     },
     {
       icon: <BarChart className="w-6 h-6" />,
       title: "Analytics Dashboard",
       description: "Comprehensive blockchain network statistics and visual data representation",
-      image: "https://images.pexels.com/photos/8369815/pexels-photo-8369815.jpeg",
+      image: "https://images.unsplash.com/photo-1642104614729-78bea997aaa7?w=500&h=300&fit=crop",
     },
   ];
 

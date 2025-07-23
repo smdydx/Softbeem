@@ -19,19 +19,19 @@ const MetaverseDev = () => {
       icon: <Gamepad2 className="w-6 h-6 text-green-400 group-hover:animate-pulse" />,
       title: "Virtual Worlds",
       description: "Create immersive 3D environments with social interaction capabilities",
-      image: "https://images.pexels.com/photos/8728560/pexels-photo-8728560.jpeg",
+      image: "https://images.unsplash.com/photo-1592478411213-6153e4ebc696?w=500&h=300&fit=crop",
     },
     {
       icon: <ShoppingBag className="w-6 h-6 text-green-400 group-hover:animate-pulse" />,
       title: "Digital Assets",
       description: "Implement NFT-powered virtual assets and marketplace functionality",
-      image: "https://images.pexels.com/photos/8369533/pexels-photo-8369533.jpeg",
+      image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=500&h=300&fit=crop",
     },
     {
       icon: <Box className="w-6 h-6 text-green-400 group-hover:animate-pulse" />,
       title: "Blockchain Integration",
       description: "Setup decentralized infrastructure for virtual economies",
-      image: "https://images.pexels.com/photos/8369651/pexels-photo-8369651.jpeg",
+      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=500&h=300&fit=crop",
     }
   ];
 
@@ -133,17 +133,17 @@ const MetaverseDev = () => {
             {[{
               icon: <Globe2 className="w-7 h-7 text-green-400 group-hover:animate-pulse" />,
               title: "Virtual Worlds Creation",
-              image: "https://images.pexels.com/photos/8728560/pexels-photo-8728560.jpeg",
+              image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=300&fit=crop",
               desc: "Immersive 3D spaces with avatars and interactions in real-time.",
             }, {
               icon: <ShoppingBag className="w-7 h-7 text-green-400 group-hover:animate-pulse" />,
               title: "NFT Marketplace",
-              image: "https://images.pexels.com/photos/8369533/pexels-photo-8369533.jpeg",
+              image: "https://images.unsplash.com/photo-1643101809204-6fb869816dbe?w=500&h=300&fit=crop",
               desc: "Trade and showcase NFTs in your own decentralized store.",
             }, {
               icon: <Box className="w-7 h-7 text-green-400 group-hover:animate-pulse" />,
               title: "Blockchain Economy",
-              image: "https://images.pexels.com/photos/8369651/pexels-photo-8369651.jpeg",
+              image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=500&h=300&fit=crop",
               desc: "Smart contract-driven economies with real crypto integrations."
             }].map((card, i) => (
               <motion.div
