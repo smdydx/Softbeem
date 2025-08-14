@@ -229,7 +229,7 @@ const HeroSection = () => {
             className="flex flex-col justify-center items-center mt-4 lg:mt-8"
           >
             <JarvisGlobe size={isMobile ? 350 : 480} />
-            <div className="mt-8">
+            <div className="mt-16">
               <ServiceIcons />
             </div>
           </motion.div>
