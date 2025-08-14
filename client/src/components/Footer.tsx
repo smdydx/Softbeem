@@ -123,7 +123,6 @@ const Footer = () => {
                 />
                 <div>
                   <h3 className="text-xl lg:text-2xl font-bold text-white">{settings.companyName || 'Softbeem'}</h3>
-                  <p className="text-green-400 text-sm">Powered by Innovation</p>
                 </div>
               </div>
             </div>
