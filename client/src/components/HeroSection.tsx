@@ -64,7 +64,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 lg:pt-24 overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center pt-8 sm:pt-12 lg:pt-16 overflow-hidden bg-black"
     >
       {/* Video Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -120,8 +120,8 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 -mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -226,7 +226,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col justify-center items-center mt-24"
+            className="flex flex-col justify-center items-center mt-4 lg:mt-8"
           >
             <JarvisGlobe size={isMobile ? 350 : 480} />
             <ServiceIcons />
