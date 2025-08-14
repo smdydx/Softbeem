@@ -6,6 +6,18 @@ import { useState } from "react";
 
 const WebDev = () => {
   const [imageError, setImageError] = useState(false);
+  const [componentError, setComponentError] = useState(false);
+
+  if (componentError) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-zinc-900 to-black pt-24 flex items-center justify-center">
+        <div className="text-white text-center">
+          <h1 className="text-2xl mb-4">Web Development Services</h1>
+          <p>Loading content...</p>
+        </div>
+      </div>
+    );
+  }
 
   const services = [
     {
@@ -173,8 +185,9 @@ const WebDev = () => {
     }
   ];
 
-  return (
-    <main className="min-h-screen bg-gradient-to-b from-zinc-900 to-black pt-24">
+  try {
+    return (
+      <main className="min-h-screen bg-gradient-to-b from-zinc-900 to-black pt-24">
       <motion.div
         variants={staggerContainer}
         initial="hidden"
@@ -331,7 +344,18 @@ const WebDev = () => {
         </motion.div>
       </motion.div>
     </main>
-  );
+    );
+  } catch (error) {
+    console.error('WebDev component error:', error);
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-zinc-900 to-black pt-24 flex items-center justify-center">
+        <div className="text-white text-center">
+          <h1 className="text-2xl mb-4">Web Development Services</h1>
+          <p>Content temporarily unavailable. Please try again.</p>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default WebDev;
