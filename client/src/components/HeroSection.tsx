@@ -226,9 +226,9 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col justify-center items-center"
+            className="flex flex-col justify-center items-center mt-8"
           >
-            <JarvisGlobe size={isMobile ? 280 : 400} />
+            <JarvisGlobe size={isMobile ? 260 : 380} />
             <ServiceIcons />
           </motion.div>
         </div>

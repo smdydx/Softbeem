@@ -25,7 +25,7 @@ const ServiceIcons = () => {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 mt-6 px-4">
+    <div className="flex flex-wrap justify-center gap-2 mt-4 px-4">
       {services.map((service, index) => (
         <motion.div
           key={service.name}
@@ -38,10 +38,10 @@ const ServiceIcons = () => {
             repeatType: "reverse",
             repeatDelay: 3
           }}
-          className="flex flex-col items-center gap-2 p-3 rounded-lg bg-zinc-800/30 backdrop-blur-sm border border-green-500/10 hover:border-green-500/30 transition-all"
+          className="flex flex-col items-center gap-1 p-2 rounded-lg bg-zinc-800/30 backdrop-blur-sm border border-green-500/10 hover:border-green-500/30 transition-all"
         >
-          <service.icon className={`w-6 h-6 ${service.color}`} />
-          <span className="text-xs text-white/80 font-medium">{service.name}</span>
+          <service.icon className={`w-4 h-4 ${service.color}`} />
+          <span className="text-[10px] text-white/80 font-medium">{service.name}</span>
         </motion.div>
       ))}
     </div>
