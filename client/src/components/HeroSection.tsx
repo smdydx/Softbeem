@@ -131,8 +131,8 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10 -mt-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 -mt-4 sm:-mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 lg:gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -166,7 +166,7 @@ const HeroSection = () => {
               </span>
             </div>
 
-            <p className="text-base md:text-lg text-gray-300 mb-8 max-w-lg mx-auto lg:mx-0">
+            <p className="text-base md:text-lg text-gray-300 mb-4 sm:mb-6 lg:mb-8 max-w-lg mx-auto lg:mx-0">
               <span className="bg-gradient-to-r from-[#00FF00] to-[#32CD32] text-transparent bg-clip-text font-bold">
                 Empowering businesses
               </span>{" "}
@@ -254,12 +254,12 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col justify-center items-center mt-4 lg:mt-8"
+            className="flex flex-col justify-center items-center mt-2 sm:mt-4 lg:mt-8"
           >
-            <div className="mt-40">
-              <JarvisGlobe size={isMobile ? 350 : 480} />
+            <div className="mt-8 sm:mt-16 lg:mt-40">
+              <JarvisGlobe size={isMobile ? 280 : 480} />
             </div>
-            <div className="mt-16">
+            <div className="mt-4 sm:mt-8 lg:mt-16">
               <ServiceIcons />
             </div>
           </motion.div>
