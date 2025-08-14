@@ -1443,6 +1443,23 @@ button, .button {
   footer {
     margin-top: 2rem;
   }
+  
+  /* Footer mobile optimizations */
+  footer .container {
+    padding: 0 1rem;
+  }
+  
+  footer h3 {
+    font-size: 1.125rem !important;
+  }
+  
+  footer p, footer a {
+    font-size: 0.875rem !important;
+  }
+  
+  footer input, footer button {
+    font-size: 0.875rem !important;
+  }
 
   .legal-hero h1 {
     font-size: 2rem !important;

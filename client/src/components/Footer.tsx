@@ -1,9 +1,9 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Send, Linkedin, Facebook, Instagram, ArrowUp } from "lucide-react";
+import { Send, Linkedin, Facebook, Instagram, ArrowUp, ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { staggerContainer } from "@/lib/animations";
+import { staggerContainer, fadeInUp } from "@/lib/animations";
 import { useState, useEffect } from "react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -82,6 +82,22 @@ const Footer = () => {
     { name: "Contact", path: "/contact" },
   ];
 
+  const quickLinks = [
+    { name: "About Us", href: "/about" },
+    { name: "Our Services", href: "/services" },
+    { name: "Blog & Insights", href: "/blog" },
+    { name: "Contact Us", href: "/contact" },
+    { name: "Careers", href: "/careers" },
+  ];
+
+  const techServices = [
+    { name: "Smart Contract Development", href: "/services/blockchain/smart-contracts" },
+    { name: "Token Development", href: "/services/blockchain/token" },
+    { name: "NFT Marketplace", href: "/services/blockchain/nft" },
+    { name: "Crypto Exchange", href: "/services/blockchain/exchange" },
+    { name: "Web Development", href: "/services/it/web-dev" },
+  ];
+
   return (
     <footer className="bg-gradient-to-b from-zinc-900 to-black pt-16 pb-8 w-full relative z-10">
       <div className="container mx-auto px-4 md:px-6">
@@ -90,82 +106,120 @@ const Footer = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
         >
           {/* Company Info */}
-          <div className="lg:col-span-2">
+          <motion.div 
+            variants={fadeInUp}
+            className="sm:col-span-2 lg:col-span-1"
+          >
             <div onClick={() => window.location.href = '/'} className="cursor-pointer">
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center mb-6">
                 <img 
                   src={settings.logoUrl || "/images/ramaera-logo.jpg"} 
                   alt={`${settings.companyName || 'Ramaera'} Logo`} 
                   className="h-14 w-14 rounded-full border-2"
                   style={{ borderColor: `${settings.themeColor || '#ff6b35'}30` }}
                 />
+                <div>
+                  <h3 className="text-xl lg:text-2xl font-bold text-white">{settings.companyName || 'Softbeem'}</h3>
+                  <p className="text-green-400 text-sm">Powered by Innovation</p>
+                </div>
               </div>
             </div>
-            <p className="text-gray-400 mb-8 text-lg leading-relaxed">
+            <p className="text-gray-300 leading-relaxed mb-6 text-sm lg:text-base">
               Softbeem managed by Ramaera Legal InfoTech Private Limited, a premier technology and legal services company providing innovative solutions for businesses across sectors.
             </p>
-            <div className="flex space-x-6">
+            <div className="flex space-x-4">
               <a href="https://www.linkedin.com/company/ramaera-legal-infotech-pvt-ltd/" target="_blank" rel="noopener noreferrer" 
-                className="text-gray-400 hover:text-primary transition-colors duration-300">
-                <Linkedin className="w-6 h-6" />
+                className="w-10 h-10 bg-zinc-800/80 hover:bg-green-500/20 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 group border border-zinc-700/50 hover:border-green-500/30">
+                <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-green-400" />
               </a>
               <a href="https://www.facebook.com/profile.php?id=61571353791629" target="_blank" rel="noopener noreferrer" 
-                className="text-gray-400 hover:text-primary transition-colors duration-300">
-                <Facebook className="w-6 h-6" />
+                className="w-10 h-10 bg-zinc-800/80 hover:bg-green-500/20 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 group border border-zinc-700/50 hover:border-green-500/30">
+                <Facebook className="w-5 h-5 text-gray-400 group-hover:text-green-400" />
               </a>
               <a href="https://www.instagram.com/ramaera_legal_infotech_pvt_ltd?igsh=MWt1bWgycHBzMW9iZw==" target="_blank" rel="noopener noreferrer" 
-                className="text-gray-400 hover:text-primary transition-colors duration-300">
-                <Instagram className="w-6 h-6" />
+                className="w-10 h-10 bg-zinc-800/80 hover:bg-green-500/20 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 group border border-zinc-700/50 hover:border-green-500/30">
+                <Instagram className="w-5 h-5 text-gray-400 group-hover:text-green-400" />
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="text-xl font-semibold mb-6 text-white">Quick Links</h4>
-            <Navigation links={navigationLinks} />
-          </div>
+          <motion.div variants={fadeInUp} className="col-span-1">
+            <h3 className="text-lg lg:text-xl font-semibold mb-6 text-white flex items-center">
+              <span className="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+              Quick Links
+            </h3>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-gray-300 hover:text-green-400 transition-colors duration-300 flex items-center group text-sm lg:text-base"
+                  >
+                    <ArrowRight className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
 
           {/* Tech Services */}
-          <div>
-            <h4 className="text-xl font-semibold mb-6 text-white">Tech Services</h4>
-            <ul className="space-y-4">
-              <li><a href="/services/blockchain/smart-contracts" className="text-gray-400 hover:text-primary transition-colors duration-300">Smart Contract Development</a></li>
-              <li><a href="/services/blockchain/token" className="text-gray-400 hover:text-primary transition-colors duration-300">Token Development</a></li>
-              <li><a href="/services/blockchain/nft" className="text-gray-400 hover:text-primary transition-colors duration-300">NFT Marketplace</a></li>
-              <li><a href="/services/blockchain/exchange" className="text-gray-400 hover:text-primary transition-colors duration-300">Crypto Exchange</a></li>
-              <li><a href="/services/it/web-dev" className="text-gray-400 hover:text-primary transition-colors duration-300">Web Development</a></li>
+          <motion.div variants={fadeInUp} className="col-span-1">
+            <h3 className="text-lg lg:text-xl font-semibold mb-6 text-white flex items-center">
+              <span className="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+              Tech Services
+            </h3>
+            <ul className="space-y-3">
+              {techServices.map((service) => (
+                <li key={service.name}>
+                  <Link
+                    to={service.href}
+                    className="text-gray-300 hover:text-green-400 transition-colors duration-300 flex items-center group text-sm lg:text-base"
+                  >
+                    <ArrowRight className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Newsletter */}
-          <div>
-            <h4 className="text-xl font-semibold mb-6 text-white">Newsletter</h4>
+          <motion.div variants={fadeInUp} className="col-span-1 sm:col-span-2 lg:col-span-1">
+            <h3 className="text-lg lg:text-xl font-semibold mb-6 text-white flex items-center">
+              <span className="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+              Newsletter
+            </h3>
+            <p className="text-gray-300 mb-6 leading-relaxed text-sm lg:text-base">
+              Stay updated with our latest technology trends and legal insights.
+            </p>
             <form onSubmit={handleSubscribe} className="space-y-4">
-              <div className="flex flex-col space-y-4">
+              <div className="relative">
                 <Input 
                   type="email" 
                   placeholder="Your Email" 
-                  className="rounded-lg focus-visible:ring-primary border-zinc-700 bg-zinc-800/50 backdrop-blur" 
+                  className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 transition-all duration-300 text-sm lg:text-base" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <Button 
-                  type="submit" 
-                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white"
-                >
-                  Subscribe <Send className="h-4 w-4 ml-2" />
-                </Button>
+                <Mail className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
               </div>
-              <p className="text-sm text-gray-400">
+              <Button 
+                type="submit" 
+                className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg shadow-green-500/20 text-sm lg:text-base"
+              >
+                Subscribe <Send className="h-4 w-4 ml-2" />
+              </Button>
+              <p className="text-xs text-gray-500 leading-relaxed">
                 By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.
               </p>
             </form>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Bottom Bar */}
