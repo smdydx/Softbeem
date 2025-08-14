@@ -83,7 +83,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-zinc-900 to-black pt-16 pb-8 w-full mt-auto relative z-10">
+    <footer className="bg-gradient-to-b from-zinc-900 to-black pt-16 pb-8 w-full relative z-10">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           initial="hidden"

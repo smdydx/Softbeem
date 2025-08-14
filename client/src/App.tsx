@@ -64,7 +64,7 @@ import BoardGeneralMeetings from "./pages/services/legal/BoardGeneralMeetings";
 import ROCComplianceFilings from "./pages/services/legal/ROCComplianceFilings";
 import MOAandAOAAlterations from "./pages/services/legal/MOAandAOAAlterations";
 import LLPToPrivateConversion from "./pages/services/legal/LLPToPrivateConversion";
-import CorporateGovernanceAdvisory from "./pages/services/legal/CorporateGovernanceAdvisory";
+import CorporateGovernanceAdvisory from "@/pages/services/legal/CorporateGovernanceAdvisory";
 import SecretarialAudit from "./pages/services/legal/SecretarialAudit";
 import VirtualCompanySecretaryServices from "@/pages/services/legal/VirtualCompanySecretaryServices";
 import ESOPStructuringAdministration from "./pages/services/legal/ESOPStructuringAdministration";
@@ -249,7 +249,6 @@ function App() {
           </main>
           <Footer />
           <CookieConsent />
-          <Toaster />
         </div>
       </SiteSettingsProvider>
     </QueryClientProvider>
