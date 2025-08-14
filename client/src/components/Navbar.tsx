@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, ChevronRight, PhoneCall, Calendar } from "lucide-react";
@@ -83,7 +82,7 @@ const Navbar = () => {
     }`}>
       <div className="container mx-auto px-3 sm:px-4 lg:px-6 relative z-10">
         <div className="flex items-center justify-between bg-gradient-to-r from-zinc-900/50 via-transparent to-zinc-900/50 rounded-full px-3 sm:px-4 lg:px-6 py-2 backdrop-blur-sm border border-green-500/10">
-          
+
           {/* Logo */}
           <div className="flex items-center">
             <div onClick={() => window.location.href = '/'} className="cursor-pointer">
@@ -231,7 +230,7 @@ const Navbar = () => {
                     {link.name}
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                   </button>
-                  
+
                   {/* Contact buttons for desktop */}
                   {link.name === "Contact Us" && (
                     <div className="hidden lg:flex items-center gap-3">
@@ -445,4 +444,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

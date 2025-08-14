@@ -4,6 +4,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import CookieConsent from "@/components/CookieConsent";
 import { SiteSettingsProvider } from "@/contexts/SiteSettingsContext";
+import { useEffect } from 'react';
+import { initMobileOptimizations } from '@/utils/mobile-optimizations';
 
 // Common Pages
 import NotFound from "@/pages/not-found";
@@ -124,6 +126,10 @@ import MerchantExporterGST from "./pages/services/legal/GstMerchantExporter";
 import ScrollToTop from "@/components/ScrollToTop";
 
 function App() {
+  useEffect(() => {
+    initMobileOptimizations();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <SiteSettingsProvider>
