@@ -87,3 +87,22 @@ export const textVariant = (delay: number) => {
     },
   };
 };
+
+export const fadeInUp = (delay: number = 0, duration: number = 0.6) => {
+  return {
+    hidden: {
+      y: 25,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        delay: delay * 0.2,
+        duration: duration * 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+};
