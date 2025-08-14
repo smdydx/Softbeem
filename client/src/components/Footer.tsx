@@ -56,16 +56,13 @@ const Footer = () => {
           if (!link || typeof link !== 'object') return null;
           return (
             <li key={index}>
-              <button
-                onClick={() => {
-                  if (link.path) {
-                    window.location.href = link.path;
-                  }
-                }}
-                className="text-gray-400 hover:text-primary transition-colors duration-300 text-left w-full"
+              <Link
+                to={link.path}
+                className="text-gray-400 hover:text-primary transition-colors duration-300 flex items-center group text-sm lg:text-base"
               >
+                <ArrowRight className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 {typeof link.name === 'string' ? link.name : ''}
-              </button>
+              </Link>
             </li>
           );
         })}
@@ -86,16 +83,16 @@ const Footer = () => {
     { name: "About Us", href: "/about" },
     { name: "Our Services", href: "/services" },
     { name: "Blog & Insights", href: "/blog" },
-    { name: "Contact Us", href: "/contact" },
+    { name: "Contact Us", href: "/#contact" },
     { name: "Careers", href: "/careers" },
   ];
 
   const techServices = [
-    { name: "Smart Contract Development", href: "/services/blockchain/smart-contracts" },
-    { name: "Token Development", href: "/services/blockchain/token" },
-    { name: "NFT Marketplace", href: "/services/blockchain/nft" },
-    { name: "Crypto Exchange", href: "/services/blockchain/exchange" },
-    { name: "Web Development", href: "/services/it/web-dev" },
+    { name: "Smart Contract Development", href: "/services/blockchain/smart-contract-development" },
+    { name: "Token Development", href: "/services/blockchain/token-development" },
+    { name: "NFT Marketplace", href: "/services/blockchain/nft-marketplace" },
+    { name: "Crypto Exchange", href: "/services/blockchain/crypto-exchange" },
+    { name: "Web Development", href: "/services/it/web-development" },
   ];
 
   return (
@@ -113,7 +110,7 @@ const Footer = () => {
             variants={fadeInUp}
             className="sm:col-span-2 lg:col-span-1"
           >
-            <div onClick={() => window.location.href = '/'} className="cursor-pointer">
+            <Link to="/" className="cursor-pointer">
               <div className="flex items-center mb-6">
                 <img 
                   src={settings.logoUrl || "/images/ramaera-logo.jpg"} 
@@ -125,7 +122,7 @@ const Footer = () => {
                   <h3 className="text-xl lg:text-2xl font-bold text-white">{settings.companyName || 'Softbeem'}</h3>
                 </div>
               </div>
-            </div>
+            </Link>
             <p className="text-gray-300 leading-relaxed mb-6 text-sm lg:text-base">
               Softbeem managed by Ramaera Legal InfoTech Private Limited, a premier technology and legal services company providing innovative solutions for businesses across sectors.
             </p>
