@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Send, Linkedin, Facebook, Instagram, ArrowUp, ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
