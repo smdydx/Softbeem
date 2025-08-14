@@ -25,7 +25,7 @@ const ServiceIcons = () => {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-2 mt-4 px-4">
+    <div className="flex flex-wrap justify-center gap-2 px-4">
       {services.map((service, index) => (
         <motion.div
           key={service.name}
