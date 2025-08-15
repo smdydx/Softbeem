@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -101,12 +102,12 @@ const Navbar = () => {
       toggleMobileService(service.title);
       return;
     }
-
+    
     setIsMobileMenuOpen(false);
     setMobileServicesOpen(false);
     setMobileOpenCategories([]);
     setMobileOpenServices([]);
-
+    
     if (service.path) {
       window.location.href = service.path;
     } else {
@@ -231,8 +232,8 @@ const Navbar = () => {
                                                     className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full"
                                                   >
                                                     <div className="text-primary/80 flex items-center">
-                                                      <div className="h-4 w-4 submenu-icon">{React.createElement(subItem.icon, { 
-                                                        className: "h-4 w-4 opacity-75 hover:opacity-100 transition-opacity"
+                                                      <div className="h-3 w-3">{React.createElement(subItem.icon, { 
+                                                        className: "h-3 w-3 opacity-75 hover:opacity-100 transition-opacity"
                                                       })}</div>
                                                     </div>
                                                     <div className="text-left">
@@ -401,7 +402,7 @@ const Navbar = () => {
                                     }`} 
                                   />
                                 </button>
-
+                                
                                 <AnimatePresence>
                                   {mobileOpenCategories.includes(category) && (
                                     <motion.div
@@ -422,7 +423,7 @@ const Navbar = () => {
                                           >
                                             <div className="flex items-center gap-3">
                                               <div className="text-green-400/80 group-hover:text-green-400 transition-colors flex-shrink-0">
-                                                <div className="h-4 w-4 mobile-submenu-icon">
+                                                <div className="h-4 w-4">
                                                   {React.createElement(service.icon)}
                                                 </div>
                                               </div>
@@ -438,7 +439,7 @@ const Navbar = () => {
                                               />
                                             )}
                                           </motion.button>
-
+                                          
                                           {/* Show submenu for services that have submenu */}
                                           <AnimatePresence>
                                             {service.submenu && mobileOpenServices.includes(service.title) && (
@@ -466,7 +467,7 @@ const Navbar = () => {
                                                   >
                                                     <div className="text-green-400/60 group-hover:text-green-400/80 transition-colors flex-shrink-0 flex items-center">
                                                       <div className="h-2.5 w-2.5">
-                                                        {React.createElement(subItem.icon)}
+                                                        {React.createElement(subItem.icon, { className: "h-2.5 w-2.5" })}
                                                       </div>
                                                     </div>
                                                     <span className="text-white/60 group-hover:text-white/80 text-xs font-medium">

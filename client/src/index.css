@@ -997,21 +997,6 @@ button, .button {
   }
 }
 
-/* Submenu icons specific styling */
-.submenu-icon {
-  width: 1rem !important;
-  height: 1rem !important;
-  min-width: 1rem !important;
-  font-size: 0.875rem;
-}
-
-/* Mobile submenu icons */
-.mobile-submenu-icon {
-  width: 1rem !important;
-  height: 1rem !important;
-  min-width: 1rem !important;
-}
-
 .mobile-services-item {
   padding: 0.75rem;
   border-radius: 0.5rem;
