@@ -21,7 +21,9 @@ import {
   Cloud,
   Gamepad2,
   Landmark,
-  Calculator
+  Calculator,
+  Blocks,
+  Monitor
 } from "lucide-react";
 
 interface Service {
@@ -40,7 +42,7 @@ interface ServicesData {
 export const servicesData: ServicesData = {
   tech: [
     {
-      icon: Code,
+      icon: Blocks,
       title: "Blockchain Services",
       features: [
         "Smart Contract Development",
@@ -106,7 +108,7 @@ export const servicesData: ServicesData = {
       path: "/services/blockchain"
     },
     {
-      icon: Smartphone,
+      icon: Monitor,
       title: "IT Services",
       features: [
         "Complete IT solutions",
@@ -170,7 +172,7 @@ export const servicesData: ServicesData = {
   ],
   legal: [
     {
-      icon: FileText,
+      icon: Scale,
       title: "Legal & Compliance",
       features: [
   "Company Incorporation Services",
