@@ -336,14 +336,24 @@ const Navbar = () => {
                       {servicesDropdownOpen && (
                         <div className="bg-zinc-900/95 border-t border-green-500/20">
                           {Object.keys(servicesData).map((category) => (
-                            <div key={category} className="px-4 py-3 border-b border-green-500/10 last:border-b-0">
-                              <h3 className="text-sm font-medium text-green-400 mb-2 capitalize">
-                                {category} Solutions
-                              </h3>
-                              <div className="space-y-1">
-                                {servicesData[category as keyof typeof servicesData].map((service, idx) => (
-                                  <div key={idx}>
+                            <div key={category} className="border-b border-green-500/10 last:border-b-0">
+                              <button
+                                onClick={() => handleMobileSubmenuToggle(category)}
+                                className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-zinc-800/50 transition-colors"
+                              >
+                                <span className="text-green-400 font-medium capitalize">
+                                  {category} Services
+                                </span>
+                                <ChevronDown className={`h-4 w-4 text-green-400 transition-transform duration-200 ${
+                                  openMobileSubmenus.includes(category) ? 'rotate-180' : ''
+                                }`} />
+                              </button>
+                              
+                              {openMobileSubmenus.includes(category) && (
+                                <div className="px-4 pb-3 space-y-1">
+                                  {servicesData[category as keyof typeof servicesData].map((service, idx) => (
                                     <button
+                                      key={idx}
                                       onClick={() => {
                                         if (service.path) {
                                           window.location.href = service.path;
@@ -352,16 +362,16 @@ const Navbar = () => {
                                           scrollToSection("/#services");
                                         }
                                       }}
-                                      className="flex items-center gap-2 w-full text-left p-2 rounded-md hover:bg-zinc-800/50 transition-colors"
+                                      className="flex items-center gap-2 w-full text-left p-2 rounded-md hover:bg-zinc-800/50 transition-colors ml-4"
                                     >
                                       <div className="text-green-400 flex-shrink-0">
                                         <div className="h-4 w-4">{React.createElement(service.icon)}</div>
                                       </div>
                                       <span className="text-sm text-white/90">{service.title}</span>
                                     </button>
-                                  </div>
-                                ))}
-                              </div>
+                                  ))}
+                                </div>
+                              )}
                             </div>
                           ))}
                         </div>
