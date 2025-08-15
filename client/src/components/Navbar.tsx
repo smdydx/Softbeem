@@ -412,7 +412,7 @@ const Navbar = () => {
             <div className="flex items-center justify-center gap-4 p-4 border-b border-green-500/10 bg-zinc-900/50">
               <a
                 href="tel:+911169310715"
-                className="flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all border border-green-500/30"
+                className="flex items-center justify-center w-14 h-14 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all border border-green-500/30"
               >
                 <PhoneCall className="w-6 h-6" />
               </a>
@@ -420,7 +420,7 @@ const Navbar = () => {
                 href="https://wa.me/911169310715"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all border border-green-500/30"
+                className="flex items-center justify-center w-14 h-14 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all border border-green-500/30"
               >
                 <svg
                   className="w-6 h-6"
@@ -432,7 +432,7 @@ const Navbar = () => {
               </a>
               <button
                 onClick={() => (window.location.href = "/schedule")}
-                className="flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all border border-green-500/30"
+                className="flex items-center justify-center w-14 h-14 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all border border-green-500/30"
               >
                 <Calendar className="w-6 h-6" />
               </button>
