@@ -113,15 +113,15 @@ export const servicesData: ServicesData = {
         "Digital Marketing",
         "On-Demand App Development",
         "SaaS & Installables",
-        "Web Developmet & CMS Products",
-        "Mobile Application",
-        "Cloud & SaaS Servcies"
+        "Web Development & CMS Products",
+        "Mobile Applications",
+        "Cloud & SaaS Services"
       ],
       submenu: [
         {
           icon: Globe,
-          title: "Digital Marketing ",
-          features: ["SEO Optimization"],
+          title: "Digital Marketing",
+          features: ["SEO Optimization", "Social Media Marketing"],
           path: "/services/digital/marketing"
         },
         {
@@ -131,13 +131,13 @@ export const servicesData: ServicesData = {
           path: "/services/it/game-dev"
         },
         {
-          icon: Smartphone,
+          icon: AppWindow,
           title: "On-Demand App Development",
           features: ["Custom app solutions"],
           path: "/services/it/app-dev"
         },
         {
-          icon: AppWindow,
+          icon: Server,
           title: "SaaS & Installables",
           features: [
             "CRM & ERP Solutions",
@@ -147,7 +147,7 @@ export const servicesData: ServicesData = {
           path: "/services/it/saas"
         },
         {
-          icon: Globe,
+          icon: Code,
           title: "Web Development & CMS Products",
           features: ["Custom web solutions"],
           path: "/services/it/web-dev"
