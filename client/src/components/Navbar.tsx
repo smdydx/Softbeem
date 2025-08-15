@@ -394,23 +394,49 @@ const Navbar = () => {
                                       className="bg-black/50"
                                     >
                                       {servicesData[category as keyof typeof servicesData].map((service, idx) => (
-                                        <motion.button
-                                          key={idx}
-                                          initial={{ x: -20, opacity: 0 }}
-                                          animate={{ x: 0, opacity: 1 }}
-                                          transition={{ duration: 0.2, delay: idx * 0.05 }}
-                                          onClick={() => handleServiceClick(service)}
-                                          className="w-full flex items-center gap-3 px-12 py-3 text-left hover:bg-green-500/10 transition-all duration-200 group"
-                                        >
-                                          <div className="text-green-400/80 group-hover:text-green-400 transition-colors flex-shrink-0">
-                                            <div className="h-4 w-4">
-                                              {React.createElement(service.icon)}
+                                        <div key={idx}>
+                                          <motion.button
+                                            initial={{ x: -20, opacity: 0 }}
+                                            animate={{ x: 0, opacity: 1 }}
+                                            transition={{ duration: 0.2, delay: idx * 0.05 }}
+                                            onClick={() => handleServiceClick(service)}
+                                            className="w-full flex items-center gap-3 px-12 py-3 text-left hover:bg-green-500/10 transition-all duration-200 group"
+                                          >
+                                            <div className="text-green-400/80 group-hover:text-green-400 transition-colors flex-shrink-0">
+                                              <div className="h-4 w-4">
+                                                {React.createElement(service.icon)}
+                                              </div>
                                             </div>
-                                          </div>
-                                          <span className="text-white/80 group-hover:text-white text-sm font-medium">
-                                            {service.title}
-                                          </span>
-                                        </motion.button>
+                                            <span className="text-white/80 group-hover:text-white text-sm font-medium">
+                                              {service.title}
+                                            </span>
+                                          </motion.button>
+                                          
+                                          {/* Show submenu for services that have submenu */}
+                                          {service.submenu && (
+                                            <div className="bg-zinc-900/80 border-l-2 border-green-500/30 ml-16">
+                                              {service.submenu.map((subItem, subIdx) => (
+                                                <motion.button
+                                                  key={subIdx}
+                                                  initial={{ x: -15, opacity: 0 }}
+                                                  animate={{ x: 0, opacity: 1 }}
+                                                  transition={{ duration: 0.2, delay: (idx * 0.05) + (subIdx * 0.03) }}
+                                                  onClick={() => subItem.path ? window.location.href = subItem.path : null}
+                                                  className="w-full flex items-center gap-3 px-8 py-2 text-left hover:bg-green-500/5 transition-all duration-200 group"
+                                                >
+                                                  <div className="text-green-400/60 group-hover:text-green-400/80 transition-colors flex-shrink-0">
+                                                    <div className="h-3 w-3">
+                                                      {React.createElement(subItem.icon)}
+                                                    </div>
+                                                  </div>
+                                                  <span className="text-white/60 group-hover:text-white/80 text-xs font-medium">
+                                                    {subItem.title}
+                                                  </span>
+                                                </motion.button>
+                                              ))}
+                                            </div>
+                                          )}
+                                        </div>
                                       ))}
                                     </motion.div>
                                   )}
