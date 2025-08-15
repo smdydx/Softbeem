@@ -333,91 +333,39 @@ const Navbar = () => {
                         <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
                       </button>
 
-                      <AnimatePresence>
-                        {servicesDropdownOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden"
-                          >
-                            {Object.keys(servicesData).map((category) => (
-                              <div key={category} className="px-4 pb-4">
-                                <h3 className="text-sm font-medium text-primary mb-3 capitalize">
-                                  {category} Solutions
-                                </h3>
-                                <div className="space-y-2">
-                                  {servicesData[category as keyof typeof servicesData].map((service, idx) => {
-                                    const isSubmenuOpen = openMobileSubmenus.includes(service.title);
-                                    return (
-                                      <div key={idx}>
-                                        <button
-                                          onClick={() => {
-                                            if (service.submenu && service.submenu.length > 0) {
-                                              handleMobileSubmenuToggle(service.title);
-                                            } else if (service.path) {
-                                              window.location.href = service.path;
-                                              setIsMobileMenuOpen(false);
-                                            }
-                                          }}
-                                          className="flex items-center gap-3 p-3 rounded-md hover:bg-zinc-800 transition-colors w-full text-left"
-                                        >
-                                          <div className="text-primary flex-shrink-0">
-                                            <div className="h-5 w-5">{React.createElement(service.icon)}</div>
-                                          </div>
-                                          <div className="flex-1">
-                                            <div className="flex items-center justify-between">
-                                              <span className="text-white text-sm">{service.title}</span>
-                                              {service.submenu && service.submenu.length > 0 && (
-                                                <ChevronDown className={`h-4 w-4 text-green-400 transition-transform duration-200 ${isSubmenuOpen ? 'rotate-180' : ''}`} />
-                                              )}
-                                            </div>
-                                            <p className="text-xs text-muted-foreground mt-1">
-                                              {service.features && service.features[0]}
-                                            </p>
-                                          </div>
-                                        </button>
-
-                                        <AnimatePresence>
-                                          {service.submenu && service.submenu.length > 0 && isSubmenuOpen && (
-                                            <motion.div
-                                              initial={{ opacity: 0, height: 0 }}
-                                              animate={{ opacity: 1, height: "auto" }}
-                                              exit={{ opacity: 0, height: 0 }}
-                                              transition={{ duration: 0.3 }}
-                                              className="ml-8 mt-2 space-y-1 bg-zinc-800/30 rounded-lg p-2 overflow-hidden"
-                                            >
-                                              {service.submenu.map((subItem, subIdx) => (
-                                                <button
-                                                  key={subIdx}
-                                                  onClick={() => {
-                                                    if (subItem.path) {
-                                                      window.location.href = subItem.path;
-                                                    }
-                                                    setIsMobileMenuOpen(false);
-                                                    setOpenMobileSubmenus([]);
-                                                  }}
-                                                  className="flex items-center gap-2 w-full text-left p-2 rounded-md hover:bg-zinc-700/50 transition-all duration-200"
-                                                >
-                                                  <div className="text-primary/80 flex-shrink-0">
-                                                    {React.createElement(subItem.icon, { className: "h-4 w-4" })}
-                                                  </div>
-                                                  <span className="text-sm text-white/90">{subItem.title}</span>
-                                                </button>
-                                              ))}
-                                            </motion.div>
-                                          )}
-                                        </AnimatePresence>
+                      {servicesDropdownOpen && (
+                        <div className="bg-zinc-900/95 border-t border-green-500/20">
+                          {Object.keys(servicesData).map((category) => (
+                            <div key={category} className="px-4 py-3 border-b border-green-500/10 last:border-b-0">
+                              <h3 className="text-sm font-medium text-green-400 mb-2 capitalize">
+                                {category} Solutions
+                              </h3>
+                              <div className="space-y-1">
+                                {servicesData[category as keyof typeof servicesData].map((service, idx) => (
+                                  <div key={idx}>
+                                    <button
+                                      onClick={() => {
+                                        if (service.path) {
+                                          window.location.href = service.path;
+                                          setIsMobileMenuOpen(false);
+                                        } else {
+                                          scrollToSection("/#services");
+                                        }
+                                      }}
+                                      className="flex items-center gap-2 w-full text-left p-2 rounded-md hover:bg-zinc-800/50 transition-colors"
+                                    >
+                                      <div className="text-green-400 flex-shrink-0">
+                                        <div className="h-4 w-4">{React.createElement(service.icon)}</div>
                                       </div>
-                                    );
-                                  })}
-                                </div>
+                                      <span className="text-sm text-white/90">{service.title}</span>
+                                    </button>
+                                  </div>
+                                ))}
                               </div>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   );
                 }
