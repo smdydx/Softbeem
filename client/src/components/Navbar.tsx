@@ -1,8 +1,14 @@
-
 import React, { useState, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, ChevronRight, PhoneCall, Calendar } from "lucide-react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  ChevronRight,
+  PhoneCall,
+  Calendar,
+} from "lucide-react";
 import { servicesData } from "@/data/services";
 
 const navLinks = [
@@ -18,16 +24,23 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
-  const [activeServiceCategory, setActiveServiceCategory] = useState<string | null>("tech");
+  const [activeServiceCategory, setActiveServiceCategory] = useState<
+    string | null
+  >("tech");
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [mobileOpenCategories, setMobileOpenCategories] = useState<string[]>([]);
+  const [mobileOpenCategories, setMobileOpenCategories] = useState<string[]>(
+    [],
+  );
   const [mobileOpenServices, setMobileOpenServices] = useState<string[]>([]);
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     const handleClickOutside = (event: MouseEvent) => {
-      if (servicesDropdownRef.current && !servicesDropdownRef.current.contains(event.target as Node)) {
+      if (
+        servicesDropdownRef.current &&
+        !servicesDropdownRef.current.contains(event.target as Node)
+      ) {
         setServicesDropdownOpen(false);
         setActiveServiceCategory("tech");
       }
@@ -59,18 +72,18 @@ const Navbar = () => {
   };
 
   const toggleMobileCategory = (category: string) => {
-    setMobileOpenCategories(prev => 
-      prev.includes(category) 
-        ? prev.filter(cat => cat !== category)
-        : [...prev, category]
+    setMobileOpenCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((cat) => cat !== category)
+        : [...prev, category],
     );
   };
 
   const toggleMobileService = (serviceTitle: string) => {
-    setMobileOpenServices(prev => 
-      prev.includes(serviceTitle) 
-        ? prev.filter(service => service !== serviceTitle)
-        : [...prev, serviceTitle]
+    setMobileOpenServices((prev) =>
+      prev.includes(serviceTitle)
+        ? prev.filter((service) => service !== serviceTitle)
+        : [...prev, serviceTitle],
     );
   };
 
@@ -81,8 +94,8 @@ const Navbar = () => {
     setMobileOpenCategories([]);
     setMobileOpenServices([]);
 
-    if (sectionId.startsWith('/#')) {
-      if (window.location.pathname !== '/') {
+    if (sectionId.startsWith("/#")) {
+      if (window.location.pathname !== "/") {
         window.location.href = sectionId;
         return;
       }
@@ -102,12 +115,12 @@ const Navbar = () => {
       toggleMobileService(service.title);
       return;
     }
-    
+
     setIsMobileMenuOpen(false);
     setMobileServicesOpen(false);
     setMobileOpenCategories([]);
     setMobileOpenServices([]);
-    
+
     if (service.path) {
       window.location.href = service.path;
     } else {
@@ -116,17 +129,21 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 h-14 sm:h-16 lg:h-20 flex items-center ${
-      isScrolled
-        ? "bg-gradient-to-r from-black/98 via-zinc-900/98 to-black/98 backdrop-blur-xl border-b border-green-500/20 shadow-xl shadow-green-500/10"
-        : "bg-gradient-to-r from-black/95 via-zinc-900/95 to-black/95 backdrop-blur-lg"
-    }`}>
+    <header
+      className={`fixed top-0 w-full z-50 transition-all duration-300 h-14 sm:h-16 lg:h-20 flex items-center ${
+        isScrolled
+          ? "bg-gradient-to-r from-black/98 via-zinc-900/98 to-black/98 backdrop-blur-xl border-b border-green-500/20 shadow-xl shadow-green-500/10"
+          : "bg-gradient-to-r from-black/95 via-zinc-900/95 to-black/95 backdrop-blur-lg"
+      }`}
+    >
       <div className="container mx-auto px-3 sm:px-4 lg:px-6 relative z-10">
         <div className="flex items-center justify-between bg-gradient-to-r from-zinc-900/50 via-transparent to-zinc-900/50 rounded-full px-3 sm:px-4 lg:px-6 py-2 backdrop-blur-sm border border-green-500/10">
-
           {/* Logo */}
           <div className="flex items-center">
-            <div onClick={() => window.location.href = '/'} className="cursor-pointer">
+            <div
+              onClick={() => (window.location.href = "/")}
+              className="cursor-pointer"
+            >
               <div className="font-bold text-white flex items-center">
                 <h1 className="font-['Orbitron'] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-[#00FF00] via-[#008000] to-[#004400] mb-0 digital-glow relative z-10 hover:scale-105 transition-transform duration-300">
                   <span className="text-2xl sm:text-4xl">&lt;/&gt;</span>
@@ -140,13 +157,19 @@ const Navbar = () => {
             {navLinks.map((link, index) => {
               if (link.name === "Services") {
                 return (
-                  <div key={index} className="relative" ref={servicesDropdownRef}>
+                  <div
+                    key={index}
+                    className="relative"
+                    ref={servicesDropdownRef}
+                  >
                     <button
                       onClick={toggleServicesDropdown}
                       className="relative text-white hover:text-primary font-medium transition-colors duration-400 group flex items-center gap-1"
                     >
                       {link.name}
-                      <ChevronDown className={`h-2 w-4 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown
+                        className={`h-2 w-4 transition-transform duration-200 ${servicesDropdownOpen ? "rotate-180" : ""}`}
+                      />
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                     </button>
 
@@ -166,15 +189,21 @@ const Navbar = () => {
                               {Object.keys(servicesData).map((category) => (
                                 <button
                                   key={category}
-                                  onMouseEnter={() => setActiveServiceCategory(category)}
-                                  onClick={() => setActiveServiceCategory(category)}
+                                  onMouseEnter={() =>
+                                    setActiveServiceCategory(category)
+                                  }
+                                  onClick={() =>
+                                    setActiveServiceCategory(category)
+                                  }
                                   className={`w-full text-left p-3 rounded-md transition-colors duration-200 flex justify-between items-center ${
                                     activeServiceCategory === category
                                       ? "bg-primary/10 text-primary"
                                       : "text-white hover:bg-zinc-800"
                                   }`}
                                 >
-                                  <span className="capitalize">{category} Services</span>
+                                  <span className="capitalize">
+                                    {category} Services
+                                  </span>
                                   <ChevronRight className="h-4 w-4" />
                                 </button>
                               ))}
@@ -195,22 +224,41 @@ const Navbar = () => {
                                       {activeServiceCategory} Solutions
                                     </h3>
                                     <div className="grid grid-cols-1 gap-2">
-                                      {servicesData[activeServiceCategory as keyof typeof servicesData].map((service, idx) => (
-                                        <div key={idx} className="relative group/service">
+                                      {servicesData[
+                                        activeServiceCategory as keyof typeof servicesData
+                                      ].map((service, idx) => (
+                                        <div
+                                          key={idx}
+                                          className="relative group/service"
+                                        >
                                           <motion.button
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.2, delay: idx * 0.05 }}
-                                            onClick={() => service.path ? window.location.href = service.path : scrollToSection("/#services")}
+                                            transition={{
+                                              duration: 0.2,
+                                              delay: idx * 0.05,
+                                            }}
+                                            onClick={() =>
+                                              service.path
+                                                ? (window.location.href =
+                                                    service.path)
+                                                : scrollToSection("/#services")
+                                            }
                                             className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full"
                                           >
                                             <div className="text-primary flex items-center">
-                                              <div className="h-3 w-3">{React.createElement(service.icon)}</div>
+                                              <div className="h-3 w-3">
+                                                {React.createElement(
+                                                  service.icon,
+                                                )}
+                                              </div>
                                             </div>
                                             <div className="text-left flex-1">
                                               <h4 className="text-[15px] text-white group-hover:text-primary transition-colors flex items-center justify-between">
                                                 {service.title}
-                                                {service.submenu && <ChevronRight className="h-4 w-4 ml-2" />}
+                                                {service.submenu && (
+                                                  <ChevronRight className="h-4 w-4 ml-2" />
+                                                )}
                                               </h4>
                                               <p className="text-xs text-muted-foreground mt-1">
                                                 {service.features[0]}
@@ -222,27 +270,49 @@ const Navbar = () => {
                                           {service.submenu && (
                                             <div className="absolute left-full top-0 ml-2 min-w-[300px] z-50 hidden group-hover/service:block">
                                               <div className="bg-zinc-950/95 backdrop-blur-sm rounded-lg shadow-xl border border-green-500/20 p-4 max-h-[400px] overflow-y-auto">
-                                                {service.submenu.map((subItem, subIdx) => (
-                                                  <motion.button
-                                                    key={subIdx}
-                                                    initial={{ opacity: 0, x: -10 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    transition={{ duration: 0.2, delay: subIdx * 0.05 }}
-                                                    onClick={() => subItem.path ? window.location.href = subItem.path : null}
-                                                    className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full"
-                                                  >
-                                                    <div className="text-primary/80 flex items-center">
-                                                      <div className="h-3 w-3">{React.createElement(subItem.icon, { 
-                                                        className: "h-3 w-3 opacity-75 hover:opacity-100 transition-opacity"
-                                                      })}</div>
-                                                    </div>
-                                                    <div className="text-left">
-                                                      <h4 className="text-white group-hover:text-primary transition-colors text-sm">
-                                                        {subItem.title}
-                                                      </h4>
-                                                    </div>
-                                                  </motion.button>
-                                                ))}
+                                                {service.submenu.map(
+                                                  (subItem, subIdx) => (
+                                                    <motion.button
+                                                      key={subIdx}
+                                                      initial={{
+                                                        opacity: 0,
+                                                        x: -10,
+                                                      }}
+                                                      animate={{
+                                                        opacity: 1,
+                                                        x: 0,
+                                                      }}
+                                                      transition={{
+                                                        duration: 0.2,
+                                                        delay: subIdx * 0.05,
+                                                      }}
+                                                      onClick={() =>
+                                                        subItem.path
+                                                          ? (window.location.href =
+                                                              subItem.path)
+                                                          : null
+                                                      }
+                                                      className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full"
+                                                    >
+                                                      <div className="text-primary/80 flex items-center">
+                                                        <div className="h-3 w-3">
+                                                          {React.createElement(
+                                                            subItem.icon,
+                                                            {
+                                                              className:
+                                                                "h-3 w-3 opacity-75 hover:opacity-100 transition-opacity",
+                                                            },
+                                                          )}
+                                                        </div>
+                                                      </div>
+                                                      <div className="text-left">
+                                                        <h4 className="text-white group-hover:text-primary transition-colors text-sm">
+                                                          {subItem.title}
+                                                        </h4>
+                                                      </div>
+                                                    </motion.button>
+                                                  ),
+                                                )}
                                               </div>
                                             </div>
                                           )}
@@ -275,25 +345,29 @@ const Navbar = () => {
                   {/* Contact buttons for desktop */}
                   {link.name === "Contact Us" && (
                     <div className="hidden lg:flex items-center gap-3">
-                      <a 
-                        href="tel:+911169310715" 
+                      <a
+                        href="tel:+911169310715"
                         className="flex items-center justify-center p-2 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all transform hover:scale-105 border border-green-500/30"
                       >
                         <PhoneCall className="w-4 h-4" />
                       </a>
-                      <a 
+                      <a
                         href="https://wa.me/911169310715"
                         target="_blank"
-                        rel="noopener noreferrer" 
+                        rel="noopener noreferrer"
                         className="flex items-center justify-center p-2 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all transform hover:scale-105 border border-green-500/30"
                       >
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                        <svg
+                          className="w-4 h-4"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
                           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                         </svg>
                       </a>
-                      <Button 
-                        onClick={() => window.location.href = '/schedule'} 
-                        variant="outline" 
+                      <Button
+                        onClick={() => (window.location.href = "/schedule")}
+                        variant="outline"
                         className="hidden lg:flex items-center justify-center gap-2 px-3 py-2 bg-green-500/10 hover:bg-green-500/20 text-green-400 border-green-500/30 text-sm"
                       >
                         <Calendar className="h-4 w-4" />
@@ -336,24 +410,28 @@ const Navbar = () => {
           >
             {/* Mobile Contact Options */}
             <div className="flex items-center justify-center gap-4 p-4 border-b border-green-500/10 bg-zinc-900/50">
-              <a 
-                href="tel:+911169310715" 
+              <a
+                href="tel:+911169310715"
                 className="flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all border border-green-500/30"
               >
                 <PhoneCall className="w-6 h-6" />
               </a>
-              <a 
+              <a
                 href="https://wa.me/911169310715"
                 target="_blank"
-                rel="noopener noreferrer" 
+                rel="noopener noreferrer"
                 className="flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all border border-green-500/30"
               >
-                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <svg
+                  className="w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                 </svg>
               </a>
-              <button 
-                onClick={() => window.location.href = '/schedule'} 
+              <button
+                onClick={() => (window.location.href = "/schedule")}
                 className="flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 transition-all border border-green-500/30"
               >
                 <Calendar className="w-6 h-6" />
@@ -371,10 +449,12 @@ const Navbar = () => {
                         className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-medium"
                       >
                         <span>{link.name}</span>
-                        <ChevronDown 
+                        <ChevronDown
                           className={`h-5 w-5 transition-transform duration-300 ${
-                            mobileServicesOpen ? 'rotate-180 text-green-400' : 'text-gray-400'
-                          }`} 
+                            mobileServicesOpen
+                              ? "rotate-180 text-green-400"
+                              : "text-gray-400"
+                          }`}
                         />
                       </button>
 
@@ -388,21 +468,28 @@ const Navbar = () => {
                             className="bg-zinc-900/80 backdrop-blur-sm"
                           >
                             {Object.keys(servicesData).map((category) => (
-                              <div key={category} className="border-b border-green-500/5 last:border-b-0">
+                              <div
+                                key={category}
+                                className="border-b border-green-500/5 last:border-b-0"
+                              >
                                 <button
                                   onClick={() => toggleMobileCategory(category)}
                                   className="w-full flex items-center justify-between px-8 py-3 text-left hover:bg-green-500/10 transition-all duration-200"
                                 >
                                   <span className="text-green-400 font-medium text-base capitalize">
-                                    {category === 'tech' ? 'Technology Services' : 'Legal & Compliance Services'}
+                                    {category === "tech"
+                                      ? "Technology Services"
+                                      : "Legal & Compliance Services"}
                                   </span>
-                                  <ChevronDown 
+                                  <ChevronDown
                                     className={`h-4 w-4 text-green-400 transition-transform duration-300 ${
-                                      mobileOpenCategories.includes(category) ? 'rotate-180' : ''
-                                    }`} 
+                                      mobileOpenCategories.includes(category)
+                                        ? "rotate-180"
+                                        : ""
+                                    }`}
                                   />
                                 </button>
-                                
+
                                 <AnimatePresence>
                                   {mobileOpenCategories.includes(category) && (
                                     <motion.div
@@ -412,19 +499,28 @@ const Navbar = () => {
                                       transition={{ duration: 0.25 }}
                                       className="bg-black/50"
                                     >
-                                      {servicesData[category as keyof typeof servicesData].map((service, idx) => (
+                                      {servicesData[
+                                        category as keyof typeof servicesData
+                                      ].map((service, idx) => (
                                         <div key={idx}>
                                           <motion.button
                                             initial={{ x: -20, opacity: 0 }}
                                             animate={{ x: 0, opacity: 1 }}
-                                            transition={{ duration: 0.2, delay: idx * 0.05 }}
-                                            onClick={() => handleServiceClick(service)}
+                                            transition={{
+                                              duration: 0.2,
+                                              delay: idx * 0.05,
+                                            }}
+                                            onClick={() =>
+                                              handleServiceClick(service)
+                                            }
                                             className="w-full flex items-center justify-between gap-3 px-12 py-3 text-left hover:bg-green-500/10 transition-all duration-200 group"
                                           >
                                             <div className="flex items-center gap-3">
                                               <div className="text-green-400/80 group-hover:text-green-400 transition-colors flex-shrink-0">
                                                 <div className="h-3 w-3">
-                                                  {React.createElement(service.icon)}
+                                                  {React.createElement(
+                                                    service.icon,
+                                                  )}
                                                 </div>
                                               </div>
                                               <span className="text-white/80 group-hover:text-white text-sm font-medium">
@@ -432,51 +528,96 @@ const Navbar = () => {
                                               </span>
                                             </div>
                                             {service.submenu && (
-                                              <ChevronDown 
+                                              <ChevronDown
                                                 className={`h-3 w-3 text-green-400/60 transition-transform duration-300 ${
-                                                  mobileOpenServices.includes(service.title) ? 'rotate-180' : ''
-                                                }`} 
+                                                  mobileOpenServices.includes(
+                                                    service.title,
+                                                  )
+                                                    ? "rotate-180"
+                                                    : ""
+                                                }`}
                                               />
                                             )}
                                           </motion.button>
-                                          
+
                                           {/* Show submenu for services that have submenu */}
                                           <AnimatePresence>
-                                            {service.submenu && mobileOpenServices.includes(service.title) && (
-                                              <motion.div
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: "auto", opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.25 }}
-                                                className="bg-zinc-950/90 border-l-2 border-green-500/30 ml-16 overflow-hidden"
-                                              >
-                                                {service.submenu.map((subItem, subIdx) => (
-                                                  <motion.button
-                                                    key={subIdx}
-                                                    initial={{ x: -15, opacity: 0 }}
-                                                    animate={{ x: 0, opacity: 1 }}
-                                                    transition={{ duration: 0.2, delay: subIdx * 0.03 }}
-                                                    onClick={() => {
-                                                      setIsMobileMenuOpen(false);
-                                                      setMobileServicesOpen(false);
-                                                      setMobileOpenCategories([]);
-                                                      setMobileOpenServices([]);
-                                                      if (subItem.path) window.location.href = subItem.path;
-                                                    }}
-                                                    className="w-full flex items-center gap-3 px-8 py-2 text-left hover:bg-green-500/5 transition-all duration-200 group"
-                                                  >
-                                                    <div className="text-green-400/60 group-hover:text-green-400/80 transition-colors flex-shrink-0 flex items-center">
-                                                      <div className="h-2.5 w-2.5">
-                                                        {React.createElement(subItem.icon, { className: "h-2.5 w-2.5" })}
-                                                      </div>
-                                                    </div>
-                                                    <span className="text-white/60 group-hover:text-white/80 text-xs font-medium">
-                                                      {subItem.title}
-                                                    </span>
-                                                  </motion.button>
-                                                ))}
-                                              </motion.div>
-                                            )}
+                                            {service.submenu &&
+                                              mobileOpenServices.includes(
+                                                service.title,
+                                              ) && (
+                                                <motion.div
+                                                  initial={{
+                                                    height: 0,
+                                                    opacity: 0,
+                                                  }}
+                                                  animate={{
+                                                    height: "auto",
+                                                    opacity: 1,
+                                                  }}
+                                                  exit={{
+                                                    height: 0,
+                                                    opacity: 0,
+                                                  }}
+                                                  transition={{
+                                                    duration: 0.25,
+                                                  }}
+                                                  className="bg-zinc-950/90 border-l-2 border-green-500/30 ml-16 overflow-hidden"
+                                                >
+                                                  {service.submenu.map(
+                                                    (subItem, subIdx) => (
+                                                      <motion.button
+                                                        key={subIdx}
+                                                        initial={{
+                                                          x: -15,
+                                                          opacity: 0,
+                                                        }}
+                                                        animate={{
+                                                          x: 0,
+                                                          opacity: 1,
+                                                        }}
+                                                        transition={{
+                                                          duration: 0.2,
+                                                          delay: subIdx * 0.03,
+                                                        }}
+                                                        onClick={() => {
+                                                          setIsMobileMenuOpen(
+                                                            false,
+                                                          );
+                                                          setMobileServicesOpen(
+                                                            false,
+                                                          );
+                                                          setMobileOpenCategories(
+                                                            [],
+                                                          );
+                                                          setMobileOpenServices(
+                                                            [],
+                                                          );
+                                                          if (subItem.path)
+                                                            window.location.href =
+                                                              subItem.path;
+                                                        }}
+                                                        className="w-full flex items-center gap-3 px-8 py-2 text-left hover:bg-green-500/5 transition-all duration-200 group"
+                                                      >
+                                                        <div className="text-green-400/60 group-hover:text-green-400/80 transition-colors flex-shrink-0 flex items-center">
+                                                          <div className="h-2.5 w-2.5">
+                                                            {React.createElement(
+                                                              subItem.icon,
+                                                              {
+                                                                className:
+                                                                  "h-2.5 w-2.5",
+                                                              },
+                                                            )}
+                                                          </div>
+                                                        </div>
+                                                        <span className="text-white/60 group-hover:text-white/80 text-xs font-medium">
+                                                          {subItem.title}
+                                                        </span>
+                                                      </motion.button>
+                                                    ),
+                                                  )}
+                                                </motion.div>
+                                              )}
                                           </AnimatePresence>
                                         </div>
                                       ))}
