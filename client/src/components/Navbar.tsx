@@ -21,6 +21,7 @@ const Navbar = () => {
   const [activeServiceCategory, setActiveServiceCategory] = useState<string | null>("tech");
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileOpenCategories, setMobileOpenCategories] = useState<string[]>([]);
+  const [mobileOpenServices, setMobileOpenServices] = useState<string[]>([]);
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const Navbar = () => {
     setIsMobileMenuOpen((prev) => !prev);
     setMobileServicesOpen(false);
     setMobileOpenCategories([]);
+    setMobileOpenServices([]);
   };
 
   const toggleServicesDropdown = () => {
@@ -53,6 +55,7 @@ const Navbar = () => {
   const toggleMobileServices = () => {
     setMobileServicesOpen(!mobileServicesOpen);
     setMobileOpenCategories([]);
+    setMobileOpenServices([]);
   };
 
   const toggleMobileCategory = (category: string) => {
@@ -63,11 +66,20 @@ const Navbar = () => {
     );
   };
 
+  const toggleMobileService = (serviceTitle: string) => {
+    setMobileOpenServices(prev => 
+      prev.includes(serviceTitle) 
+        ? prev.filter(service => service !== serviceTitle)
+        : [...prev, serviceTitle]
+    );
+  };
+
   const scrollToSection = (sectionId: string) => {
     setIsMobileMenuOpen(false);
     setServicesDropdownOpen(false);
     setMobileServicesOpen(false);
     setMobileOpenCategories([]);
+    setMobileOpenServices([]);
 
     if (sectionId.startsWith('/#')) {
       if (window.location.pathname !== '/') {
@@ -85,9 +97,16 @@ const Navbar = () => {
   };
 
   const handleServiceClick = (service: any) => {
+    // If service has submenu, toggle it instead of navigating
+    if (service.submenu) {
+      toggleMobileService(service.title);
+      return;
+    }
+    
     setIsMobileMenuOpen(false);
     setMobileServicesOpen(false);
     setMobileOpenCategories([]);
+    setMobileOpenServices([]);
     
     if (service.path) {
       window.location.href = service.path;
@@ -400,42 +419,65 @@ const Navbar = () => {
                                             animate={{ x: 0, opacity: 1 }}
                                             transition={{ duration: 0.2, delay: idx * 0.05 }}
                                             onClick={() => handleServiceClick(service)}
-                                            className="w-full flex items-center gap-3 px-12 py-3 text-left hover:bg-green-500/10 transition-all duration-200 group"
+                                            className="w-full flex items-center justify-between gap-3 px-12 py-3 text-left hover:bg-green-500/10 transition-all duration-200 group"
                                           >
-                                            <div className="text-green-400/80 group-hover:text-green-400 transition-colors flex-shrink-0">
-                                              <div className="h-4 w-4">
-                                                {React.createElement(service.icon)}
+                                            <div className="flex items-center gap-3">
+                                              <div className="text-green-400/80 group-hover:text-green-400 transition-colors flex-shrink-0">
+                                                <div className="h-4 w-4">
+                                                  {React.createElement(service.icon)}
+                                                </div>
                                               </div>
+                                              <span className="text-white/80 group-hover:text-white text-sm font-medium">
+                                                {service.title}
+                                              </span>
                                             </div>
-                                            <span className="text-white/80 group-hover:text-white text-sm font-medium">
-                                              {service.title}
-                                            </span>
+                                            {service.submenu && (
+                                              <ChevronDown 
+                                                className={`h-3 w-3 text-green-400/60 transition-transform duration-300 ${
+                                                  mobileOpenServices.includes(service.title) ? 'rotate-180' : ''
+                                                }`} 
+                                              />
+                                            )}
                                           </motion.button>
                                           
                                           {/* Show submenu for services that have submenu */}
-                                          {service.submenu && (
-                                            <div className="bg-zinc-900/80 border-l-2 border-green-500/30 ml-16">
-                                              {service.submenu.map((subItem, subIdx) => (
-                                                <motion.button
-                                                  key={subIdx}
-                                                  initial={{ x: -15, opacity: 0 }}
-                                                  animate={{ x: 0, opacity: 1 }}
-                                                  transition={{ duration: 0.2, delay: (idx * 0.05) + (subIdx * 0.03) }}
-                                                  onClick={() => subItem.path ? window.location.href = subItem.path : null}
-                                                  className="w-full flex items-center gap-3 px-8 py-2 text-left hover:bg-green-500/5 transition-all duration-200 group"
-                                                >
-                                                  <div className="text-green-400/60 group-hover:text-green-400/80 transition-colors flex-shrink-0">
-                                                    <div className="h-3 w-3">
-                                                      {React.createElement(subItem.icon)}
+                                          <AnimatePresence>
+                                            {service.submenu && mobileOpenServices.includes(service.title) && (
+                                              <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.25 }}
+                                                className="bg-zinc-950/90 border-l-2 border-green-500/30 ml-16 overflow-hidden"
+                                              >
+                                                {service.submenu.map((subItem, subIdx) => (
+                                                  <motion.button
+                                                    key={subIdx}
+                                                    initial={{ x: -15, opacity: 0 }}
+                                                    animate={{ x: 0, opacity: 1 }}
+                                                    transition={{ duration: 0.2, delay: subIdx * 0.03 }}
+                                                    onClick={() => {
+                                                      setIsMobileMenuOpen(false);
+                                                      setMobileServicesOpen(false);
+                                                      setMobileOpenCategories([]);
+                                                      setMobileOpenServices([]);
+                                                      if (subItem.path) window.location.href = subItem.path;
+                                                    }}
+                                                    className="w-full flex items-center gap-3 px-8 py-2 text-left hover:bg-green-500/5 transition-all duration-200 group"
+                                                  >
+                                                    <div className="text-green-400/60 group-hover:text-green-400/80 transition-colors flex-shrink-0">
+                                                      <div className="h-3 w-3">
+                                                        {React.createElement(subItem.icon)}
+                                                      </div>
                                                     </div>
-                                                  </div>
-                                                  <span className="text-white/60 group-hover:text-white/80 text-xs font-medium">
-                                                    {subItem.title}
-                                                  </span>
-                                                </motion.button>
-                                              ))}
-                                            </div>
-                                          )}
+                                                    <span className="text-white/60 group-hover:text-white/80 text-xs font-medium">
+                                                      {subItem.title}
+                                                    </span>
+                                                  </motion.button>
+                                                ))}
+                                              </motion.div>
+                                            )}
+                                          </AnimatePresence>
                                         </div>
                                       ))}
                                     </motion.div>
