@@ -515,7 +515,7 @@ const Navbar = () => {
                                             }
                                             className="w-full flex items-center justify-between gap-3 px-12 py-3 text-left hover:bg-green-500/10 transition-all duration-200 group"
                                           >
-                                            <div className="flex items-center gap-3">
+                                            <div className="flex items-center gap-4">
                                               <div className="text-green-400/80 group-hover:text-green-400 transition-colors flex-shrink-0">
                                                 <div className="h-3 w-3">
                                                   {React.createElement(
@@ -597,7 +597,7 @@ const Navbar = () => {
                                                             window.location.href =
                                                               subItem.path;
                                                         }}
-                                                        className="w-full flex items-center gap-3 px-8 py-2 text-left hover:bg-green-500/5 transition-all duration-200 group"
+                                                        className="w-full flex items-center gap-4 px-8 py-2 text-left hover:bg-green-500/5 transition-all duration-200 group"
                                                       >
                                                         <div className="text-green-400/60 group-hover:text-green-400/80 transition-colors flex-shrink-0 flex items-center">
                                                           <div className="h-2.5 w-2.5">
