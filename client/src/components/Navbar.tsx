@@ -423,7 +423,7 @@ const Navbar = () => {
                                           >
                                             <div className="flex items-center gap-3">
                                               <div className="text-green-400/80 group-hover:text-green-400 transition-colors flex-shrink-0">
-                                                <div className="h-3.5 w-3.5">
+                                                <div className="h-3 w-3">
                                                   {React.createElement(service.icon)}
                                                 </div>
                                               </div>
@@ -466,8 +466,8 @@ const Navbar = () => {
                                                     className="w-full flex items-center gap-3 px-8 py-2 text-left hover:bg-green-500/5 transition-all duration-200 group"
                                                   >
                                                     <div className="text-green-400/60 group-hover:text-green-400/80 transition-colors flex-shrink-0 flex items-center">
-                                                      <div className="h-3 w-3">
-                                                        {React.createElement(subItem.icon, { className: "h-3 w-3" })}
+                                                      <div className="h-2.5 w-2.5">
+                                                        {React.createElement(subItem.icon, { className: "h-2.5 w-2.5" })}
                                                       </div>
                                                     </div>
                                                     <span className="text-white/60 group-hover:text-white/80 text-xs font-medium">
