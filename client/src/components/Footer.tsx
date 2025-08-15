@@ -108,6 +108,9 @@ const Footer = () => {
           {/* Company Info */}
           <motion.div 
             variants={fadeInUp}
+            className="col-span-1"
+          >
+            <Link to="/" className="inline-block">
               <div className="flex items-center mb-6">
                 <img 
                   src={settings.logoUrl || "/images/ramaera-logo.jpg"} 
