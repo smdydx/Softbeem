@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 
 interface LazyImageProps {
@@ -6,18 +5,18 @@ interface LazyImageProps {
   alt: string;
   className?: string;
   placeholder?: string;
-  width?: number;
-  height?: number;
+  quality?: number;
+  loading?: 'lazy' | 'eager';
 }
 
-const LazyImage: React.FC<LazyImageProps> = ({ 
+export default function LazyImage({ 
   src, 
   alt, 
-  className = '', 
-  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PC9zdmc+',
-  width,
-  height
-}) => {
+  className = "", 
+  placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='100%25' height='100%25' fill='%23f0f0f0'/%3E%3C/svg%3E",
+  quality = 80,
+  loading = 'lazy'
+}: LazyImageProps) {
   const [loaded, setLoaded] = useState(false);
   const [inView, setInView] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -49,10 +48,8 @@ const LazyImage: React.FC<LazyImageProps> = ({
       onLoad={() => setLoaded(true)}
       width={width}
       height={height}
-      loading="lazy"
+      loading={loading}
       decoding="async"
     />
   );
 };
-
-export default LazyImage;
