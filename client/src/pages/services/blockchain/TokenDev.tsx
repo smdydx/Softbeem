@@ -117,9 +117,23 @@ const TokenDev = () => {
     Our team ensures that the token is fully functional, meets your project needs, and is ready for deployment. Whether you're looking for a simple token or a complex multi-featured token, we have the expertise to deliver it all.
   </p>
 
-    <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 mt-8">
-      Start Your Token Project <ArrowRight className="ml-2" />
-    </Button>
+    <div className="flex space-x-4 mt-8">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+                onClick={() => window.location.href = '/schedule'}
+              >
+                Schedule Consultation <ArrowRight className="ml-2" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-green-500 text-green-500 hover:bg-green-500/10"
+                onClick={() => window.location.href = '/blog'}
+              >
+                View Case Studies
+              </Button>
+            </div>
   </div>
 </motion.div>
 

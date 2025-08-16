@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { staggerContainer, fadeIn } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
-import { 
-  Image, ArrowRight, MessageCircle, Calendar, 
+import {
+  Image, ArrowRight, MessageCircle, Calendar,
   Shield, Globe, Users, Home, Ticket, Gamepad,
   Code, Layers, WalletCards, GalleryThumbnails,
   Bot, Scale, BadgeCheck
@@ -71,18 +71,18 @@ const NFTMarketplace = () => {
 
   // Why Choose Us
   const whyChooseUs = [
-    { 
-      title: "Ready-to-Deploy Solutions", 
+    {
+      title: "Ready-to-Deploy Solutions",
       icon: <Layers className="w-8 h-8" />,
       content: "Pre-built templates for fast market entry with white-label solutions"
     },
-    { 
-      title: "Minimized Frauds", 
+    {
+      title: "Minimized Frauds",
       icon: <Shield className="w-8 h-8" />,
       content: "Advanced security protocols and KYC integration"
     },
-    { 
-      title: "Full Customization", 
+    {
+      title: "Full Customization",
       icon: <Code className="w-8 h-8" />,
       content: "Tailor-made solutions with indefinite scalability"
     }
@@ -129,19 +129,19 @@ const NFTMarketplace = () => {
         className="container mx-auto px-4 mt-20"
       >
         {/* Hero Section */}
-        <motion.div 
-          variants={fadeIn("up", "tween", 0.2, 1)} 
+        <motion.div
+          variants={fadeIn("up", "tween", 0.2, 1)}
           className="text-center mb-24 relative overflow-hidden rounded-3xl bg-zinc-900/50 border border-green-500/10"
         >
           <div className="absolute inset-0">
-            <img 
-              src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=400&fit=crop" 
+            <img
+              src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=400&fit=crop"
               alt="NFT Marketplace"
               className="w-full h-full object-cover opacity-20"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-black/40" />
           </div>
-          
+
           <div className="relative py-24 px-6">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 mb-8">
               <Image className="w-10 h-10 text-green-400" />
@@ -156,8 +156,16 @@ const NFTMarketplace = () => {
               <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
                 View Live Demo <ArrowRight className="ml-2" />
               </Button>
-              <Button variant="outline" size="lg" className="border-green-500/30 text-green-400 hover:bg-green-500/10">
-                Schedule Free Demo <Calendar className="ml-2" />
+              <Button variant="outline" size="lg" className="border-green-500/30 text-green-400 hover:bg-green-500/10" onClick={() => window.location.href = '/schedule'}>
+                Schedule Consultation <Calendar className="ml-2" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-green-500 text-green-500 hover:bg-green-500/10"
+                onClick={() => window.location.href = '/blog'}
+              >
+                View Case Studies
               </Button>
             </div>
           </div>
@@ -168,7 +176,7 @@ const NFTMarketplace = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Why Choose Us</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {whyChooseUs.map((item, index) => (
-              <div 
+              <div
                 key={index}
                 className="group p-8 bg-zinc-900/50 border border-green-500/10 rounded-2xl hover:border-green-500/30 transition-all"
               >
@@ -185,13 +193,13 @@ const NFTMarketplace = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Core Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="group relative overflow-hidden rounded-2xl border border-green-500/10 hover:border-green-500/30 transition-all"
               >
                 <div className="absolute inset-0">
-                  <img 
-                    src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=500&h=300&fit=crop" 
+                  <img
+                    src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=500&h=300&fit=crop"
                     alt={feature.title}
                     className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity"
                   />
@@ -219,8 +227,8 @@ const NFTMarketplace = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Core Technologies</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
             {technologies.map((tech, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="flex flex-col items-center p-6 bg-zinc-900/50 border border-green-500/10 rounded-xl hover:border-green-500/30 transition-all"
               >
                 <span className="text-3xl mb-3">{tech.icon}</span>
@@ -236,8 +244,8 @@ const NFTMarketplace = () => {
             <h3 className="text-3xl font-bold text-center mb-12">Development Services</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {services.map((service, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="flex flex-col items-center text-center p-8 hover:bg-zinc-800/20 rounded-xl transition-all"
                 >
                   <div className="text-green-400 mb-6">{service.icon}</div>

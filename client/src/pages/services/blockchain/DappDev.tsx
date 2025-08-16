@@ -109,6 +109,7 @@ const DappDev = () => {
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+                onClick={() => window.location.href = '/schedule'}
               >
                 Start Your Project <ArrowRight className="ml-2" />
               </Button>
@@ -116,6 +117,7 @@ const DappDev = () => {
                 size="lg"
                 variant="outline"
                 className="border-green-500 text-green-500 hover:bg-green-500/10"
+                onClick={() => window.location.href = '/blog'}
               >
                 View Case Studies
               </Button>

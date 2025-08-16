@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { staggerContainer, fadeIn } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
@@ -101,9 +100,23 @@ const CryptoExchange = () => {
           <p className="text-gray-400 max-w-3xl mx-auto text-lg mb-8">
             Launch your crypto exchange platform with our comprehensive white-label solutions. Get market-ready, secure, and scalable exchange software.
           </p>
-          <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
-            Hire Our Experts <ArrowRight className="ml-2" />
-          </Button>
+          <div className="flex justify-center space-x-4">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+                onClick={() => window.location.href = '/schedule'}
+              >
+                Schedule Consultation <ArrowRight className="ml-2" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-green-500 text-green-500 hover:bg-green-500/10"
+                onClick={() => window.location.href = '/blog'}
+              >
+                View Case Studies
+              </Button>
+          </div>
         </motion.div>
 
         {/* Exchange Types */}
