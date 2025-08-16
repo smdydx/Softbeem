@@ -1,361 +1,336 @@
 
 import { motion } from "framer-motion";
 import { staggerContainer, fadeIn } from "@/lib/animations";
-import { Globe, ShoppingCart, Newspaper, Tag, Heart, Briefcase, Calendar, Code, Server, Shield, Smartphone, Database, Zap, Layers } from "lucide-react";
-import { useState } from "react";
+import { Code, Server, Database, Smartphone, Globe, Shield, Zap, CheckCircle, ArrowRight, Users, Trophy, Clock, Star } from "lucide-react";
 
 const WebDev = () => {
-  const [imageError, setImageError] = useState(false);
-  const [componentError, setComponentError] = useState(false);
-
-  if (componentError) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-zinc-900 to-black pt-24 flex items-center justify-center">
-        <div className="text-white text-center">
-          <h1 className="text-2xl mb-4">Web Development Services</h1>
-          <p>Loading content...</p>
-        </div>
-      </div>
-    );
-  }
-
   const services = [
     {
-      icon: <Globe className="w-8 h-8 text-green-400" />,
-      title: "Website Builder Platform",
-      description: "Create stunning, professional-grade websites with our intuitive drag-and-drop builder that requires no coding knowledge. Perfect for businesses, portfolios, and personal sites.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      features: [
-        "Drag & Drop Interface with real-time preview",
-        "100+ Responsive Templates for all industries",
-        "Custom Domain Integration with SSL security",
-        "Built-in SEO Optimization Tools for better rankings",
-        "Analytics integration to track visitor behavior"
-      ]
+      icon: <Globe className="w-8 h-8 text-blue-400" />,
+      title: "Business Websites",
+      description: "Professional corporate websites that showcase your brand",
+      features: ["Responsive Design", "SEO Optimized", "Content Management", "Contact Forms"],
+      price: "₹25,000",
+      timeline: "2-3 weeks"
     },
     {
-      icon: <ShoppingCart className="w-8 h-8 text-green-400" />,
-      title: "eCommerce Store Platform",
-      description: "Launch your fully-featured online store with multi-vendor support, secure payments, and comprehensive inventory management to scale your business.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      features: [
-        "Multi-Vendor Marketplace capabilities",
-        "20+ Payment Gateway Integrations (Stripe, PayPal, etc.)",
-        "Advanced Inventory Management with low stock alerts",
-        "Real-time Order Tracking System with notifications",
-        "Customer review and rating system"
-      ]
+      icon: <Smartphone className="w-8 h-8 text-green-400" />,
+      title: "E-Commerce Stores",
+      description: "Complete online stores with payment integration",
+      features: ["Shopping Cart", "Payment Gateway", "Inventory Management", "Order Tracking"],
+      price: "₹75,000",
+      timeline: "4-6 weeks"
     },
     {
-      icon: <Newspaper className="w-8 h-8 text-green-400" />,
-      title: "Blog & News Publishing CMS",
-      description: "Enterprise-grade content management system designed for publishers, bloggers, and media houses with advanced content scheduling and distribution features.",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      features: [
-        "Advanced Rich Text Editor with media embedding",
-        "Content Scheduling with calendar view",
-        "Multi-level Category Management with tags",
-        "User Comments System with moderation tools",
-        "AMP support for faster mobile loading"
-      ]
+      icon: <Code className="w-8 h-8 text-purple-400" />,
+      title: "Web Applications",
+      description: "Custom web apps tailored to your business needs",
+      features: ["Custom Features", "Database Integration", "User Authentication", "Admin Panel"],
+      price: "₹1,50,000",
+      timeline: "6-10 weeks"
     },
     {
-      icon: <Tag className="w-8 h-8 text-green-400" />,
-      title: "Classified Ads Portal",
-      description: "Powerful classified marketplace solution with advanced search, geolocation, and monetization features to create your own Craigslist-style platform.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      features: [
-        "Ad Listing Management with expiration dates",
-        "Category Navigation with filters",
-        "Location-based Search with Google Maps integration",
-        "User Dashboard with saved favorites",
-        "Premium listing options for monetization"
-      ]
-    },
-    {
-      icon: <Heart className="w-8 h-8 text-green-400" />,
-      title: "Matrimony Portal",
-      description: "Complete matrimonial matching platform with AI-powered recommendations, verified profiles, and secure communication channels for serious matchmaking.",
-      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      features: [
-        "Detailed Profile Management with verification",
-        "AI-based Match Recommendations",
-        "Secure Chat Integration with read receipts",
-        "Advanced Privacy Controls for sensitive data",
-        "Horoscope matching and compatibility scoring"
-      ]
-    },
-    {
-      icon: <Briefcase className="w-8 h-8 text-green-400" />,
-      title: "Job Recruitment Portal",
-      description: "Comprehensive job board solution connecting employers with qualified candidates through intelligent matching algorithms and resume parsing technology.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      features: [
-        "Advanced Job Posting System with rich formatting",
-        "Resume Database with search functionality",
-        "Application Tracking System (ATS) for employers",
-        "Company Profiles with branding options",
-        "Automated job matching for candidates"
-      ]
-    },
-    {
-      icon: <Calendar className="w-8 h-8 text-green-400" />,
-      title: "Event Management Portal",
-      description: "End-to-end event planning and ticketing system with calendar integration, attendee management, and promotional tools for event organizers.",
-      image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      features: [
-        "Event Creation with rich media and descriptions",
-        "Ticket Management with multiple pricing tiers",
-        "Calendar Integration with sync capabilities",
-        "Attendee Management with check-in system",
-        "Promotional tools and affiliate tracking"
-      ]
+      icon: <Server className="w-8 h-8 text-orange-400" />,
+      title: "CMS Platforms",
+      description: "Content management systems for easy updates",
+      features: ["Easy Content Updates", "Multi-user Access", "SEO Tools", "Analytics"],
+      price: "₹50,000",
+      timeline: "3-4 weeks"
     }
   ];
 
   const technologies = [
-    { name: "React/Next.js", icon: <Code className="w-6 h-6" />, description: "Modern frontend frameworks for blazing fast, SEO-friendly web applications" },
-    { name: "Node.js", icon: <Server className="w-6 h-6" />, description: "Scalable backend runtime for building efficient server-side applications" },
-    { name: "MongoDB", icon: <Database className="w-6 h-6" />, description: "NoSQL database for flexible, high-performance data storage" },
-    { name: "GraphQL", icon: <Layers className="w-6 h-6" />, description: "Efficient API query language for precise data fetching" },
-    { name: "Tailwind CSS", icon: <Smartphone className="w-6 h-6" />, description: "Utility-first CSS framework for responsive, modern designs" },
-    { name: "Security", icon: <Shield className="w-6 h-6" />, description: "Enterprise-grade security including OAuth, JWT, and data encryption" },
-    { name: "WebSockets", icon: <Zap className="w-6 h-6" />, description: "Real-time communication for chat and live updates" },
+    { name: "React", icon: "⚛️", color: "text-blue-400" },
+    { name: "Next.js", icon: "▲", color: "text-white" },
+    { name: "Node.js", icon: "🟢", color: "text-green-400" },
+    { name: "MongoDB", icon: "🍃", color: "text-green-500" },
+    { name: "TypeScript", icon: "📘", color: "text-blue-500" },
+    { name: "Tailwind", icon: "🎨", color: "text-cyan-400" }
   ];
 
-  const faqs = [
+  const process = [
     {
-      question: "What technologies do you use for web development?",
-      answer: "We specialize in the MERN stack (MongoDB, Express.js, React, Node.js) and Next.js for optimal performance. Our solutions also incorporate modern tools like GraphQL for efficient data fetching, Tailwind CSS for responsive designs, and Docker for containerization. We choose technologies based on your specific project requirements, budget, and scalability needs."
+      step: "01",
+      title: "Discovery",
+      description: "We understand your requirements and goals"
     },
     {
-      question: "How long does it take to develop a website?",
-      answer: "Development timelines vary significantly based on complexity: Basic brochure websites (5-10 pages): 2-3 weeks • Custom business websites: 3-6 weeks • eCommerce platforms: 6-10 weeks • Complex web applications: 3-6 months. We provide detailed project timelines after our initial consultation and requirements analysis."
+      step: "02", 
+      title: "Design",
+      description: "Create wireframes and visual designs"
     },
     {
-      question: "Do you provide website maintenance services?",
-      answer: "Yes, we offer three tiers of maintenance packages: Basic (updates & backups): $99/month • Standard (includes security monitoring): $199/month • Premium (24/7 support + emergency fixes): $399/month. All plans include monthly performance reports, software updates, and security patches to keep your site running smoothly."
-    },
-    {
-      question: "Is the website mobile responsive?",
-      answer: "Absolutely. We build all websites with a mobile-first approach, ensuring perfect functionality across all devices. Our responsive designs automatically adapt to phones (iOS/Android), tablets (iPad/Android), and desktops. We test on 50+ real devices (not just emulators) to guarantee flawless performance."
-    },
-    {
-      question: "What about website security?",
-      answer: "Security is our top priority. We implement: SSL encryption (HTTPS) • Regular security audits • Web Application Firewall (WAF) • DDoS protection • SQL injection prevention • Regular automated backups • Two-factor authentication for admin areas • GDPR/CCPA compliance features. Enterprise clients can opt for additional security layers."
-    },
-    {
-      question: "Can you migrate my existing website?",
-      answer: "Yes, we specialize in seamless website migrations with zero downtime. Our process includes: Complete backup of your current site • Database migration • Content transfer • URL redirect mapping • Testing on staging environment • DNS transition planning. We've successfully migrated 200+ websites with no data loss."
-    },
-    {
-      question: "Do you provide content creation services?",
-      answer: "We partner with professional copywriters and photographers to offer: SEO-optimized content writing • Product photography • Infographic design • Video production • Blog article creation (from $50/article). Our content team understands how to create materials that convert visitors into customers."
-    },
-    {
-      question: "What's your pricing structure?",
-      answer: "We offer transparent pricing models: Fixed-price projects (for well-defined requirements) • Time & materials (for agile development) • Retainer agreements (for ongoing work). Typical investment ranges: Basic website: $2,000-$5,000 • eCommerce site: $6,000-$15,000 • Custom web applications: $15,000+. Request a free quote for accurate pricing."
-    }
-  ];
-
-  const processSteps = [
-    {
-      title: "Discovery & Planning",
-      description: "We start with in-depth consultations to understand your business goals, target audience, and technical requirements. This phase includes competitor analysis, sitemap creation, and technology stack selection."
-    },
-    {
-      title: "UI/UX Design",
-      description: "Our designers create wireframes and prototypes focusing on user experience. You'll receive 2-3 design concepts for feedback before we proceed to development."
-    },
-    {
+      step: "03",
       title: "Development",
-      description: "Using agile methodology, we build your website in sprints with regular demos. Frontend and backend development happen simultaneously for efficiency."
+      description: "Build your website with latest technologies"
     },
     {
-      title: "Quality Assurance",
-      description: "Rigorous testing across browsers, devices, and performance metrics. We check for bugs, security vulnerabilities, and UX issues before launch."
+      step: "04",
+      title: "Testing",
+      description: "Thorough testing across all devices"
     },
     {
-      title: "Deployment & Training",
-      description: "We handle server setup, domain configuration, and go-live support. You'll receive comprehensive training on managing your content through our CMS."
-    },
-    {
-      title: "Ongoing Support",
-      description: "Post-launch, we offer maintenance packages, performance monitoring, and enhancement services to keep your website current and competitive."
+      step: "05",
+      title: "Launch",
+      description: "Deploy and make your website live"
     }
   ];
 
-  try {
-    return (
-      <main className="min-h-screen bg-gradient-to-b from-zinc-900 to-black pt-24">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.25 }}
-        className="container mx-auto px-4 py-20"
-      >
-        {/* Hero Section */}
-        <motion.div variants={fadeIn("up", "tween", 0.2, 1)} className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-600 bg-clip-text text-transparent">
-            Professional Web Development & CMS Solutions
-          </h1>
-          <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-            Transform your digital presence with our cutting-edge web development services. Since 2012, we've helped 500+ businesses 
-            across 15 industries build scalable, secure, and high-performing web platforms that drive growth and engagement. 
-            Whether you need a simple website or a complex web application, our full-stack expertise delivers results.
-          </p>
-        </motion.div>
+  const stats = [
+    { number: "500+", label: "Projects Completed" },
+    { number: "12+", label: "Years Experience" },
+    { number: "98%", label: "Client Satisfaction" },
+    { number: "24/7", label: "Support Available" }
+  ];
 
-        {/* Stats Section */}
-        <motion.div variants={fadeIn("up", "tween", 0.3, 1)} className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-          <div className="bg-zinc-800/50 p-6 rounded-lg text-center border border-green-500/20">
-            <div className="text-3xl font-bold text-green-400 mb-2">12+</div>
-            <div className="text-gray-300">Years Experience</div>
-          </div>
-          <div className="bg-zinc-800/50 p-6 rounded-lg text-center border border-green-500/20">
-            <div className="text-3xl font-bold text-green-400 mb-2">500+</div>
-            <div className="text-gray-300">Projects Delivered</div>
-          </div>
-          <div className="bg-zinc-800/50 p-6 rounded-lg text-center border border-green-500/20">
-            <div className="text-3xl font-bold text-green-400 mb-2">98%</div>
-            <div className="text-gray-300">Client Satisfaction</div>
-          </div>
-          <div className="bg-zinc-800/50 p-6 rounded-lg text-center border border-green-500/20">
-            <div className="text-3xl font-bold text-green-400 mb-2">24/7</div>
-            <div className="text-gray-300">Support Available</div>
+  const features = [
+    "Mobile-First Responsive Design",
+    "SEO Optimized Architecture", 
+    "Fast Loading Speed",
+    "Security Best Practices",
+    "Cross-Browser Compatibility",
+    "Modern UI/UX Design",
+    "Content Management System",
+    "Analytics Integration"
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-900 to-black">
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10" />
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative container mx-auto px-4"
+        >
+          <motion.div variants={fadeIn("up", "tween", 0.1, 1)} className="text-center max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent">
+                Web Development
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+              Transform your digital presence with cutting-edge web solutions that drive results
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all">
+                Start Your Project
+              </button>
+              <button className="px-8 py-4 border border-gray-500 text-gray-300 rounded-lg font-semibold hover:border-gray-400 hover:text-white transition-all">
+                View Portfolio
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 bg-zinc-800/30">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden" 
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="container mx-auto px-4"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn("up", "tween", 0.1 * index, 1)}
+                className="text-center"
+              >
+                <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">{stat.number}</div>
+                <div className="text-gray-400">{stat.label}</div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
+      </section>
 
-        {/* Services Grid */}
-        <motion.div variants={fadeIn("up", "tween", 0.4, 1)} className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-4 text-white">Our Web Development Services</h2>
-          <p className="text-gray-300 text-center max-w-3xl mx-auto mb-10">
-            We specialize in building custom web solutions tailored to your business needs. 
-            From simple websites to complex web applications, our full-cycle development process ensures quality at every stage.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Services Section */}
+      <section className="py-20">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="container mx-auto px-4"
+        >
+          <motion.div variants={fadeIn("up", "tween", 0.1, 1)} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Our Web Development Services
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              From simple websites to complex web applications, we deliver solutions that grow your business
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={index}
-                variants={fadeIn("up", "tween", 0.2 * index, 1)}
-                className="bg-zinc-800/50 rounded-lg overflow-hidden border border-green-500/20 hover:border-green-500/50 transition-colors"
+                variants={fadeIn("up", "tween", 0.1 * index, 1)}
+                className="group bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300"
               >
-                <div className="h-48 relative">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = '/images/services/website-builder.jpg';
-                      setImageError(true);
-                    }}
-                  />
+                <div className="flex items-center gap-4 mb-6">
+                  {service.icon}
+                  <h3 className="text-2xl font-bold text-white">{service.title}</h3>
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    {service.icon}
-                    <h3 className="text-xl font-semibold text-white">{service.title}</h3>
+                <p className="text-gray-400 mb-6 text-lg">{service.description}</p>
+                
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {service.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-400" />
+                      <span className="text-gray-300 text-sm">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex justify-between items-center pt-6 border-t border-zinc-700">
+                  <div>
+                    <div className="text-2xl font-bold text-blue-400">{service.price}</div>
+                    <div className="text-sm text-gray-500">{service.timeline}</div>
                   </div>
-                  <p className="text-gray-300 mb-4">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-green-400" />
-                        <span className="text-gray-300">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <button className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    Get Quote
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
+      </section>
 
-        {/* Technology Stack */}
-        <motion.div variants={fadeIn("up", "tween", 0.5, 1)} className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-4 text-white">Our Technology Stack</h2>
-          <p className="text-gray-300 text-center max-w-3xl mx-auto mb-10">
-            We use cutting-edge technologies to build fast, secure, and scalable web applications.
-          </p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
+      {/* Technologies Section */}
+      <section className="py-20 bg-zinc-800/30">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="container mx-auto px-4"
+        >
+          <motion.div variants={fadeIn("up", "tween", 0.1, 1)} className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-6 text-white">Technologies We Use</h2>
+            <p className="text-xl text-gray-400">Modern tools and frameworks for exceptional results</p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {technologies.map((tech, index) => (
-              <div key={index} className="bg-zinc-800/50 p-4 rounded-lg border border-green-500/20 text-center">
-                <div className="flex justify-center mb-3 text-green-400">
-                  {tech.icon}
+              <motion.div
+                key={index}
+                variants={fadeIn("up", "tween", 0.1 * index, 1)}
+                className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-xl p-6 text-center hover:border-blue-500/50 transition-all"
+              >
+                <div className={`text-4xl mb-3 ${tech.color}`}>{tech.icon}</div>
+                <div className="text-white font-semibold">{tech.name}</div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-20">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="container mx-auto px-4"
+        >
+          <motion.div variants={fadeIn("up", "tween", 0.1, 1)} className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-6 text-white">Our Development Process</h2>
+            <p className="text-xl text-gray-400">A proven approach that delivers exceptional results</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+            {process.map((step, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn("up", "tween", 0.1 * index, 1)}
+                className="relative"
+              >
+                <div className="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 rounded-xl p-6 text-center hover:border-blue-500/50 transition-all">
+                  <div className="text-3xl font-bold text-blue-400 mb-4">{step.step}</div>
+                  <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+                  <p className="text-gray-400">{step.description}</p>
                 </div>
-                <h4 className="font-medium mb-1 text-white">{tech.name}</h4>
-                <p className="text-gray-400 text-sm">{tech.description}</p>
-              </div>
+                {index < process.length - 1 && (
+                  <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500" />
+                )}
+              </motion.div>
             ))}
           </div>
         </motion.div>
+      </section>
 
-        {/* Development Process */}
-        <motion.div variants={fadeIn("up", "tween", 0.6, 1)} className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-4 text-white">Our Development Process</h2>
-          <p className="text-gray-300 text-center max-w-3xl mx-auto mb-10">
-            Transparent, collaborative, and efficient - our 6-phase process ensures your project's success from concept to launch.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {processSteps.map((step, index) => (
-              <div key={index} className="bg-zinc-800/50 p-6 rounded-lg border border-green-500/20">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-green-500/20 text-green-400 rounded-full w-10 h-10 flex items-center justify-center font-bold">
-                    {index + 1}
-                  </div>
-                  <h3 className="text-xl font-semibold text-white">{step.title}</h3>
-                </div>
-                <p className="text-gray-300">{step.description}</p>
-              </div>
+      {/* Features Section */}
+      <section className="py-20 bg-zinc-800/30">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="container mx-auto px-4"
+        >
+          <motion.div variants={fadeIn("up", "tween", 0.1, 1)} className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-6 text-white">Why Choose Our Web Development?</h2>
+            <p className="text-xl text-gray-400">Features that set us apart from the competition</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn("up", "tween", 0.1 * index, 1)}
+                className="flex items-center gap-3 bg-zinc-900/50 backdrop-blur-sm border border-zinc-700/50 rounded-xl p-4 hover:border-blue-500/50 transition-all"
+              >
+                <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0" />
+                <span className="text-white">{feature}</span>
+              </motion.div>
             ))}
           </div>
         </motion.div>
+      </section>
 
-        {/* FAQ Section */}
-        <motion.div variants={fadeIn("up", "tween", 0.7, 1)} className="mt-20">
-          <h2 className="text-3xl font-bold text-center mb-4 text-white">Frequently Asked Questions</h2>
-          <p className="text-gray-300 text-center max-w-3xl mx-auto mb-10">
-            Get answers to common questions about our web development services and process.
-          </p>
-          
-          <div className="max-w-4xl mx-auto space-y-6">
-            {faqs.map((faq, index) => (
-              <div key={index} className="bg-zinc-800/50 rounded-lg p-6 border border-green-500/20 hover:border-green-500/50 transition-colors">
-                <h3 className="text-xl font-semibold mb-3 text-white">{faq.question}</h3>
-                <p className="text-gray-300">{faq.answer}</p>
+      {/* CTA Section */}
+      <section className="py-20">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="container mx-auto px-4"
+        >
+          <motion.div variants={fadeIn("up", "tween", 0.1, 1)} className="text-center">
+            <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-12">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                Ready to Build Your Website?
+              </h2>
+              <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                Transform your ideas into powerful web solutions. Get started with a free consultation today.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all">
+                  Get Free Consultation
+                </button>
+                <button className="px-8 py-4 border border-gray-500 text-gray-300 rounded-lg font-semibold hover:border-gray-400 hover:text-white transition-all">
+                  View Our Work
+                </button>
               </div>
-            ))}
-          </div>
+            </div>
+          </motion.div>
         </motion.div>
-
-        {/* CTA Section */}
-        <motion.div variants={fadeIn("up", "tween", 0.8, 1)} className="mt-20 text-center">
-          <h2 className="text-3xl font-bold mb-6 text-white">Ready to Build Your Website?</h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
-            Whether you have a project in mind or need guidance on your web strategy, our team is ready to help.
-          </p>
-          <button className="bg-green-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-green-600 transition-colors">
-            Get a Free Consultation
-          </button>
-        </motion.div>
-      </motion.div>
-    </main>
-    );
-  } catch (error) {
-    console.error('WebDev component error:', error);
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-zinc-900 to-black pt-24 flex items-center justify-center">
-        <div className="text-white text-center">
-          <h1 className="text-2xl mb-4">Web Development Services</h1>
-          <p>Content temporarily unavailable. Please try again.</p>
-        </div>
-      </div>
-    );
-  }
+      </section>
+    </div>
+  );
 };
 
 export default WebDev;
