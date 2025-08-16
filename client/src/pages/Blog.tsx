@@ -5,6 +5,7 @@ import { staggerContainer, fadeIn } from "@/lib/animations";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Search, Calendar, User, Tag, ArrowRight, Filter } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState<any[]>([]);
@@ -204,13 +205,12 @@ const Blog = () => {
 
                   {/* Read More Button */}
                   <div className="mt-auto">
-                    <button 
-                      onClick={() => window.open(`/blog/${blog._id}`, '_blank')}
-                      className="text-primary hover:text-primary/80 font-medium text-sm flex items-center gap-1.5 group/btn transition-all duration-300 hover:gap-2"
-                    >
-                      Read More 
-                      <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                    </button>
+                    <Link to={`/blog/${blog._id}`}>
+                      <button className="text-primary hover:text-primary/80 font-medium text-sm flex items-center gap-1.5 group/btn transition-all duration-300 hover:gap-2">
+                        Read More 
+                        <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </Card>

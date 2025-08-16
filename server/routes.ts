@@ -58,7 +58,20 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
       const blogs = await Blog.find().sort({ createdAt: -1 });
       res.json(blogs);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch blogs" });
+      res.status(500).json({ error: "Failed to fetch blogs" });
+    }
+  });
+
+  // Get individual blog by ID
+  app.get("/api/blogs/:id", async (req, res) => {
+    try {
+      const blog = await Blog.findById(req.params.id);
+      if (!blog) {
+        return res.status(404).json({ error: "Blog not found" });
+      }
+      res.json(blog);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch blog" });
     }
   });
 

@@ -176,12 +176,11 @@ const BlogCard = ({ post, delay }: BlogCardProps) => {
         <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
           {displayDescription}
         </p>
-        <button 
-          onClick={() => window.open(`/blog/${post._id || post.id}`, '_blank')}
-          className="p-0 flex items-center gap-1 text-primary hover:text-primary/80 transition-colors duration-300 bg-transparent border-none cursor-pointer font-medium text-sm"
-        >
-          Read More <ArrowRight className="h-4 w-4" />
-        </button>
+        <Link to={`/blog/${post._id || post.id}`}>
+          <Button variant="link" className="p-0 flex items-center gap-1 text-primary">
+            Read More <ArrowRight className="h-4 w-4" />
+          </Button>
+        </Link>
       </div>
     </motion.article>
   );
