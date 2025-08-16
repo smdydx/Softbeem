@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Eye } from "lucide-react";
 import { staggerContainer, fadeIn } from "@/lib/animations";
 import { projectsData } from "@/data/projects";
+import { Link } from "react-router-dom";
 
 const categories = [
   { id: "all", name: "All" },
