@@ -145,9 +145,11 @@ const ProjectCard = ({ project, delay }: ProjectCardProps) => {
         <p className="text-muted-foreground text-sm mb-4">
           {project.description}
         </p>
-        <Button variant="link" className="p-0 flex items-center gap-1 text-primary">
-          View Case Study <ArrowRight className="h-4 w-4" />
-        </Button>
+        <Link to="/blog">
+          <Button variant="link" className="p-0 flex items-center gap-1 text-primary">
+            View Case Study <ArrowRight className="h-4 w-4" />
+          </Button>
+        </Link>
       </div>
     </motion.div>
   );
