@@ -88,11 +88,11 @@ const Footer = () => {
   ];
 
   const techServices = [
-    { name: "Smart Contract Development", path: "/services/blockchain/smart-contract-development" },
-    { name: "Token Development", path: "/services/blockchain/token-development" },
-    { name: "NFT Marketplace", path: "/services/blockchain/nft-marketplace" },
-    { name: "Crypto Exchange", path: "/services/blockchain/crypto-exchange" },
-    { name: "Web Development", path: "/services/it/web-development" },
+    { name: "Smart Contract Development", path: "/services/blockchain/smart-contracts" },
+    { name: "Token Development", path: "/services/blockchain/token" },
+    { name: "NFT Marketplace", path: "/services/blockchain/nft" },
+    { name: "Crypto Exchange", path: "/services/blockchain/exchange" },
+    { name: "Web Development", path: "/services/it/web-dev" },
   ];
 
   return (
