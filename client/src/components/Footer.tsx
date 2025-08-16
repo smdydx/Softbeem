@@ -118,9 +118,6 @@ const Footer = () => {
                   className="h-14 w-14 rounded-full border-2"
                   style={{ borderColor: `${settings.themeColor || '#ff6b35'}30` }}
                 />
-                <div>
-                  <h3 className="text-xl lg:text-2xl font-bold text-white">{settings.companyName || 'Softbeem'}</h3>
-                </div>
               </div>
             </Link>
             <p className="text-gray-300 leading-relaxed mb-6 text-sm lg:text-base">
