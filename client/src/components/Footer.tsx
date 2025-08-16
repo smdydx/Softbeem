@@ -80,19 +80,19 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { name: "About Us", href: "/about" },
-    { name: "Our Services", href: "/services" },
-    { name: "Blog & Insights", href: "/blog" },
-    { name: "Contact Us", href: "/#contact" },
-    { name: "Careers", href: "/careers" },
+    { name: "About Us", path: "/about" },
+    { name: "Our Services", path: "/services" },
+    { name: "Blog & Insights", path: "/blog" },
+    { name: "Contact Us", path: "/#contact" },
+    { name: "Careers", path: "/careers" },
   ];
 
   const techServices = [
-    { name: "Smart Contract Development", href: "/services/blockchain/smart-contract-development" },
-    { name: "Token Development", href: "/services/blockchain/token-development" },
-    { name: "NFT Marketplace", href: "/services/blockchain/nft-marketplace" },
-    { name: "Crypto Exchange", href: "/services/blockchain/crypto-exchange" },
-    { name: "Web Development", href: "/services/it/web-development" },
+    { name: "Smart Contract Development", path: "/services/blockchain/smart-contract-development" },
+    { name: "Token Development", path: "/services/blockchain/token-development" },
+    { name: "NFT Marketplace", path: "/services/blockchain/nft-marketplace" },
+    { name: "Crypto Exchange", path: "/services/blockchain/crypto-exchange" },
+    { name: "Web Development", path: "/services/it/web-development" },
   ];
 
   return (
@@ -152,7 +152,7 @@ const Footer = () => {
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
-                    to={link.href}
+                    to={link.path}
                     className="text-gray-300 hover:text-green-400 transition-colors duration-300 flex items-center group text-sm lg:text-base"
                   >
                     <ArrowRight className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -173,7 +173,7 @@ const Footer = () => {
               {techServices.map((service) => (
                 <li key={service.name}>
                   <Link
-                    to={service.href}
+                    to={service.path}
                     className="text-gray-300 hover:text-green-400 transition-colors duration-300 flex items-center group text-sm lg:text-base"
                   >
                     <ArrowRight className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -225,9 +225,9 @@ const Footer = () => {
               &copy; {new Date().getFullYear()} Ramaera Legal InfoTech Private Limited. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-primary text-sm transition-colors duration-300">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-primary text-sm transition-colors duration-300">Terms of Service</a>
-              <a href="#" className="text-gray-400 hover:text-primary text-sm transition-colors duration-300">Cookie Policy</a>
+              <Link to="/privacy-policy" className="text-gray-400 hover:text-primary text-sm transition-colors duration-300">Privacy Policy</Link>
+              <Link to="/terms-of-service" className="text-gray-400 hover:text-primary text-sm transition-colors duration-300">Terms of Service</Link>
+              <Link to="/cookie-policy" className="text-gray-400 hover:text-primary text-sm transition-colors duration-300">Cookie Policy</Link>
             </div>
           </div>
         </div>
