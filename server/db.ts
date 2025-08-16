@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const connectDB = async () => {
+export const connectDB = async () => {
   try {
     if (!process.env.DATABASE_URL && !process.env.MONGODB_URI) {
       throw new Error('DATABASE_URL or MONGODB_URI environment variable is required');
