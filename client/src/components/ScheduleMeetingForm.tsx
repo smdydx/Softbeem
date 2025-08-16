@@ -64,10 +64,10 @@ const ScheduleMeetingForm = () => {
   };
 
   return (
-    <div id="meeting" className="w-full max-w-2xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 bg-zinc-900/50 backdrop-blur-lg rounded-xl sm:rounded-2xl border border-zinc-800 my-6 sm:my-8 md:my-12">
+    <div id="meeting" className="w-full max-w-2xl mx-auto px-3 sm:px-6 md:px-8 py-4 sm:py-8 bg-zinc-900/50 backdrop-blur-lg rounded-xl sm:rounded-2xl border border-zinc-800 my-6 sm:my-8 md:my-12">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6 text-center">Schedule a Meeting</h2>
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
           <div className="space-y-2">
             <label className="block text-xs sm:text-sm font-medium">Name</label>
             <Input
@@ -75,7 +75,7 @@ const ScheduleMeetingForm = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="bg-zinc-800/50 border-zinc-700/50 h-11 sm:h-12 text-sm sm:text-base px-4"
+              className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
               placeholder="Enter your full name"
             />
           </div>
@@ -87,7 +87,7 @@ const ScheduleMeetingForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="bg-zinc-800/50 border-zinc-700/50 h-11 sm:h-12 text-sm sm:text-base px-4"
+              className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
               placeholder="your.email@example.com"
             />
           </div>
@@ -101,12 +101,12 @@ const ScheduleMeetingForm = () => {
             value={formData.phone}
             onChange={handleChange}
             required
-            className="bg-zinc-800/50 border-zinc-700/50 h-11 sm:h-12 text-sm sm:text-base px-4"
+            className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
             placeholder="+91 9876543210"
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
           <div className="space-y-2">
             <label className="block text-xs sm:text-sm font-medium">
               <Calendar className="inline-block w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
@@ -119,7 +119,7 @@ const ScheduleMeetingForm = () => {
               onChange={handleChange}
               required
               min={new Date().toISOString().split('T')[0]}
-              className="bg-zinc-800/50 border-zinc-700/50 h-11 sm:h-12 text-sm sm:text-base px-4"
+              className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
             />
           </div>
           <div className="space-y-2">
@@ -133,7 +133,7 @@ const ScheduleMeetingForm = () => {
               value={formData.time}
               onChange={handleChange}
               required
-              className="bg-zinc-800/50 border-zinc-700/50 h-11 sm:h-12 text-sm sm:text-base px-4"
+              className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
             />
           </div>
         </div>
@@ -144,7 +144,7 @@ const ScheduleMeetingForm = () => {
             name="companyName"
             value={formData.companyName}
             onChange={handleChange}
-            className="bg-zinc-800/50 border-zinc-700/50 h-11 sm:h-12 text-sm sm:text-base px-4"
+            className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
             placeholder="Your company name"
           />
         </div>
@@ -156,7 +156,7 @@ const ScheduleMeetingForm = () => {
             value={formData.purpose}
             onChange={handleChange}
             required
-            className="bg-zinc-800/50 border-zinc-700/50 h-24 sm:h-28 md:h-32 text-sm sm:text-base resize-none px-4 py-3"
+            className="bg-zinc-800/50 border-zinc-700/50 h-20 sm:h-28 md:h-32 text-sm sm:text-base resize-none px-3 sm:px-4 py-2 sm:py-3"
             placeholder="Please describe the purpose of the meeting and what you'd like to discuss..."
           />
         </div>
@@ -164,7 +164,7 @@ const ScheduleMeetingForm = () => {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-primary hover:bg-primary/90 h-11 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg font-medium mt-4 sm:mt-6"
+          className="w-full bg-primary hover:bg-primary/90 h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg font-medium mt-3 sm:mt-6"
         >
           {isSubmitting ? "Scheduling..." : "Schedule Meeting"}
         </Button>
