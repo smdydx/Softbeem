@@ -1,35 +1,6 @@
 import express, { type Express } from "express";
 import { createServer, type Server } from "http";
 import path from "path";
-
-// Rate limiting middleware
-const rateLimitMap = new Map();
-
-const rateLimit = (maxRequests = 100, windowMs = 15 * 60 * 1000) => {
-  return (req, res, next) => {
-    const clientIp = req.ip || req.connection.remoteAddress;
-    const now = Date.now();
-    const windowStart = now - windowMs;
-    
-    if (!rateLimitMap.has(clientIp)) {
-      rateLimitMap.set(clientIp, []);
-    }
-    
-    const requests = rateLimitMap.get(clientIp);
-    const validRequests = requests.filter(timestamp => timestamp > windowStart);
-    
-    if (validRequests.length >= maxRequests) {
-      return res.status(429).json({ 
-        error: 'Too many requests',
-        message: 'Please try again later'
-      });
-    }
-    
-    validRequests.push(now);
-    rateLimitMap.set(clientIp, validRequests);
-    next();
-  };
-};
 import { Blog } from "./models/Blog";
 import { Contact } from "./models/Contact";
 import { Meeting } from "./models/Meeting";
@@ -81,17 +52,13 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     httpServer = createServer(app);
   }
 
-  // Blog APIs with enhanced error handling
+  // Blog APIs
   app.get("/api/blogs", async (req, res) => {
     try {
       const blogs = await Blog.find().sort({ createdAt: -1 });
       res.json(blogs);
     } catch (error) {
-      console.error('Error fetching blogs:', error);
-      res.status(500).json({ 
-        error: "Failed to fetch blogs",
-        message: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
-      });
+      res.status(500).json({ error: "Failed to fetch blogs" });
     }
   });
 
@@ -229,49 +196,8 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     }
   });
 
-  // Admin authentication
-  app.post('/api/admin/login', async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      
-      // Environment variables से credentials check करें
-      const adminUsername = process.env.ADMIN_USERNAME || 'smdydx';
-      const adminPassword = process.env.ADMIN_PASSWORD || 'Rama@2025';
-      
-      if (username === adminUsername && password === adminPassword) {
-        // JWT token generate करें (production में JWT library use करें)
-        const token = Buffer.from(`${username}:${Date.now()}`).toString('base64');
-        res.json({ token, message: 'Login successful' });
-      } else {
-        res.status(401).json({ message: 'Invalid credentials' });
-      }
-    } catch (error) {
-      res.status(500).json({ message: 'Login failed' });
-    }
-  });
-
-  // Admin authentication middleware
-  const authenticateAdmin = (req, res, next) => {
-    const token = req.headers.authorization?.replace('Bearer ', '');
-    if (!token) {
-      return res.status(401).json({ message: 'No token provided' });
-    }
-    
-    try {
-      // Token validation logic (production में proper JWT verification करें)
-      const decoded = Buffer.from(token, 'base64').toString();
-      if (decoded.includes('smdydx')) {
-        next();
-      } else {
-        res.status(401).json({ message: 'Invalid token' });
-      }
-    } catch (error) {
-      res.status(401).json({ message: 'Invalid token' });
-    }
-  };
-
   // Admin routes
-  app.post('/api/admin/jobs', authenticateAdmin, async (req, res) => {
+  app.post('/api/admin/jobs', async (req, res) => {
     try {
       const job = new Job(req.body);
       await job.save();
