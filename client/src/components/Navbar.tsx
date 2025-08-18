@@ -13,10 +13,21 @@ import { servicesData } from "@/data/services";
 
 const navLinks = [
   { name: "Home", href: "/#home" },
-  { name: "About Us", href: "/about" },
+  { 
+    name: "About Us", 
+    href: "/about",
+    submenu: [
+      { name: "Company Overview", href: "/about/company-overview" },
+      { name: "Our Story", href: "/about/our-story" },
+      { name: "Leadership", href: "/about/leadership" },
+      { name: "Vision & Mission", href: "/about/vision-mission" },
+      { name: "Core Values", href: "/about/core-values" },
+      { name: "Careers", href: "/about/careers" },
+      { name: "Achievements", href: "/about/achievements" }
+    ]
+  },
   { name: "Services", href: "/#services" },
   { name: "Blog", href: "/blog" },
-  { name: "Careers", href: "/careers" },
   { name: "Contact Us", href: "/#contact" },
 ];
 

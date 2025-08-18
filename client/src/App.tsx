@@ -13,6 +13,13 @@ import Home from "@/pages/Home";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import About from "@/pages/About";
+import CompanyOverview from "@/pages/about/CompanyOverview";
+import OurStory from "@/pages/about/OurStory";
+import Leadership from "@/pages/about/Leadership";
+import VisionMission from "@/pages/about/VisionMission";
+import CoreValues from "@/pages/about/CoreValues";
+import AboutCareers from "@/pages/about/Careers";
+import Achievements from "@/pages/about/Achievements";
 import Services from "@/pages/Services";
 import Schedule from "@/pages/Schedule";
 import Careers from "@/pages/Careers";
@@ -143,6 +150,13 @@ function App() {
               {/* Common */}
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/about/company-overview" element={<CompanyOverview />} />
+              <Route path="/about/our-story" element={<OurStory />} />
+              <Route path="/about/leadership" element={<Leadership />} />
+              <Route path="/about/vision-mission" element={<VisionMission />} />
+              <Route path="/about/core-values" element={<CoreValues />} />
+              <Route path="/about/careers" element={<AboutCareers />} />
+              <Route path="/about/achievements" element={<Achievements />} />
               <Route path="/services" element={<Services />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogPost />} />
