@@ -8,6 +8,11 @@ import {
   ChevronRight,
   PhoneCall,
   Calendar,
+  Home,
+  Users,
+  Settings,
+  FileText,
+  MessageCircle,
 } from "lucide-react";
 import { servicesData } from "@/data/services";
 
@@ -495,9 +500,12 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileAbout}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-thin tracking-normal uppercase"
                       >
-                        <span>{link.name}</span>
+                        <div className="flex items-center gap-3">
+                          <Users className="h-5 w-5 text-green-400" />
+                          <span>{link.name}</span>
+                        </div>
                         <ChevronDown
                           className={`h-5 w-5 transition-transform duration-300 ${
                             mobileAboutOpen
@@ -547,9 +555,12 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileServices}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-thin tracking-normal uppercase"
                       >
-                        <span>{link.name}</span>
+                        <div className="flex items-center gap-3">
+                          <Settings className="h-5 w-5 text-green-400" />
+                          <span>{link.name}</span>
+                        </div>
                         <ChevronDown
                           className={`h-5 w-5 transition-transform duration-300 ${
                             mobileServicesOpen
@@ -739,13 +750,29 @@ const Navbar = () => {
 
                 // Regular nav links (excluding About Us as it's handled above)
                 if (link.name !== "About Us") {
+                  const getIcon = (name: string) => {
+                    switch (name) {
+                      case "Home":
+                        return <Home className="h-5 w-5 text-green-400" />;
+                      case "Blog":
+                        return <FileText className="h-5 w-5 text-green-400" />;
+                      case "Contact Us":
+                        return <MessageCircle className="h-5 w-5 text-green-400" />;
+                      default:
+                        return <Settings className="h-5 w-5 text-green-400" />;
+                    }
+                  };
+
                   return (
                     <button
                       key={index}
                       onClick={() => scrollToSection(link.href)}
-                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase"
+                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-thin tracking-normal uppercase"
                     >
-                      {link.name}
+                      <div className="flex items-center gap-3">
+                        {getIcon(link.name)}
+                        <span>{link.name}</span>
+                      </div>
                     </button>
                   );
                 }
