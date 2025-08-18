@@ -28,10 +28,14 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     const renderer = new THREE.WebGLRenderer({ 
       antialias: true,
       alpha: true,
-      powerPreference: 'high-performance'
+      powerPreference: 'high-performance',
+      preserveDrawingBuffer: false
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
+    renderer.domElement.style.background = 'transparent';
+    renderer.domElement.style.border = 'none';
+    renderer.domElement.style.outline = 'none';
     rendererRef.current = renderer;
     renderer.setSize(size, size);
     
@@ -496,7 +500,10 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
         width: size, 
         height: size, 
         position: 'relative',
-        margin: '0 auto'
+        margin: '0 auto',
+        background: 'transparent',
+        border: 'none',
+        outline: 'none'
       }}
     />
   );
