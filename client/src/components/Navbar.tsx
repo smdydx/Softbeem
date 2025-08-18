@@ -369,7 +369,7 @@ const Navbar = () => {
                           <a
                             key={subIdx}
                             href={subItem.href}
-                            className="flex items-center px-4 py-3 text-white/90 hover:text-white hover:bg-zinc-800/70 rounded-md transition-all duration-200 text-sm font-medium hover:font-semibold"
+                            className="flex items-center px-4 py-3 text-white/90 hover:text-white hover:bg-zinc-800/70 rounded-md transition-all duration-200 text-xs font-medium hover:font-semibold"
                           >
                             {subItem.name}
                           </a>
@@ -530,7 +530,7 @@ const Navbar = () => {
                                   setIsMobileMenuOpen(false);
                                   setMobileAboutOpen(false);
                                 }}
-                                className="block px-8 py-3 text-white/80 hover:text-white hover:bg-green-500/10 transition-all duration-200 text-base border-b border-green-500/5 last:border-b-0"
+                                className="block px-8 py-3 text-white/80 hover:text-white hover:bg-green-500/10 transition-all duration-200 text-sm border-b border-green-500/5 last:border-b-0"
                               >
                                 {subItem.name}
                               </motion.a>
