@@ -387,7 +387,7 @@ const Careers = () => {
                 {isSubmitting ? "Submitting..." : "Submit Application"}
               </Button>
             </div>
-          </form>
+          </motion.form>
         </motion.section>
       </div>
     </div>
