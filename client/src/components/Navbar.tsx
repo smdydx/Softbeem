@@ -39,6 +39,7 @@ const Navbar = () => {
     string | null
   >("tech");
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [mobileOpenCategories, setMobileOpenCategories] = useState<string[]>(
     [],
   );
@@ -67,6 +68,7 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
     setMobileServicesOpen(false);
+    setMobileAboutOpen(false);
     setMobileOpenCategories([]);
     setMobileOpenServices([]);
   };
@@ -80,6 +82,10 @@ const Navbar = () => {
     setMobileServicesOpen(!mobileServicesOpen);
     setMobileOpenCategories([]);
     setMobileOpenServices([]);
+  };
+
+  const toggleMobileAbout = () => {
+    setMobileAboutOpen(!mobileAboutOpen);
   };
 
   const toggleMobileCategory = (category: string) => {
@@ -102,6 +108,7 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
     setServicesDropdownOpen(false);
     setMobileServicesOpen(false);
+    setMobileAboutOpen(false);
     setMobileOpenCategories([]);
     setMobileOpenServices([]);
 
@@ -129,6 +136,7 @@ const Navbar = () => {
 
     setIsMobileMenuOpen(false);
     setMobileServicesOpen(false);
+    setMobileAboutOpen(false);
     setMobileOpenCategories([]);
     setMobileOpenServices([]);
 
@@ -342,6 +350,37 @@ const Navbar = () => {
                 );
               }
 
+              // About Us with submenu
+              if (link.name === "About Us") {
+                return (
+                  <div key={index} className="relative group">
+                    <button
+                      onClick={() => scrollToSection(link.href)}
+                      className="relative text-white hover:text-primary font-medium transition-colors duration-300 group flex items-center gap-1"
+                    >
+                      {link.name}
+                      <ChevronDown className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </button>
+
+                    {/* Desktop About Us Dropdown */}
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-900/95 backdrop-blur-sm border border-green-500/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                      <div className="p-2">
+                        {link.submenu?.map((subItem, subIdx) => (
+                          <a
+                            key={subIdx}
+                            href={subItem.href}
+                            className="flex items-center px-4 py-3 text-white hover:text-primary hover:bg-zinc-800 rounded-md transition-colors text-sm"
+                          >
+                            {subItem.name}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
               // Regular nav links
               return (
                 <div key={index} className="flex items-center gap-16">
@@ -452,6 +491,58 @@ const Navbar = () => {
             {/* Mobile Nav Links */}
             <div className="pb-6">
               {navLinks.map((link, index) => {
+                if (link.name === "About Us") {
+                  return (
+                    <div key={index} className="border-b border-green-500/10">
+                      <button
+                        onClick={toggleMobileAbout}
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-medium"
+                      >
+                        <span>{link.name}</span>
+                        <ChevronDown
+                          className={`h-5 w-5 transition-transform duration-300 ${
+                            mobileAboutOpen
+                              ? "rotate-180 text-green-400"
+                              : "text-gray-400"
+                          }`}
+                        />
+                      </button>
+
+                      <AnimatePresence>
+                        {mobileAboutOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="bg-zinc-900/80 backdrop-blur-sm"
+                          >
+                            {link.submenu?.map((subItem, subIdx) => (
+                              <motion.a
+                                key={subIdx}
+                                href={subItem.href}
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{
+                                  duration: 0.2,
+                                  delay: subIdx * 0.05,
+                                }}
+                                onClick={() => {
+                                  setIsMobileMenuOpen(false);
+                                  setMobileAboutOpen(false);
+                                }}
+                                className="block px-8 py-3 text-white/80 hover:text-white hover:bg-green-500/10 transition-all duration-200 text-base border-b border-green-500/5 last:border-b-0"
+                              >
+                                {subItem.name}
+                              </motion.a>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+
                 if (link.name === "Services") {
                   return (
                     <div key={index} className="border-b border-green-500/10">
@@ -598,6 +689,9 @@ const Navbar = () => {
                                                           setMobileServicesOpen(
                                                             false,
                                                           );
+                                                          setMobileAboutOpen(
+                                                            false,
+                                                          );
                                                           setMobileOpenCategories(
                                                             [],
                                                           );
@@ -644,16 +738,19 @@ const Navbar = () => {
                   );
                 }
 
-                // Regular nav links
-                return (
-                  <button
-                    key={index}
-                    onClick={() => scrollToSection(link.href)}
-                    className="block w-full text-left px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 font-medium transition-all duration-200 border-b border-green-500/10 last:border-none text-lg"
-                  >
-                    {link.name}
-                  </button>
-                );
+                // Regular nav links (excluding About Us as it's handled above)
+                if (link.name !== "About Us") {
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => scrollToSection(link.href)}
+                      className="block w-full text-left px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 font-medium transition-all duration-200 border-b border-green-500/10 last:border-none text-lg"
+                    >
+                      {link.name}
+                    </button>
+                  );
+                }
+                return null;
               })}
             </div>
           </motion.div>
