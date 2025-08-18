@@ -495,7 +495,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileAbout}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xl font-bold tracking-wider uppercase"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase"
                       >
                         <span>{link.name}</span>
                         <ChevronDown
@@ -547,7 +547,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileServices}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xl font-bold tracking-wider uppercase"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase"
                       >
                         <span>{link.name}</span>
                         <ChevronDown
@@ -714,7 +714,7 @@ const Navbar = () => {
                                                             )}
                                                           </div>
                                                         </div>
-                                                        <span className="text-white/60 group-hover:text-white/80 text-xs font-medium">
+                                                        <span className="text-white/60 group-hover:text-white text-xs font-medium">
                                                           {subItem.title}
                                                         </span>
                                                       </motion.button>
@@ -743,7 +743,7 @@ const Navbar = () => {
                     <button
                       key={index}
                       onClick={() => scrollToSection(link.href)}
-                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xl font-bold tracking-wider uppercase"
+                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase"
                     >
                       {link.name}
                     </button>

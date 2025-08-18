@@ -223,10 +223,10 @@
 /* Modern Navbar Typography */
 .nav-modern {
   font-family: 'Exo 2', 'Orbitron', 'Rajdhani', sans-serif;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  text-shadow: 0 2px 8px rgba(0, 255, 0, 0.3);
+  text-shadow: 0 1px 4px rgba(0, 255, 0, 0.2);
   position: relative;
 }
 
@@ -246,21 +246,21 @@
 
 .nav-glow {
   text-shadow: 
-    0 0 5px rgba(0, 255, 0, 0.5),
-    0 0 10px rgba(0, 255, 0, 0.3),
-    0 0 15px rgba(0, 255, 0, 0.2);
+    0 0 3px rgba(0, 255, 0, 0.3),
+    0 0 6px rgba(0, 255, 0, 0.2),
+    0 0 9px rgba(0, 255, 0, 0.1);
   font-family: 'Exo 2', sans-serif;
-  font-weight: 800;
-  letter-spacing: 3px;
+  font-weight: 300;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
 .mobile-nav-modern {
   font-family: 'Saira', 'Exo 2', sans-serif;
-  font-weight: 700;
-  letter-spacing: 1.5px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Navigation menu styles */
