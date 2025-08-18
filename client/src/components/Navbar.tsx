@@ -183,7 +183,7 @@ const Navbar = () => {
                   >
                     <button
                       onClick={toggleServicesDropdown}
-                      className="relative text-white hover:text-primary font-medium transition-colors duration-400 group flex items-center gap-1"
+                      className="relative text-white hover:text-primary font-semibold text-base transition-colors duration-400 group flex items-center gap-1 tracking-wide"
                     >
                       {link.name}
                       <ChevronDown
@@ -355,8 +355,7 @@ const Navbar = () => {
                 return (
                   <div key={index} className="relative group">
                     <button
-                      onClick={() => scrollToSection(link.href)}
-                      className="relative text-white hover:text-primary font-medium transition-colors duration-300 group flex items-center gap-1"
+                      className="relative text-white hover:text-primary font-semibold text-base transition-colors duration-300 group flex items-center gap-1 tracking-wide"
                     >
                       {link.name}
                       <ChevronDown className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />
@@ -370,7 +369,7 @@ const Navbar = () => {
                           <a
                             key={subIdx}
                             href={subItem.href}
-                            className="flex items-center px-4 py-3 text-white hover:text-primary hover:bg-zinc-800 rounded-md transition-colors text-sm"
+                            className="flex items-center px-4 py-3 text-white/90 hover:text-white hover:bg-zinc-800/70 rounded-md transition-all duration-200 text-sm font-medium hover:font-semibold"
                           >
                             {subItem.name}
                           </a>
@@ -386,7 +385,7 @@ const Navbar = () => {
                 <div key={index} className="flex items-center gap-16">
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className="relative text-white hover:text-primary font-medium transition-colors duration-300 group"
+                    className="relative text-white hover:text-primary font-semibold text-base transition-colors duration-300 group tracking-wide"
                   >
                     {link.name}
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
