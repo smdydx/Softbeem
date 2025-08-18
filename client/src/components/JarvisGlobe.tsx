@@ -16,19 +16,20 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Initialize scene, camera, and renderer
+    // Initialize scene, camera, and renderer with optimized settings
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 2000);
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
     camera.position.z = 5;
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ 
-      antialias: true, 
-      alpha: true 
+      antialias: false, // Disable for better performance
+      alpha: true,
+      powerPreference: 'high-performance'
     });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio
     renderer.setClearColor(0x000000, 0);
     rendererRef.current = renderer;
     renderer.setSize(size, size);
@@ -38,15 +39,15 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     }
     containerRef.current.appendChild(renderer.domElement);
 
-    // Create the Earth sphere
-    const earthGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+    // Create the Earth sphere with lower geometry complexity
+    const earthGeometry = new THREE.SphereGeometry(1.5, 16, 16);
     
-    // Create a holographic material
+    // Create a simplified holographic material
     const earthMaterial = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        color1: { value: new THREE.Color(0x00FF00) }, // Primary green
-        color2: { value: new THREE.Color(0x32CD32) }, // Lime green
+        color1: { value: new THREE.Color(0x00FF00) },
+        color2: { value: new THREE.Color(0x32CD32) },
       },
       vertexShader: `
         varying vec3 vNormal;
@@ -65,48 +66,33 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
         varying vec2 vUv;
         
         void main() {
-          // Create a grid pattern with thinner lines and more gaps
-          float gridSize = 30.0; // More grid divisions
+          // Simplified grid pattern
+          float gridSize = 15.0;
           vec2 grid = fract(vUv * gridSize);
           float gridLine = max(
-            step(0.98, grid.x) * step(grid.x, 0.985), // Much thinner lines
-            step(0.98, grid.y) * step(grid.y, 0.985)  // Much thinner lines
+            step(0.95, grid.x),
+            step(0.95, grid.y)
           );
           
-          // Create longitude/latitude lines - much thinner
-          float latLine = step(0.99, abs(sin(vUv.y * 3.14159 * 12.0))); // More lines, thinner
-          float longLine = step(0.99, abs(sin(vUv.x * 3.14159 * 24.0))); // More lines, thinner
+          // Simplified longitude/latitude lines
+          float latLine = step(0.98, abs(sin(vUv.y * 3.14159 * 6.0)));
+          float longLine = step(0.98, abs(sin(vUv.x * 3.14159 * 12.0)));
           
-          // Combine grid and long/lat lines
           float lines = max(max(gridLine, latLine), longLine);
           
-          // Edge glow effect
-          float rim = 1.0 - max(0.0, dot(vNormal, vec3(0.0, 0.0, 1.0)));
-          rim = pow(rim, 2.0);
+          // Simplified edge glow
+          float rim = 1.0 - dot(vNormal, vec3(0.0, 0.0, 1.0));
+          rim = pow(rim, 1.5);
           
-          // Pulsating effect
-          float pulse = 0.5 + 0.5 * sin(time * 0.5);
+          // Simplified pulse
+          float pulse = 0.7 + 0.3 * sin(time * 0.5);
           
-          // Data points that move
-          float dataPoint1 = step(0.98, sin(vUv.x * 50.0 + time) * sin(vUv.y * 50.0 + time * 0.7));
-          float dataPoint2 = step(0.98, cos(vUv.x * 40.0 - time * 0.3) * sin(vUv.y * 40.0 + time * 0.5));
-          float dataPoints = max(dataPoint1, dataPoint2);
-          
-          // Scanning line effect
-          float scanLine = step(0.98, sin(vUv.y * 3.14159 * 2.0 - time));
-          
-          // Combine all effects
           vec3 baseColor = mix(color1, color2, rim);
-          vec3 finalColor = mix(baseColor * 0.5, baseColor, lines);
-          finalColor = mix(finalColor, vec3(1.0, 1.0, 1.0), dataPoints);
-          finalColor = mix(finalColor, vec3(1.0, 1.0, 1.0), scanLine * 0.5);
+          vec3 finalColor = mix(baseColor * 0.6, baseColor, lines);
           
-          // Apply pulsating opacity - more subtle
-          float alpha = 0.5 + 0.2 * pulse;
-          // Stronger at edges
-          alpha = alpha * (0.4 + rim * 0.3);
+          float alpha = 0.4 + rim * 0.3;
           
-          gl_FragColor = vec4(finalColor, alpha * (0.2 + lines * 0.4));
+          gl_FragColor = vec4(finalColor, alpha * (0.3 + lines * 0.3) * pulse);
         }
       `,
       transparent: true,
@@ -116,17 +102,17 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     const earth = new THREE.Mesh(earthGeometry, earthMaterial);
     scene.add(earth);
 
-    // Create stars
+    // Reduce stars count for better performance
     const starsGeometry = new THREE.BufferGeometry();
     const starsMaterial = new THREE.PointsMaterial({
       color: 0xffffff,
       size: 0.02,
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.3,
     });
 
     const starsVertices = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 300; i++) { // Reduced from 1000 to 300
       const x = THREE.MathUtils.randFloatSpread(10);
       const y = THREE.MathUtils.randFloatSpread(10);
       const z = THREE.MathUtils.randFloatSpread(10);
@@ -141,209 +127,144 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     const stars = new THREE.Points(starsGeometry, starsMaterial);
     scene.add(stars);
 
-    // Holographic rings
-    const ringsGeometry = new THREE.RingGeometry(2.2, 2.3, 64);
+    // Simplified rings with lower geometry
+    const ringsGeometry = new THREE.RingGeometry(2.2, 2.3, 32);
     const ringsMaterial = new THREE.MeshBasicMaterial({
       color: 0xFF6E00,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.2,
     });
     const rings = new THREE.Mesh(ringsGeometry, ringsMaterial);
     rings.rotation.x = Math.PI / 2;
     scene.add(rings);
 
-    const rings2Geometry = new THREE.RingGeometry(2.5, 2.55, 64);
+    const rings2Geometry = new THREE.RingGeometry(2.5, 2.55, 32);
     const rings2Material = new THREE.MeshBasicMaterial({
       color: 0xFFA500,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.15,
     });
     const rings2 = new THREE.Mesh(rings2Geometry, rings2Material);
     rings2.rotation.x = Math.PI / 2;
     scene.add(rings2);
 
     // Add ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
 
-    // Create service icons orbiting around the globe with technology symbols
+    // Simplified service icons for better performance
     const serviceIcons = [
       { name: 'Blockchain', symbol: '₿', color: 0x00FF00, distance: 3 },
-      { name: 'Smart Contract', symbol: '⚡', color: 0x32CD32, distance: 3.2 },
       { name: 'Mobile App', symbol: '📱', color: 0x0097FB, distance: 3.4 },
-      { name: 'Web Dev', symbol: '🌐', color: 0xFF6E00, distance: 3.6 },
-      { name: 'IT Services', symbol: '💻', color: 0xFFA500, distance: 3.8 },
-      { name: 'Legal', symbol: '⚖️', color: 0x9932CC, distance: 4.0 },
-      { name: 'Token', symbol: '🪙', color: 0xFF4500, distance: 4.2 },
-      { name: 'Game Dev', symbol: '🎮', color: 0x00CED1, distance: 4.4 }
+      { name: 'Web Dev', symbol: '🌐', color: 0xFF6E00, distance: 3.8 },
+      { name: 'Legal', symbol: '⚖️', color: 0x9932CC, distance: 4.2 }
     ];
 
     const orbitingElements = [];
     
     serviceIcons.forEach((service, index) => {
-      // Create a plane geometry for the icon background
-      const iconBgGeometry = new THREE.PlaneGeometry(0.3, 0.3);
-      const iconBgMaterial = new THREE.MeshBasicMaterial({
-        color: service.color,
-        transparent: true,
-        opacity: 0.2,
-        side: THREE.DoubleSide
-      });
-      const iconBgMesh = new THREE.Mesh(iconBgGeometry, iconBgMaterial);
-      
-      // Create a canvas texture for the technology symbol
+      // Simplified canvas texture creation
       const canvas = document.createElement('canvas');
-      const size = 128;
+      const size = 64; // Reduced size for better performance
       canvas.width = size;
       canvas.height = size;
       const context = canvas.getContext('2d');
       
       if (context) {
-        // Clear canvas
         context.fillStyle = 'transparent';
         context.fillRect(0, 0, size, size);
         
-        // Create gradient background
-        const gradient = context.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
-        gradient.addColorStop(0, `rgba(${(service.color >> 16) & 255}, ${(service.color >> 8) & 255}, ${service.color & 255}, 0.3)`);
-        gradient.addColorStop(1, `rgba(${(service.color >> 16) & 255}, ${(service.color >> 8) & 255}, ${service.color & 255}, 0.1)`);
-        context.fillStyle = gradient;
-        context.fillRect(0, 0, size, size);
-        
-        // Draw the technology symbol
-        context.fillStyle = `rgb(${(service.color >> 16) & 255}, ${(service.color >> 8) & 255}, ${service.color & 255})`;
-        context.font = 'bold 64px Arial';
+        // Simplified gradient
+        context.fillStyle = `rgba(${(service.color >> 16) & 255}, ${(service.color >> 8) & 255}, ${service.color & 255}, 0.8)`;
+        context.font = 'bold 32px Arial';
         context.textAlign = 'center';
         context.textBaseline = 'middle';
         context.fillText(service.symbol, size/2, size/2);
-        
-        // Add glow effect
-        context.shadowColor = `rgb(${(service.color >> 16) & 255}, ${(service.color >> 8) & 255}, ${service.color & 255})`;
-        context.shadowBlur = 10;
-        context.fillText(service.symbol, size/2, size/2);
       }
       
-      // Create texture from canvas
       const texture = new THREE.CanvasTexture(canvas);
-      texture.needsUpdate = true;
       
-      // Create the icon mesh with the texture
-      const iconGeometry = new THREE.PlaneGeometry(0.4, 0.4);
+      // Single icon mesh instead of multiple components
+      const iconGeometry = new THREE.PlaneGeometry(0.3, 0.3);
       const iconMaterial = new THREE.MeshBasicMaterial({
         map: texture,
         transparent: true,
         side: THREE.DoubleSide,
-        alphaTest: 0.01
+        alphaTest: 0.1
       });
       const iconMesh = new THREE.Mesh(iconGeometry, iconMaterial);
       
-      // Create outer glowing ring
-      const outerRingGeometry = new THREE.RingGeometry(0.25, 0.28, 32);
-      const outerRingMaterial = new THREE.MeshBasicMaterial({
-        color: service.color,
-        side: THREE.DoubleSide,
-        transparent: true,
-        opacity: 0.6
-      });
-      const outerRingMesh = new THREE.Mesh(outerRingGeometry, outerRingMaterial);
-      
-      // Create inner glowing ring
-      const innerRingGeometry = new THREE.RingGeometry(0.22, 0.24, 32);
-      const innerRingMaterial = new THREE.MeshBasicMaterial({
-        color: 0xFFFFFF,
-        side: THREE.DoubleSide,
-        transparent: true,
-        opacity: 0.3
-      });
-      const innerRingMesh = new THREE.Mesh(innerRingGeometry, innerRingMaterial);
-      
-      // Group all elements together
-      const iconGroup = new THREE.Group();
-      iconGroup.add(iconBgMesh);
-      iconGroup.add(iconMesh);
-      iconGroup.add(outerRingMesh);
-      iconGroup.add(innerRingMesh);
-      
       // Position the icon
       const angle = (index / serviceIcons.length) * Math.PI * 2;
-      iconGroup.position.set(
+      iconMesh.position.set(
         Math.cos(angle) * service.distance,
-        Math.sin(angle * 0.5) * 0.8, // More vertical variation
+        Math.sin(angle * 0.5) * 0.5,
         Math.sin(angle) * service.distance
       );
       
       // Store service info for animation
-      iconGroup.userData = {
+      iconMesh.userData = {
         originalDistance: service.distance,
         angleOffset: angle,
-        speed: 0.2 + (index * 0.05), // Slower, more varied speeds
-        verticalOffset: Math.sin(angle * 2) * 0.5,
-        originalScale: 1
+        speed: 0.15 + (index * 0.03),
+        verticalOffset: Math.sin(angle * 2) * 0.3
       };
       
-      scene.add(iconGroup);
-      orbitingElements.push(iconGroup);
+      scene.add(iconMesh);
+      orbitingElements.push(iconMesh);
     });
 
-    // Animation loop
+    // Optimized animation loop with reduced frame rate
     const clock = new THREE.Clock();
+    let frameCount = 0;
     
     const animate = () => {
       if (!rendererRef.current || !sceneRef.current || !cameraRef.current) return;
       
+      frameCount++;
       const elapsedTime = clock.getElapsedTime();
       
       // Rotate the earth
-      earth.rotation.y = elapsedTime * 0.1;
+      earth.rotation.y = elapsedTime * 0.08;
       
-      // Pulse the rings
-      const pulse = Math.sin(elapsedTime * 0.5) * 0.1 + 0.9;
-      rings.scale.set(pulse, pulse, pulse);
-      rings2.scale.set(1.05 - pulse * 0.05, 1.05 - pulse * 0.05, 1.05 - pulse * 0.05);
-      
-      // Update shader time
-      if (earth.material instanceof THREE.ShaderMaterial) {
+      // Update shader time (less frequently for performance)
+      if (frameCount % 2 === 0 && earth.material instanceof THREE.ShaderMaterial) {
         earth.material.uniforms.time.value = elapsedTime;
       }
       
-      // Rotate the stars slowly
-      stars.rotation.y = elapsedTime * 0.02;
+      // Pulse the rings (less frequently)
+      if (frameCount % 3 === 0) {
+        const pulse = Math.sin(elapsedTime * 0.4) * 0.08 + 0.92;
+        rings.scale.set(pulse, pulse, pulse);
+        rings2.scale.set(1.03 - pulse * 0.03, 1.03 - pulse * 0.03, 1.03 - pulse * 0.03);
+      }
       
-      // Animate orbiting service icons
+      // Rotate the stars slowly
+      stars.rotation.y = elapsedTime * 0.015;
+      
+      // Animate orbiting service icons (simplified)
       orbitingElements.forEach((element, index) => {
         const userData = element.userData;
         const currentAngle = userData.angleOffset + (elapsedTime * userData.speed);
         
-        // Smooth orbital motion with floating effect
-        const floatOffset = Math.sin(elapsedTime * 2 + index) * 0.1;
+        // Simplified orbital motion
         element.position.set(
           Math.cos(currentAngle) * userData.originalDistance,
-          Math.sin(currentAngle * 0.7) * 0.8 + userData.verticalOffset + floatOffset,
+          Math.sin(currentAngle * 0.5) * 0.4 + userData.verticalOffset,
           Math.sin(currentAngle) * userData.originalDistance
         );
         
-        // Gentle rotation of the entire icon group
-        element.rotation.z = Math.sin(elapsedTime * 0.5 + index) * 0.1;
+        // Simplified rotation and scaling
+        if (frameCount % 4 === 0) {
+          element.rotation.z = Math.sin(elapsedTime * 0.3 + index) * 0.05;
+          const scale = 0.95 + Math.sin(elapsedTime * 1.5 + index) * 0.1;
+          element.scale.set(scale, scale, scale);
+        }
         
-        // Enhanced pulsing effect with breathing animation
-        const pulseFactor = 0.9 + Math.sin(elapsedTime * 2 + index * 0.7) * 0.3;
-        const breathingFactor = 0.95 + Math.sin(elapsedTime * 0.8 + index) * 0.05;
-        const finalScale = pulseFactor * breathingFactor;
-        element.scale.set(finalScale, finalScale, finalScale);
-        
-        // Make icons face the camera for better visibility
+        // Make icons face the camera
         element.lookAt(cameraRef.current.position);
-        
-        // Animate individual children for more dynamic effect
-        element.children.forEach((child, childIndex) => {
-          if (childIndex === 2 || childIndex === 3) { // Rings
-            child.rotation.z += 0.01 * (childIndex === 2 ? 1 : -1);
-            const ringPulse = 0.8 + Math.sin(elapsedTime * 4 + index + childIndex) * 0.2;
-            child.scale.set(ringPulse, ringPulse, ringPulse);
-          }
-        });
       });
       
       // Render

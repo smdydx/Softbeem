@@ -24,8 +24,17 @@ import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 const HeroSection = () => {
   const [typedText, setTypedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [globeLoaded, setGlobeLoaded] = useState(false);
   const isMobile = useIsMobile();
   const { settings } = useSiteSettings();
+
+  // Preload globe after component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setGlobeLoaded(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const services = [
     "Web Development",
@@ -257,7 +266,19 @@ const HeroSection = () => {
             className="flex flex-col justify-center items-center mt-2 sm:mt-4 lg:mt-8"
           >
             <div className="mt-8 sm:mt-16 lg:mt-40">
-              <JarvisGlobe size={isMobile ? 280 : 480} />
+              {globeLoaded ? (
+                <JarvisGlobe size={isMobile ? 240 : 400} />
+              ) : (
+                <div 
+                  className="flex items-center justify-center bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full border border-green-500/30"
+                  style={{ 
+                    width: isMobile ? 240 : 400, 
+                    height: isMobile ? 240 : 400 
+                  }}
+                >
+                  <div className="w-8 h-8 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
             </div>
             <div className="mt-4 sm:mt-8 lg:mt-16">
               <ServiceIcons />
