@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Calendar, Clock } from "lucide-react";
+import { Calendar, Clock, User, Mail, Phone, Building } from "lucide-react";
 
 const ScheduleMeetingForm = () => {
   const { toast } = useToast();
@@ -64,111 +64,164 @@ const ScheduleMeetingForm = () => {
   };
 
   return (
-    <div id="meeting" className="w-full max-w-2xl mx-auto px-3 sm:px-6 md:px-8 py-4 sm:py-8 bg-zinc-900/50 backdrop-blur-lg rounded-xl sm:rounded-2xl border border-zinc-800 my-6 sm:my-8 md:my-12">
-      <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6 text-center">Schedule a Meeting</h2>
-      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
-          <div className="space-y-2">
-            <label className="block text-xs sm:text-sm font-medium">Name</label>
-            <Input
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
-              placeholder="Enter your full name"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="block text-xs sm:text-sm font-medium">Email</label>
-            <Input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
-              placeholder="your.email@example.com"
-            />
-          </div>
-        </div>
+    <div id="meeting" className="w-full max-w-2xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 bg-zinc-900/50 backdrop-blur-lg rounded-lg sm:rounded-xl md:rounded-2xl border border-zinc-800/50 my-4 sm:my-6 md:my-8 lg:my-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 md:mb-6 text-center bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+          Schedule a Meeting
+        </h2>
+        <p className="text-xs sm:text-sm md:text-base text-gray-400 text-center mb-4 sm:mb-6 md:mb-8 px-2">
+          Book a consultation with our experts to discuss your project requirements
+        </p>
 
-        <div className="space-y-2">
-          <label className="block text-xs sm:text-sm font-medium">Phone (WhatsApp)</label>
-          <Input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
-            placeholder="+91 9876543210"
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6">
+          {/* Name and Email Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="flex items-center text-xs sm:text-sm font-medium text-gray-300">
+                <User className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-400" />
+                Full Name
+              </label>
+              <Input
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+                placeholder="Enter your full name"
+              />
+            </div>
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="flex items-center text-xs sm:text-sm font-medium text-gray-300">
+                <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-400" />
+                Email Address
+              </label>
+              <Input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+                placeholder="your.email@example.com"
+              />
+            </div>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
-          <div className="space-y-2">
-            <label className="block text-xs sm:text-sm font-medium">
-              <Calendar className="inline-block w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-              Preferred Date
+          {/* Phone Number */}
+          <div className="space-y-1.5 sm:space-y-2">
+            <label className="flex items-center text-xs sm:text-sm font-medium text-gray-300">
+              <Phone className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-400" />
+              Phone Number (WhatsApp)
             </label>
             <Input
-              type="date"
-              name="date"
-              value={formData.date}
+              type="tel"
+              name="phone"
+              value={formData.phone}
               onChange={handleChange}
               required
-              min={new Date().toISOString().split('T')[0]}
-              className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
+              className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+              placeholder="+91 9876543210"
             />
           </div>
-          <div className="space-y-2">
-            <label className="block text-xs sm:text-sm font-medium">
-              <Clock className="inline-block w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-              Preferred Time
+
+          {/* Date and Time Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="flex items-center text-xs sm:text-sm font-medium text-gray-300">
+                <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-400" />
+                Preferred Date
+              </label>
+              <Input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                required
+                min={new Date().toISOString().split('T')[0]}
+                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+              />
+            </div>
+            <div className="space-y-1.5 sm:space-y-2">
+              <label className="flex items-center text-xs sm:text-sm font-medium text-gray-300">
+                <Clock className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-400" />
+                Preferred Time
+              </label>
+              <Input
+                type="time"
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
+                required
+                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+              />
+            </div>
+          </div>
+
+          {/* Company Name */}
+          <div className="space-y-1.5 sm:space-y-2">
+            <label className="flex items-center text-xs sm:text-sm font-medium text-gray-300">
+              <Building className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-400" />
+              Company Name (Optional)
             </label>
             <Input
-              type="time"
-              name="time"
-              value={formData.time}
+              name="companyName"
+              value={formData.companyName}
               onChange={handleChange}
-              required
-              className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
+              className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+              placeholder="Your company name"
             />
           </div>
-        </div>
 
-        <div className="space-y-2">
-          <label className="block text-xs sm:text-sm font-medium">Company Name (Optional)</label>
-          <Input
-            name="companyName"
-            value={formData.companyName}
-            onChange={handleChange}
-            className="bg-zinc-800/50 border-zinc-700/50 h-9 sm:h-12 text-sm sm:text-base px-3 sm:px-4"
-            placeholder="Your company name"
-          />
-        </div>
+          {/* Meeting Purpose */}
+          <div className="space-y-1.5 sm:space-y-2">
+            <label className="flex items-center text-xs sm:text-sm font-medium text-gray-300">
+              <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-400" />
+              Meeting Purpose
+            </label>
+            <Textarea
+              name="purpose"
+              value={formData.purpose}
+              onChange={handleChange}
+              required
+              className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 min-h-[80px] sm:min-h-[100px] md:min-h-[120px] text-xs sm:text-sm md:text-base resize-none px-3 sm:px-4 py-2 sm:py-3 transition-all duration-200"
+              placeholder="Please describe the purpose of the meeting and what you'd like to discuss..."
+            />
+          </div>
 
-        <div className="space-y-2">
-          <label className="block text-xs sm:text-sm font-medium">Meeting Purpose</label>
-          <Textarea
-            name="purpose"
-            value={formData.purpose}
-            onChange={handleChange}
-            required
-            className="bg-zinc-800/50 border-zinc-700/50 h-20 sm:h-28 md:h-32 text-sm sm:text-base resize-none px-3 sm:px-4 py-2 sm:py-3"
-            placeholder="Please describe the purpose of the meeting and what you'd like to discuss..."
-          />
-        </div>
+          {/* Submit Button */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="pt-2 sm:pt-4"
+          >
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 h-10 sm:h-12 md:h-14 text-xs sm:text-sm md:text-base lg:text-lg font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-green-500/25"
+            >
+              {isSubmitting ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                  Scheduling...
+                </div>
+              ) : (
+                "Schedule Meeting"
+              )}
+            </Button>
+          </motion.div>
+        </form>
 
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-primary hover:bg-primary/90 h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg font-medium mt-3 sm:mt-6"
-        >
-          {isSubmitting ? "Scheduling..." : "Schedule Meeting"}
-        </Button>
-      </form>
+        {/* Additional Info */}
+        <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+          <p className="text-xs sm:text-sm text-green-400 text-center">
+            💬 We'll confirm your meeting schedule via WhatsApp within 24 hours
+          </p>
+        </div>
+      </motion.div>
     </div>
   );
 };
