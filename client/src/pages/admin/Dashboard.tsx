@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from "@/components/ui/card";
@@ -63,7 +62,7 @@ import {
 const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  
+
   // State management
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('overview');
@@ -90,7 +89,7 @@ const Dashboard = () => {
 
   // Site content management with real-time updates
   const { settings, updateSettings, updateTheme, loading: settingsLoading } = useSiteSettings();
-  
+
   const [themeSettings, setThemeSettings] = useState({
     themeColor: '#00FF00',
     fontFamily: 'Inter',
@@ -113,7 +112,7 @@ const Dashboard = () => {
     ctaText: 'Get Started',
     ctaLink: '/services'
   });
-  
+
   const [serviceCategories, setServiceCategories] = useState([
     {
       id: 'blockchain',
@@ -428,7 +427,7 @@ const Dashboard = () => {
 
     setServiceCategories([...serviceCategories, newCat]);
     setNewCategory({ name: '', description: '', icon: 'Code', status: 'active', featured: false });
-    
+
     toast({
       title: "Success",
       description: "Category added successfully",
@@ -779,7 +778,7 @@ const Dashboard = () => {
                   Refresh Data
                 </Button>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
                   { label: 'Create Blog', icon: FileText, action: () => setActiveSection('blogs'), color: 'bg-emerald-600' },
@@ -924,7 +923,7 @@ const Dashboard = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-blue-400 mb-2">Font Family</label>
                   <Select 
@@ -945,7 +944,7 @@ const Dashboard = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-blue-400 mb-2">Company Logo URL</label>
                   <Input
@@ -955,7 +954,7 @@ const Dashboard = () => {
                     placeholder="Logo image URL"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-blue-400 mb-2">Company Name</label>
                   <Input
@@ -976,7 +975,7 @@ const Dashboard = () => {
                   />
                 </div>
               </div>
-              
+
               <div className="flex gap-4 mt-6">
                 <Button 
                   onClick={saveThemeSettings} 
@@ -1004,7 +1003,6 @@ const Dashboard = () => {
           </div>
         );
 
-      // Keep existing cases for other sections...
       case 'service-categories':
         return (
           <div className="space-y-6">
@@ -1096,7 +1094,7 @@ const Dashboard = () => {
                   {serviceCategories.length} Categories
                 </Badge>
               </div>
-              
+
               <div className="space-y-4">
                 {serviceCategories
                   .filter(cat => {
@@ -1148,7 +1146,7 @@ const Dashboard = () => {
                         </Button>
                       </div>
                     </div>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                       {category.services.map((service) => (
                         <div key={service.id} className="p-3 bg-black/20 rounded-lg border border-blue-500/10">
@@ -1202,8 +1200,6 @@ const Dashboard = () => {
           </div>
         );
 
-      // Continue with other enhanced sections...
-      case 'blogs':
       case 'all-blogs':
         return (
           <div className="space-y-6">
@@ -1331,7 +1327,6 @@ const Dashboard = () => {
           </div>
         );
 
-      // Keep the rest of the existing cases with minor enhancements...
       default:
         return (
           <div className="text-center py-12">
@@ -1399,7 +1394,7 @@ const Dashboard = () => {
                   </>
                 )}
               </button>
-              
+
               {/* Enhanced Submenu */}
               {sidebarOpen && item.children.length > 0 && expandedCategories[item.id] && (
                 <div className="ml-4 mt-2 space-y-1 sidebar-submenu">
@@ -1441,7 +1436,7 @@ const Dashboard = () => {
       </div>
 
       {/* Enhanced Main Content */}
-      <div className="flex-1 overflow-y-auto admin-content">
+      <div className="flex-1 overflow-y-auto admin-content" style={{ minHeight: '100vh', backgroundColor: '#000510' }}>
         {/* Enhanced Header */}
         <div className="bg-blue-950/30 p-6 border-b border-blue-500/20 sticky top-0 z-10 backdrop-blur-sm">
           <div className="flex items-center justify-between">
