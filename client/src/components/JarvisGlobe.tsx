@@ -154,6 +154,74 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
 
+    // Add data stream lines connecting globe to service icons
+    const connectionLines = [];
+    serviceIcons.forEach((service, index) => {
+      const points = [];
+      const angle = (index / serviceIcons.length) * Math.PI * 2;
+      
+      // Start from globe surface
+      points.push(new THREE.Vector3(
+        Math.cos(angle) * 1.5,
+        Math.sin(angle * 0.5) * 0.3,
+        Math.sin(angle) * 1.5
+      ));
+      
+      // End at service icon position
+      points.push(new THREE.Vector3(
+        Math.cos(angle) * service.distance,
+        Math.sin(angle * 0.5) * 0.5,
+        Math.sin(angle) * service.distance
+      ));
+      
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      const material = new THREE.LineBasicMaterial({
+        color: service.color,
+        transparent: true,
+        opacity: 0.4,
+      });
+      
+      const line = new THREE.Line(geometry, material);
+      line.userData = { originalOpacity: 0.4, serviceIndex: index };
+      scene.add(line);
+      connectionLines.push(line);
+    });
+
+    // Add floating data particles
+    const dataParticles = [];
+    const particleGeometry = new THREE.SphereGeometry(0.02, 8, 8);
+    
+    for (let i = 0; i < 20; i++) {
+      const particleMaterial = new THREE.MeshBasicMaterial({
+        color: 0x00FF00,
+        transparent: true,
+        opacity: 0.8,
+      });
+      
+      const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+      
+      // Random position around globe
+      const angle = Math.random() * Math.PI * 2;
+      const height = (Math.random() - 0.5) * 2;
+      const radius = 2 + Math.random() * 1;
+      
+      particle.position.set(
+        Math.cos(angle) * radius,
+        height,
+        Math.sin(angle) * radius
+      );
+      
+      particle.userData = {
+        speed: 0.01 + Math.random() * 0.02,
+        angle: angle,
+        radius: radius,
+        verticalSpeed: (Math.random() - 0.5) * 0.01
+      };
+      
+      scene.add(particle);
+      dataParticles.push(particle);
+    }
+
     // Simplified service icons for better performance
     const serviceIcons = [
       { name: 'Blockchain', symbol: '₿', color: 0x32FF32, distance: 3 },
@@ -266,6 +334,37 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
         // Make icons face the camera
         element.lookAt(cameraRef.current.position);
       });
+
+      // Animate connection lines
+      connectionLines.forEach((line, index) => {
+        if (frameCount % 3 === 0) {
+          const pulse = Math.sin(elapsedTime * 2 + index * 0.5) * 0.3 + 0.7;
+          line.material.opacity = line.userData.originalOpacity * pulse;
+        }
+      });
+
+      // Animate data particles
+      dataParticles.forEach((particle, index) => {
+        const userData = particle.userData;
+        userData.angle += userData.speed;
+        
+        particle.position.set(
+          Math.cos(userData.angle) * userData.radius,
+          particle.position.y + userData.verticalSpeed,
+          Math.sin(userData.angle) * userData.radius
+        );
+        
+        // Reset particle position if it goes too far
+        if (particle.position.y > 3 || particle.position.y < -3) {
+          particle.position.y = (Math.random() - 0.5) * 2;
+        }
+        
+        // Glowing effect
+        if (frameCount % 5 === 0) {
+          const glow = 0.5 + Math.sin(elapsedTime * 3 + index) * 0.3;
+          particle.material.opacity = glow;
+        }
+      });
       
       // Render
       rendererRef.current.render(sceneRef.current, cameraRef.current);
@@ -330,6 +429,18 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
             }
           }
         });
+      });
+
+      // Clean up connection lines
+      connectionLines.forEach(line => {
+        if (line.geometry) line.geometry.dispose();
+        if (line.material) line.material.dispose();
+      });
+
+      // Clean up data particles
+      dataParticles.forEach(particle => {
+        if (particle.geometry) particle.geometry.dispose();
+        if (particle.material) particle.material.dispose();
       });
       
       if (rendererRef.current) rendererRef.current.dispose();
