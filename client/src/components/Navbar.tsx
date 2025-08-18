@@ -500,7 +500,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileAbout}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-thin tracking-normal uppercase"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-base font-thin tracking-normal uppercase"
                       >
                         <div className="flex items-center gap-3">
                           <Users className="h-5 w-5 text-green-400" />
@@ -555,7 +555,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileServices}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-thin tracking-normal uppercase"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-base font-thin tracking-normal uppercase"
                       >
                         <div className="flex items-center gap-3">
                           <Settings className="h-5 w-5 text-green-400" />
@@ -767,7 +767,7 @@ const Navbar = () => {
                     <button
                       key={index}
                       onClick={() => scrollToSection(link.href)}
-                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-thin tracking-normal uppercase"
+                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-base font-thin tracking-normal uppercase"
                     >
                       <div className="flex items-center gap-3">
                         {getIcon(link.name)}
