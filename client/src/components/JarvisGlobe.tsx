@@ -117,10 +117,10 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
           vec3 baseColor = mix(color1, color2, rim + continentPattern * 0.3);
           vec3 finalColor = mix(baseColor * 0.4, baseColor, lines + continentPattern * 0.6);
           
-          // Enhanced alpha for better visibility
-          float alpha = 0.6 + rim * 0.4 + continentPattern * 0.2;
+          // Reduced alpha for darker appearance
+          float alpha = 0.3 + rim * 0.2 + continentPattern * 0.15;
           
-          gl_FragColor = vec4(finalColor, alpha * (0.5 + lines * 0.5) * pulse);
+          gl_FragColor = vec4(finalColor * 0.7, alpha * (0.3 + lines * 0.4) * pulse);
         }
       `,
       transparent: true,
@@ -136,7 +136,7 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       color: 0x00FF88,
       size: 0.03,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.3,
       sizeAttenuation: true,
     });
 
@@ -162,7 +162,7 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       color: 0x32FF32,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0.2,
     });
     const rings = new THREE.Mesh(ringsGeometry, ringsMaterial);
     rings.rotation.x = Math.PI / 2;
@@ -173,7 +173,7 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       color: 0x00FF00,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.15,
     });
     const rings2 = new THREE.Mesh(rings2Geometry, rings2Material);
     rings2.rotation.x = Math.PI / 2.2;
@@ -186,18 +186,18 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       color: 0x66FF66,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.1,
     });
     const rings3 = new THREE.Mesh(rings3Geometry, rings3Material);
     rings3.rotation.x = Math.PI / 1.8;
     rings3.rotation.y = Math.PI / 6;
     scene.add(rings3);
 
-    // Enhanced lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+    // Enhanced lighting with darker ambient
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.15);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0x00FF00, 0.5);
+    const directionalLight = new THREE.DirectionalLight(0x00FF00, 0.3);
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
 
