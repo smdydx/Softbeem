@@ -56,7 +56,8 @@ import {
   Zap,
   Target,
   UserPlus,
-  MessageCircle
+  MessageCircle,
+  Archive
 } from "lucide-react";
 
 const Dashboard = () => {
