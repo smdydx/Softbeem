@@ -524,7 +524,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileAbout}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-sm font-thin tracking-normal uppercase"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xs font-thin tracking-normal uppercase"
                       >
                         <div className="flex items-center gap-3">
                           <Users className="h-5 w-5 text-green-400" />
@@ -584,7 +584,7 @@ const Navbar = () => {
                                     setIsMobileMenuOpen(false);
                                     setMobileAboutOpen(false);
                                   }}
-                                  className="flex items-center gap-3 px-8 py-3 text-white/80 hover:text-white hover:bg-green-500/10 transition-all duration-200 text-sm border-b border-green-500/5 last:border-b-0"
+                                  className="flex items-center gap-3 px-8 py-3 text-white/80 hover:text-white hover:bg-green-500/10 transition-all duration-200 text-xs border-b border-green-500/5 last:border-b-0"
                                 >
                                   {getAboutIcon(subItem.name)}
                                   <span>{subItem.name}</span>
@@ -603,7 +603,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileServices}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-sm font-thin tracking-normal uppercase"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xs font-thin tracking-normal uppercase"
                       >
                         <div className="flex items-center gap-3">
                           <Settings className="h-5 w-5 text-green-400" />
@@ -636,7 +636,7 @@ const Navbar = () => {
                                   onClick={() => toggleMobileCategory(category)}
                                   className="w-full flex items-center justify-between px-8 py-3 text-left hover:bg-green-500/10 transition-all duration-200"
                                 >
-                                  <span className="text-green-400 font-medium text-sm capitalize">
+                                  <span className="text-green-400 font-medium text-xs capitalize">
                                     {category === "tech"
                                       ? "Technology Services"
                                       : "Legal & Compliance Services"}
@@ -683,7 +683,7 @@ const Navbar = () => {
                                                   )}
                                                 </div>
                                               </div>
-                                              <span className="text-white/80 group-hover:text-white text-sm font-medium">
+                                              <span className="text-white/80 group-hover:text-white text-xs font-medium">
                                                 {service.title}
                                               </span>
                                             </div>
@@ -773,7 +773,7 @@ const Navbar = () => {
                                                             )}
                                                           </div>
                                                         </div>
-                                                        <span className="text-white/60 group-hover:text-white text-xs font-medium">
+                                                        <span className="text-white/60 group-hover:text-white text-[10px] font-medium">
                                                           {subItem.title}
                                                         </span>
                                                       </motion.button>
@@ -815,7 +815,7 @@ const Navbar = () => {
                     <button
                       key={index}
                       onClick={() => scrollToSection(link.href)}
-                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-sm font-thin tracking-normal uppercase"
+                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xs font-thin tracking-normal uppercase"
                     >
                       <div className="flex items-center gap-3">
                         {getIcon(link.name)}
