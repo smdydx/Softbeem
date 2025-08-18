@@ -435,12 +435,12 @@ const Navbar = () => {
               variant="ghost"
               onClick={toggleMobileMenu}
               aria-label="Toggle Menu"
-              className="p-2 sm:p-3 hover:bg-green-500/10 rounded-lg border border-green-500/30 min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="p-3 hover:bg-green-500/10 rounded-lg border border-green-500/30 min-w-[48px] min-h-[48px] flex items-center justify-center touch-manipulation"
             >
               {isMobileMenuOpen ? (
-                <X className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+                <X className="h-7 w-7 text-white" />
               ) : (
-                <Menu className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+                <Menu className="h-7 w-7 text-white" />
               )}
             </Button>
           </div>
@@ -458,21 +458,21 @@ const Navbar = () => {
             className="fixed top-14 sm:top-16 lg:top-20 left-0 right-0 bg-black/95 backdrop-blur-xl border-t border-green-500/20 overflow-y-auto max-h-[calc(100vh-4rem)] z-50 shadow-2xl"
           >
             {/* Mobile Contact Options */}
-            <div className="flex items-center justify-center gap-4 p-4 border-b border-green-500/10 bg-zinc-900/50">
+            <div className="flex items-center justify-center gap-6 p-6 border-b border-green-500/10 bg-zinc-900/50">
               <a
                 href="tel:+911169310715"
-                className="flex items-center justify-center w-14 h-14 text-green-400 transition-all hover:scale-110"
+                className="flex items-center justify-center w-16 h-16 rounded-xl bg-green-500/10 text-green-400 transition-all hover:scale-105 border border-green-500/20 touch-manipulation"
               >
-                <PhoneCall className="w-6 h-6" />
+                <PhoneCall className="w-7 h-7" />
               </a>
               <a
                 href="https://wa.me/911169310715"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-14 h-14 text-green-400 transition-all hover:scale-110"
+                className="flex items-center justify-center w-16 h-16 rounded-xl bg-green-500/10 text-green-400 transition-all hover:scale-105 border border-green-500/20 touch-manipulation"
               >
                 <svg
-                  className="w-6 h-6"
+                  className="w-7 h-7"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -481,9 +481,9 @@ const Navbar = () => {
               </a>
               <button
                 onClick={() => (window.location.href = "/schedule")}
-                className="flex items-center justify-center w-14 h-14 text-green-400 transition-all hover:scale-110"
+                className="flex items-center justify-center w-16 h-16 rounded-xl bg-green-500/10 text-green-400 transition-all hover:scale-105 border border-green-500/20 touch-manipulation"
               >
-                <Calendar className="w-6 h-6" />
+                <Calendar className="w-7 h-7" />
               </button>
             </div>
 
@@ -495,11 +495,11 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileAbout}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase"
+                        className="w-full flex items-center justify-between px-6 py-5 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase min-h-[60px] touch-manipulation"
                       >
                         <span>{link.name}</span>
                         <ChevronDown
-                          className={`h-5 w-5 transition-transform duration-300 ${
+                          className={`h-6 w-6 transition-transform duration-300 ${
                             mobileAboutOpen
                               ? "rotate-180 text-green-400"
                               : "text-gray-400"
@@ -547,11 +547,11 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileServices}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase"
+                        className="w-full flex items-center justify-between px-6 py-5 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase min-h-[60px] touch-manipulation"
                       >
                         <span>{link.name}</span>
                         <ChevronDown
-                          className={`h-5 w-5 transition-transform duration-300 ${
+                          className={`h-6 w-6 transition-transform duration-300 ${
                             mobileServicesOpen
                               ? "rotate-180 text-green-400"
                               : "text-gray-400"
@@ -743,7 +743,7 @@ const Navbar = () => {
                     <button
                       key={index}
                       onClick={() => scrollToSection(link.href)}
-                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase"
+                      className="w-full flex items-center justify-between px-6 py-5 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-light tracking-normal uppercase min-h-[60px] touch-manipulation"
                     >
                       {link.name}
                     </button>
