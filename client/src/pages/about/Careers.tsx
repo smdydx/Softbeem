@@ -1,423 +1,397 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Upload, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "@/lib/animations";
 
-// Company Overview Page
-function CompanyOverview() {
-  const [companyName, setCompanyName] = useState("");
-  const [introduction, setIntroduction] = useState("");
-  const [vision, setVision] = useState("");
-  const [mission, setMission] = useState("");
-  const [history, setHistory] = useState("");
+const Careers = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openPositions, setOpenPositions] = useState([]);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    address: "",
+    position: "",
+    experience: "",
+    currentSalary: "",
+    expectedSalary: "",
+    comments: "",
+    resume: null as File | null,
+    photo: null as File | null,
+    isRobot: false
+  });
 
-  const handleSubmit = () => {
-    // Handle submission logic here
-    toast({
-      title: "Company Overview Saved",
-      description: "Your company details have been successfully updated.",
-      action: <CheckCircle2 className="h-4 w-4 text-green-500" />,
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await fetch('/api/careers/jobs');
+        if (response.ok) {
+          const jobs = await response.json();
+          setOpenPositions(jobs);
+        }
+      } catch (error) {
+        console.error('Failed to fetch jobs:', error);
+      }
+    };
+    fetchJobs();
+  }, []);
+
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      if (file.type.startsWith('image/')) {
+        setFormData({ ...formData, photo: file });
+      } else {
+        toast({
+          title: "Invalid file type",
+          description: "Please upload an image file",
+          variant: "destructive"
+        });
+      }
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      if (file.type === "application/pdf" || file.type === "application/msword" || 
+          file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+        setFormData({ ...formData, resume: file });
+      } else {
+        toast({
+          title: "Invalid file type",
+          description: "Please upload PDF or DOC/DOCX files only",
+          variant: "destructive"
+        });
+      }
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.isRobot) {
+      toast({
+        title: "Verification required",
+        description: "Please verify that you're not a robot",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    const formDataToSend = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value !== null && key !== 'isRobot') {
+        formDataToSend.append(key, value);
+      }
     });
+
+    try {
+      const response = await fetch('/api/careers/apply', {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Application Submitted",
+          description: "Thank you for applying! We'll get back to you soon.",
+        });
+        setFormData({
+          fullName: "", email: "", phone: "", address: "", position: "",
+          experience: "", currentSalary: "", expectedSalary: "", comments: "",
+          resume: null, photo: null, isRobot: false
+        });
+      } else {
+        throw new Error('Failed to submit');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to submit application. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Company Overview</h1>
-      <Input
-        placeholder="Company Name"
-        value={companyName}
-        onChange={(e) => setCompanyName(e.target.value)}
-      />
-      <Textarea
-        placeholder="Company Introduction"
-        value={introduction}
-        onChange={(e) => setIntroduction(e.target.value)}
-        className="min-h-[100px]"
-      />
-      <Textarea
-        placeholder="Vision"
-        value={vision}
-        onChange={(e) => setVision(e.target.value)}
-        className="min-h-[100px]"
-      />
-      <Textarea
-        placeholder="Mission"
-        value={mission}
-        onChange={(e) => setMission(e.target.value)}
-        className="min-h-[100px]"
-      />
-      <Textarea
-        placeholder="Short History"
-        value={history}
-        onChange={(e) => setHistory(e.target.value)}
-        className="min-h-[150px]"
-      />
-      <Button onClick={handleSubmit}>Save Overview</Button>
-    </div>
-  );
-}
+    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-black/95">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center space-y-6"
+        >
+          <motion.h1
+            variants={fadeIn("up", "tween", 0.2, 1)}
+            className="text-4xl md:text-5xl font-bold text-white"
+          >
+            Join Our Team
+          </motion.h1>
+          <motion.p
+            variants={fadeIn("up", "tween", 0.3, 1)}
+            className="text-xl text-gray-400 max-w-3xl mx-auto"
+          >
+            We're always looking for talented individuals who share our passion for innovation and excellence. 
+            Explore our open positions and become part of our growing team.
+          </motion.p>
+        </motion.div>
 
-// Our Story / Journey Page
-function OurStory() {
-  const [story, setStory] = useState("");
-  const { toast } = useToast();
+        {/* Company Culture Section */}
+        <motion.section
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
+          <motion.div
+            variants={fadeIn("up", "tween", 0.2, 1)}
+            className="bg-zinc-900/30 rounded-xl p-8 border border-primary/10 text-center"
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">Innovation First</h3>
+            <p className="text-gray-400">
+              We foster a culture of creativity and innovation, encouraging our team members 
+              to think outside the box and push boundaries.
+            </p>
+          </motion.div>
+          
+          <motion.div
+            variants={fadeIn("up", "tween", 0.3, 1)}
+            className="bg-zinc-900/30 rounded-xl p-8 border border-primary/10 text-center"
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">Growth Opportunities</h3>
+            <p className="text-gray-400">
+              We invest in our people with continuous learning opportunities, 
+              mentorship programs, and clear career advancement paths.
+            </p>
+          </motion.div>
+          
+          <motion.div
+            variants={fadeIn("up", "tween", 0.4, 1)}
+            className="bg-zinc-900/30 rounded-xl p-8 border border-primary/10 text-center"
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">Work-Life Balance</h3>
+            <p className="text-gray-400">
+              We believe in maintaining a healthy work-life balance with flexible 
+              working arrangements and comprehensive benefits.
+            </p>
+          </motion.div>
+        </motion.section>
 
-  const handleSubmit = () => {
-    toast({
-      title: "Our Story Saved",
-      description: "Your company's journey has been updated.",
-      action: <CheckCircle2 className="h-4 w-4 text-green-500" />,
-    });
-  };
-
-  return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Our Story / Journey</h1>
-      <Textarea
-        placeholder="Tell us your company's story, milestones, and growth."
-        value={story}
-        onChange={(e) => setStory(e.target.value)}
-        className="min-h-[200px]"
-      />
-      <Button onClick={handleSubmit}>Save Story</Button>
-    </div>
-  );
-}
-
-// Leadership / Team Page
-function LeadershipTeam() {
-  const [teamMembers, setTeamMembers] = useState([
-    { name: "", role: "", profile: "" },
-  ]);
-  const { toast } = useToast();
-
-  const addTeamMember = () => {
-    setTeamMembers([...teamMembers, { name: "", role: "", profile: "" }]);
-  };
-
-  const handleMemberChange = (index, field, value) => {
-    const newMembers = [...teamMembers];
-    newMembers[index][field] = value;
-    setTeamMembers(newMembers);
-  };
-
-  const handleSubmit = () => {
-    toast({
-      title: "Team Updated",
-      description: "Your leadership and team information has been updated.",
-      action: <CheckCircle2 className="h-4 w-4 text-green-500" />,
-    });
-  };
-
-  return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Leadership / Team</h1>
-      {teamMembers.map((member, index) => (
-        <div key={index} className="border p-4 rounded-md space-y-4">
-          <Input
-            placeholder="Member Name"
-            value={member.name}
-            onChange={(e) => handleMemberChange(index, "name", e.target.value)}
-          />
-          <Input
-            placeholder="Role (e.g., Founder, Director)"
-            value={member.role}
-            onChange={(e) => handleMemberChange(index, "role", e.target.value)}
-          />
-          <Textarea
-            placeholder="Profile Summary / Bio"
-            value={member.profile}
-            onChange={(e) => handleMemberChange(index, "profile", e.target.value)}
-            className="min-h-[100px]"
-          />
-          {/* You could add an upload button for photos here */}
-        </div>
-      ))}
-      <Button onClick={addTeamMember}>Add Team Member</Button>
-      <Button onClick={handleSubmit} className="ml-2">Save Team</Button>
-    </div>
-  );
-}
-
-// Vision & Mission Page
-function VisionMissionDetailed() {
-  const [detailedVision, setDetailedVision] = useState("");
-  const [detailedMission, setDetailedMission] = useState("");
-  const [values, setValues] = useState("");
-  const { toast } = useToast();
-
-  const handleSubmit = () => {
-    toast({
-      title: "Vision & Mission Updated",
-      description: "Your detailed vision, mission, and values have been updated.",
-      action: <CheckCircle2 className="h-4 w-4 text-green-500" />,
-    });
-  };
-
-  return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Vision & Mission</h1>
-      <Textarea
-        placeholder="Detailed Vision"
-        value={detailedVision}
-        onChange={(e) => setDetailedVision(e.target.value)}
-        className="min-h-[150px]"
-      />
-      <Textarea
-        placeholder="Detailed Mission"
-        value={detailedMission}
-        onChange={(e) => setDetailedMission(e.target.value)}
-        className="min-h-[150px]"
-      />
-      <Textarea
-        placeholder="Core Values (e.g., Integrity, Innovation, Excellence)"
-        value={values}
-        onChange={(e) => setValues(e.target.value)}
-        className="min-h-[150px]"
-      />
-      <Button onClick={handleSubmit}>Save Vision & Mission</Button>
-    </div>
-  );
-}
-
-// Core Values / Culture Page
-function CoreValuesCulture() {
-  const [valuesDescription, setValuesDescription] = useState("");
-  const { toast } = useToast();
-
-  const handleSubmit = () => {
-    toast({
-      title: "Culture Values Saved",
-      description: "Your company's core values and culture have been updated.",
-      action: <CheckCircle2 className="h-4 w-4 text-green-500" />,
-    });
-  };
-
-  return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Core Values / Culture</h1>
-      <Textarea
-        placeholder="Detail your core values like Integrity, Innovation, Excellence."
-        value={valuesDescription}
-        onChange={(e) => setValuesDescription(e.target.value)}
-        className="min-h-[200px]"
-      />
-      <Button onClick={handleSubmit}>Save Values</Button>
-    </div>
-  );
-}
-
-// Careers / Work With Us Page
-function Careers() {
-  const [jobOpenings, setJobOpenings] = useState([
-    { title: "", description: "", requirements: "" },
-  ]);
-  const [hiringProcess, setHiringProcess] = useState("");
-  const [internships, setInternships] = useState("");
-  const { toast } = useToast();
-
-  const addJobOpening = () => {
-    setJobOpenings([...jobOpenings, { title: "", description: "", requirements: "" }]);
-  };
-
-  const handleJobChange = (index, field, value) => {
-    const newJobs = [...jobOpenings];
-    newJobs[index][field] = value;
-    setJobOpenings(newJobs);
-  };
-
-  const handleSubmit = () => {
-    toast({
-      title: "Careers Info Updated",
-      description: "Your job openings and hiring process have been updated.",
-      action: <CheckCircle2 className="h-4 w-4 text-green-500" />,
-    });
-  };
-
-  return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Careers / Work With Us</h1>
-      <h2 className="text-xl font-semibold">Job Openings</h2>
-      {jobOpenings.map((job, index) => (
-        <div key={index} className="border p-4 rounded-md space-y-4">
-          <Input
-            placeholder="Job Title"
-            value={job.title}
-            onChange={(e) => handleJobChange(index, "title", e.target.value)}
-          />
-          <Textarea
-            placeholder="Job Description"
-            value={job.description}
-            onChange={(e) => handleJobChange(index, "description", e.target.value)}
-            className="min-h-[100px]"
-          />
-          <Textarea
-            placeholder="Requirements"
-            value={job.requirements}
-            onChange={(e) => handleJobChange(index, "requirements", e.target.value)}
-            className="min-h-[100px]"
-          />
-        </div>
-      ))}
-      <Button onClick={addJobOpening}>Add Job Opening</Button>
-
-      <h2 className="text-xl font-semibold pt-6">Hiring Process</h2>
-      <Textarea
-        placeholder="Describe your hiring process."
-        value={hiringProcess}
-        onChange={(e) => setHiringProcess(e.target.value)}
-        className="min-h-[150px]"
-      />
-
-      <h2 className="text-xl font-semibold pt-6">Internships</h2>
-      <Textarea
-        placeholder="Information about internships."
-        value={internships}
-        onChange={(e) => setInternships(e.target.value)}
-        className="min-h-[150px]"
-      />
-
-      <Button onClick={handleSubmit}>Save Careers Info</Button>
-    </div>
-  );
-}
-
-// Achievements / Milestones Page
-function AchievementsMilestones() {
-  const [achievements, setAchievements] = useState([
-    { year: "", description: "" },
-  ]);
-  const { toast } = useToast();
-
-  const addAchievement = () => {
-    setAchievements([...achievements, { year: "", description: "" }]);
-  };
-
-  const handleAchievementChange = (index, field, value) => {
-    const newAchievements = [...achievements];
-    newAchievements[index][field] = value;
-    setAchievements(newAchievements);
-  };
-
-  const handleSubmit = () => {
-    toast({
-      title: "Achievements Saved",
-      description: "Your company's achievements and milestones have been updated.",
-      action: <CheckCircle2 className="h-4 w-4 text-green-500" />,
-    });
-  };
-
-  return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Achievements / Milestones</h1>
-      {achievements.map((achievement, index) => (
-        <div key={index} className="border p-4 rounded-md space-y-4">
-          <Input
-            placeholder="Year"
-            value={achievement.year}
-            onChange={(e) => handleAchievementChange(index, "year", e.target.value)}
-          />
-          <Textarea
-            placeholder="Description (e.g., Awards, Recognitions, Partnerships, Key Clients)"
-            value={achievement.description}
-            onChange={(e) => handleAchievementChange(index, "description", e.target.value)}
-            className="min-h-[100px]"
-          />
-        </div>
-      ))}
-      <Button onClick={addAchievement}>Add Achievement</Button>
-      <Button onClick={handleSubmit} className="ml-2">Save Achievements</Button>
-    </div>
-  );
-}
-
-// Navbar Component (example of how you might structure navigation)
-function Navbar() {
-  const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
-
-  return (
-    <nav className="bg-gray-800 p-4 text-white">
-      <div className="container mx-auto flex justify-between items-center">
-        <a href="/" className="text-xl font-bold">Your Logo</a>
-        <div className="space-x-4">
-          <a href="/" className="hover:text-gray-300">Home</a>
-          <div className="relative inline-block text-left">
-            <button
-              onClick={() => setIsAboutDropdownOpen(!isAboutDropdownOpen)}
-              className="hover:text-gray-300 focus:outline-none"
-            >
-              About Us
-            </button>
-            {isAboutDropdownOpen && (
-              <div className="absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                  <a href="/about-us/company-overview" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Company Overview</a>
-                  <a href="/about-us/our-story" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Our Story / Journey</a>
-                  <a href="/about-us/leadership-team" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Leadership / Team</a>
-                  <a href="/about-us/vision-mission" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Vision & Mission</a>
-                  <a href="/about-us/core-values-culture" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Core Values / Culture</a>
-                  <a href="/about-us/achievements-milestones" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Achievements / Milestones</a>
-                  <a href="/about-us/careers" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Careers / Work With Us</a>
+        {/* Open Positions */}
+        <motion.section
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-16"
+        >
+          <motion.h2
+            variants={fadeIn("up", "tween", 0.2, 1)}
+            className="text-3xl font-bold text-white mb-8 text-center"
+          >
+            Open Positions
+          </motion.h2>
+          
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {openPositions.map((position: any, index: number) => (
+              <motion.div
+                key={index}
+                variants={fadeIn("up", "tween", index * 0.1, 1)}
+                className="bg-zinc-900/50 border border-green-500/20 rounded-lg p-6 hover:border-green-500/40 transition-all"
+              >
+                <h3 className="text-xl font-semibold text-white mb-2">{position.title}</h3>
+                <div className="space-y-2 text-gray-400">
+                  <p><span className="text-primary">Department:</span> {position.department}</p>
+                  <p><span className="text-primary">Location:</span> {position.location}</p>
+                  <p><span className="text-primary">Type:</span> {position.type}</p>
+                  {position.description && (
+                    <p className="text-sm mt-3">{position.description}</p>
+                  )}
                 </div>
-              </div>
-            )}
+              </motion.div>
+            ))}
           </div>
-          <a href="/contact" className="hover:text-gray-300">Contact</a>
-        </div>
+          
+          {openPositions.length === 0 && (
+            <motion.div
+              variants={fadeIn("up", "tween", 0.3, 1)}
+              className="text-center py-12"
+            >
+              <p className="text-gray-400 text-lg">
+                No open positions at the moment. Please check back later or submit your resume for future opportunities.
+              </p>
+            </motion.div>
+          )}
+        </motion.section>
+
+        {/* Application Form */}
+        <motion.section
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-16"
+        >
+          <motion.h2
+            variants={fadeIn("up", "tween", 0.2, 1)}
+            className="text-3xl font-bold text-white mb-8 text-center"
+          >
+            Apply Now
+          </motion.h2>
+          
+          <motion.form
+            variants={fadeIn("up", "tween", 0.3, 1)}
+            onSubmit={handleSubmit}
+            className="max-w-2xl mx-auto space-y-6"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Input
+                placeholder="Full Name"
+                value={formData.fullName}
+                onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                required
+                className="bg-zinc-800/50 border-gray-600"
+              />
+              <Input
+                type="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                required
+                className="bg-zinc-800/50 border-gray-600"
+              />
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Input
+                type="tel"
+                placeholder="Phone"
+                value={formData.phone}
+                onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                required
+                className="bg-zinc-800/50 border-gray-600"
+              />
+              <Input
+                placeholder="Address"
+                value={formData.address}
+                onChange={(e) => setFormData({...formData, address: e.target.value})}
+                required
+                className="bg-zinc-800/50 border-gray-600"
+              />
+            </div>
+
+            <Input
+              placeholder="Apply for Position"
+              value={formData.position}
+              onChange={(e) => setFormData({...formData, position: e.target.value})}
+              required
+              className="bg-zinc-800/50 border-gray-600"
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Input
+                placeholder="Experience Level (e.g., 3 years)"
+                value={formData.experience}
+                onChange={(e) => setFormData({...formData, experience: e.target.value})}
+                required
+                className="bg-zinc-800/50 border-gray-600"
+              />
+              <Input
+                placeholder="Current Salary"
+                value={formData.currentSalary}
+                onChange={(e) => setFormData({...formData, currentSalary: e.target.value})}
+                required
+                className="bg-zinc-800/50 border-gray-600"
+              />
+            </div>
+
+            <Input
+              placeholder="Expected Salary"
+              value={formData.expectedSalary}
+              onChange={(e) => setFormData({...formData, expectedSalary: e.target.value})}
+              required
+              className="bg-zinc-800/50 border-gray-600"
+            />
+
+            <Textarea
+              placeholder="Additional Comments / Cover Letter"
+              value={formData.comments}
+              onChange={(e) => setFormData({...formData, comments: e.target.value})}
+              className="bg-zinc-800/50 border-gray-600 h-32"
+            />
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                    Upload Photo *
+                  </label>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handlePhotoChange}
+                    required
+                    className="bg-zinc-800/50 border-gray-600"
+                  />
+                </div>
+                {formData.photo && (
+                  <CheckCircle2 className="w-6 h-6 text-green-500 flex-shrink-0 mt-6" />
+                )}
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                    Upload Resume (PDF/DOC/DOCX) *
+                  </label>
+                  <Input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    required
+                    className="bg-zinc-800/50 border-gray-600"
+                  />
+                </div>
+                {formData.resume && (
+                  <CheckCircle2 className="w-6 h-6 text-green-500 flex-shrink-0 mt-6" />
+                )}
+              </div>
+
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={formData.isRobot}
+                  onChange={(e) => setFormData({...formData, isRobot: e.target.checked})}
+                  className="w-4 h-4 rounded border-gray-600"
+                />
+                <span className="text-gray-400">I'm not a robot</span>
+              </div>
+
+              <Button
+                type="submit"
+                disabled={isSubmitting || !formData.isRobot}
+                className="w-full bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/30 disabled:opacity-50"
+              >
+                {isSubmitting ? "Submitting..." : "Submit Application"}
+              </Button>
+            </div>
+          </form>
+        </motion.section>
       </div>
-    </nav>
-  );
-}
-
-// Example App component to demonstrate usage
-function App() {
-  return (
-    <div>
-      <Navbar />
-      <main className="container mx-auto p-4">
-        {/* In a real app, you would use a router here to display the correct page */}
-        {/* Example: */}
-        {/* <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about-us/company-overview" element={<CompanyOverview />} />
-          <Route path="/about-us/our-story" element={<OurStory />} />
-          <Route path="/about-us/leadership-team" element={<LeadershipTeam />} />
-          <Route path="/about-us/vision-mission" element={<VisionMissionDetailed />} />
-          <Route path="/about-us/core-values-culture" element={<CoreValuesCulture />} />
-          <Route path="/about-us/careers" element={<Careers />} />
-          <Route path="/about-us/achievements-milestones" element={<AchievementsMilestones />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes> */}
-
-        {/* For demonstration purposes, let's render one of the pages */}
-        <CompanyOverview />
-      </main>
     </div>
   );
-}
+};
 
-// Placeholder for Contact Page and HomePage
-function ContactPage() {
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">Contact Us</h1>
-      <p>Contact details and form will go here.</p>
-      <Mail className="h-12 w-12 mt-4 text-blue-500" />
-    </div>
-  );
-}
-
-function HomePage() {
-  return (
-    <div className="p-6 text-center">
-      <h1 className="text-4xl font-bold mb-4">Welcome to Our Company</h1>
-      <p className="text-lg text-gray-600">Explore our services and learn more about us.</p>
-    </div>
-  );
-}
-
-
-export default App;
+export default Careers;
