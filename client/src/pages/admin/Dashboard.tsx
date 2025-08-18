@@ -323,15 +323,16 @@ const Dashboard = () => {
     const checkAuth = async () => {
       try {
         const token = localStorage.getItem('adminAuth');
-        if (!token) {
-          navigate('/admin/login');
+        if (!token || token !== 'authenticated') {
+          navigate('/admin/login', { replace: true });
           return;
         }
         await Promise.all([fetchData(), fetchJobs(), fetchAnalytics()]);
         setLoading(false);
       } catch (error) {
         console.error('Auth error:', error);
-        navigate('/admin/login');
+        localStorage.removeItem('adminAuth');
+        navigate('/admin/login', { replace: true });
       }
     };
 
@@ -726,6 +727,13 @@ const Dashboard = () => {
       });
     }
   };
+
+  // Check authentication before rendering anything
+  const token = localStorage.getItem('adminAuth');
+  if (!token || token !== 'authenticated') {
+    navigate('/admin/login', { replace: true });
+    return null;
+  }
 
   if (loading) {
     return (
@@ -1487,7 +1495,7 @@ const Dashboard = () => {
             size={isMobile ? "sm" : "default"}
             onClick={() => {
               localStorage.removeItem('adminAuth');
-              navigate('/admin/login');
+              navigate('/admin/login', { replace: true });
             }}
           >
             {(sidebarOpen || mobileMenuOpen) ? (

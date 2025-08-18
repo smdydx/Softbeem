@@ -13,8 +13,8 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (username === 'smdydx' && password === 'Rama@2025') {
-      localStorage.setItem('adminAuth', 'true');
-      navigate('/admin/dashboard');
+      localStorage.setItem('adminAuth', 'authenticated');
+      navigate('/admin/dashboard', { replace: true });
     } else {
       alert('Invalid credentials');
     }
