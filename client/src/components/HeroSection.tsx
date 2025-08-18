@@ -267,13 +267,13 @@ const HeroSection = () => {
           >
             <div className="mt-8 sm:mt-16 lg:mt-40">
               {globeLoaded ? (
-                <JarvisGlobe size={isMobile ? 240 : 400} />
+                <JarvisGlobe size={isMobile ? 300 : 400} />
               ) : (
                 <div 
                   className="flex items-center justify-center bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full border border-green-500/30"
                   style={{ 
-                    width: isMobile ? 240 : 400, 
-                    height: isMobile ? 240 : 400 
+                    width: isMobile ? 300 : 400, 
+                    height: isMobile ? 300 : 400 
                   }}
                 >
                   <div className="w-8 h-8 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>

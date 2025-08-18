@@ -47,7 +47,7 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       uniforms: {
         time: { value: 0 },
         color1: { value: new THREE.Color(0x00FF00) },
-        color2: { value: new THREE.Color(0x00AA00) },
+        color2: { value: new THREE.Color(0x32FF32) },
       },
       vertexShader: `
         varying vec3 vNormal;
@@ -130,10 +130,10 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     // Simplified rings with lower geometry
     const ringsGeometry = new THREE.RingGeometry(2.2, 2.3, 32);
     const ringsMaterial = new THREE.MeshBasicMaterial({
-      color: 0x00FF00,
+      color: 0x32FF32,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.3,
     });
     const rings = new THREE.Mesh(ringsGeometry, ringsMaterial);
     rings.rotation.x = Math.PI / 2;
@@ -141,10 +141,10 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
 
     const rings2Geometry = new THREE.RingGeometry(2.5, 2.55, 32);
     const rings2Material = new THREE.MeshBasicMaterial({
-      color: 0x00AA00,
+      color: 0x00FF00,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.2,
     });
     const rings2 = new THREE.Mesh(rings2Geometry, rings2Material);
     rings2.rotation.x = Math.PI / 2;
@@ -156,10 +156,10 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
 
     // Simplified service icons for better performance
     const serviceIcons = [
-      { name: 'Blockchain', symbol: '₿', color: 0x00FF00, distance: 3 },
-      { name: 'Mobile App', symbol: '📱', color: 0x00CC00, distance: 3.4 },
-      { name: 'Web Dev', symbol: '🌐', color: 0x00AA00, distance: 3.8 },
-      { name: 'Legal', symbol: '⚖️', color: 0x008800, distance: 4.2 }
+      { name: 'Blockchain', symbol: '₿', color: 0x32FF32, distance: 3 },
+      { name: 'Mobile App', symbol: '📱', color: 0x00FF00, distance: 3.4 },
+      { name: 'Web Dev', symbol: '🌐', color: 0x66FF66, distance: 3.8 },
+      { name: 'Legal', symbol: '⚖️', color: 0x00CC00, distance: 4.2 }
     ];
 
     const orbitingElements = [];
