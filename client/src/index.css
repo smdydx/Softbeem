@@ -151,7 +151,6 @@
   }
 }
 
-/* Custom fonts and animations */
 .ramaera-logo {
 
 /* Responsive navigation styles */
@@ -220,7 +219,7 @@
   font-family: 'Orbitron', sans-serif;
 }
 
-/* Modern Navbar Typography */
+/* ModernNavbar Typography */
 .nav-modern {
   font-family: 'Exo 2', 'Orbitron', 'Rajdhani', sans-serif;
   font-weight: 300;
@@ -1681,29 +1680,29 @@ button, .button {
   .legal-container {
     padding: 0.75rem !important;
   }
-  
+
   /* Fix footer spacing on mobile */
   main {
     padding-bottom: 0 !important;
   }
-  
+
   footer {
     margin-top: 2rem;
   }
-  
+
   /* Footer mobile optimizations */
   footer .container {
     padding: 0 1rem;
   }
-  
+
   footer h3 {
     font-size: 1.125rem !important;
   }
-  
+
   footer p, footer a {
     font-size: 0.875rem !important;
   }
-  
+
   footer input, footer button {
     font-size: 0.875rem !important;
   }
