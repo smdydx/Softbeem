@@ -1426,9 +1426,9 @@ const Dashboard = () => {
               variant="ghost"
               size="icon"
               onClick={handleMobileMenuToggle}
-              className="text-blue-400 hover:bg-blue-500/10"
+              className="text-blue-400 hover:bg-blue-500/10 p-3"
             >
-              {(sidebarOpen || mobileMenuOpen) ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {(sidebarOpen || mobileMenuOpen) ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
             </Button>
           </div>
         </div>
@@ -1518,9 +1518,9 @@ const Dashboard = () => {
                 variant="ghost"
                 size="sm"
                 onClick={handleMobileMenuToggle}
-                className="text-blue-400 hover:bg-blue-500/10"
+                className="text-blue-400 hover:bg-blue-500/10 p-3"
               >
-                <Menu className="h-5 w-5 mr-2" />
+                <Menu className="h-6 w-6 mr-2" />
                 <span className="text-sm">Menu</span>
               </Button>
             </div>
