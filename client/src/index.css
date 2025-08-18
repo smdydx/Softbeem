@@ -228,33 +228,6 @@
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  font-family: 'Montserrat', sans-serif;
-}
-
-/* Enhanced navigation typography */
-.nav-text {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Desktop navigation improvements */
-@media (min-width: 768px) {
-  .nav-text {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-}
-
-/* Mobile navigation improvements */
-@media (max-width: 767px) {
-  .nav-text {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
 }
 
 @media (max-width: 640px) {
