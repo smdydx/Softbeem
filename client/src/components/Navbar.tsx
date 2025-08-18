@@ -13,6 +13,7 @@ import {
   Settings,
   FileText,
   MessageCircle,
+  Award,
 } from "lucide-react";
 import { servicesData } from "@/data/services";
 
@@ -374,19 +375,19 @@ const Navbar = () => {
                           const getAboutIcon = (name: string) => {
                             switch (name) {
                               case "Company Overview":
-                                return <Users className="h-3 w-3 text-green-400" />;
+                                return <Home className="h-3 w-3 text-green-400" />;
                               case "Our Story":
                                 return <FileText className="h-3 w-3 text-green-400" />;
                               case "Leadership":
                                 return <Users className="h-3 w-3 text-green-400" />;
                               case "Vision & Mission":
-                                return <Settings className="h-3 w-3 text-green-400" />;
+                                return <ChevronRight className="h-3 w-3 text-green-400" />;
                               case "Core Values":
                                 return <Settings className="h-3 w-3 text-green-400" />;
                               case "Careers":
-                                return <Users className="h-3 w-3 text-green-400" />;
+                                return <Calendar className="h-3 w-3 text-green-400" />;
                               case "Achievements":
-                                return <Settings className="h-3 w-3 text-green-400" />;
+                                return <Award className="h-3 w-3 text-green-400" />;
                               default:
                                 return <Settings className="h-3 w-3 text-green-400" />;
                             }
@@ -552,19 +553,19 @@ const Navbar = () => {
                               const getAboutIcon = (name: string) => {
                                 switch (name) {
                                   case "Company Overview":
-                                    return <Users className="h-4 w-4 text-green-400" />;
+                                    return <Home className="h-4 w-4 text-green-400" />;
                                   case "Our Story":
                                     return <FileText className="h-4 w-4 text-green-400" />;
                                   case "Leadership":
                                     return <Users className="h-4 w-4 text-green-400" />;
                                   case "Vision & Mission":
-                                    return <Settings className="h-4 w-4 text-green-400" />;
+                                    return <ChevronRight className="h-4 w-4 text-green-400" />;
                                   case "Core Values":
                                     return <Settings className="h-4 w-4 text-green-400" />;
                                   case "Careers":
-                                    return <Users className="h-4 w-4 text-green-400" />;
+                                    return <Calendar className="h-4 w-4 text-green-400" />;
                                   case "Achievements":
-                                    return <Settings className="h-4 w-4 text-green-400" />;
+                                    return <Award className="h-4 w-4 text-green-400" />;
                                   default:
                                     return <Settings className="h-4 w-4 text-green-400" />;
                                 }
