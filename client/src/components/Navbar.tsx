@@ -13,8 +13,8 @@ import { servicesData } from "@/data/services";
 
 const navLinks = [
   { name: "Home", href: "/#home" },
-  { 
-    name: "About Us", 
+  {
+    name: "About Us",
     href: "/about",
     submenu: [
       { name: "Company Overview", href: "/about/company-overview" },
@@ -495,7 +495,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileAbout}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-medium"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xl font-bold tracking-wider uppercase"
                       >
                         <span>{link.name}</span>
                         <ChevronDown
@@ -547,7 +547,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileServices}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-lg font-medium"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xl font-bold tracking-wider uppercase"
                       >
                         <span>{link.name}</span>
                         <ChevronDown
@@ -743,7 +743,7 @@ const Navbar = () => {
                     <button
                       key={index}
                       onClick={() => scrollToSection(link.href)}
-                      className="block w-full text-left px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 font-medium transition-all duration-200 border-b border-green-500/10 last:border-none text-lg"
+                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xl font-bold tracking-wider uppercase"
                     >
                       {link.name}
                     </button>

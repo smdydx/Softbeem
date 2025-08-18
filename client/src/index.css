@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@400;500;600;700;800;900&family=Saira:wght@400;500;600;700;800;900&display=swap');
 
 /* Smooth scrollbar for submenu */
 .overflow-y-auto {
@@ -218,6 +218,49 @@
 
 .tech-heading {
   font-family: 'Orbitron', sans-serif;
+}
+
+/* Modern Navbar Typography */
+.nav-modern {
+  font-family: 'Exo 2', 'Orbitron', 'Rajdhani', sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0, 255, 0, 0.3);
+  position: relative;
+}
+
+.nav-modern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-modern:hover::before {
+  opacity: 1;
+}
+
+.nav-glow {
+  text-shadow: 
+    0 0 5px rgba(0, 255, 0, 0.5),
+    0 0 10px rgba(0, 255, 0, 0.3),
+    0 0 15px rgba(0, 255, 0, 0.2);
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.mobile-nav-modern {
+  font-family: 'Saira', 'Exo 2', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Navigation menu styles */
