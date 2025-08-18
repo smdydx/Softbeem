@@ -65,7 +65,9 @@ const Dashboard = () => {
   const { toast } = useToast();
 
   // State management
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 768);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [activeSection, setActiveSection] = useState('overview');
   const [expandedCategories, setExpandedCategories] = useState({});
   const [contacts, setContacts] = useState([]);
@@ -336,6 +338,37 @@ const Dashboard = () => {
     checkAuth();
   }, [navigate]);
 
+  // Handle window resize for responsive behavior
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        setSidebarOpen(false);
+        setMobileMenuOpen(false);
+      } else {
+        setSidebarOpen(true);
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Close mobile menu when clicking outside or changing sections
+  useEffect(() => {
+    if (isMobile && mobileMenuOpen) {
+      const handleClickOutside = (event) => {
+        if (!event.target.closest('.admin-sidebar')) {
+          setMobileMenuOpen(false);
+        }
+      };
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [isMobile, mobileMenuOpen]);
+
   const fetchData = async () => {
     try {
       setRefreshing(true);
@@ -403,6 +436,21 @@ const Dashboard = () => {
       ...prev,
       [categoryId]: !prev[categoryId]
     }));
+  };
+
+  const handleMobileMenuToggle = () => {
+    if (isMobile) {
+      setMobileMenuOpen(!mobileMenuOpen);
+    } else {
+      setSidebarOpen(!sidebarOpen);
+    }
+  };
+
+  const handleSectionChange = (sectionId) => {
+    setActiveSection(sectionId);
+    if (isMobile) {
+      setMobileMenuOpen(false);
+    }
   };
 
   // Enhanced Service Management Functions
@@ -703,9 +751,9 @@ const Dashboard = () => {
     switch (activeSection) {
       case 'overview':
         return (
-          <div className="space-y-8">
+          <div className="space-y-6 mobile-space-y-4">
             {/* Enhanced Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 admin-stats-grid">
               {[
                 { 
                   icon: Eye, 
@@ -740,11 +788,11 @@ const Dashboard = () => {
                   trendUp: true
                 }
               ].map(({ icon: Icon, label, value, color, trend, trendUp }) => (
-                <Card key={label} className="p-6 bg-blue-950/30 border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 dashboard-card">
+                <Card key={label} className="p-4 md:p-6 bg-blue-950/30 border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 dashboard-card admin-card">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-blue-400">{label}</p>
-                      <h3 className={`text-3xl font-bold bg-gradient-to-r ${color} bg-clip-text text-transparent mt-2`}>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-blue-400 mobile-text-xs">{label}</p>
+                      <h3 className={`text-2xl md:text-3xl font-bold bg-gradient-to-r ${color} bg-clip-text text-transparent mt-2`}>
                         {value}
                       </h3>
                       <div className="flex items-center mt-2 gap-1">
@@ -753,13 +801,13 @@ const Dashboard = () => {
                         ) : (
                           <TrendingDown className="h-3 w-3 text-red-400" />
                         )}
-                        <span className={`text-xs ${trendUp ? 'text-green-400' : 'text-red-400'}`}>
+                        <span className={`text-xs mobile-text-xs ${trendUp ? 'text-green-400' : 'text-red-400'}`}>
                           {trend}
                         </span>
                       </div>
                     </div>
-                    <div className="p-3 rounded-xl bg-blue-500/10">
-                      <Icon className="h-6 w-6 text-blue-400" />
+                    <div className="p-2 md:p-3 rounded-xl bg-blue-500/10 flex-shrink-0">
+                      <Icon className="h-5 w-5 md:h-6 md:w-6 text-blue-400" />
                     </div>
                   </div>
                 </Card>
@@ -767,52 +815,53 @@ const Dashboard = () => {
             </div>
 
             {/* Quick Actions */}
-            <Card className="p-6 bg-blue-950/30 border-blue-500/20">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-white">Quick Actions</h2>
+            <Card className="p-4 md:p-6 bg-blue-950/30 border-blue-500/20 admin-card">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 md:mb-6 gap-4">
+                <h2 className="text-xl md:text-2xl font-bold text-white">Quick Actions</h2>
                 <Button
                   onClick={fetchData}
                   disabled={refreshing}
-                  className="bg-blue-600 hover:bg-blue-700"
+                  className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto"
+                  size={isMobile ? "sm" : "default"}
                 >
                   <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
-                  Refresh Data
+                  <span className="mobile-text-sm">Refresh Data</span>
                 </Button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 quick-actions-grid">
                 {[
-                  { label: 'Create Blog', icon: FileText, action: () => setActiveSection('blogs'), color: 'bg-emerald-600' },
-                  { label: 'Post Job', icon: Briefcase, action: () => setActiveSection('jobs'), color: 'bg-purple-600' },
-                  { label: 'Add Service', icon: Plus, action: () => setActiveSection('service-items'), color: 'bg-blue-600' },
-                  { label: 'View Analytics', icon: BarChart3, action: () => setActiveSection('analytics'), color: 'bg-amber-600' }
+                  { label: 'Create Blog', icon: FileText, action: () => handleSectionChange('all-blogs'), color: 'bg-emerald-600' },
+                  { label: 'Post Job', icon: Briefcase, action: () => handleSectionChange('job-postings'), color: 'bg-purple-600' },
+                  { label: 'Add Service', icon: Plus, action: () => handleSectionChange('service-items'), color: 'bg-blue-600' },
+                  { label: 'View Analytics', icon: BarChart3, action: () => handleSectionChange('analytics'), color: 'bg-amber-600' }
                 ].map(({ label, icon: Icon, action, color }) => (
                   <Button
                     key={label}
                     onClick={action}
-                    className={`${color} hover:opacity-90 p-6 h-auto flex flex-col gap-2`}
+                    className={`${color} hover:opacity-90 p-4 md:p-6 h-auto flex flex-col gap-2 quick-action-button`}
                   >
-                    <Icon className="h-6 w-6" />
-                    <span>{label}</span>
+                    <Icon className="h-5 w-5 md:h-6 md:w-6" />
+                    <span className="text-xs md:text-sm mobile-text-xs">{label}</span>
                   </Button>
                 ))}
               </div>
             </Card>
 
             {/* Recent Activity */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card className="p-6 bg-blue-950/30 border-blue-500/20">
-                <h3 className="text-xl font-bold text-white mb-4">Recent Messages</h3>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 recent-activity-grid">
+              <Card className="p-4 md:p-6 bg-blue-950/30 border-blue-500/20 admin-card">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-4">Recent Messages</h3>
                 <div className="space-y-3 max-h-64 overflow-y-auto">
                   {contacts.slice(0, 5).map((contact) => (
                     <div key={contact._id} className="p-3 bg-blue-900/20 rounded-lg">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <p className="font-medium text-white">{contact.name}</p>
-                          <p className="text-sm text-blue-400">{contact.email}</p>
-                          <p className="text-xs text-gray-400 mt-1 line-clamp-2">{contact.message}</p>
+                      <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-white mobile-text-sm truncate">{contact.name}</p>
+                          <p className="text-sm text-blue-400 mobile-text-xs truncate">{contact.email}</p>
+                          <p className="text-xs text-gray-400 mt-1 line-clamp-2 mobile-text-xs">{contact.message}</p>
                         </div>
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-gray-500 mobile-text-xs flex-shrink-0">
                           {new Date(contact.createdAt).toLocaleDateString()}
                         </span>
                       </div>
@@ -821,21 +870,21 @@ const Dashboard = () => {
                 </div>
               </Card>
 
-              <Card className="p-6 bg-blue-950/30 border-blue-500/20">
-                <h3 className="text-xl font-bold text-white mb-4">Pending Meetings</h3>
+              <Card className="p-4 md:p-6 bg-blue-950/30 border-blue-500/20 admin-card">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-4">Pending Meetings</h3>
                 <div className="space-y-3 max-h-64 overflow-y-auto">
                   {meetings.filter(m => m.status === 'pending').slice(0, 5).map((meeting) => (
                     <div key={meeting._id} className="p-3 bg-amber-900/20 rounded-lg border border-amber-500/20">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <p className="font-medium text-white">{meeting.name}</p>
-                          <p className="text-sm text-amber-400">{meeting.email}</p>
-                          <div className="flex gap-2 text-xs text-gray-400 mt-1">
+                      <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-white mobile-text-sm truncate">{meeting.name}</p>
+                          <p className="text-sm text-amber-400 mobile-text-xs truncate">{meeting.email}</p>
+                          <div className="flex gap-2 text-xs text-gray-400 mt-1 mobile-text-xs">
                             <span>{new Date(meeting.date).toLocaleDateString()}</span>
                             <span>{meeting.time}</span>
                           </div>
                         </div>
-                        <Badge className="bg-amber-500/10 text-amber-500">Pending</Badge>
+                        <Badge className="bg-amber-500/10 text-amber-500 text-xs flex-shrink-0">Pending</Badge>
                       </div>
                     </div>
                   ))}
@@ -1343,14 +1392,23 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#000510] text-white flex">
+      {/* Mobile Overlay */}
+      {isMobile && mobileMenuOpen && (
+        <div className="admin-overlay active" onClick={() => setMobileMenuOpen(false)} />
+      )}
+
       {/* Enhanced Sidebar */}
-      <div className={`${sidebarOpen ? 'w-80' : 'w-16'} bg-blue-950/40 border-r border-blue-500/20 transition-all duration-300 flex flex-col admin-sidebar`}>
+      <div className={`${
+        isMobile 
+          ? `admin-sidebar ${mobileMenuOpen ? 'open' : ''}`
+          : sidebarOpen ? 'w-80' : 'w-16'
+      } bg-blue-950/40 border-r border-blue-500/20 transition-all duration-300 flex flex-col admin-sidebar`}>
         {/* Sidebar Header */}
         <div className="p-4 border-b border-blue-500/20">
           <div className="flex items-center justify-between">
-            {sidebarOpen && (
+            {(sidebarOpen || mobileMenuOpen) && (
               <div>
-                <h2 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+                <h2 className="text-lg md:text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
                   Admin Panel
                 </h2>
                 <p className="text-xs text-blue-400 mt-1">Enhanced Dashboard v2.0</p>
@@ -1359,10 +1417,10 @@ const Dashboard = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
+              onClick={handleMobileMenuToggle}
               className="text-blue-400 hover:bg-blue-500/10"
             >
-              {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {(sidebarOpen || mobileMenuOpen) ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
@@ -1376,7 +1434,7 @@ const Dashboard = () => {
                   if (item.children.length > 0) {
                     toggleCategory(item.id);
                   } else {
-                    setActiveSection(item.id);
+                    handleSectionChange(item.id);
                   }
                 }}
                 className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 sidebar-item ${
@@ -1384,9 +1442,9 @@ const Dashboard = () => {
                 }`}
               >
                 <item.icon className="h-5 w-5 flex-shrink-0" />
-                {sidebarOpen && (
+                {(sidebarOpen || mobileMenuOpen) && (
                   <>
-                    <span className="flex-1 text-left font-medium">{item.title}</span>
+                    <span className="flex-1 text-left font-medium text-sm md:text-base">{item.title}</span>
                     {item.children.length > 0 && (
                       <div className={`transition-transform duration-200 ${expandedCategories[item.id] ? 'rotate-180' : ''}`}>
                         <ChevronDown className="h-4 w-4" />
@@ -1397,18 +1455,18 @@ const Dashboard = () => {
               </button>
 
               {/* Enhanced Submenu */}
-              {sidebarOpen && item.children.length > 0 && expandedCategories[item.id] && (
+              {(sidebarOpen || mobileMenuOpen) && item.children.length > 0 && expandedCategories[item.id] && (
                 <div className="ml-4 mt-2 space-y-1 sidebar-submenu">
                   {item.children.map((child) => (
                     <button
                       key={child.id}
-                      onClick={() => setActiveSection(child.id)}
+                      onClick={() => handleSectionChange(child.id)}
                       className={`w-full flex items-center gap-3 p-2 rounded-lg transition-all duration-200 ${
                         activeSection === child.id ? 'bg-blue-600 text-white' : 'text-blue-400 hover:bg-blue-500/10'
                       }`}
                     >
                       <child.icon className="h-4 w-4 flex-shrink-0" />
-                      <span className="flex-1 text-left text-sm">{child.title}</span>
+                      <span className="flex-1 text-left text-xs md:text-sm">{child.title}</span>
                     </button>
                   ))}
                 </div>
@@ -1421,17 +1479,22 @@ const Dashboard = () => {
         <div className="p-4 border-t border-blue-500/20">
           <div className="flex items-center gap-2 mb-3">
             <div className="w-2 h-2 bg-green-400 rounded-full realtime-indicator"></div>
-            {sidebarOpen && <span className="text-xs text-green-400">System Online</span>}
+            {(sidebarOpen || mobileMenuOpen) && <span className="text-xs text-green-400">System Online</span>}
           </div>
           <Button 
             variant="outline"
             className="w-full border-red-500/50 hover:bg-red-500/10 text-red-400"
+            size={isMobile ? "sm" : "default"}
             onClick={() => {
               localStorage.removeItem('adminAuth');
               navigate('/admin/login');
             }}
           >
-            {sidebarOpen ? 'Logout' : <X className="h-4 w-4" />}
+            {(sidebarOpen || mobileMenuOpen) ? (
+              <span className="text-sm">Logout</span>
+            ) : (
+              <X className="h-4 w-4" />
+            )}
           </Button>
         </div>
       </div>
@@ -1439,32 +1502,48 @@ const Dashboard = () => {
       {/* Enhanced Main Content */}
       <div className="flex-1 overflow-y-auto admin-content" style={{ minHeight: '100vh', backgroundColor: '#000510' }}>
         {/* Enhanced Header */}
-        <div className="bg-blue-950/30 p-6 border-b border-blue-500/20 sticky top-0 z-10 backdrop-blur-sm">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+        <div className="bg-blue-950/30 p-4 md:p-6 border-b border-blue-500/20 sticky top-0 z-10 backdrop-blur-sm admin-header">
+          {/* Mobile menu button */}
+          {isMobile && (
+            <div className="flex items-center justify-between mb-4 sm:hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleMobileMenuToggle}
+                className="text-blue-400 hover:bg-blue-500/10"
+              >
+                <Menu className="h-5 w-5 mr-2" />
+                <span className="text-sm">Menu</span>
+              </Button>
+            </div>
+          )}
+          
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div className="admin-header-info">
+              <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
                 {sidebarMenu.find(item => item.id === activeSection)?.title || 
                  sidebarMenu.find(item => item.children.some(child => child.id === activeSection))?.children.find(child => child.id === activeSection)?.title ||
                  'Dashboard'}
               </h1>
-              <div className="flex items-center gap-4 text-blue-400 mt-1">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-blue-400 mt-1">
                 <div className="flex items-center gap-2">
                   <CircuitBoard className="h-4 w-4" />
-                  <p className="text-sm">System Status: Online</p>
+                  <p className="text-xs md:text-sm mobile-text-xs">System Status: Online</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4" />
-                  <p className="text-sm">{stats.totalMessages} Active Messages</p>
+                  <p className="text-xs md:text-sm mobile-text-xs">{stats.totalMessages} Active Messages</p>
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <Badge className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 realtime-indicator">
+            
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 admin-header-actions">
+              <Badge className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 realtime-indicator text-xs text-center">
                 Real-time Updates
               </Badge>
               <Button
                 variant="outline"
-                size="sm"
+                size={isMobile ? "sm" : "default"}
                 onClick={fetchData}
                 disabled={refreshing}
                 className="border-blue-500/50 hover:bg-blue-500/10"
@@ -1476,7 +1555,7 @@ const Dashboard = () => {
         </div>
 
         {/* Enhanced Content Area */}
-        <div className="p-6">
+        <div className="p-4 md:p-6">
           {renderContent()}
         </div>
       </div>
