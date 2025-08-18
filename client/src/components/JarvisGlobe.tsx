@@ -154,6 +154,14 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
 
+    // Simplified service icons for better performance
+    const serviceIcons = [
+      { name: 'Blockchain', symbol: '₿', color: 0x32FF32, distance: 3 },
+      { name: 'Mobile App', symbol: '📱', color: 0x00FF00, distance: 3.4 },
+      { name: 'Web Dev', symbol: '🌐', color: 0x66FF66, distance: 3.8 },
+      { name: 'Legal', symbol: '⚖️', color: 0x00CC00, distance: 4.2 }
+    ];
+
     // Add data stream lines connecting globe to service icons
     const connectionLines = [];
     serviceIcons.forEach((service, index) => {
@@ -221,14 +229,6 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
       scene.add(particle);
       dataParticles.push(particle);
     }
-
-    // Simplified service icons for better performance
-    const serviceIcons = [
-      { name: 'Blockchain', symbol: '₿', color: 0x32FF32, distance: 3 },
-      { name: 'Mobile App', symbol: '📱', color: 0x00FF00, distance: 3.4 },
-      { name: 'Web Dev', symbol: '🌐', color: 0x66FF66, distance: 3.8 },
-      { name: 'Legal', symbol: '⚖️', color: 0x00CC00, distance: 4.2 }
-    ];
 
     const orbitingElements = [];
     
