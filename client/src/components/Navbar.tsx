@@ -524,7 +524,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileAbout}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xs font-thin tracking-normal uppercase"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-[10px] font-thin tracking-normal uppercase"
                       >
                         <div className="flex items-center gap-3">
                           <Users className="h-5 w-5 text-green-400" />
@@ -603,7 +603,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileServices}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xs font-thin tracking-normal uppercase"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-[10px] font-thin tracking-normal uppercase"
                       >
                         <div className="flex items-center gap-3">
                           <Settings className="h-5 w-5 text-green-400" />
@@ -762,7 +762,7 @@ const Navbar = () => {
                                                         }}
                                                         className="w-full flex items-center gap-4 px-8 py-2 text-left hover:bg-green-500/5 transition-all duration-200 group"
                                                       >
-                                                        <div className="text-green-400/60 group-hover:text-green-400/80 transition-colors flex-shrink-0 flex items-center">
+                                                        <div className="text-green-400/60 group-hover:text-green-400 transition-colors flex-shrink-0 flex items-center">
                                                           <div className="h-2.5 w-2.5">
                                                             {React.createElement(
                                                               subItem.icon,
@@ -815,7 +815,7 @@ const Navbar = () => {
                     <button
                       key={index}
                       onClick={() => scrollToSection(link.href)}
-                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-xs font-thin tracking-normal uppercase"
+                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-[10px] font-thin tracking-normal uppercase"
                     >
                       <div className="flex items-center gap-3">
                         {getIcon(link.name)}
