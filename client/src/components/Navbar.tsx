@@ -370,15 +370,39 @@ const Navbar = () => {
                     {/* Desktop About Us Dropdown */}
                     <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-900/95 backdrop-blur-sm border border-green-500/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                       <div className="p-2">
-                        {link.submenu?.map((subItem, subIdx) => (
-                          <a
-                            key={subIdx}
-                            href={subItem.href}
-                            className="flex items-center px-4 py-3 text-white/90 hover:text-white hover:bg-zinc-800/70 rounded-md transition-all duration-200 text-xs font-medium hover:font-semibold"
-                          >
-                            {subItem.name}
-                          </a>
-                        ))}
+                        {link.submenu?.map((subItem, subIdx) => {
+                          const getAboutIcon = (name: string) => {
+                            switch (name) {
+                              case "Company Overview":
+                                return <Users className="h-3 w-3 text-green-400" />;
+                              case "Our Story":
+                                return <FileText className="h-3 w-3 text-green-400" />;
+                              case "Leadership":
+                                return <Users className="h-3 w-3 text-green-400" />;
+                              case "Vision & Mission":
+                                return <Settings className="h-3 w-3 text-green-400" />;
+                              case "Core Values":
+                                return <Settings className="h-3 w-3 text-green-400" />;
+                              case "Careers":
+                                return <Users className="h-3 w-3 text-green-400" />;
+                              case "Achievements":
+                                return <Settings className="h-3 w-3 text-green-400" />;
+                              default:
+                                return <Settings className="h-3 w-3 text-green-400" />;
+                            }
+                          };
+
+                          return (
+                            <a
+                              key={subIdx}
+                              href={subItem.href}
+                              className="flex items-center gap-3 px-4 py-3 text-white/90 hover:text-white hover:bg-zinc-800/70 rounded-md transition-all duration-200 text-xs font-medium hover:font-semibold"
+                            >
+                              {getAboutIcon(subItem.name)}
+                              <span>{subItem.name}</span>
+                            </a>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
@@ -524,25 +548,49 @@ const Navbar = () => {
                             transition={{ duration: 0.3 }}
                             className="bg-zinc-900/80 backdrop-blur-sm"
                           >
-                            {link.submenu?.map((subItem, subIdx) => (
-                              <motion.a
-                                key={subIdx}
-                                href={subItem.href}
-                                initial={{ x: -20, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                transition={{
-                                  duration: 0.2,
-                                  delay: subIdx * 0.05,
-                                }}
-                                onClick={() => {
-                                  setIsMobileMenuOpen(false);
-                                  setMobileAboutOpen(false);
-                                }}
-                                className="block px-8 py-3 text-white/80 hover:text-white hover:bg-green-500/10 transition-all duration-200 text-sm border-b border-green-500/5 last:border-b-0"
-                              >
-                                {subItem.name}
-                              </motion.a>
-                            ))}
+                            {link.submenu?.map((subItem, subIdx) => {
+                              const getAboutIcon = (name: string) => {
+                                switch (name) {
+                                  case "Company Overview":
+                                    return <Users className="h-4 w-4 text-green-400" />;
+                                  case "Our Story":
+                                    return <FileText className="h-4 w-4 text-green-400" />;
+                                  case "Leadership":
+                                    return <Users className="h-4 w-4 text-green-400" />;
+                                  case "Vision & Mission":
+                                    return <Settings className="h-4 w-4 text-green-400" />;
+                                  case "Core Values":
+                                    return <Settings className="h-4 w-4 text-green-400" />;
+                                  case "Careers":
+                                    return <Users className="h-4 w-4 text-green-400" />;
+                                  case "Achievements":
+                                    return <Settings className="h-4 w-4 text-green-400" />;
+                                  default:
+                                    return <Settings className="h-4 w-4 text-green-400" />;
+                                }
+                              };
+
+                              return (
+                                <motion.a
+                                  key={subIdx}
+                                  href={subItem.href}
+                                  initial={{ x: -20, opacity: 0 }}
+                                  animate={{ x: 0, opacity: 1 }}
+                                  transition={{
+                                    duration: 0.2,
+                                    delay: subIdx * 0.05,
+                                  }}
+                                  onClick={() => {
+                                    setIsMobileMenuOpen(false);
+                                    setMobileAboutOpen(false);
+                                  }}
+                                  className="flex items-center gap-3 px-8 py-3 text-white/80 hover:text-white hover:bg-green-500/10 transition-all duration-200 text-sm border-b border-green-500/5 last:border-b-0"
+                                >
+                                  {getAboutIcon(subItem.name)}
+                                  <span>{subItem.name}</span>
+                                </motion.a>
+                              );
+                            })}
                           </motion.div>
                         )}
                       </AnimatePresence>
