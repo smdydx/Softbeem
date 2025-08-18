@@ -67,16 +67,16 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
         
         void main() {
           // Simplified grid pattern
-          float gridSize = 15.0;
+          float gridSize = 20.0;
           vec2 grid = fract(vUv * gridSize);
           float gridLine = max(
-            step(0.95, grid.x),
-            step(0.95, grid.y)
+            step(0.98, grid.x),
+            step(0.98, grid.y)
           );
           
           // Simplified longitude/latitude lines
-          float latLine = step(0.98, abs(sin(vUv.y * 3.14159 * 6.0)));
-          float longLine = step(0.98, abs(sin(vUv.x * 3.14159 * 12.0)));
+          float latLine = step(0.99, abs(sin(vUv.y * 3.14159 * 8.0)));
+          float longLine = step(0.99, abs(sin(vUv.x * 3.14159 * 16.0)));
           
           float lines = max(max(gridLine, latLine), longLine);
           
