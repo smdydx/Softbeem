@@ -74,10 +74,10 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-24 sm:pt-28 lg:pt-32 overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center pt-0 overflow-hidden bg-black"
     >
       {/* Video Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 z-0 overflow-hidden top-0"></div>
         <video
           autoPlay
           muted
@@ -140,7 +140,7 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10 -mt-4 sm:-mt-8">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 mt-16 sm:mt-20 lg:mt-24"></div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 lg:gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50, scale: 0.9 }}
