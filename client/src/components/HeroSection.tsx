@@ -140,8 +140,8 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10 mt-16 sm:mt-20 lg:mt-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 lg:gap-8 items-center">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 relative z-10 mt-8 sm:mt-12 md:mt-16 lg:mt-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -151,10 +151,10 @@ const HeroSection = () => {
               type: "spring",
               stiffness: 100,
             }}
-            className="text-center lg:text-left"
+            className="text-center lg:text-left order-2 lg:order-1"
           >
             <h1
-              className="font-bold tracking-wider bg-clip-text text-transparent digital-glow relative z-10 hover:scale-105 transition-transform duration-300 flex items-center gap-2 sm:gap-4 mb-4 justify-center lg:justify-start text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+              className="font-bold tracking-wider bg-clip-text text-transparent digital-glow relative z-10 hover:scale-105 transition-transform duration-300 flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mb-4 sm:mb-6 justify-center lg:justify-start text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
               style={{
                 fontFamily: settings.fontFamily || "Orbitron",
                 backgroundImage: `linear-gradient(to right, ${settings.themeColor || "#00FF00"}, ${settings.themeColor ? `${settings.themeColor}80` : "#008000"}, ${settings.themeColor ? `${settings.themeColor}40` : "#004400"})`,
@@ -162,20 +162,20 @@ const HeroSection = () => {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              <span className="text-6xl sm:text-8xl">&lt;/&gt;</span>
-              {settings.companyName || "Softbeem"}
+              <span className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl">&lt;/&gt;</span>
+              <span className="mt-2 sm:mt-0">{settings.companyName || "Softbeem"}</span>
             </h1>
 
-            <div className="flex flex-nowrap whitespace-nowrap gap-2 sm:gap-3 items-center justify-center lg:justify-start mb-6">
-              <span className="font-['Rajdhani'] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00FF00] via-[#008000] to-[#004400] digital-glow">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-1 sm:gap-3 items-center justify-center lg:justify-start mb-4 sm:mb-6">
+              <span className="font-['Rajdhani'] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00FF00] via-[#008000] to-[#004400] digital-glow">
                 Search
               </span>
-              <span className="font-['Rajdhani'] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white digital-glow">
+              <span className="font-['Rajdhani'] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white digital-glow">
                 Ends Here
               </span>
             </div>
 
-            <p className="text-base md:text-lg text-gray-300 mb-4 sm:mb-6 lg:mb-8 max-w-lg mx-auto lg:mx-0">
+            <p className="text-sm sm:text-base md:text-lg text-gray-300 mb-4 sm:mb-6 lg:mb-8 max-w-lg mx-auto lg:mx-0 px-2 sm:px-0">
               <span className="bg-gradient-to-r from-[#00FF00] to-[#32CD32] text-transparent bg-clip-text font-bold">
                 Empowering businesses
               </span>{" "}
@@ -183,18 +183,18 @@ const HeroSection = () => {
               navigate the digital transformation landscape.
             </p>
 
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-2 sm:px-0">
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-[#00FF00] to-[#004400] hover:from-[#008000] hover:to-[#006600] text-white border-none shadow-lg shadow-green-500/20 transition-all duration-300 hover:scale-105"
+                    size={isMobile ? "default" : "lg"}
+                    className="bg-gradient-to-r from-[#00FF00] to-[#004400] hover:from-[#008000] hover:to-[#006600] text-white border-none shadow-lg shadow-green-500/20 transition-all duration-300 hover:scale-105 w-full sm:w-auto text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3"
                   >
-                    Explore Our Services
-                    <ArrowRight className="h-4 w-4 ml-2" />
+                    <span className="text-xs sm:text-sm">Explore Our Services</span>
+                    <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-72 p-3 backdrop-blur-xl bg-black/80 border border-green-500/20">
+                <PopoverContent className="w-80 sm:w-72 p-3 backdrop-blur-xl bg-black/80 border border-green-500/20 mx-2 sm:mx-0">
                   <div className="flex flex-col gap-2">
                     <Link
                       to="/services/blockchain"
@@ -250,9 +250,9 @@ const HeroSection = () => {
 
               <Button
                 variant="outline"
-                size="lg"
+                size={isMobile ? "default" : "lg"}
                 onClick={() => scrollToSection("#contact")}
-                className="border-green-500/30 text-white hover:bg-green-500/10 shadow-lg"
+                className="border-green-500/30 text-white hover:bg-green-500/10 shadow-lg w-full sm:w-auto text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3"
               >
                 Contact Us
               </Button>
@@ -263,24 +263,24 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col justify-center items-center mt-2 sm:mt-4 lg:mt-8"
+            className="flex flex-col justify-center items-center mt-4 sm:mt-6 lg:mt-8 order-1 lg:order-2"
           >
-            <div className="mt-8 sm:mt-16 lg:mt-40">
+            <div className="mt-2 sm:mt-4 md:mt-8 lg:mt-16 xl:mt-40">
               {globeLoaded ? (
-                <JarvisGlobe size={isMobile ? 300 : 400} />
+                <JarvisGlobe size={isMobile ? 250 : 400} />
               ) : (
                 <div 
                   className="flex items-center justify-center bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full border border-green-500/30"
                   style={{ 
-                    width: isMobile ? 300 : 400, 
-                    height: isMobile ? 300 : 400 
+                    width: isMobile ? 250 : 400, 
+                    height: isMobile ? 250 : 400 
                   }}
                 >
-                  <div className="w-8 h-8 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
               )}
             </div>
-            <div className="mt-4 sm:mt-8 lg:mt-16">
+            <div className="mt-3 sm:mt-4 md:mt-6 lg:mt-8 xl:mt-16">
               <ServiceIcons />
             </div>
           </motion.div>
