@@ -588,7 +588,7 @@ const Navbar = () => {
                                   className="flex items-center gap-3 px-8 py-3 text-white/80 hover:text-white hover:bg-green-500/10 transition-all duration-200 text-xs border-b border-green-500/5 last:border-b-0 font-['Inter']"
                                 >
                                   {getAboutIcon(subItem.name)}
-                                  <span>{subItem.name}</span>
+                                  <span className="text-xs font-medium">{subItem.name}</span>
                                 </motion.a>
                               );
                             })}
