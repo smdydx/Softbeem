@@ -74,7 +74,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black -mt-14 sm:-mt-16 lg:-mt-20 pt-14 sm:pt-16 lg:pt-20"
     >
       {/* Video Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
