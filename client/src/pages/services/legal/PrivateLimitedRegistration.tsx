@@ -140,11 +140,12 @@ export default function PrivateLimitedRegistration() {
             </motion.p>
             <motion.div
               variants={fadeIn("up", "tween", 0.4, 1)}
-              className="flex gap-4 justify-center"
+              className="flex gap-4 justify-center flex-wrap"
             >
               <Button
                 size="lg"
                 className="bg-green-500 hover:bg-green-600 text-lg px-8"
+                onClick={() => window.location.href = '/schedule'}
               >
                 Get Started Now <ArrowRight className="ml-2" />
               </Button>
@@ -152,6 +153,7 @@ export default function PrivateLimitedRegistration() {
                 size="lg"
                 variant="outline"
                 className="border-green-500 text-green-500 hover:bg-green-500/10 text-lg px-8"
+                onClick={() => window.location.href = '/schedule'}
               >
                 Schedule Consultation <Phone className="ml-2" />
               </Button>
@@ -256,6 +258,7 @@ export default function PrivateLimitedRegistration() {
               <Button
                 size="lg"
                 className="bg-green-500 hover:bg-green-600 text-lg px-12"
+                onClick={() => window.location.href = '/schedule'}
               >
                 Start Registration Process
               </Button>
