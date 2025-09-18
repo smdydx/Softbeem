@@ -243,7 +243,8 @@ const Navbar = () => {
                 </motion.button>
               </div>
             </div>
-          </header>
+          </div>
+        </header>
 
         {/* Premium Quick Actions Dropdown */}
         <AnimatePresence>
