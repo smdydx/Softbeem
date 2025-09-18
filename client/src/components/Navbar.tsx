@@ -163,7 +163,7 @@ const Navbar = () => {
   if (isMobile) {
     return (
       <>
-        {/* Mobile Header - Use desktop-like design */}
+        {/* Mobile Header - Clean Empty Header */}
         <header
           className={`fixed top-0 w-full z-50 transition-all duration-300 h-16 flex items-center ${
             isScrolled
@@ -171,9 +171,9 @@ const Navbar = () => {
               : "bg-gradient-to-r from-black/95 via-zinc-900/95 to-black/95 backdrop-blur-lg"
           }`}
         >
-          <div className="container mx-auto px-4 flex items-center justify-between">
+          <div className="container mx-auto px-4">
             {/* Logo */}
-            <div className="flex items-center">
+            <div className="flex items-center justify-between">
               <div
                 onClick={() => (window.location.href = "/")}
                 className="cursor-pointer"
@@ -184,22 +184,22 @@ const Navbar = () => {
                   </h1>
                 </div>
               </div>
-            </div>
 
-            {/* Mobile Menu Button */}
-            <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                onClick={toggleMobileMenu}
-                aria-label="Toggle Menu"
-                className="p-2 hover:bg-green-500/10 rounded-lg border border-green-500/30 min-w-[44px] min-h-[44px] flex items-center justify-center"
-              >
-                {isMobileMenuOpen ? (
-                  <X className="h-5 w-5 text-white" />
-                ) : (
-                  <Menu className="h-5 w-5 text-white" />
-                )}
-              </Button>
+              {/* Mobile Menu Button */}
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  onClick={toggleMobileMenu}
+                  aria-label="Toggle Menu"
+                  className="p-2 hover:bg-green-500/10 rounded-lg border border-green-500/30 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                >
+                  {isMobileMenuOpen ? (
+                    <X className="h-5 w-5 text-white" />
+                  ) : (
+                    <Menu className="h-5 w-5 text-white" />
+                  )}
+                </Button>
+              </div>
             </div>
           </div>
         </header>
