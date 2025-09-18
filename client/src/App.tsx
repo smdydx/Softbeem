@@ -13,6 +13,7 @@ import Home from "@/pages/Home";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import About from "@/pages/About";
+import Contact from "@/pages/Contact";
 import CompanyOverview from "@/pages/about/CompanyOverview";
 import OurStory from "@/pages/about/OurStory";
 import Leadership from "@/pages/about/Leadership";
@@ -160,6 +161,7 @@ function App() {
               <Route path="/services" element={<Services />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogPost />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/schedule" element={<Schedule />} />
               <Route path="/careers" element={<Careers />} />
 

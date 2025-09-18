@@ -235,10 +235,10 @@ const AIChatBot = () => {
           initial={{ opacity: 0, y: 50, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.95 }}
-          className="fixed bottom-20 right-4 w-[90vw] max-w-sm h-[50vh] max-h-[400px] bg-black/95 backdrop-blur-lg border border-green-500/30 rounded-2xl shadow-2xl overflow-hidden z-[45] flex flex-col md:bottom-4 md:w-[400px] md:h-[600px] md:max-h-[600px]"
+          className="fixed bottom-16 right-2 left-2 h-[60vh] bg-black/95 backdrop-blur-lg border border-green-500/30 rounded-2xl shadow-2xl overflow-hidden z-[45] flex flex-col sm:bottom-20 sm:right-4 sm:left-auto sm:w-[90vw] sm:max-w-sm md:bottom-4 md:w-[400px] md:h-[600px] md:max-h-[600px]"
         >
           {/* Header */}
-          <div className="p-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 flex justify-between items-center border-b border-green-500/20 shrink-0">
+          <div className="p-3 sm:p-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 flex justify-between items-center border-b border-green-500/20 shrink-0">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <Bot className="h-6 w-6 text-green-400" />
@@ -266,13 +266,13 @@ const AIChatBot = () => {
           </div>
 
           {/* Quick Actions */}
-          <div className="p-3 border-b border-green-500/10 shrink-0">
-            <div className="grid grid-cols-2 gap-2">
+          <div className="p-2 sm:p-3 border-b border-green-500/10 shrink-0">
+            <div className="grid grid-cols-2 gap-1 sm:gap-2">
               {quickActions.map((action, index) => (
                 <button
                   key={index}
                   onClick={() => handleQuickAction(action.query)}
-                  className="flex items-center gap-2 p-2 bg-zinc-800/50 hover:bg-zinc-700/50 rounded-lg text-xs text-gray-300 hover:text-white transition-all duration-200"
+                  className="flex items-center gap-1 sm:gap-2 p-1.5 sm:p-2 bg-zinc-800/50 hover:bg-zinc-700/50 rounded-lg text-xs text-gray-300 hover:text-white transition-all duration-200"
                 >
                   {action.icon}
                   {action.text}
@@ -282,7 +282,7 @@ const AIChatBot = () => {
           </div>
 
           {/* Messages Container */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent">
+          <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-3 sm:space-y-4 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent">
             {messages.map((message, index) => (
               <motion.div
                 key={index}
@@ -290,7 +290,7 @@ const AIChatBot = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`max-w-[85%] p-3 rounded-2xl whitespace-pre-wrap text-sm ${
+                <div className={`max-w-[90%] sm:max-w-[85%] p-2 sm:p-3 rounded-2xl whitespace-pre-wrap text-xs sm:text-sm ${
                   message.type === 'user' 
                     ? 'bg-gradient-to-r from-green-500/20 to-blue-500/20 text-white border border-green-500/30' 
                     : 'bg-zinc-800/80 text-gray-200 border border-zinc-700/50'
@@ -325,7 +325,7 @@ const AIChatBot = () => {
           </div>
 
           {/* Input Area */}
-          <div className="p-4 border-t border-green-500/20 shrink-0">
+          <div className="p-2 sm:p-4 border-t border-green-500/20 shrink-0">
             <div className="flex gap-2 items-end">
               <div className="flex-1">
                 <Input
@@ -357,7 +357,7 @@ const AIChatBot = () => {
           animate={{ scale: 1, rotate: 0 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="fixed bottom-20 right-4 md:bottom-4 md:right-4 p-3 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 rounded-full text-green-400 shadow-lg shadow-green-500/25 border border-green-500/30 z-[45] backdrop-blur-sm"
+          className="fixed bottom-20 right-4 p-3 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 rounded-full text-green-400 shadow-lg shadow-green-500/25 border border-green-500/30 z-[45] backdrop-blur-sm md:bottom-4"
           onClick={() => setIsOpen(true)}
         >
           <Bot className="h-6 w-6" />
