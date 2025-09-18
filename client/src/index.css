@@ -1868,9 +1868,30 @@ button, .button {
   z-index: 45 !important;
 }
 
-/* Chatbot highest priority */
+/* Z-index hierarchy */
+.navbar-header {
+  z-index: 40 !important;
+}
+
+.mobile-bottom-nav {
+  z-index: 50 !important;
+}
+
+.mobile-menu-overlay {
+  z-index: 60 !important;
+}
+
 .chatbot-container {
-  z-index: 9999 !important;
+  z-index: 45 !important;
+}
+
+/* Ensure chatbot stays above bottom nav but below menus */
+.chatbot-button {
+  z-index: 45 !important;
+}
+
+.chatbot-window {
+  z-index: 45 !important;
 }
 
 @media (min-width: 641px) and (max-width: 768px) {

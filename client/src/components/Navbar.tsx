@@ -258,7 +258,7 @@ const Navbar = () => {
                 stiffness: 300,
                 opacity: { duration: 0.2 }
               }}
-              className="fixed top-20 right-4 z-50 min-w-[220px] perspective-1000"
+              className="fixed top-20 right-4 z-[60] min-w-[220px] perspective-1000"
             >
               <div className="relative bg-gradient-to-br from-zinc-900/95 via-black/98 to-zinc-900/95 backdrop-blur-2xl rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/10 p-1 overflow-hidden">
                 {/* Animated background gradient */}
@@ -368,7 +368,7 @@ const Navbar = () => {
           initial={{ y: 100 }}
           animate={{ y: 0 }}
           transition={{ type: "spring", damping: 20, stiffness: 300 }}
-          className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-black via-zinc-900/95 to-zinc-800/90 backdrop-blur-xl border-t border-green-500/20 shadow-xl pb-2 pb-[env(safe-area-inset-bottom)]"
+          className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black via-zinc-900/95 to-zinc-800/90 backdrop-blur-xl border-t border-green-500/20 shadow-xl pb-2 pb-[env(safe-area-inset-bottom)]"
         >
           {/* Subtle glass morphism background */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-zinc-900/40 to-transparent" />
@@ -534,7 +534,7 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-black/50"
+              className="fixed inset-0 z-[60] bg-black/50"
               onClick={() => setMobileServicesOpen(false)}
             >
               <motion.div
@@ -675,7 +675,7 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-black/50"
+              className="fixed inset-0 z-[60] bg-black/50"
               onClick={() => {
                 setIsMobileMenuOpen(false);
                 setMobileAboutOpen(false);
