@@ -97,16 +97,20 @@ export default function NonDisclosureAgreements() {
               variants={fadeIn("up", "tween", 0.4, 1)}
               className="flex gap-4 justify-center"
             >
-              <Button size="lg" className="bg-purple-500 hover:bg-purple-600 text-lg px-8">
-                Get Started <ArrowRight className="ml-2" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-purple-500 text-purple-500 hover:bg-purple-500/10 text-lg px-8"
-              >
-                Book Consultation <Phone className="ml-2" />
-              </Button>
+              <a href="https://wa.me/911169310715" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="bg-purple-500 hover:bg-purple-600 text-lg px-8">
+                  Get Started <ArrowRight className="ml-2" />
+                </Button>
+              </a>
+              <a href="/schedule">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-purple-500 text-purple-500 hover:bg-purple-500/10 text-lg px-8"
+                >
+                  Book Consultation <Phone className="ml-2" />
+                </Button>
+              </a>
             </motion.div>
           </motion.div>
         </div>

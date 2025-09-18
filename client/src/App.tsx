@@ -27,7 +27,7 @@ import Careers from "@/pages/Careers";
 // Components
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AIChatBot from "./components/AIChatBot";
+import AIChatBot from "@/components/AIChatBot";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard";
@@ -111,7 +111,7 @@ import EmploymentContracts from "./pages/services/legal/EmploymentContracts";
 import NonDisclosureAgreementsNDAs from "./pages/services/legal/NonDisclosureAgreementsNDAs";
 import StartupAdvisoryFundingStructuringESOPs from "./pages/services/legal/StartupAdvisoryFundingStructuringESOPs";
 import DueDiligenceReportsforMAInvestors from "./pages/services/legal/DueDiligenceReportsforMAInvestors";
-import CorporateRestructuringAdvisory from "./pages/services/legal/CorporateRestructuringAdvisory";
+import CorporateRestructuringAdvisory from "@/pages/services/legal/CorporateRestructuringAdvisory";
 import InsolvencyBankruptcyAdvisoryunderIBC from "./pages/services/legal/InsolvencyBankruptcyAdvisoryunderIBC";
 import ShopsEstablishmentRegistration from "./pages/services/legal/ShopsEstablishmentRegistration";
 import ProvidentFundPFEmployeeStateInsuranceESIRegistration from "./pages/services/legal/ProvidentFundPFEmployeeStateInsuranceESIRegistration";
@@ -264,7 +264,10 @@ function App() {
             </Routes>
           </main>
           <Footer />
+          <ScrollToTop />
           <CookieConsent />
+          <AIChatBot />
+          <Toaster />
         </div>
       </SiteSettingsProvider>
     </QueryClientProvider>

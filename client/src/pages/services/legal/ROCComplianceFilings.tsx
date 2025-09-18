@@ -244,9 +244,11 @@ export default function ROCComplianceFilings() {
               Let our experts handle your compliance requirements while you focus on growing your business
             </motion.p>
             <motion.div variants={fadeIn("up", "tween", 0.4, 1)} className="flex justify-center gap-4">
-              <Button size="lg" className="bg-green-500 hover:bg-green-600">
-                Get Started <ArrowRight className="ml-2" />
-              </Button>
+              <a href="https://wa.me/911169310715" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="bg-green-500 hover:bg-green-600">
+                  Get Started <ArrowRight className="ml-2" />
+                </Button>
+              </a>
             </motion.div>
           </motion.div>
         </div>

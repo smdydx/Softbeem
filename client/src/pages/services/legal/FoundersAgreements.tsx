@@ -125,19 +125,23 @@ export default function FoundersAgreements() {
               variants={fadeIn("up", "tween", 0.4, 1)}
               className="flex gap-4 justify-center"
             >
-              <Button
-                size="lg"
-                className="bg-blue-500 hover:bg-blue-600 text-lg px-8"
-              >
-                Get Started <ArrowRight className="ml-2" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-blue-500 text-blue-500 hover:bg-blue-500/10 text-lg px-8"
-              >
-                Book Consultation <Phone className="ml-2" />
-              </Button>
+              <a href="https://wa.me/911169310715" target="_blank" rel="noopener noreferrer">
+                <Button
+                  size="lg"
+                  className="bg-blue-500 hover:bg-blue-600 text-lg px-8"
+                >
+                  Get Started <ArrowRight className="ml-2" />
+                </Button>
+              </a>
+              <a href="/schedule">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-blue-500 text-blue-500 hover:bg-blue-500/10 text-lg px-8"
+                >
+                  Book Consultation <Phone className="ml-2" />
+                </Button>
+              </a>
             </motion.div>
           </motion.div>
         </div>

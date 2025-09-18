@@ -245,13 +245,16 @@ export default function Compliance() {
               variants={fadeIn("up", "tween", 0.4, 1)}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
-              <Button
-                size="lg"
-                className="bg-green-500 hover:bg-green-600 text-lg px-8"
-              >
-                Call Us <ArrowRight className="ml-2" />
-              </Button>
-              <Button
+              <a href="tel:+911169310715">
+                <Button
+                  size="lg"
+                  className="bg-green-500 hover:bg-green-600 text-lg px-8"
+                >
+                  Call Us <ArrowRight className="ml-2" />
+                </Button>
+              </a>
+              <a href="https://wa.me/911169310715" target="_blank" rel="noopener noreferrer">
+                <Button</a>
                 size="lg"
                 variant="outline"
                 className="border-green-500 text-green-500 hover:bg-green-500/10 text-lg px-8"
