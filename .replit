@@ -13,6 +13,10 @@ build = ["npm", "run", "build"]
 localPort = 5000
 externalPort = 80
 
+[[ports]]
+localPort = 38145
+externalPort = 3000
+
 [agent]
 expertMode = true
 
@@ -26,10 +30,10 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Frontend Development Server"
+args = "Full-Stack Server"
 
 [[workflows.workflow]]
-name = "Frontend Development Server"
+name = "Full-Stack Server"
 author = "agent"
 
 [[workflows.workflow.tasks]]
