@@ -80,7 +80,7 @@ const DueDiligenceReportsforMAInvestors: React.FC = () => {
         </p>
         <button
           className="bg-red-700 text-white px-8 py-3 rounded-md hover:bg-red-800 transition"
-          onClick={() => alert("Contact form or booking page coming soon!")}
+          onClick={() => window.location.href = '/contact'}
         >
           Get Started
         </button>

@@ -80,7 +80,7 @@ const InsolvencyBankruptcyAdvisoryunderIBC: React.FC = () => {
         </p>
         <button
           className="bg-yellow-700 text-white px-8 py-3 rounded-md hover:bg-yellow-800 transition"
-          onClick={() => alert("Contact form or booking page coming soon!")}
+          onClick={() => window.location.href = '/contact'}
         >
           Contact Us
         </button>

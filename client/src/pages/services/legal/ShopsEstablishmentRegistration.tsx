@@ -80,7 +80,7 @@ const ShopsEstablishmentRegistration: React.FC = () => {
         </p>
         <button
           className="bg-green-700 text-white px-8 py-3 rounded-md hover:bg-green-800 transition"
-          onClick={() => alert("Contact form coming soon!")}
+          onClick={() => window.location.href = '/contact'}
         >
           Register Now
         </button>

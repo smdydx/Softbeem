@@ -121,7 +121,7 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
 
       await jobPosting.save();
       res.status(201).json(jobPosting);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Job posting error:', error);
       res.status(500).json({ message: "Failed to create job posting", error: error.message });
     }
@@ -131,7 +131,7 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     try {
       const jobs = await JobPosting.find().sort({ createdAt: -1 });
       res.json(jobs);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Fetch jobs error:', error);
       res.status(500).json({ message: "Failed to fetch job postings", error: error.message });
     }
@@ -237,7 +237,7 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
         res.json({ data: setting?.settingValue || null });
       } else {
         const allSettings = await SiteSettings.find();
-        const settingsMap = {};
+        const settingsMap: Record<string, any> = {};
         allSettings.forEach(setting => {
           settingsMap[setting.settingKey] = setting.settingValue;
         });
@@ -357,7 +357,7 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
       const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
       const categories = existingSettings?.settingValue || [];
 
-      const updatedCategories = categories.filter(cat => cat.id !== id);
+      const updatedCategories = categories.filter((cat: any) => cat.id !== id);
 
       const settings = await SiteSettings.findOneAndUpdate(
         { settingKey: 'serviceCategories' },
@@ -383,11 +383,11 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
       const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
       const categories = existingSettings?.settingValue || [];
 
-      const updatedCategories = categories.map(cat => {
+      const updatedCategories = categories.map((cat: any) => {
         if (cat.id === categoryId) {
           return {
             ...cat,
-            services: cat.services.map(svc => 
+            services: cat.services.map((svc: any) => 
               svc.id === serviceId ? { ...svc, ...service } : svc
             )
           };
@@ -418,11 +418,11 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
       const existingSettings = await SiteSettings.findOne({ settingKey: 'serviceCategories' });
       const categories = existingSettings?.settingValue || [];
 
-      const updatedCategories = categories.map(cat => {
+      const updatedCategories = categories.map((cat: any) => {
         if (cat.id === categoryId) {
           return {
             ...cat,
-            services: cat.services.filter(svc => svc.id !== serviceId)
+            services: cat.services.filter((svc: any) => svc.id !== serviceId)
           };
         }
         return cat;
