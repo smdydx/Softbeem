@@ -131,6 +131,7 @@ const Navbar = () => {
     setMobileAboutOpen(false);
     setMobileOpenCategories([]);
     setMobileOpenServices([]);
+    setQuickActionsOpen(false);
 
     if (sectionId.startsWith("/#")) {
       if (window.location.pathname !== "/") {
@@ -142,8 +143,6 @@ const Navbar = () => {
         const y = element.getBoundingClientRect().top + window.pageYOffset - 80;
         window.scrollTo({ top: y, behavior: "smooth" });
       }
-    } else if (sectionId === "/contact") {
-      window.location.href = "/contact";
     } else {
       window.location.href = sectionId;
     }
@@ -472,7 +471,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveTab("blog");
-                scrollToSection("/blog");
+                window.location.href = "/blog";
               }}
               className={`relative flex flex-col items-center py-2 px-2 rounded-xl min-w-[50px] transition-all duration-200 group ${
                 activeTab === "blog"
@@ -502,7 +501,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveTab("contact");
-                window.location.href = "/contact";
+                scrollToSection("/contact");
               }}
               className={`relative flex flex-col items-center py-2 px-2 rounded-xl min-w-[50px] transition-all duration-200 group ${
                 activeTab === "contact"
@@ -1036,7 +1035,7 @@ const Navbar = () => {
                   <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      scrollToSection("/blog");
+                      window.location.href = "/blog";
                     }}
                     className="w-full flex items-center gap-4 p-4 bg-zinc-800 rounded-xl hover:bg-zinc-700 transition-all"
                   >
@@ -1050,7 +1049,7 @@ const Navbar = () => {
                   <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      window.location.href = "/contact";
+                      scrollToSection("/contact");
                     }}
                     className="w-full flex items-center gap-4 p-4 bg-zinc-800 rounded-xl hover:bg-zinc-700 transition-all"
                   >
