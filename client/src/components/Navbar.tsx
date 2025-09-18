@@ -257,7 +257,7 @@ const Navbar = () => {
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                   </svg>
                   <span className="text-white group-hover:text-green-400 font-medium text-sm">Email</span>
-                </button>
+                </a>
               </div>
             </motion.div>
           )}
@@ -302,7 +302,8 @@ const Navbar = () => {
             <button
               onClick={() => {
                 setActiveTab("about");
-                scrollToSection("/about");
+                setIsMobileMenuOpen(true);
+                setMobileAboutOpen(true);
               }}
               className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "about"
@@ -497,7 +498,10 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-50 bg-black/50"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setMobileAboutOpen(false);
+              }}
             >
               <motion.div
                 initial={{ y: "100%" }}
@@ -514,9 +518,14 @@ const Navbar = () => {
 
                 {/* Header */}
                 <div className="flex items-center justify-between px-4 pb-3 border-b border-green-500/20 bg-gradient-to-b from-zinc-900/98 to-black/98 sticky top-0 z-10">
-                  <h2 className="text-lg font-semibold text-white">Menu</h2>
+                  <h2 className="text-lg font-semibold text-white">
+                    {mobileAboutOpen ? "About Us" : "Menu"}
+                  </h2>
                   <button
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setMobileAboutOpen(false);
+                    }}
                     className="p-2 rounded-full hover:bg-white/10"
                   >
                     <X className="h-5 w-5 text-white" />
@@ -525,6 +534,61 @@ const Navbar = () => {
 
                 {/* Menu Content */}
                 <div className="p-4 space-y-2">
+                  {/* Show About Us submenu if opened from bottom nav */}
+                  {mobileAboutOpen && (
+                    <div className="space-y-2">
+                      {navLinks.find(link => link.name === "About Us")?.submenu?.map((subItem, subIdx) => {
+                        const getAboutIcon = (name: string) => {
+                          switch (name) {
+                            case "Company Overview": return Home;
+                            case "Our Story": return FileText;
+                            case "Leadership": return Users;
+                            case "Vision & Mission": return ChevronRight;
+                            case "Core Values": return Settings;
+                            case "Careers": return Calendar;
+                            case "Achievements": return Award;
+                            default: return Settings;
+                          }
+                        };
+
+                        return (
+                          <motion.a
+                            key={subIdx}
+                            href={subItem.href}
+                            initial={{ x: -10, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ duration: 0.2, delay: subIdx * 0.03 }}
+                            onClick={() => {
+                              setIsMobileMenuOpen(false);
+                              setMobileAboutOpen(false);
+                            }}
+                            className="w-full flex items-center gap-4 p-4 bg-zinc-800 rounded-xl hover:bg-zinc-700 transition-all"
+                          >
+                            <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+                              {React.createElement(getAboutIcon(subItem.name), {
+                                className: "h-5 w-5 text-green-400"
+                              })}
+                            </div>
+                            <span className="font-medium text-white">{subItem.name}</span>
+                          </motion.a>
+                        );
+                      })}
+                      <div className="pt-4 border-t border-zinc-700">
+                        <button
+                          onClick={() => setMobileAboutOpen(false)}
+                          className="w-full flex items-center gap-4 p-4 bg-zinc-800 rounded-xl hover:bg-zinc-700 transition-all"
+                        >
+                          <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+                            <ArrowRight className="h-5 w-5 text-green-400 rotate-180" />
+                          </div>
+                          <span className="font-medium text-white">Back to Menu</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Regular menu items when About submenu is not open */}
+                  {!mobileAboutOpen && (
                   {/* Home */}
                   <button
                     onClick={() => {
@@ -831,6 +895,7 @@ const Navbar = () => {
                       </a>
                     </div>
                   </div>
+                  )}
                 </div>
               </motion.div>
             </motion.div>
