@@ -243,7 +243,7 @@ const AIChatBot = () => {
               stiffness: 300,
               duration: 0.3
             }}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 w-[calc(100vw-2rem)] max-w-sm sm:max-w-md md:max-w-lg h-[70vh] sm:h-[75vh] md:h-[80vh] max-h-[600px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-3xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden"
+            className="fixed bottom-[5.5rem] right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 w-[calc(100vw-2rem)] max-w-sm sm:max-w-md md:max-w-lg h-[60vh] sm:h-[65vh] md:h-[80vh] max-h-[600px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-3xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden"
           >
             {/* Animated Background Pattern */}
             <div className="absolute inset-0 opacity-10">
@@ -399,7 +399,7 @@ const AIChatBot = () => {
             animate={{ scale: 1, rotate: 0 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 md:bottom-6 md:right-8 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative z-[45]"
+            className="fixed bottom-[5.5rem] right-4 sm:bottom-[5.5rem] sm:right-6 md:bottom-6 md:right-8 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative z-[45]"
             onClick={() => setIsOpen(true)}
           >
             {/* Animated background */}
