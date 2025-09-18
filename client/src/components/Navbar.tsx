@@ -363,227 +363,166 @@ const Navbar = () => {
           )}
         </AnimatePresence>
 
-        {/* Premium Mobile Bottom Navigation - Swiggy Style */}
+        {/* Premium Mobile Bottom Navigation - Compact */}
         <motion.nav 
           initial={{ y: 100 }}
           animate={{ y: 0 }}
           transition={{ type: "spring", damping: 20, stiffness: 300 }}
-          className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black via-zinc-900/95 to-zinc-800/90 backdrop-blur-2xl border-t border-gradient-to-r from-green-500/30 via-blue-500/20 to-purple-500/30 shadow-2xl shadow-black/50"
+          className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-black via-zinc-900/95 to-zinc-800/90 backdrop-blur-xl border-t border-green-500/20 shadow-xl pb-2 pb-[env(safe-area-inset-bottom)]"
         >
-          {/* Premium glass morphism background */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-zinc-900/60 to-transparent" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center_bottom,_var(--tw-gradient-stops))] from-green-400/5 via-transparent to-transparent" />
+          {/* Subtle glass morphism background */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-zinc-900/40 to-transparent" />
           
-          <div className="relative flex items-center justify-around px-2 py-3">
+          <div className="relative flex items-center justify-around px-1 py-2">
             {/* Home */}
             <motion.button
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveTab("home");
                 scrollToSection("/#home");
               }}
-              className={`relative flex flex-col items-center py-3 px-4 rounded-2xl min-w-[65px] transition-all duration-300 ${
+              className={`relative flex flex-col items-center py-2 px-2 rounded-xl min-w-[50px] transition-all duration-200 group ${
                 activeTab === "home"
-                  ? "bg-gradient-to-t from-orange-500/20 via-orange-400/15 to-orange-300/10 border border-orange-500/30 shadow-lg shadow-orange-500/25"
-                  : "hover:bg-white/5 hover:border-white/10 border border-transparent"
+                  ? "bg-gradient-to-t from-orange-500/20 to-orange-400/10 border border-orange-500/30"
+                  : "hover:bg-white/5 border border-transparent"
               }`}
             >
               {/* Active indicator */}
               {activeTab === "home" && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full"
+                  className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full"
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 />
               )}
               
-              <div className={`p-2 rounded-xl transition-all duration-300 ${
-                activeTab === "home" 
-                  ? "bg-gradient-to-br from-orange-500/20 to-orange-600/20 shadow-lg shadow-orange-500/25" 
-                  : "bg-zinc-800/50 group-hover:bg-white/10"
-              }`}>
-                <Home className={`h-5 w-5 mb-1 transition-colors ${
-                  activeTab === "home" ? "text-orange-400" : "text-gray-400 hover:text-white"
-                }`} />
-              </div>
-              <span className={`text-xs font-semibold transition-colors ${
-                activeTab === "home" ? "text-orange-400" : "text-gray-400 hover:text-white"
+              <Home className={`h-4 w-4 mb-1 transition-colors ${
+                activeTab === "home" ? "text-orange-400" : "text-gray-400 group-hover:text-white"
+              }`} />
+              <span className={`text-xs font-medium transition-colors ${
+                activeTab === "home" ? "text-orange-400" : "text-gray-400 group-hover:text-white"
               }`}>Home</span>
-              
-              {/* Premium glow effect */}
-              {activeTab === "home" && (
-                <div className="absolute inset-0 bg-orange-500/10 rounded-2xl blur-xl" />
-              )}
             </motion.button>
 
             {/* Services */}
             <motion.button
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveTab("services");
                 toggleMobileServices();
               }}
-              className={`relative flex flex-col items-center py-3 px-4 rounded-2xl min-w-[65px] transition-all duration-300 ${
+              className={`relative flex flex-col items-center py-2 px-2 rounded-xl min-w-[50px] transition-all duration-200 group ${
                 activeTab === "services"
-                  ? "bg-gradient-to-t from-blue-500/20 via-blue-400/15 to-blue-300/10 border border-blue-500/30 shadow-lg shadow-blue-500/25"
-                  : "hover:bg-white/5 hover:border-white/10 border border-transparent"
+                  ? "bg-gradient-to-t from-blue-500/20 to-blue-400/10 border border-blue-500/30"
+                  : "hover:bg-white/5 border border-transparent"
               }`}
             >
               {/* Active indicator */}
               {activeTab === "services" && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full"
+                  className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full"
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 />
               )}
               
-              <div className={`p-2 rounded-xl transition-all duration-300 ${
-                activeTab === "services" 
-                  ? "bg-gradient-to-br from-blue-500/20 to-blue-600/20 shadow-lg shadow-blue-500/25" 
-                  : "bg-zinc-800/50 group-hover:bg-white/10"
-              }`}>
-                <Settings className={`h-5 w-5 mb-1 transition-colors ${
-                  activeTab === "services" ? "text-blue-400" : "text-gray-400 hover:text-white"
-                }`} />
-              </div>
-              <span className={`text-xs font-semibold transition-colors ${
-                activeTab === "services" ? "text-blue-400" : "text-gray-400 hover:text-white"
+              <Settings className={`h-4 w-4 mb-1 transition-colors ${
+                activeTab === "services" ? "text-blue-400" : "text-gray-400 group-hover:text-white"
+              }`} />
+              <span className={`text-xs font-medium transition-colors ${
+                activeTab === "services" ? "text-blue-400" : "text-gray-400 group-hover:text-white"
               }`}>Services</span>
-              
-              {/* Premium glow effect */}
-              {activeTab === "services" && (
-                <div className="absolute inset-0 bg-blue-500/10 rounded-2xl blur-xl" />
-              )}
             </motion.button>
 
             {/* About */}
             <motion.button
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveTab("about");
                 setIsMobileMenuOpen(true);
                 setMobileAboutOpen(true);
               }}
-              className={`relative flex flex-col items-center py-3 px-4 rounded-2xl min-w-[65px] transition-all duration-300 ${
+              className={`relative flex flex-col items-center py-2 px-2 rounded-xl min-w-[50px] transition-all duration-200 group ${
                 activeTab === "about"
-                  ? "bg-gradient-to-t from-green-500/20 via-green-400/15 to-green-300/10 border border-green-500/30 shadow-lg shadow-green-500/25"
-                  : "hover:bg-white/5 hover:border-white/10 border border-transparent"
+                  ? "bg-gradient-to-t from-green-500/20 to-green-400/10 border border-green-500/30"
+                  : "hover:bg-white/5 border border-transparent"
               }`}
             >
               {/* Active indicator */}
               {activeTab === "about" && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-green-400 to-green-500 rounded-full"
+                  className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-green-400 to-green-500 rounded-full"
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 />
               )}
               
-              <div className={`p-2 rounded-xl transition-all duration-300 ${
-                activeTab === "about" 
-                  ? "bg-gradient-to-br from-green-500/20 to-green-600/20 shadow-lg shadow-green-500/25" 
-                  : "bg-zinc-800/50 group-hover:bg-white/10"
-              }`}>
-                <Users className={`h-5 w-5 mb-1 transition-colors ${
-                  activeTab === "about" ? "text-green-400" : "text-gray-400 hover:text-white"
-                }`} />
-              </div>
-              <span className={`text-xs font-semibold transition-colors ${
-                activeTab === "about" ? "text-green-400" : "text-gray-400 hover:text-white"
+              <Users className={`h-4 w-4 mb-1 transition-colors ${
+                activeTab === "about" ? "text-green-400" : "text-gray-400 group-hover:text-white"
+              }`} />
+              <span className={`text-xs font-medium transition-colors ${
+                activeTab === "about" ? "text-green-400" : "text-gray-400 group-hover:text-white"
               }`}>About</span>
-              
-              {/* Premium glow effect */}
-              {activeTab === "about" && (
-                <div className="absolute inset-0 bg-green-500/10 rounded-2xl blur-xl" />
-              )}
             </motion.button>
 
             {/* Blog */}
             <motion.button
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveTab("blog");
                 scrollToSection("/blog");
               }}
-              className={`relative flex flex-col items-center py-3 px-4 rounded-2xl min-w-[65px] transition-all duration-300 ${
+              className={`relative flex flex-col items-center py-2 px-2 rounded-xl min-w-[50px] transition-all duration-200 group ${
                 activeTab === "blog"
-                  ? "bg-gradient-to-t from-purple-500/20 via-purple-400/15 to-purple-300/10 border border-purple-500/30 shadow-lg shadow-purple-500/25"
-                  : "hover:bg-white/5 hover:border-white/10 border border-transparent"
+                  ? "bg-gradient-to-t from-purple-500/20 to-purple-400/10 border border-purple-500/30"
+                  : "hover:bg-white/5 border border-transparent"
               }`}
             >
               {/* Active indicator */}
               {activeTab === "blog" && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full"
+                  className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full"
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 />
               )}
               
-              <div className={`p-2 rounded-xl transition-all duration-300 ${
-                activeTab === "blog" 
-                  ? "bg-gradient-to-br from-purple-500/20 to-purple-600/20 shadow-lg shadow-purple-500/25" 
-                  : "bg-zinc-800/50 group-hover:bg-white/10"
-              }`}>
-                <FileText className={`h-5 w-5 mb-1 transition-colors ${
-                  activeTab === "blog" ? "text-purple-400" : "text-gray-400 hover:text-white"
-                }`} />
-              </div>
-              <span className={`text-xs font-semibold transition-colors ${
-                activeTab === "blog" ? "text-purple-400" : "text-gray-400 hover:text-white"
+              <FileText className={`h-4 w-4 mb-1 transition-colors ${
+                activeTab === "blog" ? "text-purple-400" : "text-gray-400 group-hover:text-white"
+              }`} />
+              <span className={`text-xs font-medium transition-colors ${
+                activeTab === "blog" ? "text-purple-400" : "text-gray-400 group-hover:text-white"
               }`}>Blog</span>
-              
-              {/* Premium glow effect */}
-              {activeTab === "blog" && (
-                <div className="absolute inset-0 bg-purple-500/10 rounded-2xl blur-xl" />
-              )}
             </motion.button>
 
             {/* Contact */}
             <motion.button
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveTab("contact");
                 scrollToSection("/#contact");
               }}
-              className={`relative flex flex-col items-center py-3 px-4 rounded-2xl min-w-[65px] transition-all duration-300 ${
+              className={`relative flex flex-col items-center py-2 px-2 rounded-xl min-w-[50px] transition-all duration-200 group ${
                 activeTab === "contact"
-                  ? "bg-gradient-to-t from-pink-500/20 via-pink-400/15 to-pink-300/10 border border-pink-500/30 shadow-lg shadow-pink-500/25"
-                  : "hover:bg-white/5 hover:border-white/10 border border-transparent"
+                  ? "bg-gradient-to-t from-pink-500/20 to-pink-400/10 border border-pink-500/30"
+                  : "hover:bg-white/5 border border-transparent"
               }`}
             >
               {/* Active indicator */}
               {activeTab === "contact" && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-pink-400 to-pink-500 rounded-full"
+                  className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-pink-400 to-pink-500 rounded-full"
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 />
               )}
               
-              <div className={`p-2 rounded-xl transition-all duration-300 ${
-                activeTab === "contact" 
-                  ? "bg-gradient-to-br from-pink-500/20 to-pink-600/20 shadow-lg shadow-pink-500/25" 
-                  : "bg-zinc-800/50 group-hover:bg-white/10"
-              }`}>
-                <MessageCircle className={`h-5 w-5 mb-1 transition-colors ${
-                  activeTab === "contact" ? "text-pink-400" : "text-gray-400 hover:text-white"
-                }`} />
-              </div>
-              <span className={`text-xs font-semibold transition-colors ${
-                activeTab === "contact" ? "text-pink-400" : "text-gray-400 hover:text-white"
+              <MessageCircle className={`h-4 w-4 mb-1 transition-colors ${
+                activeTab === "contact" ? "text-pink-400" : "text-gray-400 group-hover:text-white"
+              }`} />
+              <span className={`text-xs font-medium transition-colors ${
+                activeTab === "contact" ? "text-pink-400" : "text-gray-400 group-hover:text-white"
               }`}>Contact</span>
-              
-              {/* Premium glow effect */}
-              {activeTab === "contact" && (
-                <div className="absolute inset-0 bg-pink-500/10 rounded-2xl blur-xl" />
-              )}
             </motion.button>
           </div>
         </motion.nav>
