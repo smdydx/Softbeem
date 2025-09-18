@@ -159,48 +159,48 @@ const Navbar = () => {
     }
   };
 
-  // Mobile-first Swiggy-style navbar
+  // Mobile-first navbar with proper header
   if (isMobile) {
     return (
       <>
-        {/* Mobile Top Header */}
+        {/* Mobile Header - Use desktop-like design */}
         <header
           className={`fixed top-0 w-full z-50 transition-all duration-300 h-16 flex items-center ${
             isScrolled
-              ? "bg-white/98 backdrop-blur-xl border-b border-gray-200/50 shadow-lg"
-              : "bg-white/95 backdrop-blur-lg"
+              ? "bg-gradient-to-r from-black/98 via-zinc-900/98 to-black/98 backdrop-blur-xl border-b border-green-500/20 shadow-xl shadow-green-500/10"
+              : "bg-gradient-to-r from-black/95 via-zinc-900/95 to-black/95 backdrop-blur-lg"
           }`}
         >
           <div className="container mx-auto px-4 flex items-center justify-between">
-            {/* Location & Search */}
-            <div className="flex items-center gap-3 flex-1">
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1">
-                  <span className="text-sm font-medium text-gray-800">Home</span>
-                  <ChevronDown className="h-3 w-3 text-gray-600" />
+            {/* Logo */}
+            <div className="flex items-center">
+              <div
+                onClick={() => (window.location.href = "/")}
+                className="cursor-pointer"
+              >
+                <div className="font-bold text-white flex items-center">
+                  <h1 className="font-['Orbitron'] text-xl sm:text-2xl font-bold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-[#00FF00] via-[#008000] to-[#004400] mb-0 digital-glow relative z-10 hover:scale-105 transition-transform duration-300">
+                    <span className="text-xl sm:text-2xl">&lt;/&gt;</span>
+                  </h1>
                 </div>
-                <span className="text-xs text-gray-500 truncate max-w-[120px]">
-                  Current Location
-                </span>
               </div>
             </div>
 
-            {/* Search Bar */}
-            <div className="flex-1 mx-3">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search for services..."
-                  className="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-xl text-sm border-0 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
-                />
-              </div>
+            {/* Mobile Menu Button */}
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                onClick={toggleMobileMenu}
+                aria-label="Toggle Menu"
+                className="p-2 hover:bg-green-500/10 rounded-lg border border-green-500/30 min-w-[44px] min-h-[44px] flex items-center justify-center"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="h-5 w-5 text-white" />
+                ) : (
+                  <Menu className="h-5 w-5 text-white" />
+                )}
+              </Button>
             </div>
-
-            {/* Profile Icon */}
-            <button className="p-2 rounded-full">
-              <User className="h-6 w-6 text-gray-700" />
-            </button>
           </div>
         </header>
 

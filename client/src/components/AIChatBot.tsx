@@ -235,7 +235,7 @@ const AIChatBot = () => {
           initial={{ opacity: 0, y: 50, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.95 }}
-          className="fixed bottom-4 right-4 w-[95vw] max-w-md h-[70vh] max-h-[600px] bg-black/95 backdrop-blur-lg border border-green-500/30 rounded-2xl shadow-2xl overflow-hidden z-50 flex flex-col"
+          className="fixed bottom-20 right-4 w-[95vw] max-w-md h-[60vh] max-h-[500px] bg-black/95 backdrop-blur-lg border border-green-500/30 rounded-2xl shadow-2xl overflow-hidden z-50 flex flex-col md:bottom-4 md:h-[70vh] md:max-h-[600px]"
         >
           {/* Header */}
           <div className="p-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 flex justify-between items-center border-b border-green-500/20 shrink-0">
@@ -357,7 +357,7 @@ const AIChatBot = () => {
           animate={{ scale: 1, rotate: 0 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="fixed bottom-4 right-4 p-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 rounded-full text-green-400 shadow-lg shadow-green-500/25 border border-green-500/30 z-50 backdrop-blur-sm"
+          className="fixed bottom-20 right-4 p-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 rounded-full text-green-400 shadow-lg shadow-green-500/25 border border-green-500/30 z-50 backdrop-blur-sm md:bottom-4"
           onClick={() => setIsOpen(true)}
         >
           <Bot className="h-6 w-6" />
