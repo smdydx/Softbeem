@@ -163,7 +163,7 @@ const Navbar = () => {
   if (isMobile) {
     return (
       <>
-        {/* Mobile Header - Quick Actions Only */}
+        {/* Mobile Header - Use desktop-like design */}
         <header
           className={`fixed top-0 w-full z-50 transition-all duration-300 h-16 flex items-center ${
             isScrolled
@@ -171,70 +171,52 @@ const Navbar = () => {
               : "bg-gradient-to-r from-black/95 via-zinc-900/95 to-black/95 backdrop-blur-lg"
           }`}
         >
-          <div className="container mx-auto px-4">
-            {/* Quick Actions Bar */}
-            <div className="flex items-center justify-center gap-6">
-              {/* Home */}
-              <button
-                onClick={() => scrollToSection("/#home")}
-                className="flex flex-col items-center py-2 px-3 text-green-400 hover:text-white transition-colors"
+          <div className="container mx-auto px-4 flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center">
+              <div
+                onClick={() => (window.location.href = "/")}
+                className="cursor-pointer"
               >
-                <Home className="h-5 w-5 mb-1" />
-                <span className="text-xs font-medium">Home</span>
-              </button>
+                <div className="font-bold text-white flex items-center">
+                  <h1 className="font-['Orbitron'] text-xl sm:text-2xl font-bold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-[#00FF00] via-[#008000] to-[#004400] mb-0 digital-glow relative z-10 hover:scale-105 transition-transform duration-300">
+                    <span className="text-xl sm:text-2xl">&lt;/&gt;</span>
+                  </h1>
+                </div>
+              </div>
+            </div>
 
-              {/* Services */}
-              <button
-                onClick={() => toggleMobileServices()}
-                className="flex flex-col items-center py-2 px-3 text-green-400 hover:text-white transition-colors"
+            {/* Mobile Menu Button */}
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                onClick={toggleMobileMenu}
+                aria-label="Toggle Menu"
+                className="p-2 hover:bg-green-500/10 rounded-lg border border-green-500/30 min-w-[44px] min-h-[44px] flex items-center justify-center"
               >
-                <Settings className="h-5 w-5 mb-1" />
-                <span className="text-xs font-medium">Services</span>
-              </button>
-
-              {/* About */}
-              <button
-                onClick={() => scrollToSection("/about")}
-                className="flex flex-col items-center py-2 px-3 text-green-400 hover:text-white transition-colors"
-              >
-                <Users className="h-5 w-5 mb-1" />
-                <span className="text-xs font-medium">About</span>
-              </button>
-
-              {/* Contact */}
-              <button
-                onClick={() => scrollToSection("/#contact")}
-                className="flex flex-col items-center py-2 px-3 text-green-400 hover:text-white transition-colors"
-              >
-                <MessageCircle className="h-5 w-5 mb-1" />
-                <span className="text-xs font-medium">Contact</span>
-              </button>
-
-              {/* Schedule */}
-              <button
-                onClick={() => (window.location.href = "/schedule")}
-                className="flex flex-col items-center py-2 px-3 text-blue-400 hover:text-white transition-colors"
-              >
-                <Calendar className="h-5 w-5 mb-1" />
-                <span className="text-xs font-medium">Schedule</span>
-              </button>
+                {isMobileMenuOpen ? (
+                  <X className="h-5 w-5 text-white" />
+                ) : (
+                  <Menu className="h-5 w-5 text-white" />
+                )}
+              </Button>
             </div>
           </div>
         </header>
 
-        {/* Mobile Bottom Navigation - Premium Dark Theme */}
-        <nav className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-black via-zinc-900/98 to-zinc-800/95 backdrop-blur-xl border-t border-green-500/20 shadow-2xl shadow-black/50">
-          <div className="flex items-center justify-around py-3 px-2">
+        {/* Mobile Bottom Navigation */}
+        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-b from-zinc-900/98 to-black/98 backdrop-blur-xl border-t border-green-500/20 shadow-xl">
+          <div className="flex items-center justify-around py-2">
             {/* Home */}
             <button
               onClick={() => {
                 setActiveTab("home");
                 scrollToSection("/#home");
               }}
-              className={`flex flex-col items-center py-2 px-3 min-w-[60px] rounded-lg transition-all duration-200 ${
+              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "home"
-                  ? "text-green-400 bg-green-500/10 border border-green-500/20"
-                  : "text-gray-400 hover:text-green-400 hover:bg-green-500/5"
+                  ? "text-orange-500"
+                  : "text-gray-400"
               }`}
             >
               <Home className="h-5 w-5 mb-1" />
@@ -247,10 +229,10 @@ const Navbar = () => {
                 setActiveTab("services");
                 toggleMobileServices();
               }}
-              className={`flex flex-col items-center py-2 px-3 min-w-[60px] rounded-lg transition-all duration-200 ${
+              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "services"
-                  ? "text-green-400 bg-green-500/10 border border-green-500/20"
-                  : "text-gray-400 hover:text-green-400 hover:bg-green-500/5"
+                  ? "text-orange-500"
+                  : "text-gray-400"
               }`}
             >
               <Settings className="h-5 w-5 mb-1" />
@@ -263,10 +245,10 @@ const Navbar = () => {
                 setActiveTab("about");
                 scrollToSection("/about");
               }}
-              className={`flex flex-col items-center py-2 px-3 min-w-[60px] rounded-lg transition-all duration-200 ${
+              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "about"
-                  ? "text-green-400 bg-green-500/10 border border-green-500/20"
-                  : "text-gray-400 hover:text-green-400 hover:bg-green-500/5"
+                  ? "text-orange-500"
+                  : "text-gray-400"
               }`}
             >
               <Users className="h-5 w-5 mb-1" />
@@ -279,10 +261,10 @@ const Navbar = () => {
                 setActiveTab("blog");
                 scrollToSection("/blog");
               }}
-              className={`flex flex-col items-center py-2 px-3 min-w-[60px] rounded-lg transition-all duration-200 ${
+              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "blog"
-                  ? "text-green-400 bg-green-500/10 border border-green-500/20"
-                  : "text-gray-400 hover:text-green-400 hover:bg-green-500/5"
+                  ? "text-orange-500"
+                  : "text-gray-400"
               }`}
             >
               <FileText className="h-5 w-5 mb-1" />
@@ -295,10 +277,10 @@ const Navbar = () => {
                 setActiveTab("contact");
                 scrollToSection("/#contact");
               }}
-              className={`flex flex-col items-center py-2 px-3 min-w-[60px] rounded-lg transition-all duration-200 ${
+              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "contact"
-                  ? "text-green-400 bg-green-500/10 border border-green-500/20"
-                  : "text-gray-400 hover:text-green-400 hover:bg-green-500/5"
+                  ? "text-orange-500"
+                  : "text-gray-400"
               }`}
             >
               <MessageCircle className="h-5 w-5 mb-1" />
