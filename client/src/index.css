@@ -152,6 +152,8 @@
 }
 
 .ramaera-logo {
+  /* Add any specific styles for ramaera-logo here if needed */
+}
 
 /* Responsive navigation styles */
 @media screen and (max-width: 1024px) {
@@ -788,7 +790,6 @@ main {
   .admin-table table {
     min-width: 600px;
   }
-}
 
 /* Real-time indicator */
 .realtime-indicator {

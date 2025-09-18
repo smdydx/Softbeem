@@ -17,6 +17,7 @@ import {
   Search,
   ShoppingCart,
   User,
+  ArrowRight,
 } from "lucide-react";
 import { servicesData } from "@/data/services";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -589,8 +590,9 @@ const Navbar = () => {
 
                   {/* Regular menu items when About submenu is not open */}
                   {!mobileAboutOpen && (
-                  {/* Home */}
-                  <button
+                    <div className="space-y-2">
+                      {/* Home */}
+                      <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
                       scrollToSection("/#home");
@@ -871,30 +873,31 @@ const Navbar = () => {
                     <span className="font-medium text-white">Contact Us</span>
                   </button>
 
-                  {/* Quick Actions */}
-                  <div className="mt-6 pt-4 border-t border-zinc-700">
-                    <h3 className="text-base font-medium text-white mb-3">Quick Actions</h3>
-                    <div className="grid grid-cols-2 gap-3">
-                      <button
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          window.location.href = "/schedule";
-                        }}
-                        className="flex items-center gap-3 p-3 bg-green-500/10 rounded-xl border border-green-500/30"
-                      >
-                        <Calendar className="h-5 w-5 text-green-400" />
-                        <span className="text-sm font-medium text-green-400">Schedule Meeting</span>
-                      </button>
-                      <a
-                        href="tel:+911169310715"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="flex items-center gap-3 p-3 bg-blue-500/10 rounded-xl border border-blue-500/30"
-                      >
-                        <PhoneCall className="h-5 w-5 text-blue-400" />
-                        <span className="text-sm font-medium text-blue-400">Call Now</span>
-                      </a>
+                    {/* Quick Actions */}
+                    <div className="mt-6 pt-4 border-t border-zinc-700">
+                      <h3 className="text-base font-medium text-white mb-3">Quick Actions</h3>
+                      <div className="grid grid-cols-2 gap-3">
+                        <button
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            window.location.href = "/schedule";
+                          }}
+                          className="flex items-center gap-3 p-3 bg-green-500/10 rounded-xl border border-green-500/30"
+                        >
+                          <Calendar className="h-5 w-5 text-green-400" />
+                          <span className="text-sm font-medium text-green-400">Schedule Meeting</span>
+                        </button>
+                        <a
+                          href="tel:+911169310715"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="flex items-center gap-3 p-3 bg-blue-500/10 rounded-xl border border-blue-500/30"
+                        >
+                          <PhoneCall className="h-5 w-5 text-blue-400" />
+                          <span className="text-sm font-medium text-blue-400">Call Now</span>
+                        </a>
+                      </div>
                     </div>
-                  </div>
+                    </div>
                   )}
                 </div>
               </motion.div>
