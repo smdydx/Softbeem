@@ -1882,16 +1882,16 @@ button, .button {
 }
 
 .chatbot-container {
-  z-index: 45 !important;
+  z-index: 70 !important;
 }
 
-/* Ensure chatbot stays above bottom nav but below menus */
+/* Ensure chatbot stays above bottom nav and menus */
 .chatbot-button {
-  z-index: 45 !important;
+  z-index: 70 !important;
 }
 
 .chatbot-window {
-  z-index: 45 !important;
+  z-index: 70 !important;
 }
 
 /* Premium chatbot mobile optimizations */
@@ -1899,8 +1899,9 @@ button, .button {
   .chatbot-container {
     width: calc(100vw - 1rem) !important;
     max-width: 380px !important;
-    height: calc(60vh - 1rem) !important;
-    bottom: 5.5rem !important;
+    height: calc(55vh - 1rem) !important;
+    bottom: 6rem !important;
+    z-index: 70 !important;
   }
   
   .chatbot-header {
@@ -1923,8 +1924,8 @@ button, .button {
 
   /* Floating button positioning */
   .chatbot-floating-button {
-    bottom: 5.5rem !important;
-    z-index: 45 !important;
+    bottom: 6rem !important;
+    z-index: 70 !important;
   }
 
   /* Premium glass effects */
