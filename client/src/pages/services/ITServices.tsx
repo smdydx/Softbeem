@@ -127,7 +127,7 @@ const ITServices = () => {
             Empowering businesses with cutting-edge technology solutions. From custom software development to cloud services, 
             we deliver scalable and reliable solutions tailored to your needs.
           </p>
-          <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+          <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700" onClick={() => window.location.href = '/schedule'}>
             Schedule Consultation <ArrowRight className="ml-2" />
           </Button>
         </motion.div>
