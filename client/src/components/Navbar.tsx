@@ -243,8 +243,7 @@ const Navbar = () => {
                 </motion.button>
               </div>
             </div>
-          </div>
-        </header>
+          </header>
 
         {/* Premium Quick Actions Dropdown */}
         <AnimatePresence>
@@ -1216,9 +1215,10 @@ const Navbar = () => {
                                             className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full"
                                           >
                                             <div className="text-primary flex items-center">
-                                              <div className="h-3 w-3">
+                                              <div className="h-4 w-4">
                                                 {React.createElement(
                                                   service.icon,
+                                                  { className: "h-4 w-4" }
                                                 )}
                                               </div>
                                             </div>
@@ -1264,12 +1264,12 @@ const Navbar = () => {
                                                       className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full"
                                                     >
                                                       <div className="text-primary/80 flex items-center">
-                                                        <div className="h-3 w-3">
+                                                        <div className="h-4 w-4">
                                                           {React.createElement(
                                                             subItem.icon,
                                                             {
                                                               className:
-                                                                "h-3 w-3 opacity-75 hover:opacity-100 transition-opacity",
+                                                                "h-4 w-4 opacity-75 hover:opacity-100 transition-opacity",
                                                             },
                                                           )}
                                                         </div>
