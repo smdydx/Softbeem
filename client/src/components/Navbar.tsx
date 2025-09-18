@@ -14,8 +14,12 @@ import {
   FileText,
   MessageCircle,
   Award,
+  Search,
+  ShoppingCart,
+  User,
 } from "lucide-react";
 import { servicesData } from "@/data/services";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const navLinks = [
   { name: "Home", href: "/#home" },
@@ -38,6 +42,7 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const isMobile = useIsMobile();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
@@ -50,6 +55,7 @@ const Navbar = () => {
     [],
   );
   const [mobileOpenServices, setMobileOpenServices] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState("home");
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -153,6 +159,239 @@ const Navbar = () => {
     }
   };
 
+  // Mobile-first Swiggy-style navbar
+  if (isMobile) {
+    return (
+      <>
+        {/* Mobile Top Header */}
+        <header
+          className={`fixed top-0 w-full z-50 transition-all duration-300 h-16 flex items-center ${
+            isScrolled
+              ? "bg-white/98 backdrop-blur-xl border-b border-gray-200/50 shadow-lg"
+              : "bg-white/95 backdrop-blur-lg"
+          }`}
+        >
+          <div className="container mx-auto px-4 flex items-center justify-between">
+            {/* Location & Search */}
+            <div className="flex items-center gap-3 flex-1">
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1">
+                  <span className="text-sm font-medium text-gray-800">Home</span>
+                  <ChevronDown className="h-3 w-3 text-gray-600" />
+                </div>
+                <span className="text-xs text-gray-500 truncate max-w-[120px]">
+                  Current Location
+                </span>
+              </div>
+            </div>
+
+            {/* Search Bar */}
+            <div className="flex-1 mx-3">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search for services..."
+                  className="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-xl text-sm border-0 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                />
+              </div>
+            </div>
+
+            {/* Profile Icon */}
+            <button className="p-2 rounded-full">
+              <User className="h-6 w-6 text-gray-700" />
+            </button>
+          </div>
+        </header>
+
+        {/* Mobile Bottom Navigation */}
+        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg">
+          <div className="flex items-center justify-around py-2">
+            {/* Home */}
+            <button
+              onClick={() => {
+                setActiveTab("home");
+                scrollToSection("/#home");
+              }}
+              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
+                activeTab === "home"
+                  ? "text-orange-500"
+                  : "text-gray-600"
+              }`}
+            >
+              <Home className="h-5 w-5 mb-1" />
+              <span className="text-xs font-medium">Home</span>
+            </button>
+
+            {/* Services */}
+            <button
+              onClick={() => {
+                setActiveTab("services");
+                setIsMobileMenuOpen(true);
+              }}
+              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
+                activeTab === "services"
+                  ? "text-orange-500"
+                  : "text-gray-600"
+              }`}
+            >
+              <Settings className="h-5 w-5 mb-1" />
+              <span className="text-xs font-medium">Services</span>
+            </button>
+
+            {/* About */}
+            <button
+              onClick={() => {
+                setActiveTab("about");
+                scrollToSection("/about");
+              }}
+              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
+                activeTab === "about"
+                  ? "text-orange-500"
+                  : "text-gray-600"
+              }`}
+            >
+              <Users className="h-5 w-5 mb-1" />
+              <span className="text-xs font-medium">About</span>
+            </button>
+
+            {/* Blog */}
+            <button
+              onClick={() => {
+                setActiveTab("blog");
+                scrollToSection("/blog");
+              }}
+              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
+                activeTab === "blog"
+                  ? "text-orange-500"
+                  : "text-gray-600"
+              }`}
+            >
+              <FileText className="h-5 w-5 mb-1" />
+              <span className="text-xs font-medium">Blog</span>
+            </button>
+
+            {/* Contact */}
+            <button
+              onClick={() => {
+                setActiveTab("contact");
+                scrollToSection("/#contact");
+              }}
+              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
+                activeTab === "contact"
+                  ? "text-orange-500"
+                  : "text-gray-600"
+              }`}
+            >
+              <MessageCircle className="h-5 w-5 mb-1" />
+              <span className="text-xs font-medium">Contact</span>
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile Services Menu (Swiggy-style) */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/50"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <motion.div
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl max-h-[80vh] overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Handle Bar */}
+                <div className="flex justify-center py-3">
+                  <div className="w-10 h-1 bg-gray-300 rounded-full"></div>
+                </div>
+
+                {/* Header */}
+                <div className="flex items-center justify-between px-4 pb-3 border-b border-gray-100">
+                  <h2 className="text-lg font-semibold text-gray-800">Our Services</h2>
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-2 rounded-full hover:bg-gray-100"
+                  >
+                    <X className="h-5 w-5 text-gray-600" />
+                  </button>
+                </div>
+
+                {/* Services Grid */}
+                <div className="p-4">
+                  {Object.keys(servicesData).map((category) => (
+                    <div key={category} className="mb-6">
+                      <h3 className="text-base font-medium text-gray-800 mb-3 capitalize">
+                        {category === "tech" ? "Technology Services" : "Legal & Compliance Services"}
+                      </h3>
+                      <div className="grid grid-cols-2 gap-3">
+                        {servicesData[category as keyof typeof servicesData].map((service, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => {
+                              setIsMobileMenuOpen(false);
+                              if (service.path) {
+                                window.location.href = service.path;
+                              } else {
+                                scrollToSection("/#services");
+                              }
+                            }}
+                            className="flex flex-col items-center p-3 bg-gray-50 rounded-xl hover:bg-orange-50 hover:border-orange-200 border border-transparent transition-all"
+                          >
+                            <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+                              {React.createElement(service.icon, {
+                                className: "h-6 w-6 text-orange-600"
+                              })}
+                            </div>
+                            <span className="text-xs text-gray-700 text-center font-medium leading-tight">
+                              {service.title}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+
+                  {/* Quick Actions */}
+                  <div className="mt-6 pt-4 border-t border-gray-100">
+                    <h3 className="text-base font-medium text-gray-800 mb-3">Quick Actions</h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          window.location.href = "/schedule";
+                        }}
+                        className="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-200"
+                      >
+                        <Calendar className="h-5 w-5 text-green-600" />
+                        <span className="text-sm font-medium text-green-700">Schedule Meeting</span>
+                      </button>
+                      <a
+                        href="tel:+911169310715"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl border border-blue-200"
+                      >
+                        <PhoneCall className="h-5 w-5 text-blue-600" />
+                        <span className="text-sm font-medium text-blue-700">Call Now</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </>
+    );
+  }
+
+  // Desktop Navigation (unchanged)
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 h-14 sm:h-16 lg:h-20 flex items-center ${

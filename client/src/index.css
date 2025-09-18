@@ -1905,6 +1905,28 @@ div[class*="group-hover/service:block"] > div::-webkit-scrollbar-thumb {
     overflow-x: hidden;
   }
 
+  /* Swiggy-style mobile navbar */
+  .mobile-navbar-shadow {
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-card-mobile {
+    transition: all 0.2s ease;
+    transform: scale(1);
+  }
+
+  .service-card-mobile:hover {
+    transform: scale(1.02);
+  }
+
+  .bottom-nav-item {
+    transition: all 0.2s ease;
+  }
+
+  .bottom-nav-item:active {
+    transform: scale(0.95);
+  }
+
   .flex-responsive {
     @apply flex flex-col md:flex-row;
   }
@@ -1918,6 +1940,14 @@ div[class*="group-hover/service:block"] > div::-webkit-scrollbar-thumb {
     min-height: calc(100vh - 80px);
     position: relative;
     z-index: 1;
+  }
+
+  /* Mobile bottom navigation spacing */
+  @media (max-width: 768px) {
+    main {
+      padding-bottom: 80px !important; /* Space for bottom navigation */
+      padding-top: 4rem !important; /* Space for top header */
+    }
   }
 
   /* Ensure footer stays at bottom */
