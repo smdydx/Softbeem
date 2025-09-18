@@ -1897,12 +1897,11 @@ button, .button {
 /* Premium chatbot mobile optimizations */
 @media screen and (max-width: 768px) {
   .chatbot-container {
-    width: calc(100vw - 1.5rem) !important;
-    max-width: 400px !important;
-    height: calc(50vh - 1rem) !important;
+    width: calc(100vw - 1rem) !important;
+    max-width: 380px !important;
+    height: calc(55vh - 1rem) !important;
     bottom: 6rem !important;
     z-index: 70 !important;
-    right: 0.75rem !important;
   }
   
   .chatbot-header {
@@ -1927,38 +1926,6 @@ button, .button {
   .chatbot-floating-button {
     bottom: 6rem !important;
     z-index: 70 !important;
-    right: 0.75rem !important;
-  }
-
-  /* Desktop positioning */
-  @media (min-width: 768px) {
-    .chatbot-container {
-      width: 420px !important;
-      max-width: 420px !important;
-      height: 600px !important;
-      bottom: 1.5rem !important;
-      right: 1.5rem !important;
-    }
-    
-    .chatbot-floating-button {
-      bottom: 1.5rem !important;
-      right: 1.5rem !important;
-    }
-  }
-
-  /* Large desktop positioning */
-  @media (min-width: 1024px) {
-    .chatbot-container {
-      width: 450px !important;
-      height: 650px !important;
-      bottom: 2rem !important;
-      right: 2rem !important;
-    }
-    
-    .chatbot-floating-button {
-      bottom: 2rem !important;
-      right: 2rem !important;
-    }
   }
 
   /* Premium glass effects */
