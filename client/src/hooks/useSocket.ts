@@ -1,26 +1,16 @@
 
-import { useRef, useEffect } from 'react';
-import { io, Socket } from 'socket.io-client';
+import { useRef } from 'react';
 
-export const useSocket = (serverPath: string = '') => {
-  const socketRef = useRef<Socket | null>(null);
-
-  useEffect(() => {
-    // Only create socket if we don't have one
-    if (!socketRef.current) {
-      socketRef.current = io(serverPath || 'http://localhost:5000', {
-        transports: ['websocket', 'polling'],
-        autoConnect: true,
-      });
+export const useSocket = () => {
+  const socketRef = useRef<any>(null);
+  
+  return {
+    socket: socketRef.current,
+    connect: () => {
+      // Socket connection logic here if needed
+    },
+    disconnect: () => {
+      // Socket disconnection logic here if needed
     }
-
-    return () => {
-      if (socketRef.current) {
-        socketRef.current.disconnect();
-        socketRef.current = null;
-      }
-    };
-  }, [serverPath]);
-
-  return socketRef.current;
+  };
 };

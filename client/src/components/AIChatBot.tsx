@@ -87,14 +87,15 @@ const AIChatBot = () => {
       digital: "₹15,000/month से शुरू (complete package)"
     },
     contact: {
-      phone: "+91-XXXXXXXXXX",
+      phone: "+91-1169310715",
       email: "info@softbeem.com",
+      whatsapp: "https://wa.me/911169310715",
       schedule: "Free consultation available",
       response: "24 hours के अंदर response guaranteed"
     }
   };
 
-  // Enhanced response logic
+  // Enhanced response logic with comprehensive AI responses
   const generateResponse = (query: string): string => {
     const lowerQuery = query.toLowerCase();
 
@@ -106,16 +107,16 @@ const AIChatBot = () => {
     // Services related queries
     if (lowerQuery.includes('service') || lowerQuery.includes('सेवा')) {
       if (lowerQuery.includes('blockchain') || lowerQuery.includes('ब्लॉकचेन')) {
-        return `🔷 **Blockchain Services:**\n\n${websiteInfo.services.blockchain.join('\n')}\n\n💰 **Starting Price:** ${websiteInfo.pricing.blockchain}\n\nकौन सी service के बारे में और जानना चाहते हैं?`;
+        return `🔷 **Blockchain Services:**\n\n${websiteInfo.services.blockchain.join('\n• ')}\n\n💰 **Starting Price:** ${websiteInfo.pricing.blockchain}\n\nकौन सी service के बारे में और जानना चाहते हैं?`;
       }
       if (lowerQuery.includes('web') || lowerQuery.includes('website') || lowerQuery.includes('वेबसाइट')) {
-        return `🔷 **Web Development Services:**\n\n${websiteInfo.services.it.slice(0, 3).join('\n')}\n\n💰 **Starting Price:** ${websiteInfo.pricing.web}\n\nकोई specific requirement है?`;
+        return `🔷 **Web Development Services:**\n\n• ${websiteInfo.services.it.slice(0, 3).join('\n• ')}\n\n💰 **Starting Price:** ${websiteInfo.pricing.web}\n\nकोई specific requirement है?`;
       }
       if (lowerQuery.includes('legal') || lowerQuery.includes('कानूनी')) {
-        return `🔷 **Legal Services:**\n\n${websiteInfo.services.legal.join('\n')}\n\n💰 **Starting Price:** ${websiteInfo.pricing.legal}\n\nकिस legal service की जरूरत है?`;
+        return `🔷 **Legal Services:**\n\n• ${websiteInfo.services.legal.join('\n• ')}\n\n💰 **Starting Price:** ${websiteInfo.pricing.legal}\n\nकिस legal service की जरूरत है?`;
       }
       if (lowerQuery.includes('digital') || lowerQuery.includes('marketing') || lowerQuery.includes('मार्केटिंग')) {
-        return `🔷 **Digital Marketing Services:**\n\n${websiteInfo.services.digital.join('\n')}\n\n💰 **Starting Price:** ${websiteInfo.pricing.digital}\n\nकौन सा marketing strategy चाहिए?`;
+        return `🔷 **Digital Marketing Services:**\n\n• ${websiteInfo.services.digital.join('\n• ')}\n\n💰 **Starting Price:** ${websiteInfo.pricing.digital}\n\nकौन सा marketing strategy चाहिए?`;
       }
 
       return `हमारी **सभी Services:**\n\n🔸 **Blockchain Development**\n🔸 **Web & Mobile Development** \n🔸 **Legal & Compliance**\n🔸 **Digital Marketing**\n\nकिस category के बारे में जानना चाहते हैं?`;
@@ -133,12 +134,12 @@ const AIChatBot = () => {
 
     // Contact and meeting
     if (lowerQuery.includes('contact') || lowerQuery.includes('meeting') || lowerQuery.includes('call') || lowerQuery.includes('संपर्क') || lowerQuery.includes('मीटिंग')) {
-      return `📞 **Contact Information:**\n\n• **Phone:** ${websiteInfo.contact.phone}\n• **Email:** ${websiteInfo.contact.email}\n• **Free Consultation:** ${websiteInfo.contact.schedule}\n• **Response Time:** ${websiteInfo.contact.response}\n\nक्या आप meeting schedule करना चाहते हैं?`;
+      return `📞 **Contact Information:**\n\n• **Phone:** ${websiteInfo.contact.phone}\n• **Email:** ${websiteInfo.contact.email}\n• **WhatsApp:** ${websiteInfo.contact.whatsapp}\n• **Free Consultation:** ${websiteInfo.contact.schedule}\n• **Response Time:** ${websiteInfo.contact.response}\n\nक्या आप meeting schedule करना चाहते हैं?`;
     }
 
     // Technology specific queries
     if (lowerQuery.includes('smart contract') || lowerQuery.includes('स्मार्ट कॉन्ट्रैक्ट')) {
-      return `🔷 **Smart Contract Development:**\n\n• Ethereum, BSC, Polygon support\n• Security audited contracts\n• Gas optimization\n• Custom functionality\n• Testing & deployment\n\n💰 **Price:** ₹50,000 से शुरू\n\n कौन सा blockchain platform चाहिए?`;
+      return `🔷 **Smart Contract Development:**\n\n• Ethereum, BSC, Polygon support\n• Security audited contracts\n• Gas optimization\n• Custom functionality\n• Testing & deployment\n\n💰 **Price:** ₹50,000 से शुरू\n\nकौन सा blockchain platform चाहिए?`;
     }
 
     if (lowerQuery.includes('nft') || lowerQuery.includes('एनएफटी')) {
@@ -151,7 +152,7 @@ const AIChatBot = () => {
 
     // Career related
     if (lowerQuery.includes('career') || lowerQuery.includes('job') || lowerQuery.includes('नौकरी') || lowerQuery.includes('करियर')) {
-      return `💼 **Career Opportunities:**\n\n• Blockchain Developers\n• Web Developers\n• Mobile App Developers\n• Legal Executives\n• Digital Marketing Specialists\n\nHamari careers page पर जाकर current openings देख सकते हैं।`;
+      return `💼 **Career Opportunities:**\n\n• Blockchain Developers\n• Web Developers\n• Mobile App Developers\n• Legal Executives\n• Digital Marketing Specialists\n\nहमारी careers page पर जाकर current openings देख सकते हैं।`;
     }
 
     // Process related
@@ -229,192 +230,194 @@ const AIChatBot = () => {
   };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          transition={{ 
-            type: "spring", 
-            damping: 25, 
-            stiffness: 300,
-            duration: 0.3
-          }}
-          className="fixed bottom-20 right-2 sm:right-4 md:bottom-24 z-[45] w-[calc(100vw-1rem)] max-w-sm md:w-96 h-[30rem] sm:h-[36rem] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-3xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden"
-        >
-          {/* Animated Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-blue-500/20 to-purple-500/20 animate-pulse" />
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-400/30 to-transparent rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-500/30 to-transparent rounded-full blur-2xl" />
-          </div>
-
-          {/* Premium Header */}
-          <div className="relative p-4 sm:p-5 bg-gradient-to-r from-green-500/20 via-blue-500/15 to-purple-500/20 border-b border-green-500/30 backdrop-blur-sm">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-                    <Bot className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                  </div>
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse flex items-center justify-center">
-                    <Sparkles className="h-2 w-2 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-white font-bold text-sm sm:text-base bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
-                    Softbeem AI Assistant
-                  </h3>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <p className="text-green-300 text-xs font-medium">Online • Ready to help</p>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <button 
-                  onClick={() => setIsOpen(false)} 
-                  className="p-2 rounded-xl bg-zinc-800/50 hover:bg-zinc-700/50 text-gray-400 hover:text-white transition-all duration-200 backdrop-blur-sm border border-zinc-700/50"
-                >
-                  <Minimize2 className="h-4 w-4" />
-                </button>
-                <button 
-                  onClick={() => setIsOpen(false)} 
-                  className="p-2 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-red-400 hover:text-red-300 transition-all duration-200 backdrop-blur-sm border border-red-500/30"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
+    <div className="fixed z-[45]">
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ 
+              type: "spring", 
+              damping: 25, 
+              stiffness: 300,
+              duration: 0.3
+            }}
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 w-[calc(100vw-2rem)] max-w-sm sm:max-w-md md:max-w-lg h-[70vh] sm:h-[75vh] md:h-[80vh] max-h-[600px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-3xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden"
+          >
+            {/* Animated Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-blue-500/20 to-purple-500/20 animate-pulse" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-400/30 to-transparent rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-500/30 to-transparent rounded-full blur-2xl" />
             </div>
-          </div>
 
-          {/* Premium Quick Actions */}
-          <div className="relative p-3 sm:p-4 border-b border-green-500/20 bg-gradient-to-r from-zinc-900/50 to-zinc-800/50">
-            <div className="grid grid-cols-2 gap-2">
-              {quickActions.map((action, index) => {
-                const colorClasses = {
-                  blue: "from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-300 hover:from-blue-500/30 hover:to-blue-600/30",
-                  green: "from-green-500/20 to-green-600/20 border-green-500/30 text-green-300 hover:from-green-500/30 hover:to-green-600/30",
-                  purple: "from-purple-500/20 to-purple-600/20 border-purple-500/30 text-purple-300 hover:from-purple-500/30 hover:to-purple-600/30",
-                  orange: "from-orange-500/20 to-orange-600/20 border-orange-500/30 text-orange-300 hover:from-orange-500/30 hover:to-orange-600/30"
-                };
-                
-                return (
-                  <motion.button
-                    key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    onClick={() => handleQuickAction(action.query)}
-                    className={`flex items-center gap-2 p-2 sm:p-3 bg-gradient-to-r ${colorClasses[action.color as keyof typeof colorClasses]} rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 border backdrop-blur-sm group`}
+            {/* Premium Header */}
+            <div className="relative p-3 sm:p-4 md:p-5 bg-gradient-to-r from-green-500/20 via-blue-500/15 to-purple-500/20 border-b border-green-500/30 backdrop-blur-sm">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="relative">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                      <Bot className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-white" />
+                    </div>
+                    <div className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse flex items-center justify-center">
+                      <Sparkles className="h-1.5 w-1.5 sm:h-2 sm:w-2 text-white" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold text-xs sm:text-sm md:text-base bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
+                      Softbeem AI Assistant
+                    </h3>
+                    <div className="flex items-center gap-1 sm:gap-2">
+                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <p className="text-green-300 text-[10px] sm:text-xs font-medium">Online • Ready to help</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <button 
+                    onClick={() => setIsOpen(false)} 
+                    className="p-1.5 sm:p-2 rounded-xl bg-zinc-800/50 hover:bg-zinc-700/50 text-gray-400 hover:text-white transition-all duration-200 backdrop-blur-sm border border-zinc-700/50"
                   >
-                    <div className="w-6 h-6 flex items-center justify-center">
-                      {action.icon}
-                    </div>
-                    <span className="truncate group-hover:scale-110 transition-transform">{action.text}</span>
-                  </motion.button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Messages Container with Premium Styling */}
-          <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent">
-            {messages.map((message, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div className={`max-w-[90%] sm:max-w-[85%] p-3 sm:p-4 rounded-2xl whitespace-pre-wrap text-xs sm:text-sm leading-relaxed shadow-lg backdrop-blur-sm border ${
-                  message.type === 'user' 
-                    ? 'bg-gradient-to-r from-green-500/30 to-emerald-500/30 text-white border-green-500/40 shadow-green-500/20' 
-                    : 'bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 text-gray-200 border-zinc-700/50 shadow-black/20'
-                }`}>
-                  <div className="mb-2 break-words font-medium">{message.text}</div>
-                  <div className={`text-[10px] sm:text-xs opacity-60 font-medium ${message.type === 'user' ? 'text-right text-green-200' : 'text-left text-gray-400'}`}>
-                    {formatTime(message.timestamp)}
-                  </div>
+                    <Minimize2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                  </button>
+                  <button 
+                    onClick={() => setIsOpen(false)} 
+                    className="p-1.5 sm:p-2 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-red-400 hover:text-red-300 transition-all duration-200 backdrop-blur-sm border border-red-500/30"
+                  >
+                    <X className="h-3 w-3 sm:h-4 sm:w-4" />
+                  </button>
                 </div>
-              </motion.div>
-            ))}
-
-            {isTyping && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex justify-start"
-              >
-                <div className="bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 text-gray-200 p-4 rounded-2xl border border-zinc-700/50 shadow-lg backdrop-blur-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                    </div>
-                    <span className="text-xs font-medium text-green-400">AI is thinking...</span>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Premium Input Area */}
-          <div className="relative p-3 sm:p-4 border-t border-green-500/30 bg-gradient-to-r from-zinc-900/80 to-zinc-800/80 backdrop-blur-sm">
-            <div className="flex gap-2 items-end">
-              <div className="flex-1 relative">
-                <Input
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Type your message..."
-                  disabled={isTyping}
-                  className="bg-zinc-800/60 border-green-500/40 text-white placeholder-gray-400 focus:border-green-400 rounded-xl resize-none text-xs sm:text-sm pr-12 py-3 backdrop-blur-sm shadow-inner"
-                  style={{ minHeight: '44px' }}
-                />
-                <MessageSquare className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
               </div>
-              <Button 
-                onClick={handleSend} 
-                disabled={!input.trim() || isTyping}
-                size="icon" 
-                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white border-0 rounded-xl h-11 w-11 sm:h-12 sm:w-12 shrink-0 shadow-lg shadow-green-500/25 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:scale-100"
-              >
-                <Send className="h-4 w-4 sm:h-5 sm:w-5" />
-              </Button>
             </div>
-          </div>
-        </motion.div>
-      )}
 
-      {!isOpen && (
-        <motion.button
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="fixed bottom-16 right-2 sm:right-4 md:bottom-6 z-[45] w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative"
-          onClick={() => setIsOpen(true)}
-        >
-          {/* Animated background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-emerald-400/20 to-teal-400/20 rounded-full animate-pulse" />
-          
-          <Bot className="h-7 w-7 sm:h-8 sm:w-8 relative z-10 group-hover:scale-110 transition-transform" />
-          
-          {/* Premium status indicator */}
-          <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse flex items-center justify-center">
-            <Sparkles className="h-3 w-3 text-white" />
-          </div>
+            {/* Premium Quick Actions */}
+            <div className="relative p-2 sm:p-3 md:p-4 border-b border-green-500/20 bg-gradient-to-r from-zinc-900/50 to-zinc-800/50">
+              <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                {quickActions.map((action, index) => {
+                  const colorClasses = {
+                    blue: "from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-300 hover:from-blue-500/30 hover:to-blue-600/30",
+                    green: "from-green-500/20 to-green-600/20 border-green-500/30 text-green-300 hover:from-green-500/30 hover:to-green-600/30",
+                    purple: "from-purple-500/20 to-purple-600/20 border-purple-500/30 text-purple-300 hover:from-purple-500/30 hover:to-purple-600/30",
+                    orange: "from-orange-500/20 to-orange-600/20 border-orange-500/30 text-orange-300 hover:from-orange-500/30 hover:to-orange-600/30"
+                  };
+                  
+                  return (
+                    <motion.button
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      onClick={() => handleQuickAction(action.query)}
+                      className={`flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 md:p-3 bg-gradient-to-r ${colorClasses[action.color as keyof typeof colorClasses]} rounded-xl text-[10px] sm:text-xs md:text-sm font-medium transition-all duration-300 hover:scale-105 border backdrop-blur-sm group`}
+                    >
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex items-center justify-center">
+                        {action.icon}
+                      </div>
+                      <span className="truncate group-hover:scale-110 transition-transform">{action.text}</span>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </div>
 
-          {/* Glow effect */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" />
-        </motion.button>
-      )}
-    </AnimatePresence>
+            {/* Messages Container with Premium Styling */}
+            <div className="flex-1 overflow-y-auto p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3 md:space-y-4 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent">
+              {messages.map((message, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div className={`max-w-[90%] sm:max-w-[85%] p-2 sm:p-3 md:p-4 rounded-2xl whitespace-pre-wrap text-[10px] sm:text-xs md:text-sm leading-relaxed shadow-lg backdrop-blur-sm border ${
+                    message.type === 'user' 
+                      ? 'bg-gradient-to-r from-green-500/30 to-emerald-500/30 text-white border-green-500/40 shadow-green-500/20' 
+                      : 'bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 text-gray-200 border-zinc-700/50 shadow-black/20'
+                  }`}>
+                    <div className="mb-1 sm:mb-2 break-words font-medium">{message.text}</div>
+                    <div className={`text-[8px] sm:text-[10px] md:text-xs opacity-60 font-medium ${message.type === 'user' ? 'text-right text-green-200' : 'text-left text-gray-400'}`}>
+                      {formatTime(message.timestamp)}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+
+              {isTyping && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex justify-start"
+                >
+                  <div className="bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 text-gray-200 p-3 sm:p-4 rounded-2xl border border-zinc-700/50 shadow-lg backdrop-blur-sm">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="flex gap-1">
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-bounce"></div>
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      </div>
+                      <span className="text-[10px] sm:text-xs font-medium text-green-400">AI is thinking...</span>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Premium Input Area */}
+            <div className="relative p-2 sm:p-3 md:p-4 border-t border-green-500/30 bg-gradient-to-r from-zinc-900/80 to-zinc-800/80 backdrop-blur-sm">
+              <div className="flex gap-1.5 sm:gap-2 items-end">
+                <div className="flex-1 relative">
+                  <Input
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Type your message..."
+                    disabled={isTyping}
+                    className="bg-zinc-800/60 border-green-500/40 text-white placeholder-gray-400 focus:border-green-400 rounded-xl resize-none text-[10px] sm:text-xs md:text-sm pr-8 sm:pr-10 md:pr-12 py-2 sm:py-3 backdrop-blur-sm shadow-inner"
+                    style={{ minHeight: '36px' }}
+                  />
+                  <MessageSquare className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 h-3 w-3 sm:h-4 sm:w-4 text-gray-500" />
+                </div>
+                <Button 
+                  onClick={handleSend} 
+                  disabled={!input.trim() || isTyping}
+                  size="icon" 
+                  className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white border-0 rounded-xl h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 shrink-0 shadow-lg shadow-green-500/25 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:scale-100"
+                >
+                  <Send className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {!isOpen && (
+          <motion.button
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 md:bottom-6 md:right-8 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative z-[45]"
+            onClick={() => setIsOpen(true)}
+          >
+            {/* Animated background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-emerald-400/20 to-teal-400/20 rounded-full animate-pulse" />
+            
+            <Bot className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 relative z-10 group-hover:scale-110 transition-transform" />
+            
+            {/* Premium status indicator */}
+            <div className="absolute -top-0.5 sm:-top-1 -right-0.5 sm:-right-1 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse flex items-center justify-center">
+              <Sparkles className="h-2 w-2 sm:h-3 sm:w-3 text-white" />
+            </div>
+
+            {/* Glow effect */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 
