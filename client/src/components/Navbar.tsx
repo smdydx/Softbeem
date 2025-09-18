@@ -193,162 +193,400 @@ const Navbar = () => {
                 </div>
               </div>
 
-              {/* Quick Actions - Single Button */}
+              {/* Premium Quick Actions - Hamburger Style */}
               <div className="flex items-center">
-                <Button
-                  variant="ghost"
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.05 }}
                   onClick={() => {
                     setQuickActionsOpen(!quickActionsOpen);
                   }}
                   aria-label="Quick Actions"
-                  className="p-2 hover:bg-green-500/10 rounded-full min-w-[40px] min-h-[40px] flex items-center justify-center"
+                  className="relative p-3 bg-gradient-to-br from-zinc-800/50 via-zinc-900/80 to-black/90 backdrop-blur-md rounded-xl border border-green-500/30 shadow-lg hover:shadow-green-500/25 transition-all duration-300 min-w-[48px] min-h-[48px] flex items-center justify-center group overflow-hidden"
                 >
-                  <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                  </svg>
-                </Button>
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-500/10 to-green-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Premium hamburger icon with animation */}
+                  <div className="flex flex-col space-y-1 transition-all duration-300">
+                    <motion.div 
+                      className={`w-5 h-0.5 bg-gradient-to-r from-green-400 to-emerald-300 rounded-full transition-all duration-300 ${
+                        quickActionsOpen ? 'rotate-45 translate-y-1.5' : ''
+                      }`}
+                      animate={{
+                        rotate: quickActionsOpen ? 45 : 0,
+                        y: quickActionsOpen ? 6 : 0
+                      }}
+                    />
+                    <motion.div 
+                      className={`w-5 h-0.5 bg-gradient-to-r from-green-400 to-emerald-300 rounded-full transition-all duration-300 ${
+                        quickActionsOpen ? 'opacity-0' : 'opacity-100'
+                      }`}
+                      animate={{
+                        opacity: quickActionsOpen ? 0 : 1
+                      }}
+                    />
+                    <motion.div 
+                      className={`w-5 h-0.5 bg-gradient-to-r from-green-400 to-emerald-300 rounded-full transition-all duration-300 ${
+                        quickActionsOpen ? '-rotate-45 -translate-y-1.5' : ''
+                      }`}
+                      animate={{
+                        rotate: quickActionsOpen ? -45 : 0,
+                        y: quickActionsOpen ? -6 : 0
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
+                </motion.button>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Quick Actions Dropdown */}
+        {/* Premium Quick Actions Dropdown */}
         <AnimatePresence>
           {quickActionsOpen && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: -10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: -10 }}
-              className="fixed top-20 right-4 z-50 bg-gradient-to-b from-zinc-900/98 to-black/98 backdrop-blur-xl rounded-xl border border-green-500/20 shadow-xl p-3 min-w-[180px]"
+              initial={{ opacity: 0, scale: 0.8, y: -20, rotateX: -15 }}
+              animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: -20, rotateX: -15 }}
+              transition={{ 
+                type: "spring", 
+                damping: 20, 
+                stiffness: 300,
+                opacity: { duration: 0.2 }
+              }}
+              className="fixed top-20 right-4 z-50 min-w-[220px] perspective-1000"
             >
-              <div className="flex flex-col gap-2">
-                {/* WhatsApp */}
-                <a
-                  href="https://wa.me/911169310715"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setQuickActionsOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/10 transition-all group"
-                >
-                  <svg className="h-5 w-5 text-green-400" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                  </svg>
-                  <span className="text-white group-hover:text-green-400 font-medium text-sm">WhatsApp</span>
-                </a>
+              <div className="relative bg-gradient-to-br from-zinc-900/95 via-black/98 to-zinc-900/95 backdrop-blur-2xl rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/10 p-1 overflow-hidden">
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-emerald-500/10 to-teal-500/5 opacity-50" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-green-400/10 via-transparent to-transparent" />
+                
+                {/* Premium glass morphism effect */}
+                <div className="relative bg-black/20 backdrop-blur-sm rounded-xl border border-white/5">
+                  <div className="flex flex-col gap-1 p-3">
+                    {/* WhatsApp */}
+                    <motion.a
+                      whileHover={{ scale: 1.02, x: 4 }}
+                      whileTap={{ scale: 0.98 }}
+                      href="https://wa.me/911169310715"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setQuickActionsOpen(false)}
+                      className="relative flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-zinc-800/50 to-zinc-900/50 hover:from-green-500/10 hover:to-emerald-500/10 border border-transparent hover:border-green-500/20 transition-all duration-300 group overflow-hidden"
+                    >
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-500/5 to-green-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      
+                      <div className="relative z-10 flex items-center gap-4">
+                        <div className="p-2 bg-gradient-to-br from-green-500/20 to-emerald-600/20 rounded-xl border border-green-500/30 group-hover:shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
+                          <svg className="h-5 w-5 text-green-400 group-hover:text-green-300 transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                          </svg>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-white group-hover:text-green-300 font-semibold text-sm transition-colors">WhatsApp</span>
+                          <span className="text-gray-400 text-xs group-hover:text-green-400/70 transition-colors">Quick chat</span>
+                        </div>
+                      </div>
+                      
+                      {/* Arrow indicator */}
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <ChevronRight className="h-4 w-4 text-green-400" />
+                      </div>
+                    </motion.a>
 
-                {/* Schedule Meeting */}
-                <button
-                  onClick={() => {
-                    setQuickActionsOpen(false);
-                    window.location.href = "/schedule";
-                  }}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/10 transition-all group"
-                >
-                  <Calendar className="h-5 w-5 text-green-400" />
-                  <span className="text-white group-hover:text-green-400 font-medium text-sm">Schedule</span>
-                </button>
+                    {/* Schedule Meeting */}
+                    <motion.button
+                      whileHover={{ scale: 1.02, x: 4 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => {
+                        setQuickActionsOpen(false);
+                        window.location.href = "/schedule";
+                      }}
+                      className="relative flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-zinc-800/50 to-zinc-900/50 hover:from-blue-500/10 hover:to-indigo-500/10 border border-transparent hover:border-blue-500/20 transition-all duration-300 group overflow-hidden"
+                    >
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      
+                      <div className="relative z-10 flex items-center gap-4">
+                        <div className="p-2 bg-gradient-to-br from-blue-500/20 to-indigo-600/20 rounded-xl border border-blue-500/30 group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
+                          <Calendar className="h-5 w-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-white group-hover:text-blue-300 font-semibold text-sm transition-colors">Schedule</span>
+                          <span className="text-gray-400 text-xs group-hover:text-blue-400/70 transition-colors">Book meeting</span>
+                        </div>
+                      </div>
+                      
+                      {/* Arrow indicator */}
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <ChevronRight className="h-4 w-4 text-blue-400" />
+                      </div>
+                    </motion.button>
 
-                {/* Email */}
-                <a
-                  href="mailto:contact@sisko.dev"
-                  onClick={() => setQuickActionsOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/10 transition-all group"
-                >
-                  <svg className="h-5 w-5 text-green-400" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                  </svg>
-                  <span className="text-white group-hover:text-green-400 font-medium text-sm">Email</span>
-                </a>
+                    {/* Email */}
+                    <motion.a
+                      whileHover={{ scale: 1.02, x: 4 }}
+                      whileTap={{ scale: 0.98 }}
+                      href="mailto:contact@sisko.dev"
+                      onClick={() => setQuickActionsOpen(false)}
+                      className="relative flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-zinc-800/50 to-zinc-900/50 hover:from-purple-500/10 hover:to-pink-500/10 border border-transparent hover:border-purple-500/20 transition-all duration-300 group overflow-hidden"
+                    >
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      
+                      <div className="relative z-10 flex items-center gap-4">
+                        <div className="p-2 bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-xl border border-purple-500/30 group-hover:shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300">
+                          <svg className="h-5 w-5 text-purple-400 group-hover:text-purple-300 transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                          </svg>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-white group-hover:text-purple-300 font-semibold text-sm transition-colors">Email</span>
+                          <span className="text-gray-400 text-xs group-hover:text-purple-400/70 transition-colors">Send message</span>
+                        </div>
+                      </div>
+                      
+                      {/* Arrow indicator */}
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <ChevronRight className="h-4 w-4 text-purple-400" />
+                      </div>
+                    </motion.a>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Mobile Bottom Navigation */}
-        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-b from-zinc-900/98 to-black/98 backdrop-blur-xl border-t border-green-500/20 shadow-xl">
-          <div className="flex items-center justify-around py-2">
+        {/* Premium Mobile Bottom Navigation - Swiggy Style */}
+        <motion.nav 
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", damping: 20, stiffness: 300 }}
+          className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black via-zinc-900/95 to-zinc-800/90 backdrop-blur-2xl border-t border-gradient-to-r from-green-500/30 via-blue-500/20 to-purple-500/30 shadow-2xl shadow-black/50"
+        >
+          {/* Premium glass morphism background */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-zinc-900/60 to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center_bottom,_var(--tw-gradient-stops))] from-green-400/5 via-transparent to-transparent" />
+          
+          <div className="relative flex items-center justify-around px-2 py-3">
             {/* Home */}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.1, y: -2 }}
               onClick={() => {
                 setActiveTab("home");
                 scrollToSection("/#home");
               }}
-              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
+              className={`relative flex flex-col items-center py-3 px-4 rounded-2xl min-w-[65px] transition-all duration-300 ${
                 activeTab === "home"
-                  ? "text-orange-500"
-                  : "text-gray-400"
+                  ? "bg-gradient-to-t from-orange-500/20 via-orange-400/15 to-orange-300/10 border border-orange-500/30 shadow-lg shadow-orange-500/25"
+                  : "hover:bg-white/5 hover:border-white/10 border border-transparent"
               }`}
             >
-              <Home className="h-5 w-5 mb-1" />
-              <span className="text-xs font-medium">Home</span>
-            </button>
+              {/* Active indicator */}
+              {activeTab === "home" && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                />
+              )}
+              
+              <div className={`p-2 rounded-xl transition-all duration-300 ${
+                activeTab === "home" 
+                  ? "bg-gradient-to-br from-orange-500/20 to-orange-600/20 shadow-lg shadow-orange-500/25" 
+                  : "bg-zinc-800/50 group-hover:bg-white/10"
+              }`}>
+                <Home className={`h-5 w-5 mb-1 transition-colors ${
+                  activeTab === "home" ? "text-orange-400" : "text-gray-400 hover:text-white"
+                }`} />
+              </div>
+              <span className={`text-xs font-semibold transition-colors ${
+                activeTab === "home" ? "text-orange-400" : "text-gray-400 hover:text-white"
+              }`}>Home</span>
+              
+              {/* Premium glow effect */}
+              {activeTab === "home" && (
+                <div className="absolute inset-0 bg-orange-500/10 rounded-2xl blur-xl" />
+              )}
+            </motion.button>
 
             {/* Services */}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.1, y: -2 }}
               onClick={() => {
                 setActiveTab("services");
                 toggleMobileServices();
               }}
-              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
+              className={`relative flex flex-col items-center py-3 px-4 rounded-2xl min-w-[65px] transition-all duration-300 ${
                 activeTab === "services"
-                  ? "text-orange-500"
-                  : "text-gray-400"
+                  ? "bg-gradient-to-t from-blue-500/20 via-blue-400/15 to-blue-300/10 border border-blue-500/30 shadow-lg shadow-blue-500/25"
+                  : "hover:bg-white/5 hover:border-white/10 border border-transparent"
               }`}
             >
-              <Settings className="h-5 w-5 mb-1" />
-              <span className="text-xs font-medium">Services</span>
-            </button>
+              {/* Active indicator */}
+              {activeTab === "services" && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                />
+              )}
+              
+              <div className={`p-2 rounded-xl transition-all duration-300 ${
+                activeTab === "services" 
+                  ? "bg-gradient-to-br from-blue-500/20 to-blue-600/20 shadow-lg shadow-blue-500/25" 
+                  : "bg-zinc-800/50 group-hover:bg-white/10"
+              }`}>
+                <Settings className={`h-5 w-5 mb-1 transition-colors ${
+                  activeTab === "services" ? "text-blue-400" : "text-gray-400 hover:text-white"
+                }`} />
+              </div>
+              <span className={`text-xs font-semibold transition-colors ${
+                activeTab === "services" ? "text-blue-400" : "text-gray-400 hover:text-white"
+              }`}>Services</span>
+              
+              {/* Premium glow effect */}
+              {activeTab === "services" && (
+                <div className="absolute inset-0 bg-blue-500/10 rounded-2xl blur-xl" />
+              )}
+            </motion.button>
 
             {/* About */}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.1, y: -2 }}
               onClick={() => {
                 setActiveTab("about");
                 setIsMobileMenuOpen(true);
                 setMobileAboutOpen(true);
               }}
-              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
+              className={`relative flex flex-col items-center py-3 px-4 rounded-2xl min-w-[65px] transition-all duration-300 ${
                 activeTab === "about"
-                  ? "text-orange-500"
-                  : "text-gray-400"
+                  ? "bg-gradient-to-t from-green-500/20 via-green-400/15 to-green-300/10 border border-green-500/30 shadow-lg shadow-green-500/25"
+                  : "hover:bg-white/5 hover:border-white/10 border border-transparent"
               }`}
             >
-              <Users className="h-5 w-5 mb-1" />
-              <span className="text-xs font-medium">About</span>
-            </button>
+              {/* Active indicator */}
+              {activeTab === "about" && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-green-400 to-green-500 rounded-full"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                />
+              )}
+              
+              <div className={`p-2 rounded-xl transition-all duration-300 ${
+                activeTab === "about" 
+                  ? "bg-gradient-to-br from-green-500/20 to-green-600/20 shadow-lg shadow-green-500/25" 
+                  : "bg-zinc-800/50 group-hover:bg-white/10"
+              }`}>
+                <Users className={`h-5 w-5 mb-1 transition-colors ${
+                  activeTab === "about" ? "text-green-400" : "text-gray-400 hover:text-white"
+                }`} />
+              </div>
+              <span className={`text-xs font-semibold transition-colors ${
+                activeTab === "about" ? "text-green-400" : "text-gray-400 hover:text-white"
+              }`}>About</span>
+              
+              {/* Premium glow effect */}
+              {activeTab === "about" && (
+                <div className="absolute inset-0 bg-green-500/10 rounded-2xl blur-xl" />
+              )}
+            </motion.button>
 
             {/* Blog */}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.1, y: -2 }}
               onClick={() => {
                 setActiveTab("blog");
                 scrollToSection("/blog");
               }}
-              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
+              className={`relative flex flex-col items-center py-3 px-4 rounded-2xl min-w-[65px] transition-all duration-300 ${
                 activeTab === "blog"
-                  ? "text-orange-500"
-                  : "text-gray-400"
+                  ? "bg-gradient-to-t from-purple-500/20 via-purple-400/15 to-purple-300/10 border border-purple-500/30 shadow-lg shadow-purple-500/25"
+                  : "hover:bg-white/5 hover:border-white/10 border border-transparent"
               }`}
             >
-              <FileText className="h-5 w-5 mb-1" />
-              <span className="text-xs font-medium">Blog</span>
-            </button>
+              {/* Active indicator */}
+              {activeTab === "blog" && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                />
+              )}
+              
+              <div className={`p-2 rounded-xl transition-all duration-300 ${
+                activeTab === "blog" 
+                  ? "bg-gradient-to-br from-purple-500/20 to-purple-600/20 shadow-lg shadow-purple-500/25" 
+                  : "bg-zinc-800/50 group-hover:bg-white/10"
+              }`}>
+                <FileText className={`h-5 w-5 mb-1 transition-colors ${
+                  activeTab === "blog" ? "text-purple-400" : "text-gray-400 hover:text-white"
+                }`} />
+              </div>
+              <span className={`text-xs font-semibold transition-colors ${
+                activeTab === "blog" ? "text-purple-400" : "text-gray-400 hover:text-white"
+              }`}>Blog</span>
+              
+              {/* Premium glow effect */}
+              {activeTab === "blog" && (
+                <div className="absolute inset-0 bg-purple-500/10 rounded-2xl blur-xl" />
+              )}
+            </motion.button>
 
             {/* Contact */}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.1, y: -2 }}
               onClick={() => {
                 setActiveTab("contact");
                 scrollToSection("/#contact");
               }}
-              className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
+              className={`relative flex flex-col items-center py-3 px-4 rounded-2xl min-w-[65px] transition-all duration-300 ${
                 activeTab === "contact"
-                  ? "text-orange-500"
-                  : "text-gray-400"
+                  ? "bg-gradient-to-t from-pink-500/20 via-pink-400/15 to-pink-300/10 border border-pink-500/30 shadow-lg shadow-pink-500/25"
+                  : "hover:bg-white/5 hover:border-white/10 border border-transparent"
               }`}
             >
-              <MessageCircle className="h-5 w-5 mb-1" />
-              <span className="text-xs font-medium">Contact</span>
-            </button>
+              {/* Active indicator */}
+              {activeTab === "contact" && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-pink-400 to-pink-500 rounded-full"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                />
+              )}
+              
+              <div className={`p-2 rounded-xl transition-all duration-300 ${
+                activeTab === "contact" 
+                  ? "bg-gradient-to-br from-pink-500/20 to-pink-600/20 shadow-lg shadow-pink-500/25" 
+                  : "bg-zinc-800/50 group-hover:bg-white/10"
+              }`}>
+                <MessageCircle className={`h-5 w-5 mb-1 transition-colors ${
+                  activeTab === "contact" ? "text-pink-400" : "text-gray-400 hover:text-white"
+                }`} />
+              </div>
+              <span className={`text-xs font-semibold transition-colors ${
+                activeTab === "contact" ? "text-pink-400" : "text-gray-400 hover:text-white"
+              }`}>Contact</span>
+              
+              {/* Premium glow effect */}
+              {activeTab === "contact" && (
+                <div className="absolute inset-0 bg-pink-500/10 rounded-2xl blur-xl" />
+              )}
+            </motion.button>
           </div>
-        </nav>
+        </motion.nav>
 
         {/* Services Menu Overlay (Direct from bottom navigation) */}
         <AnimatePresence>
