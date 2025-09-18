@@ -115,7 +115,12 @@ export default function GSTInvoiceEWayBill() {
                   required
                 />
               </div>
-              <Button type="submit" className="w-full bg-green-500 hover:bg-green-600">Get Started</Button>
+              <Button 
+        onClick={() => window.location.href = '/contact'}
+        className="w-full bg-green-500 hover:bg-green-600"
+      >
+        Get Started
+      </Button>
               {formMessage && <p className="mt-4 text-sm text-gray-300">{formMessage}</p>}
             </form>
           </div>

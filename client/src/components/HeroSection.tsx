@@ -190,14 +190,14 @@ const HeroSection = () => {
                     size="lg"
                     className="bg-gradient-to-r from-[#00FF00] to-[#004400] hover:from-[#008000] hover:to-[#006600] text-white border-none shadow-lg shadow-green-500/20 transition-all duration-300 hover:scale-105"
                   >
-                    Explore Our Services
+                    Start Your Project
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-72 p-3 backdrop-blur-xl bg-black/80 border border-green-500/20">
                   <div className="flex flex-col gap-2">
                     <Link
-                      to="/services/blockchain"
+                      to="/schedule"
                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/10 transition-all duration-300 group"
                     >
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
@@ -205,15 +205,15 @@ const HeroSection = () => {
                       </div>
                       <div>
                         <span className="font-semibold text-white group-hover:text-green-400 transition-colors">
-                          Blockchain Development
+                          Schedule a Call
                         </span>
                         <span className="block text-sm text-gray-400">
-                          Smart Contracts & DApps
+                          Book a meeting with us
                         </span>
                       </div>
                     </Link>
                     <Link
-                      to="/services/it-services"
+                      to="/blog"
                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/10 transition-all duration-300 group"
                     >
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
@@ -221,15 +221,15 @@ const HeroSection = () => {
                       </div>
                       <div>
                         <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">
-                          IT Services
+                          Read Our Blog
                         </span>
                         <span className="block text-sm text-gray-400">
-                          Software & Mobile Apps
+                          Latest insights and news
                         </span>
                       </div>
                     </Link>
                     <Link
-                      to="/services/legal/compliance"
+                      to="/contact"
                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/10 transition-all duration-300 group"
                     >
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
@@ -237,10 +237,10 @@ const HeroSection = () => {
                       </div>
                       <div>
                         <span className="font-semibold text-white group-hover:text-yellow-400 transition-colors">
-                          Legal & Compliance Services
+                          Get In Touch
                         </span>
                         <span className="block text-sm text-gray-400">
-                          Business & Compliance
+                          Contact us for inquiries
                         </span>
                       </div>
                     </Link>
@@ -251,10 +251,10 @@ const HeroSection = () => {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => scrollToSection("#contact")}
+                onClick={() => window.location.href = '/contact'}
                 className="border-green-500/30 text-white hover:bg-green-500/10 shadow-lg"
               >
-                Contact Us
+                Get Started
               </Button>
             </div>
           </motion.div>

@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { staggerContainer, fadeIn } from "@/lib/animations";
 import { Code, Server, Database, Smartphone, Globe, Shield, Zap, CheckCircle, ArrowRight, Users, Trophy, Clock, Star } from "lucide-react";
@@ -116,7 +115,10 @@ const WebDev = () => {
               Transform your digital presence with cutting-edge web solutions that drive results
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all">
+              <button 
+                onClick={() => window.location.href = '/schedule'}
+                className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all"
+              >
                 Start Your Project
               </button>
               <button className="px-8 py-4 border border-gray-500 text-gray-300 rounded-lg font-semibold hover:border-gray-400 hover:text-white transition-all">
@@ -181,7 +183,7 @@ const WebDev = () => {
                   <h3 className="text-2xl font-bold text-white">{service.title}</h3>
                 </div>
                 <p className="text-gray-400 mb-6 text-lg">{service.description}</p>
-                
+
                 <div className="grid grid-cols-2 gap-3 mb-6">
                   {service.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-2">

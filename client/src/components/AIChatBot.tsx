@@ -241,18 +241,18 @@ const AIChatBot = () => {
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          className="fixed bottom-36 right-6 md:bottom-24 z-[45] w-80 md:w-96 h-[32rem] bg-zinc-900/95 backdrop-blur-xl rounded-2xl border border-green-500/20 shadow-2xl overflow-hidden"
+          className="fixed bottom-20 right-2 sm:right-4 md:bottom-24 z-[45] w-[calc(100vw-1rem)] max-w-sm md:w-96 h-[28rem] sm:h-[32rem] bg-zinc-900/95 backdrop-blur-xl rounded-2xl border border-green-500/20 shadow-2xl overflow-hidden"
         >
           {/* Header */}
-          <div className="p-3 sm:p-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 flex justify-between items-center border-b border-green-500/20 shrink-0">
-            <div className="flex items-center gap-3">
+          <div className="p-2 sm:p-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 flex justify-between items-center border-b border-green-500/20 shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3">
               <div className="relative">
-                <Bot className="h-6 w-6 text-green-400" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                <Bot className="h-5 w-5 sm:h-6 sm:w-6 text-green-400" />
+                <div className="absolute -top-0.5 -right-0.5 w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-full animate-pulse"></div>
               </div>
               <div>
-                <h3 className="text-white font-semibold text-sm">Softbeem AI Assistant</h3>
-                <p className="text-green-400 text-xs">Online • Ready to help</p>
+                <h3 className="text-white font-semibold text-xs sm:text-sm">Softbeem AI Assistant</h3>
+                <p className="text-green-400 text-[10px] sm:text-xs">Online • Ready to help</p>
               </div>
             </div>
             <div className="flex gap-2">
@@ -272,23 +272,25 @@ const AIChatBot = () => {
           </div>
 
           {/* Quick Actions */}
-          <div className="p-2 sm:p-3 border-b border-green-500/10 shrink-0">
+          <div className="p-1.5 sm:p-3 border-b border-green-500/10 shrink-0">
             <div className="grid grid-cols-2 gap-1 sm:gap-2">
               {quickActions.map((action, index) => (
                 <button
                   key={index}
                   onClick={() => handleQuickAction(action.query)}
-                  className="flex items-center gap-1 sm:gap-2 p-1.5 sm:p-2 bg-zinc-800/50 hover:bg-zinc-700/50 rounded-lg text-xs text-gray-300 hover:text-white transition-all duration-200"
+                  className="flex items-center gap-1 sm:gap-2 p-1 sm:p-2 bg-zinc-800/50 hover:bg-zinc-700/50 rounded-lg text-[10px] sm:text-xs text-gray-300 hover:text-white transition-all duration-200"
                 >
-                  {action.icon}
-                  {action.text}
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                    {action.icon}
+                  </div>
+                  <span className="truncate">{action.text}</span>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Messages Container */}
-          <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-3 sm:space-y-4 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent">
+          <div className="flex-1 overflow-y-auto p-1.5 sm:p-4 space-y-2 sm:space-y-4 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent">
             {messages.map((message, index) => (
               <motion.div
                 key={index}
@@ -296,13 +298,13 @@ const AIChatBot = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`max-w-[90%] sm:max-w-[85%] p-2 sm:p-3 rounded-2xl whitespace-pre-wrap text-xs sm:text-sm ${
+                <div className={`max-w-[92%] sm:max-w-[85%] p-2 sm:p-3 rounded-xl sm:rounded-2xl whitespace-pre-wrap text-[11px] sm:text-sm leading-relaxed ${
                   message.type === 'user' 
                     ? 'bg-gradient-to-r from-green-500/20 to-blue-500/20 text-white border border-green-500/30' 
                     : 'bg-zinc-800/80 text-gray-200 border border-zinc-700/50'
                 }`}>
-                  <div className="mb-1">{message.text}</div>
-                  <div className={`text-xs opacity-60 ${message.type === 'user' ? 'text-right' : 'text-left'}`}>
+                  <div className="mb-1 break-words">{message.text}</div>
+                  <div className={`text-[9px] sm:text-xs opacity-60 ${message.type === 'user' ? 'text-right' : 'text-left'}`}>
                     {formatTime(message.timestamp)}
                   </div>
                 </div>
@@ -331,8 +333,8 @@ const AIChatBot = () => {
           </div>
 
           {/* Input Area */}
-          <div className="p-2 sm:p-4 border-t border-green-500/20 shrink-0">
-            <div className="flex gap-2 items-end">
+          <div className="p-1.5 sm:p-4 border-t border-green-500/20 shrink-0">
+            <div className="flex gap-1.5 sm:gap-2 items-end">
               <div className="flex-1">
                 <Input
                   value={input}
@@ -340,17 +342,17 @@ const AIChatBot = () => {
                   onKeyPress={handleKeyPress}
                   placeholder="Type your message..."
                   disabled={isTyping}
-                  className="bg-zinc-800/50 border-green-500/30 text-white placeholder-gray-400 focus:border-green-400 rounded-xl resize-none"
-                  style={{ minHeight: '40px' }}
+                  className="bg-zinc-800/50 border-green-500/30 text-white placeholder-gray-400 focus:border-green-400 rounded-lg sm:rounded-xl resize-none text-xs sm:text-sm"
+                  style={{ minHeight: '36px' }}
                 />
               </div>
               <Button 
                 onClick={handleSend} 
                 disabled={!input.trim() || isTyping}
                 size="icon" 
-                className="bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 text-green-400 border border-green-500/30 rounded-xl h-10 w-10 shrink-0"
+                className="bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 text-green-400 border border-green-500/30 rounded-lg sm:rounded-xl h-9 w-9 sm:h-10 sm:w-10 shrink-0"
               >
-                <Send className="h-4 w-4" />
+                <Send className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </div>
           </div>
@@ -363,7 +365,7 @@ const AIChatBot = () => {
           animate={{ scale: 1, rotate: 0 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="fixed bottom-20 right-6 md:bottom-6 z-[45] w-14 h-14 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 rounded-full text-green-400 shadow-lg shadow-green-500/25 border border-green-500/30 z-[45] backdrop-blur-sm md:bottom-4"
+          className="fixed bottom-16 right-2 sm:right-4 md:bottom-6 z-[45] w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 rounded-full text-green-400 shadow-lg shadow-green-500/25 border border-green-500/30 backdrop-blur-sm"
           onClick={() => setIsOpen(true)}
         >
           <Bot className="h-6 w-6" />

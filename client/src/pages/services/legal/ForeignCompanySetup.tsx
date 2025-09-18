@@ -94,6 +94,7 @@ export default function ForeignCompanySetup() {
             >
               <Button
                 size="lg"
+                onClick={() => window.location.href = '/contact'}
                 className="bg-green-500 hover:bg-green-600 text-lg px-8"
               >
                 Get Started <ArrowRight className="ml-2" />

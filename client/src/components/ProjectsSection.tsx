@@ -17,8 +17,8 @@ const categories = [
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
 
-  const filteredProjects = activeCategory === "all" 
-    ? projectsData 
+  const filteredProjects = activeCategory === "all"
+    ? projectsData
     : projectsData.filter(project => project.category === activeCategory);
 
   return (
@@ -93,13 +93,12 @@ const ProjectsSection = () => {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <Button
-            variant="transparent"
-            size="lg"
-            className="flex items-center gap-2"
-          >
-            View All Projects <ArrowRight className="h-4 w-4" />
-          </Button>
+          {/* Updated Link for "View Portfolio" */}
+          <Link to="/blog">
+            <Button variant="transparent" size="lg" className="flex items-center gap-2">
+              View Portfolio <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>
@@ -131,9 +130,12 @@ const ProjectCard = ({ project, delay }: ProjectCardProps) => {
           className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <Button variant="secondary" size="icon" className="rounded-full">
-            <Eye className="h-5 w-5" />
-          </Button>
+          {/* Start Your Project button linked to schedule */}
+          <Link to="/schedule">
+            <Button variant="secondary" size="icon" className="rounded-full">
+              <Eye className="h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="p-6">
@@ -146,9 +148,10 @@ const ProjectCard = ({ project, delay }: ProjectCardProps) => {
         <p className="text-muted-foreground text-sm mb-4">
           {project.description}
         </p>
-        <Link to="/blog">
+        {/* Get Started button linked to contact form */}
+        <Link to="/contact">
           <Button variant="link" className="p-0 flex items-center gap-1 text-primary">
-            View Case Study <ArrowRight className="h-4 w-4" />
+            Get Started <ArrowRight className="h-4 w-4" />
           </Button>
         </Link>
       </div>
