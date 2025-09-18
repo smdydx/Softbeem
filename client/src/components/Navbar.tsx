@@ -243,8 +243,7 @@ const Navbar = () => {
                 </motion.button>
               </div>
             </div>
-          </div>
-        </header>
+          </header>
 
         {/* Premium Quick Actions Dropdown */}
         <AnimatePresence>
@@ -981,28 +980,6 @@ const Navbar = () => {
                           className="bg-gradient-to-b from-zinc-800 to-black/70 border-t border-zinc-700 p-3 space-y-1"
                         >
                           {navLinks.find(link => link.name === "About Us")?.submenu?.map((subItem, subIdx) => {
-                            const getAboutIcon = (name: string) => {
-                              switch (name) {
-                                case "Company Overview":
-                                  return <Home className="h-4 w-4 text-green-400" />;
-                                case "Our Story":
-                                  return <FileText className="h-4 w-4 text-green-400" />;
-                                // case "Leadership":
-                                //   return <Users className="h-4 w-4 text-green-400" />;
-                                case "Vision & Mission":
-                                  return <ChevronRight className="h-4 w-4 text-green-400" />;
-                                case "Core Values":
-                                  return <Settings className="h-4 w-4 text-green-400" />;
-                                case "Careers":
-                                  return <Calendar className="h-4 w-4 text-green-400" />;
-                                case "Achievements":
-                                  return <Award className="h-4 w-4 text-green-400" />;
-                                default:
-                                  return <Settings className="h-4 w-4 text-green-400" />;
-                              }
-                            };
-</old_str>
-<new_str>
                             const getAboutIcon = (name: string) => {
                               switch (name) {
                                 case "Company Overview":
