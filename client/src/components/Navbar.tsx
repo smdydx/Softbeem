@@ -243,7 +243,8 @@ const Navbar = () => {
                 </motion.button>
               </div>
             </div>
-          </header>
+          </div>
+        </header>
 
         {/* Premium Quick Actions Dropdown */}
         <AnimatePresence>
@@ -983,6 +984,21 @@ const Navbar = () => {
                             const getAboutIcon = (name: string) => {
                               switch (name) {
                                 case "Company Overview":
+                                  return Home;
+                                case "Our Story":
+                                  return FileText;
+                                case "Vision & Mission":
+                                  return ChevronRight;
+                                case "Core Values":
+                                  return Settings;
+                                case "Careers":
+                                  return Calendar;
+                                case "Achievements":
+                                  return Award;
+                                default:
+                                  return Settings;
+                              }
+                            };
                                   return <Home className="h-4 w-4 text-green-400" />;
                                 case "Our Story":
                                   return <FileText className="h-4 w-4 text-green-400" />;
