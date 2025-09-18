@@ -30,7 +30,7 @@ const navLinks = [
     submenu: [
       { name: "Company Overview", href: "/about/company-overview" },
       { name: "Our Story", href: "/about/our-story" },
-      { name: "Leadership", href: "/about/leadership" },
+      // { name: "Leadership", href: "/about/leadership" },
       { name: "Vision & Mission", href: "/about/vision-mission" },
       { name: "Core Values", href: "/about/core-values" },
       { name: "Careers", href: "/about/careers" },
@@ -721,7 +721,7 @@ const Navbar = () => {
                           switch (name) {
                             case "Company Overview": return Home;
                             case "Our Story": return FileText;
-                            case "Leadership": return Users;
+                            // case "Leadership": return Users;
                             case "Vision & Mission": return ChevronRight;
                             case "Core Values": return Settings;
                             case "Careers": return Calendar;
@@ -987,8 +987,30 @@ const Navbar = () => {
                                   return <Home className="h-4 w-4 text-green-400" />;
                                 case "Our Story":
                                   return <FileText className="h-4 w-4 text-green-400" />;
-                                case "Leadership":
-                                  return <Users className="h-4 w-4 text-green-400" />;
+                                // case "Leadership":
+                                //   return <Users className="h-4 w-4 text-green-400" />;
+                                case "Vision & Mission":
+                                  return <ChevronRight className="h-4 w-4 text-green-400" />;
+                                case "Core Values":
+                                  return <Settings className="h-4 w-4 text-green-400" />;
+                                case "Careers":
+                                  return <Calendar className="h-4 w-4 text-green-400" />;
+                                case "Achievements":
+                                  return <Award className="h-4 w-4 text-green-400" />;
+                                default:
+                                  return <Settings className="h-4 w-4 text-green-400" />;
+                              }
+                            };
+</old_str>
+<new_str>
+                            const getAboutIcon = (name: string) => {
+                              switch (name) {
+                                case "Company Overview":
+                                  return <Home className="h-4 w-4 text-green-400" />;
+                                case "Our Story":
+                                  return <FileText className="h-4 w-4 text-green-400" />;
+                                // case "Leadership":
+                                //   return <Users className="h-4 w-4 text-green-400" />;
                                 case "Vision & Mission":
                                   return <ChevronRight className="h-4 w-4 text-green-400" />;
                                 case "Core Values":
@@ -1323,8 +1345,8 @@ const Navbar = () => {
                                 return <Home className="h-3 w-3 text-green-400" />;
                               case "Our Story":
                                 return <FileText className="h-3 w-3 text-green-400" />;
-                              case "Leadership":
-                                return <Users className="h-3 w-3 text-green-400" />;
+                              // case "Leadership":
+                              //   return <Users className="h-3 w-3 text-green-400" />;
                               case "Vision & Mission":
                                 return <ChevronRight className="h-3 w-3 text-green-400" />;
                               case "Core Values":
