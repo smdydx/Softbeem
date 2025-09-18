@@ -56,16 +56,15 @@ app.use((req, res, next) => {
 connectDB();
 
 // Example file upload route (replace with your actual implementation)
-app.post('/api/upload', (req, res) => {
+app.post('/api/upload', (req: any, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');
   }
 
-  let sampleFile = req.files.sampleFile;
+  let sampleFile = req.files.sampleFile as any;
   let uploadPath = __dirname + '/uploads/' + sampleFile.name;
 
-
-  sampleFile.mv(uploadPath, function (err) {
+  sampleFile.mv(uploadPath, function (err: any) {
     if (err) return res.status(500).send(err);
     res.send('File uploaded!');
   });
@@ -102,17 +101,17 @@ registerRoutes(app, httpServer).then((server) => {
     });
   });
 
-  server.on('error', (e: any) => {
+  httpServer.on('error', (e: any) => {
     if (e.code === 'EADDRINUSE') {
       log(`Port ${port} is busy, retrying...`);
       setTimeout(() => {
-        server.close();
-        server.listen(port, '0.0.0.0');
+        httpServer.close();
+        httpServer.listen(Number(port), '0.0.0.0');
       }, 1000);
     }
   });
 
-  httpServer.listen(port, '0.0.0.0', () => {
+  httpServer.listen(Number(port), '0.0.0.0', () => {
     log(`[express] Server running at http://0.0.0.0:${port}`);
   });
 });
