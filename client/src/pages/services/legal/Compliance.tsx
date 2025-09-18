@@ -254,13 +254,14 @@ export default function Compliance() {
                 </Button>
               </a>
               <a href="https://wa.me/911169310715" target="_blank" rel="noopener noreferrer">
-                <Button</a>
-                size="lg"
-                variant="outline"
-                className="border-green-500 text-green-500 hover:bg-green-500/10 text-lg px-8"
-              >
-                Get in Touch
-              </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-green-500 text-green-500 hover:bg-green-500/10 text-lg px-8"
+                >
+                  Get in Touch
+                </Button>
+              </a>
             </motion.div>
           </motion.div>
         </div>
