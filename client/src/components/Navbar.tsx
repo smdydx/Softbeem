@@ -205,7 +205,7 @@ const Navbar = () => {
         </header>
 
         {/* Mobile Bottom Navigation */}
-        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg">
+        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-b from-zinc-900/98 to-black/98 backdrop-blur-xl border-t border-green-500/20 shadow-xl">
           <div className="flex items-center justify-around py-2">
             {/* Home */}
             <button
@@ -216,7 +216,7 @@ const Navbar = () => {
               className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "home"
                   ? "text-orange-500"
-                  : "text-gray-600"
+                  : "text-gray-400"
               }`}
             >
               <Home className="h-5 w-5 mb-1" />
@@ -232,7 +232,7 @@ const Navbar = () => {
               className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "services"
                   ? "text-orange-500"
-                  : "text-gray-600"
+                  : "text-gray-400"
               }`}
             >
               <Settings className="h-5 w-5 mb-1" />
@@ -248,7 +248,7 @@ const Navbar = () => {
               className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "about"
                   ? "text-orange-500"
-                  : "text-gray-600"
+                  : "text-gray-400"
               }`}
             >
               <Users className="h-5 w-5 mb-1" />
@@ -264,7 +264,7 @@ const Navbar = () => {
               className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "blog"
                   ? "text-orange-500"
-                  : "text-gray-600"
+                  : "text-gray-400"
               }`}
             >
               <FileText className="h-5 w-5 mb-1" />
@@ -280,7 +280,7 @@ const Navbar = () => {
               className={`flex flex-col items-center py-2 px-3 min-w-[60px] ${
                 activeTab === "contact"
                   ? "text-orange-500"
-                  : "text-gray-600"
+                  : "text-gray-400"
               }`}
             >
               <MessageCircle className="h-5 w-5 mb-1" />
@@ -304,43 +304,43 @@ const Navbar = () => {
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl max-h-[85vh] overflow-y-auto"
+                className="absolute bottom-0 left-0 right-0 bg-gradient-to-b from-zinc-900/98 to-black/98 backdrop-blur-xl rounded-t-2xl max-h-[85vh] overflow-y-auto border-t border-green-500/20"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Handle Bar */}
-                <div className="flex justify-center py-3 bg-white rounded-t-2xl">
-                  <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
+                <div className="flex justify-center py-3 bg-gradient-to-b from-zinc-900/98 to-black/98 rounded-t-2xl">
+                  <div className="w-12 h-1 bg-gray-600 rounded-full"></div>
                 </div>
 
                 {/* Header */}
-                <div className="flex items-center justify-between px-4 pb-3 border-b border-gray-100 bg-white sticky top-0 z-10">
-                  <h2 className="text-lg font-semibold text-gray-800">Our Services</h2>
+                <div className="flex items-center justify-between px-4 pb-3 border-b border-green-500/20 bg-gradient-to-b from-zinc-900/98 to-black/98 sticky top-0 z-10">
+                  <h2 className="text-lg font-semibold text-white">Our Services</h2>
                   <button
                     onClick={() => setMobileServicesOpen(false)}
-                    className="p-2 rounded-full hover:bg-gray-100"
+                    className="p-2 rounded-full hover:bg-white/10"
                   >
-                    <X className="h-5 w-5 text-gray-600" />
+                    <X className="h-5 w-5 text-white" />
                   </button>
                 </div>
 
                 {/* Services Content */}
                 <div className="p-4 space-y-2">
                   {Object.keys(servicesData).map((category) => (
-                    <div key={category} className="bg-gray-50 rounded-xl overflow-hidden">
+                    <div key={category} className="bg-zinc-800 rounded-xl overflow-hidden">
                       <button
                         onClick={() => toggleMobileCategory(category)}
-                        className="w-full flex items-center justify-between gap-4 p-4 hover:bg-orange-50 transition-all"
+                        className="w-full flex items-center justify-between gap-4 p-4 hover:bg-zinc-700 transition-all"
                       >
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                            <Settings className="h-5 w-5 text-orange-600" />
+                          <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+                            <Settings className="h-5 w-5 text-green-400" />
                           </div>
-                          <span className="font-medium text-gray-800 capitalize">
+                          <span className="font-medium text-white capitalize">
                             {category === "tech" ? "Technology Services" : "Legal & Compliance"}
                           </span>
                         </div>
                         <ChevronDown
-                          className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                          className={`h-5 w-5 text-gray-400 transition-transform duration-300 ${
                             mobileOpenCategories.includes(category) ? "rotate-180" : ""
                           }`}
                         />
@@ -353,21 +353,21 @@ const Navbar = () => {
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="bg-white border-t border-gray-100"
+                            className="bg-gradient-to-b from-zinc-800 to-black/70 border-t border-zinc-700"
                           >
                             {servicesData[category as keyof typeof servicesData].map((service, idx) => (
                               <div key={idx} className="p-3">
                                 <button
                                   onClick={() => handleServiceClick(service)}
-                                  className="w-full flex items-center justify-between gap-3 p-3 rounded-lg hover:bg-orange-50 transition-all group"
+                                  className="w-full flex items-center justify-between gap-3 p-3 rounded-lg hover:bg-zinc-700 transition-all group"
                                 >
                                   <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                    <div className="w-8 h-8 bg-green-500/10 rounded-full flex items-center justify-center">
                                       {React.createElement(service.icon, {
-                                        className: "h-4 w-4 text-orange-600"
+                                        className: "h-4 w-4 text-green-400"
                                       })}
                                     </div>
-                                    <span className="text-sm text-gray-700 group-hover:text-orange-700 font-medium">
+                                    <span className="text-sm text-white/80 group-hover:text-white font-medium">
                                       {service.title}
                                     </span>
                                   </div>
@@ -402,14 +402,14 @@ const Navbar = () => {
                                             setMobileOpenServices([]);
                                             if (subItem.path) window.location.href = subItem.path;
                                           }}
-                                          className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-orange-50 transition-all group"
+                                          className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-700 transition-all group"
                                         >
-                                          <div className="w-6 h-6 bg-orange-50 rounded-full flex items-center justify-center">
+                                          <div className="w-6 h-6 bg-green-500/10 rounded-full flex items-center justify-center">
                                             {React.createElement(subItem.icon, {
-                                              className: "h-3 w-3 text-orange-600"
+                                              className: "h-3 w-3 text-green-400"
                                             })}
                                           </div>
-                                          <span className="text-xs text-gray-600 group-hover:text-orange-600 font-medium">
+                                          <span className="text-xs text-white/70 group-hover:text-white font-medium">
                                             {subItem.title}
                                           </span>
                                         </motion.button>
@@ -445,22 +445,22 @@ const Navbar = () => {
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl max-h-[85vh] overflow-y-auto"
+                className="absolute bottom-0 left-0 right-0 bg-gradient-to-b from-zinc-900/98 to-black/98 backdrop-blur-xl rounded-t-2xl max-h-[85vh] overflow-y-auto border-t border-green-500/20"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Handle Bar */}
-                <div className="flex justify-center py-3 bg-white rounded-t-2xl">
-                  <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
+                <div className="flex justify-center py-3 bg-gradient-to-b from-zinc-900/98 to-black/98 rounded-t-2xl">
+                  <div className="w-12 h-1 bg-gray-600 rounded-full"></div>
                 </div>
 
                 {/* Header */}
-                <div className="flex items-center justify-between px-4 pb-3 border-b border-gray-100 bg-white sticky top-0 z-10">
-                  <h2 className="text-lg font-semibold text-gray-800">Menu</h2>
+                <div className="flex items-center justify-between px-4 pb-3 border-b border-green-500/20 bg-gradient-to-b from-zinc-900/98 to-black/98 sticky top-0 z-10">
+                  <h2 className="text-lg font-semibold text-white">Menu</h2>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-full hover:bg-gray-100"
+                    className="p-2 rounded-full hover:bg-white/10"
                   >
-                    <X className="h-5 w-5 text-gray-600" />
+                    <X className="h-5 w-5 text-white" />
                   </button>
                 </div>
 
@@ -472,28 +472,28 @@ const Navbar = () => {
                       setIsMobileMenuOpen(false);
                       scrollToSection("/#home");
                     }}
-                    className="w-full flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-orange-50 transition-all"
+                    className="w-full flex items-center gap-4 p-4 bg-zinc-800 rounded-xl hover:bg-zinc-700 transition-all"
                   >
-                    <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                      <Home className="h-5 w-5 text-orange-600" />
+                    <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+                      <Home className="h-5 w-5 text-green-400" />
                     </div>
-                    <span className="font-medium text-gray-800">Home</span>
+                    <span className="font-medium text-white">Home</span>
                   </button>
 
                   {/* Services with Submenu */}
-                  <div className="bg-gray-50 rounded-xl overflow-hidden">
+                  <div className="bg-zinc-800 rounded-xl overflow-hidden">
                     <button
                       onClick={toggleMobileServices}
-                      className="w-full flex items-center justify-between gap-4 p-4 hover:bg-orange-50 transition-all"
+                      className="w-full flex items-center justify-between gap-4 p-4 hover:bg-zinc-700 transition-all"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                          <Settings className="h-5 w-5 text-orange-600" />
+                        <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+                          <Settings className="h-5 w-5 text-green-400" />
                         </div>
-                        <span className="font-medium text-gray-800">Services</span>
+                        <span className="font-medium text-white">Services</span>
                       </div>
                       <ChevronDown
-                        className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                        className={`h-5 w-5 text-gray-400 transition-transform duration-300 ${
                           mobileServicesOpen ? "rotate-180" : ""
                         }`}
                       />
@@ -506,19 +506,19 @@ const Navbar = () => {
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.3 }}
-                          className="bg-white border-t border-gray-100"
+                          className="bg-gradient-to-b from-zinc-800 to-black/70 border-t border-zinc-700"
                         >
                           {Object.keys(servicesData).map((category) => (
-                            <div key={category} className="p-3">
+                            <div key={category} className="border-b border-zinc-700">
                               <button
                                 onClick={() => toggleMobileCategory(category)}
-                                className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-all"
+                                className="w-full flex items-center justify-between px-8 py-3 hover:bg-zinc-700 transition-all"
                               >
-                                <span className="text-sm font-medium text-gray-700 capitalize">
-                                  {category === "tech" ? "Technology Services" : "Legal & Compliance"}
+                                <span className="text-green-400 font-medium text-xs capitalize">
+                                  {category === "tech" ? "Technology Services" : "Legal & Compliance Services"}
                                 </span>
                                 <ChevronDown
-                                  className={`h-4 w-4 text-gray-500 transition-transform duration-300 ${
+                                  className={`h-4 w-4 text-gray-400 transition-transform duration-300 ${
                                     mobileOpenCategories.includes(category) ? "rotate-180" : ""
                                   }`}
                                 />
@@ -531,32 +531,46 @@ const Navbar = () => {
                                     animate={{ height: "auto", opacity: 1 }}
                                     exit={{ height: 0, opacity: 0 }}
                                     transition={{ duration: 0.25 }}
-                                    className="ml-3 mt-2 space-y-1"
+                                    className="bg-black/50"
                                   >
                                     {servicesData[category as keyof typeof servicesData].map((service, idx) => (
                                       <div key={idx}>
-                                        <button
-                                          onClick={() => handleServiceClick(service)}
-                                          className="w-full flex items-center justify-between gap-3 p-3 rounded-lg hover:bg-orange-50 transition-all group"
+                                        <motion.button
+                                          initial={{ x: -20, opacity: 0 }}
+                                          animate={{ x: 0, opacity: 1 }}
+                                          transition={{
+                                            duration: 0.2,
+                                            delay: idx * 0.05,
+                                          }}
+                                          onClick={() =>
+                                            handleServiceClick(service)
+                                          }
+                                          className="w-full flex items-center justify-between gap-3 px-12 py-3 hover:bg-zinc-700 transition-all group"
                                         >
-                                          <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                                              {React.createElement(service.icon, {
-                                                className: "h-4 w-4 text-orange-600"
-                                              })}
+                                          <div className="flex items-center gap-4">
+                                            <div className="text-green-400/80 group-hover:text-green-400 transition-colors flex-shrink-0">
+                                              <div className="h-3 w-3">
+                                                {React.createElement(
+                                                  service.icon,
+                                                )}
+                                              </div>
                                             </div>
-                                            <span className="text-sm text-gray-700 group-hover:text-orange-700 font-medium">
+                                            <span className="text-white/80 group-hover:text-white text-xs font-medium">
                                               {service.title}
                                             </span>
                                           </div>
                                           {service.submenu && (
                                             <ChevronDown
-                                              className={`h-4 w-4 text-gray-400 transition-transform duration-300 ${
-                                                mobileOpenServices.includes(service.title) ? "rotate-180" : ""
+                                              className={`h-3 w-3 text-green-400/60 transition-transform duration-300 ${
+                                                mobileOpenServices.includes(
+                                                  service.title,
+                                                )
+                                                  ? "rotate-180"
+                                                  : ""
                                               }`}
                                             />
                                           )}
-                                        </button>
+                                        </motion.button>
 
                                         {/* Service Submenu */}
                                         <AnimatePresence>
@@ -566,33 +580,60 @@ const Navbar = () => {
                                               animate={{ height: "auto", opacity: 1 }}
                                               exit={{ height: 0, opacity: 0 }}
                                               transition={{ duration: 0.25 }}
-                                              className="ml-6 mt-2 space-y-1"
+                                              className="bg-zinc-950/90 border-l-2 border-green-500/30 ml-16 overflow-hidden"
                                             >
-                                              {service.submenu.map((subItem, subIdx) => (
-                                                <motion.button
-                                                  key={subIdx}
-                                                  initial={{ x: -10, opacity: 0 }}
-                                                  animate={{ x: 0, opacity: 1 }}
-                                                  transition={{ duration: 0.2, delay: subIdx * 0.03 }}
-                                                  onClick={() => {
-                                                    setIsMobileMenuOpen(false);
-                                                    setMobileServicesOpen(false);
-                                                    setMobileOpenCategories([]);
-                                                    setMobileOpenServices([]);
-                                                    if (subItem.path) window.location.href = subItem.path;
-                                                  }}
-                                                  className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-orange-50 transition-all group"
-                                                >
-                                                  <div className="w-6 h-6 bg-orange-50 rounded-full flex items-center justify-center">
-                                                    {React.createElement(subItem.icon, {
-                                                      className: "h-3 w-3 text-orange-600"
-                                                    })}
-                                                  </div>
-                                                  <span className="text-xs text-gray-600 group-hover:text-orange-600 font-medium">
-                                                    {subItem.title}
-                                                  </span>
-                                                </motion.button>
-                                              ))}
+                                              {service.submenu.map(
+                                                (subItem, subIdx) => (
+                                                  <motion.button
+                                                    key={subIdx}
+                                                    initial={{
+                                                      x: -15,
+                                                      opacity: 0,
+                                                    }}
+                                                    animate={{
+                                                      x: 0,
+                                                      opacity: 1,
+                                                    }}
+                                                    transition={{
+                                                      duration: 0.2,
+                                                      delay: subIdx * 0.03,
+                                                    }}
+                                                    onClick={() => {
+                                                      setIsMobileMenuOpen(
+                                                        false,
+                                                      );
+                                                      setMobileServicesOpen(
+                                                        false,
+                                                      );
+                                                      setMobileOpenCategories(
+                                                        [],
+                                                      );
+                                                      setMobileOpenServices(
+                                                        [],
+                                                      );
+                                                      if (subItem.path)
+                                                        window.location.href =
+                                                          subItem.path;
+                                                    }}
+                                                    className="w-full flex items-center gap-4 px-8 py-2 hover:bg-zinc-700 transition-all duration-200 group"
+                                                  >
+                                                    <div className="text-green-400/60 group-hover:text-green-400 transition-colors flex-shrink-0 flex items-center">
+                                                      <div className="h-2.5 w-2.5">
+                                                        {React.createElement(
+                                                          subItem.icon,
+                                                          {
+                                                            className:
+                                                              "h-2.5 w-2.5",
+                                                          },
+                                                        )}
+                                                      </div>
+                                                    </div>
+                                                    <span className="text-white/60 group-hover:text-white text-[10px] font-medium">
+                                                      {subItem.title}
+                                                    </span>
+                                                  </motion.button>
+                                                ),
+                                              )}
                                             </motion.div>
                                           )}
                                         </AnimatePresence>
@@ -609,19 +650,19 @@ const Navbar = () => {
                   </div>
 
                   {/* About with Submenu */}
-                  <div className="bg-gray-50 rounded-xl overflow-hidden">
+                  <div className="bg-zinc-800 rounded-xl overflow-hidden">
                     <button
                       onClick={toggleMobileAbout}
-                      className="w-full flex items-center justify-between gap-4 p-4 hover:bg-orange-50 transition-all"
+                      className="w-full flex items-center justify-between gap-4 p-4 hover:bg-zinc-700 transition-all"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                          <Users className="h-5 w-5 text-orange-600" />
+                        <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+                          <Users className="h-5 w-5 text-green-400" />
                         </div>
-                        <span className="font-medium text-gray-800">About Us</span>
+                        <span className="font-medium text-white">About Us</span>
                       </div>
                       <ChevronDown
-                        className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                        className={`h-5 w-5 text-gray-400 transition-transform duration-300 ${
                           mobileAboutOpen ? "rotate-180" : ""
                         }`}
                       />
@@ -634,7 +675,7 @@ const Navbar = () => {
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.3 }}
-                          className="bg-white border-t border-gray-100 p-3 space-y-1"
+                          className="bg-gradient-to-b from-zinc-800 to-black/70 border-t border-zinc-700 p-3 space-y-1"
                         >
                           {navLinks.find(link => link.name === "About Us")?.submenu?.map((subItem, subIdx) => {
                             const getAboutIcon = (name: string) => {
@@ -661,14 +702,14 @@ const Navbar = () => {
                                   setIsMobileMenuOpen(false);
                                   setMobileAboutOpen(false);
                                 }}
-                                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 transition-all group"
+                                className="flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-700 transition-all group"
                               >
-                                <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                <div className="w-8 h-8 bg-green-500/10 rounded-full flex items-center justify-center">
                                   {React.createElement(getAboutIcon(subItem.name), {
-                                    className: "h-4 w-4 text-orange-600"
+                                    className: "h-4 w-4 text-green-400"
                                   })}
                                 </div>
-                                <span className="text-sm text-gray-700 group-hover:text-orange-700 font-medium">
+                                <span className="text-sm text-white/80 group-hover:text-white font-medium">
                                   {subItem.name}
                                 </span>
                               </motion.a>
@@ -685,12 +726,12 @@ const Navbar = () => {
                       setIsMobileMenuOpen(false);
                       scrollToSection("/blog");
                     }}
-                    className="w-full flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-orange-50 transition-all"
+                    className="w-full flex items-center gap-4 p-4 bg-zinc-800 rounded-xl hover:bg-zinc-700 transition-all"
                   >
-                    <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                      <FileText className="h-5 w-5 text-orange-600" />
+                    <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+                      <FileText className="h-5 w-5 text-green-400" />
                     </div>
-                    <span className="font-medium text-gray-800">Blog</span>
+                    <span className="font-medium text-white">Blog</span>
                   </button>
 
                   {/* Contact */}
@@ -699,35 +740,35 @@ const Navbar = () => {
                       setIsMobileMenuOpen(false);
                       scrollToSection("/#contact");
                     }}
-                    className="w-full flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-orange-50 transition-all"
+                    className="w-full flex items-center gap-4 p-4 bg-zinc-800 rounded-xl hover:bg-zinc-700 transition-all"
                   >
-                    <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                      <MessageCircle className="h-5 w-5 text-orange-600" />
+                    <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
+                      <MessageCircle className="h-5 w-5 text-green-400" />
                     </div>
-                    <span className="font-medium text-gray-800">Contact Us</span>
+                    <span className="font-medium text-white">Contact Us</span>
                   </button>
 
                   {/* Quick Actions */}
-                  <div className="mt-6 pt-4 border-t border-gray-100">
-                    <h3 className="text-base font-medium text-gray-800 mb-3">Quick Actions</h3>
+                  <div className="mt-6 pt-4 border-t border-zinc-700">
+                    <h3 className="text-base font-medium text-white mb-3">Quick Actions</h3>
                     <div className="grid grid-cols-2 gap-3">
                       <button
                         onClick={() => {
                           setIsMobileMenuOpen(false);
                           window.location.href = "/schedule";
                         }}
-                        className="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-200"
+                        className="flex items-center gap-3 p-3 bg-green-500/10 rounded-xl border border-green-500/30"
                       >
-                        <Calendar className="h-5 w-5 text-green-600" />
-                        <span className="text-sm font-medium text-green-700">Schedule Meeting</span>
+                        <Calendar className="h-5 w-5 text-green-400" />
+                        <span className="text-sm font-medium text-green-400">Schedule Meeting</span>
                       </button>
                       <a
                         href="tel:+911169310715"
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl border border-blue-200"
+                        className="flex items-center gap-3 p-3 bg-blue-500/10 rounded-xl border border-blue-500/30"
                       >
-                        <PhoneCall className="h-5 w-5 text-blue-600" />
-                        <span className="text-sm font-medium text-blue-700">Call Now</span>
+                        <PhoneCall className="h-5 w-5 text-blue-400" />
+                        <span className="text-sm font-medium text-blue-400">Call Now</span>
                       </a>
                     </div>
                   </div>
@@ -1073,7 +1114,7 @@ const Navbar = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-14 sm:top-16 lg:top-20 left-0 right-0 bg-black/95 backdrop-blur-xl border-t border-green-500/20 overflow-y-auto max-h-[calc(100vh-4rem)] z-50 shadow-2xl"
+            className="fixed top-14 sm:top-16 lg:top-20 left-0 right-0 bg-gradient-to-b from-zinc-900/98 to-black/98 backdrop-blur-xl border-t border-green-500/20 overflow-y-auto max-h-[calc(100vh-4rem)] z-50 shadow-2xl"
           >
             {/* Mobile Contact Options */}
             <div className="flex items-center justify-center gap-4 p-4 border-b border-green-500/10 bg-zinc-900/50">
@@ -1113,7 +1154,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileAbout}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-[10px] font-light tracking-wide uppercase font-['Inter']"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-zinc-800/50 transition-all duration-200 text-[10px] font-light tracking-wide uppercase font-['Inter']"
                       >
                         <div className="flex items-center gap-3">
                           <Users className="h-5 w-5 text-green-400" />
@@ -1135,7 +1176,7 @@ const Navbar = () => {
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="bg-zinc-900/80 backdrop-blur-sm"
+                            className="bg-gradient-to-b from-zinc-800 to-black/70 border-t border-zinc-700"
                           >
                             {link.submenu?.map((subItem, subIdx) => {
                               const getAboutIcon = (name: string) => {
@@ -1173,7 +1214,7 @@ const Navbar = () => {
                                     setIsMobileMenuOpen(false);
                                     setMobileAboutOpen(false);
                                   }}
-                                  className="flex items-center gap-3 px-8 py-3 text-white/80 hover:text-white hover:bg-green-500/10 transition-all duration-200 text-xs border-b border-green-500/5 last:border-b-0 font-['Inter']"
+                                  className="flex items-center gap-3 px-8 py-3 text-white/80 hover:text-white hover:bg-zinc-800/50 transition-all duration-200 text-xs border-b border-green-500/5 last:border-b-0 font-['Inter']"
                                 >
                                   {getAboutIcon(subItem.name)}
                                   <span className="text-xs font-medium">{subItem.name}</span>
@@ -1192,7 +1233,7 @@ const Navbar = () => {
                     <div key={index} className="border-b border-green-500/10">
                       <button
                         onClick={toggleMobileServices}
-                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-[10px] font-light tracking-wide uppercase font-['Inter']"
+                        className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-zinc-800/50 transition-all duration-200 text-[10px] font-light tracking-wide uppercase font-['Inter']"
                       >
                         <div className="flex items-center gap-3">
                           <Settings className="h-5 w-5 text-green-400" />
@@ -1214,16 +1255,16 @@ const Navbar = () => {
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="bg-zinc-900/80 backdrop-blur-sm"
+                            className="bg-gradient-to-b from-zinc-800 to-black/70 border-t border-zinc-700"
                           >
                             {Object.keys(servicesData).map((category) => (
                               <div
                                 key={category}
-                                className="border-b border-green-500/5 last:border-b-0"
+                                className="border-b border-zinc-700 last:border-b-0"
                               >
                                 <button
                                   onClick={() => toggleMobileCategory(category)}
-                                  className="w-full flex items-center justify-between px-8 py-3 text-left hover:bg-green-500/10 transition-all duration-200 font-['Inter']"
+                                  className="w-full flex items-center justify-between px-8 py-3 hover:bg-zinc-700 transition-all"
                                 >
                                   <span className="text-green-400 font-medium text-xs capitalize">
                                     {category === "tech"
@@ -1231,7 +1272,7 @@ const Navbar = () => {
                                       : "Legal & Compliance Services"}
                                   </span>
                                   <ChevronDown
-                                    className={`h-4 w-4 text-green-400 transition-transform duration-300 ${
+                                    className={`h-4 w-4 text-gray-400 transition-transform duration-300 ${
                                       mobileOpenCategories.includes(category)
                                         ? "rotate-180"
                                         : ""
@@ -1262,7 +1303,7 @@ const Navbar = () => {
                                             onClick={() =>
                                               handleServiceClick(service)
                                             }
-                                            className="w-full flex items-center justify-between gap-3 px-12 py-3 text-left hover:bg-green-500/10 transition-all duration-200 group font-['Inter']"
+                                            className="w-full flex items-center justify-between gap-3 px-12 py-3 hover:bg-zinc-700 transition-all group"
                                           >
                                             <div className="flex items-center gap-4">
                                               <div className="text-green-400/80 group-hover:text-green-400 transition-colors flex-shrink-0">
@@ -1336,9 +1377,6 @@ const Navbar = () => {
                                                           setMobileServicesOpen(
                                                             false,
                                                           );
-                                                          setMobileAboutOpen(
-                                                            false,
-                                                          );
                                                           setMobileOpenCategories(
                                                             [],
                                                           );
@@ -1349,7 +1387,7 @@ const Navbar = () => {
                                                             window.location.href =
                                                               subItem.path;
                                                         }}
-                                                        className="w-full flex items-center gap-4 px-8 py-2 text-left hover:bg-green-500/5 transition-all duration-200 group font-['Inter']"
+                                                        className="w-full flex items-center gap-4 px-8 py-2 hover:bg-zinc-700 transition-all duration-200 group"
                                                       >
                                                         <div className="text-green-400/60 group-hover:text-green-400 transition-colors flex-shrink-0 flex items-center">
                                                           <div className="h-2.5 w-2.5">
@@ -1404,7 +1442,7 @@ const Navbar = () => {
                     <button
                       key={index}
                       onClick={() => scrollToSection(link.href)}
-                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-green-500/5 transition-all duration-200 text-[10px] font-light tracking-wide uppercase font-['Inter']"
+                      className="w-full flex items-center justify-between px-6 py-4 text-white hover:text-green-400 hover:bg-zinc-800/50 transition-all duration-200 text-[10px] font-light tracking-wide uppercase font-['Inter']"
                     >
                       <div className="flex items-center gap-3">
                         {getIcon(link.name)}
