@@ -27,11 +27,16 @@ function ImageRow() {
   );
 }
 
-function BlockchainImage(props) {
+interface BlockchainImageProps {
+  src: string;
+  alt: string;
+}
+
+function BlockchainImage({ src, alt }: BlockchainImageProps) {
   return (
     <img
-      src={props.src}
-      alt={props.alt}
+      src={src}
+      alt={alt}
       style={{ width: '300px', height: '200px', margin: '10px', objectFit: 'cover' }}
     />
   );
