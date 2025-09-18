@@ -243,7 +243,7 @@ const AIChatBot = () => {
               stiffness: 300,
               duration: 0.3
             }}
-            className="fixed bottom-[5.5rem] right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 w-[calc(100vw-2rem)] max-w-sm sm:max-w-md md:max-w-lg h-[60vh] sm:h-[65vh] md:h-[80vh] max-h-[600px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-3xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden"
+            className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 md:bottom-32 md:right-8 lg:bottom-36 lg:right-10 w-[calc(100vw-2rem)] max-w-sm sm:max-w-md md:max-w-lg h-[60vh] sm:h-[65vh] md:h-[70vh] max-h-[500px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-3xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden z-[9998]"
           >
             {/* Animated Background Pattern */}
             <div className="absolute inset-0 opacity-10">
@@ -399,17 +399,17 @@ const AIChatBot = () => {
             animate={{ scale: 1, rotate: 0 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="fixed bottom-[5.5rem] right-4 sm:bottom-[5.5rem] sm:right-6 md:bottom-6 md:right-8 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative z-[45]"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-10 lg:right-10 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative z-[9999] transition-all duration-300"
             onClick={() => setIsOpen(true)}
           >
             {/* Animated background */}
             <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-emerald-400/20 to-teal-400/20 rounded-full animate-pulse" />
             
-            <Bot className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 relative z-10 group-hover:scale-110 transition-transform" />
+            <Bot className="h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9 lg:h-10 lg:w-10 relative z-10 group-hover:scale-110 transition-transform" />
             
             {/* Premium status indicator */}
-            <div className="absolute -top-0.5 sm:-top-1 -right-0.5 sm:-right-1 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse flex items-center justify-center">
-              <Sparkles className="h-2 w-2 sm:h-3 sm:w-3 text-white" />
+            <div className="absolute -top-1 -right-1 sm:-top-1.5 sm:-right-1.5 md:-top-2 md:-right-2 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse flex items-center justify-center shadow-lg">
+              <Sparkles className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-3.5 md:w-3.5 text-white" />
             </div>
 
             {/* Glow effect */}
