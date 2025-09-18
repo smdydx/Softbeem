@@ -87,7 +87,10 @@ const About = () => {
                 variants={fadeIn("up", "tween", 0.4, 1)}
                 className="flex flex-wrap gap-4"
               >
-                <button className="px-6 py-3 bg-primary text-white rounded-lg flex items-center gap-2 hover:scale-105 transition-transform">
+                <button 
+                  className="px-6 py-3 bg-primary text-white rounded-lg flex items-center gap-2 hover:scale-105 transition-transform"
+                  onClick={() => window.location.href = '/contact'}
+                >
                   Get Started
                   <ArrowRight className="h-4 w-4" />
                 </button>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { staggerContainer, fadeIn } from "@/lib/animations";
@@ -16,6 +15,7 @@ import {
   Linkedin,
   Facebook,
   Instagram,
+  ArrowRight,
 } from "lucide-react";
 
 const contactInfo = [
@@ -96,7 +96,7 @@ const ContactSection = () => {
       if (!response.ok) {
         throw new Error('Failed to send message');
       }
-      
+
       const result = await response.json();
       toast({
         title: "Message sent!",

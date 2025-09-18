@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer, slideIn } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
@@ -106,12 +105,13 @@ const AboutSection = () => {
               ))}
             </motion.div>
 
-            <Button 
-              size="lg" 
-              onClick={() => scrollToSection("#services")}
-              className="flex items-center gap-2"
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              onClick={() => window.location.href = '/about'}
             >
-              Explore Our Services <ArrowRight className="h-4 w-4" />
+              Learn More About Us
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </motion.div>
         </motion.div>

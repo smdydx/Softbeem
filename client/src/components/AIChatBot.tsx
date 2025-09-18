@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Bot, X, Send, Minimize2, Phone, Search, FileText, Calendar, Users, Building } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -117,7 +116,7 @@ const AIChatBot = () => {
       if (lowerQuery.includes('digital') || lowerQuery.includes('marketing') || lowerQuery.includes('मार्केटिंग')) {
         return `🔷 **Digital Marketing Services:**\n\n${websiteInfo.services.digital.join('\n')}\n\n💰 **Starting Price:** ${websiteInfo.pricing.digital}\n\nकौन सा marketing strategy चाहिए?`;
       }
-      
+
       return `हमारी **सभी Services:**\n\n🔸 **Blockchain Development**\n🔸 **Web & Mobile Development** \n🔸 **Legal & Compliance**\n🔸 **Digital Marketing**\n\nकिस category के बारे में जानना चाहते हैं?`;
     }
 
@@ -228,14 +227,21 @@ const AIChatBot = () => {
     setTimeout(() => handleSend(), 100);
   };
 
+  // Placeholder for toggleChat function if it's defined elsewhere
+  // If it's not defined, this component might not compile or work as expected.
+  // For now, we'll assume it's defined globally or in a parent component.
+  const toggleChat = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 50, scale: 0.95 }}
-          className="fixed bottom-16 right-2 left-2 h-[60vh] bg-black/95 backdrop-blur-lg border border-green-500/30 rounded-2xl shadow-2xl overflow-hidden z-[45] flex flex-col sm:bottom-20 sm:right-4 sm:left-auto sm:w-[90vw] sm:max-w-sm md:bottom-4 md:w-[400px] md:h-[600px] md:max-h-[600px]"
+          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, y: 20 }}
+          className="fixed bottom-36 right-6 md:bottom-24 z-[45] w-80 md:w-96 h-[32rem] bg-zinc-900/95 backdrop-blur-xl rounded-2xl border border-green-500/20 shadow-2xl overflow-hidden"
         >
           {/* Header */}
           <div className="p-3 sm:p-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 flex justify-between items-center border-b border-green-500/20 shrink-0">
@@ -302,7 +308,7 @@ const AIChatBot = () => {
                 </div>
               </motion.div>
             ))}
-            
+
             {isTyping && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -357,7 +363,7 @@ const AIChatBot = () => {
           animate={{ scale: 1, rotate: 0 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="fixed bottom-20 right-4 p-3 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 rounded-full text-green-400 shadow-lg shadow-green-500/25 border border-green-500/30 z-[45] backdrop-blur-sm md:bottom-4"
+          className="fixed bottom-20 right-6 md:bottom-6 z-[45] w-14 h-14 bg-gradient-to-r from-green-500/20 to-blue-500/20 hover:from-green-500/30 hover:to-blue-500/30 rounded-full text-green-400 shadow-lg shadow-green-500/25 border border-green-500/30 z-[45] backdrop-blur-sm md:bottom-4"
           onClick={() => setIsOpen(true)}
         >
           <Bot className="h-6 w-6" />

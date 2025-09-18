@@ -70,7 +70,7 @@ const Navbar = () => {
         setServicesDropdownOpen(false);
         setActiveServiceCategory("tech");
       }
-      
+
       // Close quick actions when clicking outside
       const target = event.target as Element;
       if (!target.closest('[aria-label="Quick Actions"]') && !target.closest('.fixed.top-20.right-4')) {
@@ -208,7 +208,7 @@ const Navbar = () => {
                 >
                   {/* Animated background */}
                   <div className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-500/10 to-green-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
+
                   {/* Premium hamburger icon with animation */}
                   <div className="flex flex-col space-y-1 transition-all duration-300">
                     <motion.div 
@@ -238,14 +238,13 @@ const Navbar = () => {
                       }}
                     />
                   </div>
-                  
+
                   {/* Glow effect */}
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
                 </motion.button>
               </div>
             </div>
-          </div>
-        </header>
+          </header>
 
         {/* Premium Quick Actions Dropdown */}
         <AnimatePresence>
@@ -266,7 +265,7 @@ const Navbar = () => {
                 {/* Animated background gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-emerald-500/10 to-teal-500/5 opacity-50" />
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-green-400/10 via-transparent to-transparent" />
-                
+
                 {/* Premium glass morphism effect */}
                 <div className="relative bg-black/20 backdrop-blur-sm rounded-xl border border-white/5">
                   <div className="flex flex-col gap-1 p-3">
@@ -282,7 +281,7 @@ const Navbar = () => {
                     >
                       {/* Glow effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-500/5 to-green-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      
+
                       <div className="relative z-10 flex items-center gap-4">
                         <div className="p-2 bg-gradient-to-br from-green-500/20 to-emerald-600/20 rounded-xl border border-green-500/30 group-hover:shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
                           <svg className="h-5 w-5 text-green-400 group-hover:text-green-300 transition-colors" viewBox="0 0 24 24" fill="currentColor">
@@ -294,7 +293,7 @@ const Navbar = () => {
                           <span className="text-gray-400 text-xs group-hover:text-green-400/70 transition-colors">Quick chat</span>
                         </div>
                       </div>
-                      
+
                       {/* Arrow indicator */}
                       <div className="absolute right-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <ChevronRight className="h-4 w-4 text-green-400" />
@@ -313,7 +312,7 @@ const Navbar = () => {
                     >
                       {/* Glow effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      
+
                       <div className="relative z-10 flex items-center gap-4">
                         <div className="p-2 bg-gradient-to-br from-blue-500/20 to-indigo-600/20 rounded-xl border border-blue-500/30 group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
                           <Calendar className="h-5 w-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
@@ -323,7 +322,7 @@ const Navbar = () => {
                           <span className="text-gray-400 text-xs group-hover:text-blue-400/70 transition-colors">Book meeting</span>
                         </div>
                       </div>
-                      
+
                       {/* Arrow indicator */}
                       <div className="absolute right-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <ChevronRight className="h-4 w-4 text-blue-400" />
@@ -340,7 +339,7 @@ const Navbar = () => {
                     >
                       {/* Glow effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      
+
                       <div className="relative z-10 flex items-center gap-4">
                         <div className="p-2 bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-xl border border-purple-500/30 group-hover:shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300">
                           <svg className="h-5 w-5 text-purple-400 group-hover:text-purple-300 transition-colors" viewBox="0 0 24 24" fill="currentColor">
@@ -352,7 +351,7 @@ const Navbar = () => {
                           <span className="text-gray-400 text-xs group-hover:text-purple-400/70 transition-colors">Send message</span>
                         </div>
                       </div>
-                      
+
                       {/* Arrow indicator */}
                       <div className="absolute right-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <ChevronRight className="h-4 w-4 text-purple-400" />
@@ -374,7 +373,7 @@ const Navbar = () => {
         >
           {/* Subtle glass morphism background */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-zinc-900/40 to-transparent" />
-          
+
           <div className="relative flex items-center justify-around px-1 py-2">
             {/* Home */}
             <motion.button
@@ -397,7 +396,7 @@ const Navbar = () => {
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 />
               )}
-              
+
               <Home className={`h-4 w-4 mb-1 transition-colors ${
                 activeTab === "home" ? "text-orange-400" : "text-gray-400 group-hover:text-white"
               }`} />
@@ -427,7 +426,7 @@ const Navbar = () => {
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 />
               )}
-              
+
               <Settings className={`h-4 w-4 mb-1 transition-colors ${
                 activeTab === "services" ? "text-blue-400" : "text-gray-400 group-hover:text-white"
               }`} />
@@ -458,7 +457,7 @@ const Navbar = () => {
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 />
               )}
-              
+
               <Users className={`h-4 w-4 mb-1 transition-colors ${
                 activeTab === "about" ? "text-green-400" : "text-gray-400 group-hover:text-white"
               }`} />
@@ -488,7 +487,7 @@ const Navbar = () => {
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 />
               )}
-              
+
               <FileText className={`h-4 w-4 mb-1 transition-colors ${
                 activeTab === "blog" ? "text-purple-400" : "text-gray-400 group-hover:text-white"
               }`} />
@@ -518,7 +517,7 @@ const Navbar = () => {
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 />
               )}
-              
+
               <MessageCircle className={`h-4 w-4 mb-1 transition-colors ${
                 activeTab === "contact" ? "text-pink-400" : "text-gray-400 group-hover:text-white"
               }`} />
@@ -984,14 +983,22 @@ const Navbar = () => {
                           {navLinks.find(link => link.name === "About Us")?.submenu?.map((subItem, subIdx) => {
                             const getAboutIcon = (name: string) => {
                               switch (name) {
-                                case "Company Overview": return Home;
-                                case "Our Story": return FileText;
-                                case "Leadership": return Users;
-                                case "Vision & Mission": return ChevronRight;
-                                case "Core Values": return Settings;
-                                case "Careers": return Calendar;
-                                case "Achievements": return Award;
-                                default: return Settings;
+                                case "Company Overview":
+                                  return <Home className="h-4 w-4 text-green-400" />;
+                                case "Our Story":
+                                  return <FileText className="h-4 w-4 text-green-400" />;
+                                case "Leadership":
+                                  return <Users className="h-4 w-4 text-green-400" />;
+                                case "Vision & Mission":
+                                  return <ChevronRight className="h-4 w-4 text-green-400" />;
+                                case "Core Values":
+                                  return <Settings className="h-4 w-4 text-green-400" />;
+                                case "Careers":
+                                  return <Calendar className="h-4 w-4 text-green-400" />;
+                                case "Achievements":
+                                  return <Award className="h-4 w-4 text-green-400" />;
+                                default:
+                                  return <Settings className="h-4 w-4 text-green-400" />;
                               }
                             };
 
@@ -1198,12 +1205,14 @@ const Navbar = () => {
                                               duration: 0.2,
                                               delay: idx * 0.05,
                                             }}
-                                            onClick={() =>
-                                              service.path
-                                                ? (window.location.href =
-                                                    service.path)
-                                                : scrollToSection("/#services")
-                                            }
+                                            onClick={() => {
+                                              setServicesDropdownOpen(false);
+                                              if (service.path) {
+                                                window.location.href = service.path;
+                                              } else {
+                                                scrollToSection("/#services");
+                                              }
+                                            }}
                                             className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full"
                                           >
                                             <div className="text-primary flex items-center">
@@ -1246,12 +1255,12 @@ const Navbar = () => {
                                                         duration: 0.2,
                                                         delay: subIdx * 0.05,
                                                       }}
-                                                      onClick={() =>
-                                                        subItem.path
-                                                          ? (window.location.href =
-                                                              subItem.path)
-                                                          : null
-                                                      }
+                                                      onClick={() => {
+                                                        setServicesDropdownOpen(false);
+                                                        if (subItem.path) {
+                                                          window.location.href = subItem.path;
+                                                        }
+                                                      }}
                                                       className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full"
                                                     >
                                                       <div className="text-primary/80 flex items-center">
@@ -1636,84 +1645,70 @@ const Navbar = () => {
                                             )}
                                           </motion.button>
 
-                                          {/* Show submenu for services that have submenu */}
+                                          {/* Service Submenu */}
                                           <AnimatePresence>
-                                            {service.submenu &&
-                                              mobileOpenServices.includes(
-                                                service.title,
-                                              ) && (
-                                                <motion.div
-                                                  initial={{
-                                                    height: 0,
-                                                    opacity: 0,
-                                                  }}
-                                                  animate={{
-                                                    height: "auto",
-                                                    opacity: 1,
-                                                  }}
-                                                  exit={{
-                                                    height: 0,
-                                                    opacity: 0,
-                                                  }}
-                                                  transition={{
-                                                    duration: 0.25,
-                                                  }}
-                                                  className="bg-zinc-950/90 border-l-2 border-green-500/30 ml-16 overflow-hidden"
-                                                >
-                                                  {service.submenu.map(
-                                                    (subItem, subIdx) => (
-                                                      <motion.button
-                                                        key={subIdx}
-                                                        initial={{
-                                                          x: -15,
-                                                          opacity: 0,
-                                                        }}
-                                                        animate={{
-                                                          x: 0,
-                                                          opacity: 1,
-                                                        }}
-                                                        transition={{
-                                                          duration: 0.2,
-                                                          delay: subIdx * 0.03,
-                                                        }}
-                                                        onClick={() => {
-                                                          setIsMobileMenuOpen(
-                                                            false,
-                                                          );
-                                                          setMobileServicesOpen(
-                                                            false,
-                                                          );
-                                                          setMobileOpenCategories(
-                                                            [],
-                                                          );
-                                                          setMobileOpenServices(
-                                                            [],
-                                                          );
-                                                          if (subItem.path)
-                                                            window.location.href =
-                                                              subItem.path;
-                                                        }}
-                                                        className="w-full flex items-center gap-4 px-8 py-2 hover:bg-zinc-700 transition-all duration-200 group"
-                                                      >
-                                                        <div className="text-green-400/60 group-hover:text-green-400 transition-colors flex-shrink-0 flex items-center">
-                                                          <div className="h-2.5 w-2.5">
-                                                            {React.createElement(
-                                                              subItem.icon,
-                                                              {
-                                                                className:
-                                                                  "h-2.5 w-2.5",
-                                                              },
-                                                            )}
-                                                          </div>
+                                            {service.submenu && mobileOpenServices.includes(service.title) && (
+                                              <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.25 }}
+                                                className="bg-zinc-950/90 border-l-2 border-green-500/30 ml-16 overflow-hidden"
+                                              >
+                                                {service.submenu.map(
+                                                  (subItem, subIdx) => (
+                                                    <motion.button
+                                                      key={subIdx}
+                                                      initial={{
+                                                        x: -15,
+                                                        opacity: 0,
+                                                      }}
+                                                      animate={{
+                                                        x: 0,
+                                                        opacity: 1,
+                                                      }}
+                                                      transition={{
+                                                        duration: 0.2,
+                                                        delay: subIdx * 0.03,
+                                                      }}
+                                                      onClick={() => {
+                                                        setIsMobileMenuOpen(
+                                                          false,
+                                                        );
+                                                        setMobileServicesOpen(
+                                                          false,
+                                                        );
+                                                        setMobileOpenCategories(
+                                                          [],
+                                                        );
+                                                        setMobileOpenServices(
+                                                          [],
+                                                        );
+                                                        if (subItem.path)
+                                                          window.location.href =
+                                                            subItem.path;
+                                                      }}
+                                                      className="w-full flex items-center gap-4 px-8 py-2 hover:bg-zinc-700 transition-all duration-200 group"
+                                                    >
+                                                      <div className="text-green-400/60 group-hover:text-green-400 transition-colors flex-shrink-0 flex items-center">
+                                                        <div className="h-2.5 w-2.5">
+                                                          {React.createElement(
+                                                            subItem.icon,
+                                                            {
+                                                              className:
+                                                                "h-2.5 w-2.5",
+                                                            },
+                                                          )}
                                                         </div>
-                                                        <span className="text-white/60 group-hover:text-white text-[10px] font-medium">
-                                                          {subItem.title}
-                                                        </span>
-                                                      </motion.button>
-                                                    ),
-                                                  )}
-                                                </motion.div>
-                                              )}
+                                                      </div>
+                                                      <span className="text-white/60 group-hover:text-white text-[10px] font-medium">
+                                                        {subItem.title}
+                                                      </span>
+                                                    </motion.button>
+                                                  ),
+                                                )}
+                                              </motion.div>
+                                            )}
                                           </AnimatePresence>
                                         </div>
                                       ))}

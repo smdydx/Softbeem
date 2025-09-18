@@ -135,7 +135,7 @@ const BlogCard = ({ post, delay }: BlogCardProps) => {
         day: 'numeric' 
       })
     : post.date;
-  
+
   const displayDescription = post.content 
     ? post.content.substring(0, 150) + '...'
     : post.description;

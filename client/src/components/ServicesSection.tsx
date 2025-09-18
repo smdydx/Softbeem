@@ -104,12 +104,13 @@ const ServicesSection = () => {
         >
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              size="lg"
-              onClick={() => window.location.href = '/services'}
-              className="flex items-center gap-2"
-            >
-              Explore Our Services <ArrowRight className="h-4 w-4" />
-            </Button>
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                onClick={() => window.location.href = '/services'}
+              >
+                View All Services
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             <Button
               size="lg"
               onClick={() => scrollToSection("#contact")}

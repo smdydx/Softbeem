@@ -199,6 +199,7 @@ const Services = () => {
 
                     <Button 
                       className="mt-6 bg-gradient-to-r from-green-500 to-emerald-600"
+                      onClick={() => window.location.href = service.path}
                     >
                       Learn More <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>

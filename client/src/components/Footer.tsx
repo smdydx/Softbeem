@@ -59,6 +59,20 @@ const Footer = () => {
               <Link
                 to={link.path}
                 className="text-gray-400 hover:text-primary transition-colors duration-300 flex items-center group text-sm lg:text-base"
+                onClick={(e) => {
+                  if (link.path.startsWith('/#')) {
+                    e.preventDefault();
+                    if (window.location.pathname !== '/') {
+                      window.location.href = link.path;
+                    } else {
+                      const element = document.getElementById(link.path.substring(2));
+                      if (element) {
+                        const y = element.getBoundingClientRect().top + window.pageYOffset - 80;
+                        window.scrollTo({ top: y, behavior: "smooth" });
+                      }
+                    }
+                  }
+                }}
               >
                 <ArrowRight className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 {typeof link.name === 'string' ? link.name : ''}

@@ -162,7 +162,7 @@ const Contact = () => {
               <Button
                 size="lg"
                 className="bg-green-500 hover:bg-green-600 text-white gap-2"
-                onClick={() => window.open("tel:+911169310715")}
+                onClick={() => window.location.href = "tel:+911169310715"}
               >
                 <Phone className="h-5 w-5" />
                 Call Now
@@ -180,7 +180,7 @@ const Contact = () => {
                 size="lg"
                 variant="outline"
                 className="border-green-500 text-green-500 hover:bg-green-500/10 gap-2"
-                onClick={() => window.open("mailto:support@softbeem.com")}
+                onClick={() => window.location.href = "mailto:support@softbeem.com"}
               >
                 <Mail className="h-5 w-5" />
                 Email Us
