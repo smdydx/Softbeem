@@ -289,7 +289,7 @@ const Navbar = () => {
           </div>
         </nav>
 
-        {/* Mobile Services Menu (Swiggy-style) */}
+        {/* Mobile Full Screen Menu (Swiggy-style with submenu) */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
@@ -304,17 +304,17 @@ const Navbar = () => {
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl max-h-[80vh] overflow-y-auto"
+                className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl max-h-[85vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Handle Bar */}
-                <div className="flex justify-center py-3">
-                  <div className="w-10 h-1 bg-gray-300 rounded-full"></div>
+                <div className="flex justify-center py-3 bg-white rounded-t-2xl">
+                  <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
                 </div>
 
                 {/* Header */}
-                <div className="flex items-center justify-between px-4 pb-3 border-b border-gray-100">
-                  <h2 className="text-lg font-semibold text-gray-800">Our Services</h2>
+                <div className="flex items-center justify-between px-4 pb-3 border-b border-gray-100 bg-white sticky top-0 z-10">
+                  <h2 className="text-lg font-semibold text-gray-800">Menu</h2>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2 rounded-full hover:bg-gray-100"
@@ -323,40 +323,248 @@ const Navbar = () => {
                   </button>
                 </div>
 
-                {/* Services Grid */}
-                <div className="p-4">
-                  {Object.keys(servicesData).map((category) => (
-                    <div key={category} className="mb-6">
-                      <h3 className="text-base font-medium text-gray-800 mb-3 capitalize">
-                        {category === "tech" ? "Technology Services" : "Legal & Compliance Services"}
-                      </h3>
-                      <div className="grid grid-cols-2 gap-3">
-                        {servicesData[category as keyof typeof servicesData].map((service, idx) => (
-                          <button
-                            key={idx}
-                            onClick={() => {
-                              setIsMobileMenuOpen(false);
-                              if (service.path) {
-                                window.location.href = service.path;
-                              } else {
-                                scrollToSection("/#services");
-                              }
-                            }}
-                            className="flex flex-col items-center p-3 bg-gray-50 rounded-xl hover:bg-orange-50 hover:border-orange-200 border border-transparent transition-all"
-                          >
-                            <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-                              {React.createElement(service.icon, {
-                                className: "h-6 w-6 text-orange-600"
-                              })}
-                            </div>
-                            <span className="text-xs text-gray-700 text-center font-medium leading-tight">
-                              {service.title}
-                            </span>
-                          </button>
-                        ))}
-                      </div>
+                {/* Menu Content */}
+                <div className="p-4 space-y-2">
+                  {/* Home */}
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      scrollToSection("/#home");
+                    }}
+                    className="w-full flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-orange-50 transition-all"
+                  >
+                    <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                      <Home className="h-5 w-5 text-orange-600" />
                     </div>
-                  ))}
+                    <span className="font-medium text-gray-800">Home</span>
+                  </button>
+
+                  {/* Services with Submenu */}
+                  <div className="bg-gray-50 rounded-xl overflow-hidden">
+                    <button
+                      onClick={toggleMobileServices}
+                      className="w-full flex items-center justify-between gap-4 p-4 hover:bg-orange-50 transition-all"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                          <Settings className="h-5 w-5 text-orange-600" />
+                        </div>
+                        <span className="font-medium text-gray-800">Services</span>
+                      </div>
+                      <ChevronDown
+                        className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                          mobileServicesOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    <AnimatePresence>
+                      {mobileServicesOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="bg-white border-t border-gray-100"
+                        >
+                          {Object.keys(servicesData).map((category) => (
+                            <div key={category} className="p-3">
+                              <button
+                                onClick={() => toggleMobileCategory(category)}
+                                className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-all"
+                              >
+                                <span className="text-sm font-medium text-gray-700 capitalize">
+                                  {category === "tech" ? "Technology Services" : "Legal & Compliance"}
+                                </span>
+                                <ChevronDown
+                                  className={`h-4 w-4 text-gray-500 transition-transform duration-300 ${
+                                    mobileOpenCategories.includes(category) ? "rotate-180" : ""
+                                  }`}
+                                />
+                              </button>
+
+                              <AnimatePresence>
+                                {mobileOpenCategories.includes(category) && (
+                                  <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.25 }}
+                                    className="ml-3 mt-2 space-y-1"
+                                  >
+                                    {servicesData[category as keyof typeof servicesData].map((service, idx) => (
+                                      <div key={idx}>
+                                        <button
+                                          onClick={() => handleServiceClick(service)}
+                                          className="w-full flex items-center justify-between gap-3 p-3 rounded-lg hover:bg-orange-50 transition-all group"
+                                        >
+                                          <div className="flex items-center gap-3">
+                                            <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                              {React.createElement(service.icon, {
+                                                className: "h-4 w-4 text-orange-600"
+                                              })}
+                                            </div>
+                                            <span className="text-sm text-gray-700 group-hover:text-orange-700 font-medium">
+                                              {service.title}
+                                            </span>
+                                          </div>
+                                          {service.submenu && (
+                                            <ChevronDown
+                                              className={`h-4 w-4 text-gray-400 transition-transform duration-300 ${
+                                                mobileOpenServices.includes(service.title) ? "rotate-180" : ""
+                                              }`}
+                                            />
+                                          )}
+                                        </button>
+
+                                        {/* Service Submenu */}
+                                        <AnimatePresence>
+                                          {service.submenu && mobileOpenServices.includes(service.title) && (
+                                            <motion.div
+                                              initial={{ height: 0, opacity: 0 }}
+                                              animate={{ height: "auto", opacity: 1 }}
+                                              exit={{ height: 0, opacity: 0 }}
+                                              transition={{ duration: 0.25 }}
+                                              className="ml-6 mt-2 space-y-1"
+                                            >
+                                              {service.submenu.map((subItem, subIdx) => (
+                                                <motion.button
+                                                  key={subIdx}
+                                                  initial={{ x: -10, opacity: 0 }}
+                                                  animate={{ x: 0, opacity: 1 }}
+                                                  transition={{ duration: 0.2, delay: subIdx * 0.03 }}
+                                                  onClick={() => {
+                                                    setIsMobileMenuOpen(false);
+                                                    setMobileServicesOpen(false);
+                                                    setMobileOpenCategories([]);
+                                                    setMobileOpenServices([]);
+                                                    if (subItem.path) window.location.href = subItem.path;
+                                                  }}
+                                                  className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-orange-50 transition-all group"
+                                                >
+                                                  <div className="w-6 h-6 bg-orange-50 rounded-full flex items-center justify-center">
+                                                    {React.createElement(subItem.icon, {
+                                                      className: "h-3 w-3 text-orange-600"
+                                                    })}
+                                                  </div>
+                                                  <span className="text-xs text-gray-600 group-hover:text-orange-600 font-medium">
+                                                    {subItem.title}
+                                                  </span>
+                                                </motion.button>
+                                              ))}
+                                            </motion.div>
+                                          )}
+                                        </AnimatePresence>
+                                      </div>
+                                    ))}
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* About with Submenu */}
+                  <div className="bg-gray-50 rounded-xl overflow-hidden">
+                    <button
+                      onClick={toggleMobileAbout}
+                      className="w-full flex items-center justify-between gap-4 p-4 hover:bg-orange-50 transition-all"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                          <Users className="h-5 w-5 text-orange-600" />
+                        </div>
+                        <span className="font-medium text-gray-800">About Us</span>
+                      </div>
+                      <ChevronDown
+                        className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                          mobileAboutOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    <AnimatePresence>
+                      {mobileAboutOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="bg-white border-t border-gray-100 p-3 space-y-1"
+                        >
+                          {navLinks.find(link => link.name === "About Us")?.submenu?.map((subItem, subIdx) => {
+                            const getAboutIcon = (name: string) => {
+                              switch (name) {
+                                case "Company Overview": return Home;
+                                case "Our Story": return FileText;
+                                case "Leadership": return Users;
+                                case "Vision & Mission": return ChevronRight;
+                                case "Core Values": return Settings;
+                                case "Careers": return Calendar;
+                                case "Achievements": return Award;
+                                default: return Settings;
+                              }
+                            };
+
+                            return (
+                              <motion.a
+                                key={subIdx}
+                                href={subItem.href}
+                                initial={{ x: -10, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.2, delay: subIdx * 0.03 }}
+                                onClick={() => {
+                                  setIsMobileMenuOpen(false);
+                                  setMobileAboutOpen(false);
+                                }}
+                                className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 transition-all group"
+                              >
+                                <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                  {React.createElement(getAboutIcon(subItem.name), {
+                                    className: "h-4 w-4 text-orange-600"
+                                  })}
+                                </div>
+                                <span className="text-sm text-gray-700 group-hover:text-orange-700 font-medium">
+                                  {subItem.name}
+                                </span>
+                              </motion.a>
+                            );
+                          })}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Blog */}
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      scrollToSection("/blog");
+                    }}
+                    className="w-full flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-orange-50 transition-all"
+                  >
+                    <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                      <FileText className="h-5 w-5 text-orange-600" />
+                    </div>
+                    <span className="font-medium text-gray-800">Blog</span>
+                  </button>
+
+                  {/* Contact */}
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      scrollToSection("/#contact");
+                    }}
+                    className="w-full flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-orange-50 transition-all"
+                  >
+                    <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                      <MessageCircle className="h-5 w-5 text-orange-600" />
+                    </div>
+                    <span className="font-medium text-gray-800">Contact Us</span>
+                  </button>
 
                   {/* Quick Actions */}
                   <div className="mt-6 pt-4 border-t border-gray-100">
