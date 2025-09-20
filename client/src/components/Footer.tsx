@@ -122,7 +122,7 @@ const Footer = () => {
           {/* Company Info */}
           <motion.div 
             variants={fadeInUp}
-            className="col-span-1"
+            className="col-span-1 sm:col-span-2 lg:col-span-1"
           >
             <Link to="/" className="inline-block">
               <div className="flex items-center mb-6">

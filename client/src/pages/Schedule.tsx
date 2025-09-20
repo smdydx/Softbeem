@@ -22,12 +22,12 @@ const Schedule = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background pt-16 sm:pt-20 md:pt-24 lg:pt-28">
+    <div className="min-h-screen bg-background pt-20 sm:pt-20 md:pt-24 lg:pt-28">
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
-        className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8"
+        className="container mx-auto px-4 sm:px-4 md:px-6 lg:px-8"
       >
         <motion.div variants={fadeIn("up", "tween", 0.2, 1)} className="text-center mb-6 sm:mb-8 md:mb-12">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent mb-3 sm:mb-4 md:mb-6 leading-tight">

@@ -329,7 +329,7 @@ const Contact = () => {
                     name="Service"
                     value={formData.Service}
                     onChange={handleChange}
-                    className="w-full rounded-md border border-input bg-zinc-800/50 px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="w-full h-12 rounded-md border border-input bg-zinc-800/50 px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     required
                   >
                     <option value="">Select a service</option>

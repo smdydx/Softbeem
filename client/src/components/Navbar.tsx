@@ -412,8 +412,8 @@ const Navbar = () => {
           initial={{ y: 100 }}
           animate={{ y: 0 }}
           transition={{ type: "spring", damping: 20, stiffness: 300 }}
-          className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black via-zinc-900/95 to-zinc-800/90 backdrop-blur-xl border-t border-green-500/20 shadow-xl pb-2 pb-[env(safe-area-inset-bottom)]"
-        >
+          className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black via-zinc-900/95 to-zinc-800/90 backdrop-blur-xl border-t border-green-500/20 shadow-xl pb-[max(0.5rem,env(safe-area-inset-bottom))]"
+        ></motion.nav>
           {/* Subtle glass morphism background */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-zinc-900/40 to-transparent" />
 
