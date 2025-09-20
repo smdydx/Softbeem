@@ -230,20 +230,17 @@ const AIChatBot = () => {
   };
 
   return (
-    <div className="fixed z-[45]">
+    <div className="fixed z-50">
       <AnimatePresence>
+        {/* Chat Window */}
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            transition={{ 
-              type: "spring", 
-              damping: 25, 
-              stiffness: 300,
-              duration: 0.3
-            }}
-            className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 md:bottom-32 md:right-8 lg:bottom-36 lg:right-10 w-[calc(100vw-2rem)] max-w-sm sm:max-w-md md:max-w-lg h-[60vh] sm:h-[65vh] md:h-[70vh] max-h-[500px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-3xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden z-[9998]"
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 md:bottom-32 md:right-8 w-[340px] sm:w-[380px] md:w-[420px] h-[500px] sm:h-[550px] md:h-[600px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden"
+            style={{ maxWidth: 'calc(100vw - 2rem)' }}
           >
             {/* Animated Background Pattern */}
             <div className="absolute inset-0 opacity-10">
@@ -253,47 +250,47 @@ const AIChatBot = () => {
             </div>
 
             {/* Premium Header */}
-            <div className="relative p-3 sm:p-4 md:p-5 bg-gradient-to-r from-green-500/20 via-blue-500/15 to-purple-500/20 border-b border-green-500/30 backdrop-blur-sm">
+            <div className="relative p-4 bg-gradient-to-r from-green-500/20 via-blue-500/15 to-purple-500/20 border-b border-green-500/30 backdrop-blur-sm">
               <div className="flex justify-between items-center">
-                <div className="flex items-center gap-2 sm:gap-3">
+                <div className="flex items-center gap-3">
                   <div className="relative">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-                      <Bot className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-white" />
+                    <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                      <Bot className="h-5 w-5 text-white" />
                     </div>
-                    <div className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse flex items-center justify-center">
-                      <Sparkles className="h-1.5 w-1.5 sm:h-2 sm:w-2 text-white" />
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse flex items-center justify-center">
+                      <Sparkles className="h-2 w-2 text-white" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-white font-bold text-xs sm:text-sm md:text-base bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
+                    <h3 className="text-white font-bold text-sm bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
                       Softbeem AI Assistant
                     </h3>
-                    <div className="flex items-center gap-1 sm:gap-2">
-                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      <p className="text-green-300 text-[10px] sm:text-xs font-medium">Online • Ready to help</p>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <p className="text-green-300 text-xs font-medium">Online • Ready to help</p>
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 sm:gap-2">
+                <div className="flex items-center gap-2">
                   <button 
                     onClick={() => setIsOpen(false)} 
-                    className="p-1.5 sm:p-2 rounded-xl bg-zinc-800/50 hover:bg-zinc-700/50 text-gray-400 hover:text-white transition-all duration-200 backdrop-blur-sm border border-zinc-700/50"
+                    className="p-2 rounded-xl bg-zinc-800/50 hover:bg-zinc-700/50 text-gray-400 hover:text-white transition-all duration-200 backdrop-blur-sm border border-zinc-700/50"
                   >
-                    <Minimize2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <Minimize2 className="h-4 w-4" />
                   </button>
                   <button 
                     onClick={() => setIsOpen(false)} 
-                    className="p-1.5 sm:p-2 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-red-400 hover:text-red-300 transition-all duration-200 backdrop-blur-sm border border-red-500/30"
+                    className="p-2 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-red-400 hover:text-red-300 transition-all duration-200 backdrop-blur-sm border border-red-500/30"
                   >
-                    <X className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <X className="h-4 w-4" />
                   </button>
                 </div>
               </div>
             </div>
 
             {/* Premium Quick Actions */}
-            <div className="relative p-2 sm:p-3 md:p-4 border-b border-green-500/20 bg-gradient-to-r from-zinc-900/50 to-zinc-800/50">
-              <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+            <div className="relative p-3 border-b border-green-500/20 bg-gradient-to-r from-zinc-900/50 to-zinc-800/50">
+              <div className="grid grid-cols-2 gap-2">
                 {quickActions.map((action, index) => {
                   const colorClasses = {
                     blue: "from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-300 hover:from-blue-500/30 hover:to-blue-600/30",
@@ -309,9 +306,9 @@ const AIChatBot = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
                       onClick={() => handleQuickAction(action.query)}
-                      className={`flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 md:p-3 bg-gradient-to-r ${colorClasses[action.color as keyof typeof colorClasses]} rounded-xl text-[10px] sm:text-xs md:text-sm font-medium transition-all duration-300 hover:scale-105 border backdrop-blur-sm group`}
+                      className={`flex items-center gap-2 p-2 bg-gradient-to-r ${colorClasses[action.color as keyof typeof colorClasses]} rounded-xl text-xs font-medium transition-all duration-300 hover:scale-105 border backdrop-blur-sm group`}
                     >
-                      <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex items-center justify-center">
+                      <div className="w-4 h-4 flex items-center justify-center">
                         {action.icon}
                       </div>
                       <span className="truncate group-hover:scale-110 transition-transform">{action.text}</span>
@@ -321,8 +318,8 @@ const AIChatBot = () => {
               </div>
             </div>
 
-            {/* Messages Container with Premium Styling */}
-            <div className="flex-1 overflow-y-auto p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3 md:space-y-4 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent">
+            {/* Messages Container */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent">
               {messages.map((message, index) => (
                 <motion.div
                   key={index}
@@ -331,13 +328,13 @@ const AIChatBot = () => {
                   transition={{ duration: 0.3, ease: "easeOut" }}
                   className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-[90%] sm:max-w-[85%] p-2 sm:p-3 md:p-4 rounded-2xl whitespace-pre-wrap text-[10px] sm:text-xs md:text-sm leading-relaxed shadow-lg backdrop-blur-sm border ${
+                  <div className={`max-w-[85%] p-3 rounded-2xl whitespace-pre-wrap text-sm leading-relaxed shadow-lg backdrop-blur-sm border ${
                     message.type === 'user' 
                       ? 'bg-gradient-to-r from-green-500/30 to-emerald-500/30 text-white border-green-500/40 shadow-green-500/20' 
                       : 'bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 text-gray-200 border-zinc-700/50 shadow-black/20'
                   }`}>
-                    <div className="mb-1 sm:mb-2 break-words font-medium">{message.text}</div>
-                    <div className={`text-[8px] sm:text-[10px] md:text-xs opacity-60 font-medium ${message.type === 'user' ? 'text-right text-green-200' : 'text-left text-gray-400'}`}>
+                    <div className="mb-2 break-words font-medium">{message.text}</div>
+                    <div className={`text-xs opacity-60 font-medium ${message.type === 'user' ? 'text-right text-green-200' : 'text-left text-gray-400'}`}>
                       {formatTime(message.timestamp)}
                     </div>
                   </div>
@@ -350,14 +347,14 @@ const AIChatBot = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 text-gray-200 p-3 sm:p-4 rounded-2xl border border-zinc-700/50 shadow-lg backdrop-blur-sm">
-                    <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 text-gray-200 p-3 rounded-2xl border border-zinc-700/50 shadow-lg backdrop-blur-sm">
+                    <div className="flex items-center gap-2">
                       <div className="flex gap-1">
-                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-bounce"></div>
-                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                       </div>
-                      <span className="text-[10px] sm:text-xs font-medium text-green-400">AI is thinking...</span>
+                      <span className="text-xs font-medium text-green-400">AI is thinking...</span>
                     </div>
                   </div>
                 </motion.div>
@@ -366,8 +363,8 @@ const AIChatBot = () => {
             </div>
 
             {/* Premium Input Area */}
-            <div className="relative p-2 sm:p-3 md:p-4 border-t border-green-500/30 bg-gradient-to-r from-zinc-900/80 to-zinc-800/80 backdrop-blur-sm">
-              <div className="flex gap-1.5 sm:gap-2 items-end">
+            <div className="relative p-3 border-t border-green-500/30 bg-gradient-to-r from-zinc-900/80 to-zinc-800/80 backdrop-blur-sm">
+              <div className="flex gap-2 items-end">
                 <div className="flex-1 relative">
                   <Input
                     value={input}
@@ -375,41 +372,46 @@ const AIChatBot = () => {
                     onKeyPress={handleKeyPress}
                     placeholder="Type your message..."
                     disabled={isTyping}
-                    className="bg-zinc-800/60 border-green-500/40 text-white placeholder-gray-400 focus:border-green-400 rounded-xl resize-none text-[10px] sm:text-xs md:text-sm pr-8 sm:pr-10 md:pr-12 py-2 sm:py-3 backdrop-blur-sm shadow-inner"
-                    style={{ minHeight: '36px' }}
+                    className="bg-zinc-800/60 border-green-500/40 text-white placeholder-gray-400 focus:border-green-400 rounded-xl resize-none text-sm pr-10 py-3 backdrop-blur-sm shadow-inner"
+                    style={{ minHeight: '40px' }}
                   />
-                  <MessageSquare className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 h-3 w-3 sm:h-4 sm:w-4 text-gray-500" />
+                  <MessageSquare className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
                 </div>
                 <Button 
                   onClick={handleSend} 
                   disabled={!input.trim() || isTyping}
                   size="icon" 
-                  className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white border-0 rounded-xl h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 shrink-0 shadow-lg shadow-green-500/25 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:scale-100"
+                  className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white border-0 rounded-xl h-10 w-10 shrink-0 shadow-lg shadow-green-500/25 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:scale-100"
                 >
-                  <Send className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
+                  <Send className="h-4 w-4" />
                 </Button>
               </div>
             </div>
           </motion.div>
         )}
 
+        {/* Floating Chat Button - Professional Position */}
         {!isOpen && (
           <motion.button
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-10 lg:right-10 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative z-[9999] transition-all duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="fixed bottom-6 right-6 w-16 h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative transition-all duration-300"
             onClick={() => setIsOpen(true)}
+            style={{ 
+              zIndex: 9999,
+              marginBottom: 'env(safe-area-inset-bottom, 0px)'
+            }}
           >
             {/* Animated background */}
             <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-emerald-400/20 to-teal-400/20 rounded-full animate-pulse" />
             
-            <Bot className="h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9 lg:h-10 lg:w-10 relative z-10 group-hover:scale-110 transition-transform" />
+            <Bot className="h-8 w-8 md:h-9 md:w-9 lg:h-10 lg:w-10 relative z-10 group-hover:scale-110 transition-transform" />
             
             {/* Premium status indicator */}
-            <div className="absolute -top-1 -right-1 sm:-top-1.5 sm:-right-1.5 md:-top-2 md:-right-2 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse flex items-center justify-center shadow-lg">
-              <Sparkles className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-3.5 md:w-3.5 text-white" />
+            <div className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse flex items-center justify-center shadow-lg">
+              <Sparkles className="h-2.5 w-2.5 md:h-3 md:w-3 text-white" />
             </div>
 
             {/* Glow effect */}

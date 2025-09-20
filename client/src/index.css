@@ -1894,54 +1894,95 @@ button, .button {
   z-index: 45 !important;
 }
 
-/* Premium chatbot mobile optimizations */
+/* Professional Chatbot Positioning */
+.chatbot-container {
+  position: fixed !important;
+  bottom: 1.5rem !important;
+  right: 1.5rem !important;
+  z-index: 9999 !important;
+  max-width: calc(100vw - 3rem) !important;
+}
+
+/* Mobile Chatbot Optimization */
 @media screen and (max-width: 768px) {
   .chatbot-container {
-    width: calc(100vw - 1rem) !important;
-    max-width: 380px !important;
-    height: calc(60vh - 1rem) !important;
-    bottom: 5.5rem !important;
+    bottom: 1rem !important;
+    right: 1rem !important;
+    max-width: calc(100vw - 2rem) !important;
+    width: 340px !important;
+    height: 500px !important;
   }
   
-  .chatbot-header {
-    padding: 1rem !important;
-  }
-  
-  .chatbot-messages {
-    font-size: 0.8rem !important;
-    line-height: 1.4 !important;
-  }
-  
-  .chatbot-quick-actions {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.5rem !important;
-  }
-  
-  .chatbot-input-area {
-    padding: 0.75rem !important;
-  }
-
-  /* Floating button positioning */
   .chatbot-floating-button {
-    bottom: 5.5rem !important;
-    z-index: 45 !important;
+    bottom: 1rem !important;
+    right: 1rem !important;
+    width: 56px !important;
+    height: 56px !important;
+    z-index: 9999 !important;
   }
+}
 
-  /* Premium glass effects */
-  .chatbot-glass-effect {
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    background: rgba(0, 0, 0, 0.85) !important;
-    border: 1px solid rgba(0, 255, 0, 0.2) !important;
+/* Tablet Optimization */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .chatbot-container {
+    bottom: 1.5rem !important;
+    right: 1.5rem !important;
+    width: 380px !important;
+    height: 550px !important;
   }
+  
+  .chatbot-floating-button {
+    bottom: 1.5rem !important;
+    right: 1.5rem !important;
+    width: 64px !important;
+    height: 64px !important;
+  }
+}
 
-  /* Glow animations for premium feel */
-  .chatbot-premium-glow {
-    box-shadow: 
-      0 0 20px rgba(0, 255, 0, 0.3),
-      0 0 40px rgba(0, 255, 0, 0.2),
-      0 0 80px rgba(0, 255, 0, 0.1) !important;
+/* Desktop Optimization */
+@media screen and (min-width: 1025px) {
+  .chatbot-container {
+    bottom: 2rem !important;
+    right: 2rem !important;
+    width: 420px !important;
+    height: 600px !important;
   }
+  
+  .chatbot-floating-button {
+    bottom: 2rem !important;
+    right: 2rem !important;
+    width: 72px !important;
+    height: 72px !important;
+  }
+}
+
+/* Safe Area Support for iOS */
+@supports (padding: max(0px)) {
+  .chatbot-floating-button {
+    bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+    right: max(1rem, env(safe-area-inset-right)) !important;
+  }
+}
+
+/* Premium Chatbot Glass Effects */
+.chatbot-glass-effect {
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  background: rgba(0, 0, 0, 0.85) !important;
+  border: 1px solid rgba(0, 255, 0, 0.2) !important;
+}
+
+/* Professional Glow Effects */
+.chatbot-premium-glow {
+  box-shadow: 
+    0 0 20px rgba(0, 255, 0, 0.3),
+    0 0 40px rgba(0, 255, 0, 0.2),
+    0 0 80px rgba(0, 255, 0, 0.1) !important;
+}
+
+/* Ensure chatbot stays above everything */
+.chatbot-z-index {
+  z-index: 9999 !important;
 }
 
 /* Smooth scrolling for chatbot */
