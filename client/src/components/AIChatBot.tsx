@@ -25,6 +25,16 @@ const AIChatBot = () => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Listen for hamburger menu chatbot open event
+  useEffect(() => {
+    const handleOpenChatbot = () => {
+      setIsOpen(true);
+    };
+
+    window.addEventListener('openChatbot', handleOpenChatbot);
+    return () => window.removeEventListener('openChatbot', handleOpenChatbot);
+  }, []);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -239,7 +249,7 @@ const AIChatBot = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 md:bottom-32 md:right-8 w-[340px] sm:w-[380px] md:w-[420px] h-[500px] sm:h-[550px] md:h-[600px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden"
+            className="fixed bottom-20 left-4 sm:bottom-24 sm:left-6 md:bottom-32 md:left-8 w-[340px] sm:w-[380px] md:w-[420px] h-[500px] sm:h-[550px] md:h-[600px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden"
             style={{ maxWidth: 'calc(100vw - 2rem)' }}
           >
             {/* Animated Background Pattern */}
@@ -390,18 +400,19 @@ const AIChatBot = () => {
           </motion.div>
         )}
 
-        {/* Floating Chat Button - Professional Position */}
+        {/* Floating Chat Button - Bottom Left Position */}
         {!isOpen && (
           <motion.button
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="fixed bottom-6 right-6 w-16 h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative transition-all duration-300"
+            className="fixed bottom-6 left-6 w-16 h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative transition-all duration-300"
             onClick={() => setIsOpen(true)}
             style={{ 
-              zIndex: 9999,
-              marginBottom: 'env(safe-area-inset-bottom, 0px)'
+              zIndex: 45,
+              marginBottom: 'env(safe-area-inset-bottom, 0px)',
+              marginLeft: 'env(safe-area-inset-left, 0px)'
             }}
           >
             {/* Animated background */}
