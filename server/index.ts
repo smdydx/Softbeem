@@ -84,7 +84,7 @@ app.set('io', io);
 
 // Register routes and start server
 registerRoutes(app, httpServer).then((server) => {
-  const port = process.env.PORT || 5000;
+  const port = process.env.PORT || 3000;
 
   // Graceful shutdown handling
   process.on('SIGTERM', () => {
@@ -106,13 +106,13 @@ registerRoutes(app, httpServer).then((server) => {
       log(`Port ${port} is busy, retrying...`);
       setTimeout(() => {
         httpServer.close();
-        httpServer.listen(Number(port), '0.0.0.0');
+        httpServer.listen(Number(port), 'localhost');
       }, 1000);
     }
   });
 
-  httpServer.listen(Number(port), '0.0.0.0', () => {
-    log(`[express] Server running at http://0.0.0.0:${port}`);
+  httpServer.listen(Number(port), 'localhost', () => {
+    log(`[express] Server running at http://localhost:${port}`);
   });
 });
 
