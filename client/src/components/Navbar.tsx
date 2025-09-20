@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Menu,
@@ -43,6 +44,7 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const isMobile = useIsMobile();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -135,7 +137,7 @@ const Navbar = () => {
 
     if (sectionId.startsWith("/#")) {
       if (window.location.pathname !== "/") {
-        window.location.href = sectionId;
+        navigate(sectionId);
         return;
       }
       const element = document.getElementById(sectionId.substring(2));
@@ -144,7 +146,7 @@ const Navbar = () => {
         window.scrollTo({ top: y, behavior: "smooth" });
       }
     } else {
-      window.location.href = sectionId;
+      navigate(sectionId);
     }
   };
 
@@ -162,9 +164,13 @@ const Navbar = () => {
     setMobileOpenServices([]);
 
     if (service.path) {
-      window.location.href = service.path;
+      navigate(service.path);
     } else {
-      scrollToSection("/#services");
+      if (window.location.pathname !== "/") {
+        navigate("/#services");
+      } else {
+        scrollToSection("#services");
+      }
     }
   };
 
@@ -184,7 +190,7 @@ const Navbar = () => {
             <div className="flex items-center justify-between">
               {/* Logo */}
               <div
-                onClick={() => (window.location.href = "/")}
+                onClick={() => navigate("/")}
                 className="cursor-pointer"
               >
                 <div className="font-bold text-white flex items-center">
@@ -306,7 +312,7 @@ const Navbar = () => {
                       whileTap={{ scale: 0.98 }}
                       onClick={() => {
                         setQuickActionsOpen(false);
-                        window.location.href = "/schedule";
+                        navigate("/schedule");
                       }}
                       className="relative flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-zinc-800/50 to-zinc-900/50 hover:from-blue-500/10 hover:to-indigo-500/10 border border-transparent hover:border-blue-500/20 transition-all duration-300 group overflow-hidden"
                     >
@@ -380,7 +386,11 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveTab("home");
-                scrollToSection("/#home");
+                if (window.location.pathname !== "/") {
+                  navigate("/#home");
+                } else {
+                  scrollToSection("#home");
+                }
               }}
               className={`relative flex flex-col items-center py-2 px-2 rounded-xl min-w-[50px] transition-all duration-200 group ${
                 activeTab === "home"
@@ -471,7 +481,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveTab("blog");
-                window.location.href = "/blog";
+                navigate("/blog");
               }}
               className={`relative flex flex-col items-center py-2 px-2 rounded-xl min-w-[50px] transition-all duration-200 group ${
                 activeTab === "blog"
@@ -639,7 +649,7 @@ const Navbar = () => {
                                             setMobileServicesOpen(false);
                                             setMobileOpenCategories([]);
                                             setMobileOpenServices([]);
-                                            if (subItem.path) window.location.href = subItem.path;
+                                            if (subItem.path) navigate(subItem.path);
                                           }}
                                           className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-700 transition-all group"
                                         >
@@ -773,7 +783,11 @@ const Navbar = () => {
                       <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      scrollToSection("/#home");
+                      if (window.location.pathname !== "/") {
+                        navigate("/");
+                      } else {
+                        scrollToSection("#home");
+                      }
                     }}
                     className="w-full flex items-center gap-4 p-4 bg-zinc-800 rounded-xl hover:bg-zinc-700 transition-all"
                   >
@@ -915,8 +929,7 @@ const Navbar = () => {
                                                         [],
                                                       );
                                                       if (subItem.path)
-                                                        window.location.href =
-                                                          subItem.path;
+                                                        navigate(subItem.path);
                                                     }}
                                                     className="w-full flex items-center gap-4 px-8 py-2 hover:bg-zinc-700 transition-all duration-200 group"
                                                   >
@@ -1033,7 +1046,7 @@ const Navbar = () => {
                   <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      window.location.href = "/blog";
+                      navigate("/blog");
                     }}
                     className="w-full flex items-center gap-4 p-4 bg-zinc-800 rounded-xl hover:bg-zinc-700 transition-all"
                   >
@@ -1064,7 +1077,7 @@ const Navbar = () => {
                         <button
                           onClick={() => {
                             setIsMobileMenuOpen(false);
-                            window.location.href = "/schedule";
+                            navigate("/schedule");
                           }}
                           className="flex items-center gap-3 p-3 bg-green-500/10 rounded-xl border border-green-500/30"
                         >
@@ -1108,7 +1121,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <div
-              onClick={() => (window.location.href = "/")}
+              onClick={() => navigate("/")}
               className="cursor-pointer"
             >
               <div className="font-bold text-white flex items-center">
@@ -1208,9 +1221,13 @@ const Navbar = () => {
                                             onClick={() => {
                                               setServicesDropdownOpen(false);
                                               if (service.path) {
-                                                window.location.href = service.path;
+                                                navigate(service.path);
                                               } else {
-                                                scrollToSection("/#services");
+                                                if (window.location.pathname !== "/") {
+                                                  navigate("/#services");
+                                                } else {
+                                                  scrollToSection("#services");
+                                                }
                                               }
                                             }}
                                             className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full"
@@ -1259,7 +1276,7 @@ const Navbar = () => {
                                                       onClick={() => {
                                                         setServicesDropdownOpen(false);
                                                         if (subItem.path) {
-                                                          window.location.href = subItem.path;
+                                                          navigate(subItem.path);
                                                         }
                                                       }}
                                                       className="flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800 transition-colors group w-full"
@@ -1390,7 +1407,7 @@ const Navbar = () => {
                         </svg>
                       </a>
                       <Button
-                        onClick={() => (window.location.href = "/schedule")}
+                        onClick={() => navigate("/schedule")}
                         variant="outline"
                         className="hidden lg:flex items-center justify-center gap-2 px-3 py-2 bg-green-500/10 hover:bg-green-500/20 text-green-400 border-green-500/30 text-sm"
                       >
@@ -1455,7 +1472,7 @@ const Navbar = () => {
                 </svg>
               </a>
               <button
-                onClick={() => (window.location.href = "/schedule")}
+                onClick={() => navigate("/schedule")}
                 className="flex items-center justify-center w-14 h-14 text-green-400 transition-all hover:scale-110"
               >
                 <Calendar className="w-6 h-6" />
@@ -1686,8 +1703,7 @@ const Navbar = () => {
                                                           [],
                                                         );
                                                         if (subItem.path)
-                                                          window.location.href =
-                                                            subItem.path;
+                                                          navigate(subItem.path);
                                                       }}
                                                       className="w-full flex items-center gap-4 px-8 py-2 hover:bg-zinc-700 transition-all duration-200 group"
                                                     >
