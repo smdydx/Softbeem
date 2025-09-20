@@ -241,10 +241,10 @@ const ScheduleMeetingForm = () => {
                             placeholder="+91 9876543210"
                             type="tel"
                             inputMode="tel"
-                            className="pl-10 h-12 sm:h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
+                            className="pl-10 sm:pl-12 h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
                             {...field}
                           />
-                          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 pointer-events-none" />
                         </div>
                       </FormControl>
                       <FormMessage />
@@ -339,10 +339,10 @@ const ScheduleMeetingForm = () => {
                         <div className="relative">
                           <Input
                             placeholder="Your company name"
-                            className="pl-10 h-11 sm:h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
+                            className="pl-10 sm:pl-12 h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
                             {...field}
                           />
-                          <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 pointer-events-none" />
                         </div>
                       </FormControl>
                       <FormMessage />

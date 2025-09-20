@@ -2103,6 +2103,15 @@ button, .button {
   .schedule-form .relative svg {
     width: 1rem !important;
     height: 1rem !important;
+    left: 0.75rem !important;
+  }
+  
+  .schedule-form input {
+    padding-left: 2.5rem !important;
+  }
+  
+  .schedule-form button[role="combobox"] {
+    padding-left: 2.5rem !important;
   }
 }
 
