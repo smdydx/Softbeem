@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { staggerContainer, fadeIn } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
@@ -111,11 +110,13 @@ const AppDev = () => {
             Transform your ideas into powerful, scalable, and user-friendly mobile applications. 
             We deliver cutting-edge solutions across all major platforms with focus on performance and user experience.
           </p>
-          <Link to="/contact">
-            <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+          <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+              onClick={() => window.location.href = '/contact'}
+            >
               Start Your Project <ArrowRight className="ml-2" />
             </Button>
-          </Link>
         </motion.div>
 
         {/* Services Grid */}
@@ -180,11 +181,13 @@ const AppDev = () => {
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
             Let's transform your idea into a powerful mobile application. Our team of experts will guide you through every step of the development process.
           </p>
-          <Link to="/contact">
-            <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+          <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+              onClick={() => window.location.href = '/contact'}
+            >
               Get Started Today <ArrowRight className="ml-2" />
             </Button>
-          </Link>
         </motion.div>
       </motion.div>
     </main>

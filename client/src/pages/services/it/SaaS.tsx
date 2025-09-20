@@ -177,10 +177,19 @@ const SaaS = () => {
             From CRM to industry-specific ERPs, we deliver scalable, customizable applications tailored to your needs.
           </p>
           <div className="flex justify-center gap-4">
-            <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+              onClick={() => window.location.href = '/schedule'}
+            >
               Schedule Demo <ArrowRight className="ml-2" />
             </Button>
-            <Button size="lg" variant="outline" className="border-gray-600 hover:bg-gray-800/50">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-gray-600 hover:bg-gray-800/50"
+              onClick={() => window.location.href = '/services'}
+            >
               View Case Studies
             </Button>
           </div>

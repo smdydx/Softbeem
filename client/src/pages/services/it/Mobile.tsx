@@ -107,11 +107,13 @@ const Mobile = () => {
             Transform your business with cutting-edge mobile applications. We create robust, scalable, and user-friendly 
             apps that deliver exceptional user experiences across all platforms.
           </p>
-          <Link to="/contact">
-            <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
-              Start Your Project <ArrowRight className="ml-2" />
-            </Button>
-          </Link>
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+            onClick={() => window.location.href = '/contact'}
+          >
+            Start Your Project <ArrowRight className="ml-2" />
+          </Button>
         </motion.div>
 
         {/* Services Grid */}
