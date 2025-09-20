@@ -142,7 +142,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <SiteSettingsProvider>
-        <div className="flex flex-col min-h-screen"
+        <div className="flex flex-col min-h-screen">
           <Navbar />
           <ScrollToTop />
           <main className="flex-grow pt-20 md:pt-24 pb-16">
