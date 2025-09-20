@@ -106,13 +106,13 @@ registerRoutes(app, httpServer).then((server) => {
       log(`Port ${port} is busy, retrying...`);
       setTimeout(() => {
         httpServer.close();
-        httpServer.listen(Number(port), 'localhost');
+        httpServer.listen(Number(port), '0.0.0.0');
       }, 1000);
     }
   });
 
-  httpServer.listen(Number(port), 'localhost', () => {
-    log(`[express] Server running at http://localhost:${port}`);
+  httpServer.listen(Number(port), '0.0.0.0', () => {
+    log(`[express] Server running at http://0.0.0.0:${port}`);
   });
 });
 
