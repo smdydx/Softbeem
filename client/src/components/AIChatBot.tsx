@@ -330,7 +330,7 @@ const AIChatBot = () => {
             </div>
 
             {/* Messages Container */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent">
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent scroll-smooth">
               {messages.map((message, index) => (
                 <motion.div
                   key={index}
@@ -344,7 +344,7 @@ const AIChatBot = () => {
                       ? 'bg-gradient-to-r from-green-500/30 to-emerald-500/30 text-white border-green-500/40 shadow-green-500/20' 
                       : 'bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 text-gray-200 border-zinc-700/50 shadow-black/20'
                   }`}>
-                    <div className="mb-2 break-words font-medium">{message.text}</div>
+                    <div className="mb-2 break-words font-medium chatbot-message-text">{message.text}</div>
                     <div className={`text-xs opacity-60 font-medium ${message.type === 'user' ? 'text-right text-green-200' : 'text-left text-gray-400'}`}>
                       {formatTime(message.timestamp)}
                     </div>
@@ -370,7 +370,7 @@ const AIChatBot = () => {
                   </div>
                 </motion.div>
               )}
-              <div ref={messagesEndRef} />
+              <div ref={messagesEndRef} className="h-2" />
             </div>
 
             {/* Premium Input Area */}
