@@ -171,7 +171,7 @@ const ScheduleMeetingForm = () => {
               Book a consultation with our experts to discuss your project requirements
             </p>
           </CardHeader>
-          <CardContent className="relative p-4 sm:p-6">
+          <CardContent className="relative p-4 sm:p-6 schedule-form">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                 {/* Name and Email Row */}
@@ -189,10 +189,10 @@ const ScheduleMeetingForm = () => {
                           <div className="relative">
                             <Input
                               placeholder="Enter your full name"
-                              className="pl-10 h-11 sm:h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
+                              className="pl-10 sm:pl-12 h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
                               {...field}
                             />
-                            <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 pointer-events-none" />
                           </div>
                         </FormControl>
                         <FormMessage />
@@ -213,10 +213,10 @@ const ScheduleMeetingForm = () => {
                             <Input
                               placeholder="your.email@example.com"
                               type="email"
-                              className="pl-10 h-11 sm:h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
+                              className="pl-10 sm:pl-12 h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
                               {...field}
                             />
-                            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 pointer-events-none" />
                           </div>
                         </FormControl>
                         <FormMessage />
@@ -269,11 +269,11 @@ const ScheduleMeetingForm = () => {
                               <Button
                                 variant={"outline"}
                                 className={cn(
-                                  "h-11 sm:h-12 pl-10 text-left font-normal border-2 focus:border-emerald-500 text-base",
+                                  "h-12 pl-10 sm:pl-12 text-left font-normal border-2 focus:border-emerald-500 text-base relative",
                                   !field.value && "text-muted-foreground"
                                 )}
                               >
-                                <CalendarIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                <CalendarIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 pointer-events-none" />
                                 {field.value ? (
                                   format(field.value, "PPP")
                                 ) : (
@@ -307,7 +307,7 @@ const ScheduleMeetingForm = () => {
                         </FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger className="h-11 sm:h-12 border-2 focus:border-emerald-500 text-base">
+                            <SelectTrigger className="h-12 border-2 focus:border-emerald-500 text-base">
                               <SelectValue placeholder="Select a time" />
                             </SelectTrigger>
                           </FormControl>
@@ -368,7 +368,7 @@ const ScheduleMeetingForm = () => {
                       <FormControl>
                         <Textarea
                           placeholder="Please describe the purpose of the meeting and what you'd like to discuss..."
-                          className="min-h-[100px] sm:min-h-[120px] border-2 focus:border-emerald-500 transition-all duration-200 resize-none text-base"
+                          className="min-h-[100px] sm:min-h-[120px] border-2 focus:border-emerald-500 transition-all duration-200 resize-none text-base p-3"
                           {...field}
                         />
                       </FormControl>

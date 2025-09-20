@@ -2100,18 +2100,83 @@ button, .button {
   }
 
   /* Form field icons mobile */
+  /* Schedule form mobile optimizations */
+  .schedule-form {
+    padding: 0.75rem !important;
+  }
+  
+  .schedule-form .relative {
+    position: relative !important;
+  }
+  
   .schedule-form .relative svg {
     width: 1rem !important;
     height: 1rem !important;
     left: 0.75rem !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
   }
   
   .schedule-form input {
     padding-left: 2.5rem !important;
+    height: 48px !important;
+    font-size: 16px !important;
+    border-radius: 0.5rem !important;
+  }
+  
+  .schedule-form textarea {
+    padding: 0.75rem !important;
+    font-size: 16px !important;
+    border-radius: 0.5rem !important;
+    min-height: 100px !important;
   }
   
   .schedule-form button[role="combobox"] {
     padding-left: 2.5rem !important;
+    height: 48px !important;
+    font-size: 16px !important;
+  }
+  
+  .schedule-form label {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
+    font-weight: 500 !important;
+  }
+  
+  /* Form message spacing */
+  .schedule-form [data-slot="form-message"] {
+    margin-top: 0.375rem !important;
+    font-size: 0.8rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Grid layout fixes */
+  .schedule-form .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Form item spacing */
+  .schedule-form > form > div {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  /* Button improvements */
+  .schedule-form button[type="submit"] {
+    height: 48px !important;
+    font-size: 1rem !important;
+    padding: 0.75rem 1.5rem !important;
+  }
+  
+  /* Popover adjustments */
+  .schedule-form [data-radix-popper-content-wrapper] {
+    z-index: 9999 !important;
+  }
+  
+  /* Select content mobile */
+  .schedule-form [role="listbox"] {
+    max-height: 200px !important;
+    overflow-y: auto !important;
   }
 }
 
