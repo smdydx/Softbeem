@@ -64,7 +64,7 @@ const ScheduleMeetingForm = () => {
   };
 
   return (
-    <div id="meeting" className="w-full max-w-2xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 bg-zinc-900/50 backdrop-blur-lg rounded-lg sm:rounded-xl md:rounded-2xl border-2 sm:border border-zinc-800/50 my-4 sm:my-6 md:my-8 lg:my-12"></div>
+    <div id="meeting" className="w-full max-w-2xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 bg-zinc-900/50 backdrop-blur-lg rounded-lg sm:rounded-xl md:rounded-2xl border-2 sm:border border-zinc-800/50 my-4 sm:my-6 md:my-8 lg:my-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
