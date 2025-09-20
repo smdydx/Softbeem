@@ -150,7 +150,7 @@ export const servicesData: ServicesData = {
         },
         {
           icon: Code,
-          title: "Web Development & CMS Products",
+          title: "Web Development & CMS",
           features: ["Custom web solutions"],
           path: "/services/it/web-dev"
         },

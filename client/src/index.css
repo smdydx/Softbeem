@@ -1350,6 +1350,8 @@ button, .button {
   color: rgba(255, 255, 255, 0.8);
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(0, 255, 0, 0.05);
+  text-align: left;
+  justify-content: flex-start;
 }
 
 .mobile-submenu-item:hover {
@@ -2025,6 +2027,14 @@ button, .button {
     overflow-wrap: break-word !important;
     word-wrap: break-word !important;
     hyphens: auto !important;
+  }
+
+  /* Mobile service menu text alignment */
+  .mobile-submenu-item span {
+    text-align: left !important;
+    display: block !important;
+    width: 100% !important;
+    line-height: 1.4 !important;
   }
 }
 
