@@ -117,7 +117,7 @@ const Footer = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12"
         >
           {/* Company Info */}
           <motion.div 
@@ -204,23 +204,23 @@ const Footer = () => {
             <p className="text-gray-300 mb-6 leading-relaxed text-sm lg:text-base">
               Stay updated with our latest technology trends and legal insights.
             </p>
-            <form onSubmit={handleSubscribe} className="space-y-4">
+            <form onSubmit={handleSubscribe} className="space-y-3 sm:space-y-4">
               <div className="relative">
                 <Input 
                   type="email" 
                   placeholder="Your Email" 
-                  className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 transition-all duration-300 text-sm lg:text-base" 
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-zinc-800/80 border border-zinc-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 transition-all duration-300 text-sm h-10 sm:h-auto" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <Mail className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Mail className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
               </div>
               <Button 
                 type="submit" 
-                className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg shadow-green-500/20 text-sm lg:text-base"
+                className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg shadow-green-500/20 text-sm h-10 sm:h-auto"
               >
-                Subscribe <Send className="h-4 w-4 ml-2" />
+                Subscribe <Send className="h-3 w-3 sm:h-4 sm:w-4 ml-2" />
               </Button>
               <p className="text-xs text-gray-500 leading-relaxed">
                 By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.
@@ -230,15 +230,15 @@ const Footer = () => {
         </motion.div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-zinc-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm text-center md:text-left">
+        <div className="border-t border-zinc-800 pt-6 sm:pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
+            <p className="text-gray-400 text-xs sm:text-sm text-center md:text-left">
               &copy; {new Date().getFullYear()} Ramaera Legal InfoTech Private Limited. All rights reserved.
             </p>
-            <div className="flex space-x-6">
-              <Link to="/privacy-policy" className="text-gray-400 hover:text-primary text-sm transition-colors duration-300">Privacy Policy</Link>
-              <Link to="/terms-of-service" className="text-gray-400 hover:text-primary text-sm transition-colors duration-300">Terms of Service</Link>
-              <Link to="/cookie-policy" className="text-gray-400 hover:text-primary text-sm transition-colors duration-300">Cookie Policy</Link>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
+              <Link to="/privacy-policy" className="text-gray-400 hover:text-primary text-xs sm:text-sm transition-colors duration-300">Privacy Policy</Link>
+              <Link to="/terms-of-service" className="text-gray-400 hover:text-primary text-xs sm:text-sm transition-colors duration-300">Terms of Service</Link>
+              <Link to="/cookie-policy" className="text-gray-400 hover:text-primary text-xs sm:text-sm transition-colors duration-300">Cookie Policy</Link>
             </div>
           </div>
         </div>

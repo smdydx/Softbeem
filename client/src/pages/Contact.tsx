@@ -283,7 +283,7 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="John Doe"
                       required
-                      className="bg-zinc-800/50"
+                      className="bg-zinc-800/50 h-11 text-base"
                     />
                   </div>
 
@@ -299,7 +299,7 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="john@example.com"
                       required
-                      className="bg-zinc-800/50"
+                      className="bg-zinc-800/50 h-11 text-base"
                     />
                   </div>
                 </div>
@@ -316,7 +316,7 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="Your phone number"
                     required
-                    className="bg-zinc-800/50"
+                    className="bg-zinc-800/50 h-11 text-base"
                   />
                 </div>
 
@@ -352,7 +352,7 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="How can we help you?"
                     required
-                    className="bg-zinc-800/50"
+                    className="bg-zinc-800/50 h-11 text-base"
                   />
                 </div>
 
@@ -368,7 +368,7 @@ const Contact = () => {
                     rows={4}
                     placeholder="Tell us about your project or inquiry..."
                     required
-                    className="bg-zinc-800/50 resize-none"
+                    className="bg-zinc-800/50 resize-none text-base min-h-[100px]"
                   />
                 </div>
 
@@ -391,7 +391,7 @@ const Contact = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primary hover:bg-primary/90 py-6"
+                    className="w-full bg-primary hover:bg-primary/90 py-4 sm:py-6 h-12 sm:h-auto text-base"
                   >
                     {isSubmitting ? "Sending..." : (
                       <>

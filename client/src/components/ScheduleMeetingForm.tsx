@@ -13,8 +13,9 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { CalendarIcon, Clock, User, Mail, Phone, Building, CheckCircle, MessageSquare, Globe } from "lucide-react";
+import { CalendarIcon, Clock, User, Mail, Phone, Building, CheckCircle, MessageSquare, Globe, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Label } from "@/components/ui/label";
 
 // Form validation schema
 const formSchema = z.object({
@@ -52,7 +53,7 @@ const ScheduleMeetingForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  
+
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -63,7 +64,7 @@ const ScheduleMeetingForm = () => {
       companyName: "",
     },
   });
-  
+
   const timeSlots = generateTimeSlots();
 
   const onSubmit = async (data: FormData) => {
@@ -79,7 +80,7 @@ const ScheduleMeetingForm = () => {
         purpose: data.purpose,
         companyName: data.companyName || '',
       };
-      
+
       const response = await fetch('/api/meetings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -89,13 +90,13 @@ const ScheduleMeetingForm = () => {
       if (!response.ok) {
         throw new Error('Failed to schedule meeting');
       }
-      
+
       setIsSubmitted(true);
       toast({
         title: "Meeting Request Sent! ✅",
         description: "We'll confirm your meeting schedule shortly via WhatsApp.",
       });
-      
+
       form.reset();
     } catch (error) {
       toast({
@@ -107,7 +108,7 @@ const ScheduleMeetingForm = () => {
       setIsSubmitting(false);
     }
   };
-  
+
   const characterCount = form.watch('purpose')?.length || 0;
 
   if (isSubmitted) {
@@ -123,7 +124,7 @@ const ScheduleMeetingForm = () => {
               <div className="mb-6">
                 <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-green-700 dark:text-green-300 mb-2">
-                  Meeting Request Submitted! 
+                  Meeting Request Submitted!
                 </h3>
                 <p className="text-green-600 dark:text-green-400">
                   Thank you! We've received your meeting request and will confirm the schedule via WhatsApp within 24 hours.
@@ -137,7 +138,7 @@ const ScheduleMeetingForm = () => {
                   <li>✓ Meeting details will be shared via email</li>
                 </ul>
               </div>
-              <Button 
+              <Button
                 onClick={() => setIsSubmitted(false)}
                 variant="outline"
                 className="border-green-300 text-green-700 hover:bg-green-100 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/50"
@@ -399,7 +400,7 @@ const ScheduleMeetingForm = () => {
                 </motion.div>
               </form>
             </Form>
-            
+
             {/* Additional Info */}
             <div className="mt-6 p-4 bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950/50 dark:to-green-950/50 border border-emerald-200 dark:border-emerald-800 rounded-lg">
               <p className="text-sm text-emerald-700 dark:text-emerald-300 text-center">
@@ -408,7 +409,7 @@ const ScheduleMeetingForm = () => {
             </div>
           </CardContent>
         </Card>
-        
+
         {/* Info Sidebar */}
         <div className="space-y-4 sm:space-y-6">
           <Card className="bg-gradient-to-br from-emerald-50 via-green-50 to-emerald-100 dark:from-emerald-950/50 dark:via-green-950/50 dark:to-emerald-900/50 border-emerald-200 dark:border-emerald-800">
@@ -434,7 +435,7 @@ const ScheduleMeetingForm = () => {
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 dark:from-blue-950/50 dark:via-indigo-950/50 dark:to-blue-900/50 border-blue-200 dark:border-blue-800">
             <CardHeader className="p-4 sm:p-6">
               <CardTitle className="text-base sm:text-lg text-blue-700 dark:text-blue-300">
@@ -465,7 +466,7 @@ const ScheduleMeetingForm = () => {
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="bg-gradient-to-br from-purple-50 via-violet-50 to-purple-100 dark:from-purple-950/50 dark:via-violet-950/50 dark:to-purple-900/50 border-purple-200 dark:border-purple-800">
             <CardContent className="p-4 sm:p-6">
               <div className="text-center">
@@ -476,8 +477,8 @@ const ScheduleMeetingForm = () => {
                   Connect with us directly for immediate assistance
                 </p>
                 <div className="space-y-2">
-                  <a 
-                    href="tel:+919876543210" 
+                  <a
+                    href="tel:+919876543210"
                     className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 transition-colors"
                   >
                     <Phone className="w-4 h-4" />

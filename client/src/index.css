@@ -1385,14 +1385,14 @@ button, .button {
 }
 
 .mobile-services-item:hover {
-  background: rgba(255, 110, 0, 0.1);
+  background: rgba(0, 255, 0, 0.1);
 }
 
 /* Better scrolling for mobile */
 .mobile-menu-scroll {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 110, 0, 0.5) transparent;
+  scrollbar-color: rgba(0, 255, 0, 0.5) transparent;
 }
 
 .mobile-menu-scroll::-webkit-scrollbar {
@@ -1423,13 +1423,13 @@ button, .button {
   }
 
   .mobile-submenu-item:hover {
-    border-left-color: #ff6e00;
-    background: rgba(255, 110, 0, 0.05);
+    border-left-color: #00ff00;
+    background: rgba(0, 255, 0, 0.05);
   }
 }
 
 .mobile-menu-scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 110, 0, 0.5);
+  background-color: rgba(0, 255, 0, 0.5);
   border-radius: 20px;
 }
 

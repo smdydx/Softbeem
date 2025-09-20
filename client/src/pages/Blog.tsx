@@ -63,7 +63,7 @@ const Blog = () => {
               <Input
                 type="text"
                 placeholder="Search articles..."
-                className="pl-10 h-12 text-base"
+                className="pl-10 h-11 sm:h-12 text-sm sm:text-base"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
