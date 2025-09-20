@@ -2,10 +2,27 @@
 import { motion } from "framer-motion";
 import { staggerContainer, fadeIn } from "@/lib/animations";
 import ScheduleMeetingForm from "@/components/ScheduleMeetingForm";
+import { useEffect } from "react";
 
 const Schedule = () => {
+  useEffect(() => {
+    // Hide floating contact buttons on schedule page
+    const contactButtons = document.querySelector('.fixed.left-1\\/2.top-1\\/2');
+    if (contactButtons) {
+      (contactButtons as HTMLElement).style.display = 'none';
+    }
+    
+    return () => {
+      // Show contact buttons when leaving the page
+      const contactButtons = document.querySelector('.fixed.left-1\\/2.top-1\\/2');
+      if (contactButtons) {
+        (contactButtons as HTMLElement).style.display = 'flex';
+      }
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background pt-24 sm:pt-28 lg:pt-32 px-4">
+    <div className="min-h-screen bg-background pt-20 sm:pt-24 lg:pt-28 px-4">
       <motion.div
         variants={staggerContainer}
         initial="hidden"

@@ -64,7 +64,7 @@ const ScheduleMeetingForm = () => {
   };
 
   return (
-    <div id="meeting" className="w-full max-w-2xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 bg-zinc-900/50 backdrop-blur-lg rounded-lg sm:rounded-xl md:rounded-2xl border-2 sm:border border-zinc-800/50 my-4 sm:my-6 md:my-8 lg:my-12">
+    <div id="meeting" className="w-full max-w-2xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 bg-zinc-900/50 backdrop-blur-lg rounded-xl border-2 border-zinc-800/50 my-6 sm:my-8 md:my-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -90,7 +90,7 @@ const ScheduleMeetingForm = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-12 text-base px-4 transition-all duration-200"
                 placeholder="Enter your full name"
               />
             </div>
@@ -105,7 +105,7 @@ const ScheduleMeetingForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-12 text-base px-4 transition-all duration-200"
                 placeholder="your.email@example.com"
               />
             </div>
@@ -123,7 +123,7 @@ const ScheduleMeetingForm = () => {
               value={formData.phone}
               onChange={handleChange}
               required
-              className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+              className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-12 text-base px-4 transition-all duration-200"
               placeholder="+91 9876543210"
             />
           </div>
@@ -142,7 +142,7 @@ const ScheduleMeetingForm = () => {
                 onChange={handleChange}
                 required
                 min={new Date().toISOString().split('T')[0]}
-                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-12 text-base px-4 transition-all duration-200"
               />
             </div>
             <div className="space-y-1.5 sm:space-y-2">
@@ -156,7 +156,7 @@ const ScheduleMeetingForm = () => {
                 value={formData.time}
                 onChange={handleChange}
                 required
-                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+                className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-12 text-base px-4 transition-all duration-200"
               />
             </div>
           </div>
@@ -171,7 +171,7 @@ const ScheduleMeetingForm = () => {
               name="companyName"
               value={formData.companyName}
               onChange={handleChange}
-              className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-9 sm:h-10 md:h-12 text-xs sm:text-sm md:text-base px-3 sm:px-4 transition-all duration-200"
+              className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 h-12 text-base px-4 transition-all duration-200"
               placeholder="Your company name"
             />
           </div>
@@ -187,7 +187,7 @@ const ScheduleMeetingForm = () => {
               value={formData.purpose}
               onChange={handleChange}
               required
-              className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 min-h-[80px] sm:min-h-[100px] md:min-h-[120px] text-xs sm:text-sm md:text-base resize-none px-3 sm:px-4 py-2 sm:py-3 transition-all duration-200"
+              className="bg-zinc-800/50 border-zinc-700/50 focus:border-green-500/50 focus:ring-green-500/20 min-h-[120px] text-base resize-none px-4 py-3 transition-all duration-200"
               placeholder="Please describe the purpose of the meeting and what you'd like to discuss..."
             />
           </div>
@@ -201,7 +201,7 @@ const ScheduleMeetingForm = () => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 h-10 sm:h-12 md:h-14 text-xs sm:text-sm md:text-base lg:text-lg font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-green-500/25"
+              className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 h-14 text-lg font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-green-500/25"
             >
               {isSubmitting ? (
                 <div className="flex items-center gap-2">

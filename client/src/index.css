@@ -2036,6 +2036,39 @@ button, .button {
     width: 100% !important;
     line-height: 1.4 !important;
   }
+
+  /* Schedule form mobile optimizations */
+  #meeting {
+    margin: 1rem !important;
+    width: calc(100% - 2rem) !important;
+    max-width: none !important;
+  }
+
+  #meeting input, #meeting textarea {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    height: 48px !important;
+    padding: 0.75rem !important;
+  }
+
+  #meeting textarea {
+    height: 120px !important;
+    min-height: 120px !important;
+  }
+
+  #meeting button[type="submit"] {
+    height: 56px !important;
+    font-size: 1.125rem !important;
+  }
+
+  #meeting .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  #meeting label {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
+  }
 }
 
 /* Tablet optimization */
