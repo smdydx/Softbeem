@@ -10,8 +10,14 @@ import { Chat } from "./models/Chat";
 
 import { SiteSettings } from "./models/SiteSettings";
 import { Job } from "./models/Job"; // Import Job model
+import { uploadFile } from "./storage";
 
 export async function registerRoutes(app: Express, httpServer?: Server): Promise<Server> {
+  // Health check endpoint
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
   // Meeting APIs
   app.post("/api/meetings", async (req, res) => {
     try {
@@ -483,12 +489,6 @@ export async function registerRoutes(app: Express, httpServer?: Server): Promise
     await setupVite(app, httpServer);
   }
 
-    async function uploadFile(file: any): Promise<string> {
-        // Implement your file upload logic here
-        // This is a placeholder implementation
-        console.log("Simulating file upload for:", file.name);
-        return Promise.resolve(`/uploads/${file.name}`);
-    }
 
   return httpServer;
 }

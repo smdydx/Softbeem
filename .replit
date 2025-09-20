@@ -10,8 +10,17 @@ build = ["npm", "run", "build"]
 run = ["npm", "run", "start"]
 
 [[ports]]
+localPort = 3000
+externalPort = 3000
+exposeLocalhost = true
+
+[[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 36261
+externalPort = 3003
 
 [[ports]]
 localPort = 39175
@@ -38,31 +47,16 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Frontend Server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Backend Server"
+args = "Backend"
 
 [[workflows.workflow]]
-name = "Frontend Server"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"
-
-[[workflows.workflow]]
-name = "Backend Server"
+name = "Backend"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev:server"
+waitForPort = 3000
 
 [workflows.workflow.metadata]
 outputType = "console"
