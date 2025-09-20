@@ -1,5 +1,7 @@
 import React from "react";
 import { FaBuilding, FaProjectDiagram, FaHandshake } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const CorporateRestructuringAdvisory: React.FC = () => {
   return (
@@ -78,12 +80,11 @@ const CorporateRestructuringAdvisory: React.FC = () => {
         <p className="mb-6 max-w-2xl mx-auto text-gray-700">
           Contact us today to optimize your business structure for success.
         </p>
-        <button
-          className="bg-blue-700 text-white px-8 py-3 rounded-md hover:bg-blue-800 transition"
-          onClick={() => window.location.href = '/contact'}
-        >
-          Get Started
-        </button>
+        <Button asChild className="bg-blue-700 text-white px-8 py-3 rounded-md hover:bg-blue-800 transition">
+          <Link to="/contact">
+            Get Started
+          </Link>
+        </Button>
       </section>
     </div>
   );

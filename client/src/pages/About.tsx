@@ -3,6 +3,8 @@ import { fadeIn, staggerContainer } from "@/lib/animations";
 import { lazy, Suspense } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -87,13 +89,12 @@ const About = () => {
                 variants={fadeIn("up", "tween", 0.4, 1)}
                 className="flex flex-wrap gap-4"
               >
-                <button 
-                  className="px-6 py-3 bg-primary text-white rounded-lg flex items-center gap-2 hover:scale-105 transition-transform"
-                  onClick={() => window.location.href = '/contact'}
-                >
-                  Get Started
-                  <ArrowRight className="h-4 w-4" />
-                </button>
+                <Button asChild className="px-6 py-3 bg-primary text-white rounded-lg flex items-center gap-2 hover:scale-105 transition-transform">
+                  <Link to="/contact">
+                    Get Started
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
               </motion.div>
             </motion.div>
 

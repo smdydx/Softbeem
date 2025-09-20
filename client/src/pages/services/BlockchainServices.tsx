@@ -197,7 +197,7 @@ const BlockchainServices = () => {
             <div className="inline-flex flex-col items-center">
               <p className="text-gray-400 mb-6 text-lg">Ready to start your blockchain journey?</p>
               <Button asChild size="lg" className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold text-lg py-6 px-12">
-                <Link to="#contact">Get Started</Link>
+                <Link to="/schedule">Get Started</Link>
               </Button>
             </div>
           </motion.div>
