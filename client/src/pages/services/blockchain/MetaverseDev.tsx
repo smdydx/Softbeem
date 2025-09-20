@@ -90,7 +90,11 @@ const MetaverseDev = () => {
             <p className="text-gray-400 text-lg mb-6">
               Our metaverse development services allow you to create virtual worlds powered by blockchain technologies. From immersive 3D environments to integrated NFT assets, we offer a seamless experience that brings your vision to life.
             </p>
-            <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+              onClick={() => window.location.href = '/schedule'}
+            >
               Get Started
             </Button>
           </div>
@@ -171,18 +175,22 @@ const MetaverseDev = () => {
 
         <motion.div variants={fadeIn("up", "tween", 0.5, 1)} className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Technologies We Use</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4">
             {technologies.map((tech, index) => (
-              <div key={index} className="flex items-center justify-center p-4 rounded-lg bg-zinc-900/50 border border-green-500/10 hover:border-green-500/30 transition-all duration-300">
-                <span className="text-2xl mr-2">{tech.icon}</span>
-                <span className="font-medium">{tech.name}</span>
+              <div key={index} className="flex flex-col sm:flex-row items-center justify-center p-3 sm:p-4 rounded-lg bg-zinc-900/50 border border-green-500/10 hover:border-green-500/30 transition-all duration-300">
+                <span className="text-lg sm:text-2xl mb-1 sm:mb-0 sm:mr-2">{tech.icon}</span>
+                <span className="font-medium text-sm sm:text-base text-center">{tech.name}</span>
               </div>
             ))}
           </div>
         </motion.div>
 
         <motion.div variants={fadeIn("up", "tween", 0.6, 1)} className="text-center">
-          <Button size="lg" className=" mb-10 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
+          <Button 
+            size="lg" 
+            className=" mb-10 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+            onClick={() => window.location.href = '/schedule'}
+          >
             Get Demo <ArrowRight className="ml-2" />
           </Button>
         </motion.div>
@@ -262,18 +270,30 @@ const MetaverseDev = () => {
 
 
       <motion.div variants={fadeIn("up", "tween", 0.3, 1)} className="text-center mb-16 mt-12">
-        <h2 className="text-3xl font-bold text-white mb-4">Meet the Professional</h2>
-        <p className="text-gray-400 mb-6">
-          Our expert team works tirelessly to deliver the best blockchain solutions, ensuring efficiency, security, and cutting-edge technology in every project.
-        </p>
-        <div className="relative inline-block rounded-full overflow-hidden w-36 h-36 mx-auto group cursor-pointer">
-          <div className="absolute inset-0 bg-black opacity-70 group-hover:opacity-0 transition-all duration-300"></div>
-          <img src="/images/devimage.jpg" alt="Professional Image" className="w-full h-full object-cover rounded-full transition-all duration-300" />
+        <h2 className="text-3xl font-bold text-white mb-4">Why Choose Our Metaverse Solutions?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+          <div className="bg-zinc-900/50 rounded-lg p-6 border border-green-500/20">
+            <div className="text-4xl mb-4">🚀</div>
+            <h3 className="text-xl font-bold text-green-400 mb-2">Cutting-Edge Technology</h3>
+            <p className="text-gray-400">
+              We use the latest blockchain and 3D technologies to create immersive experiences.
+            </p>
+          </div>
+          <div className="bg-zinc-900/50 rounded-lg p-6 border border-green-500/20">
+            <div className="text-4xl mb-4">🔒</div>
+            <h3 className="text-xl font-bold text-green-400 mb-2">Secure & Scalable</h3>
+            <p className="text-gray-400">
+              Our solutions are built with security-first approach and designed to scale globally.
+            </p>
+          </div>
+          <div className="bg-zinc-900/50 rounded-lg p-6 border border-green-500/20">
+            <div className="text-4xl mb-4">⚡</div>
+            <h3 className="text-xl font-bold text-green-400 mb-2">Fast Delivery</h3>
+            <p className="text-gray-400">
+              Quick development cycles without compromising on quality or functionality.
+            </p>
+          </div>
         </div>
-        <p className="text-gray-400 mt-4">
-          <strong>Wasim Akram </strong><br />
-          Blockchain Expert & Developer
-        </p>
       </motion.div>
     </main>
   );
