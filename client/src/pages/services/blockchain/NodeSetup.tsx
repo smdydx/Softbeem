@@ -122,19 +122,20 @@ const NodeSetup = () => {
           variants={fadeIn("up", "tween", 0.2, 1)}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent mb-6">
             Enterprise Blockchain Node Setup
           </h1>
-          <p className="text-gray-400 max-w-3xl mx-auto text-lg mb-8">
+          <p className="text-gray-400 max-w-3xl mx-auto text-base md:text-lg mb-8 px-4">
             Deploy and manage high-performance blockchain nodes with enterprise-grade
             security and reliability. Our node infrastructure solutions ensure 99.9%
             uptime and optimal performance.
           </p>
 
-          <div className="flex flex-wrap gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button
               size="lg"
               className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+              onClick={() => window.location.href = '/schedule'}
             >
               Schedule Demo <ArrowRight className="ml-2" />
             </Button>
@@ -142,6 +143,7 @@ const NodeSetup = () => {
               size="lg"
               variant="outline"
               className="border-green-500 text-green-500 hover:bg-green-500/10"
+              onClick={() => window.location.href = '/contact'}
             >
               Contact Us <MessageCircle className="ml-2" />
             </Button>
@@ -151,38 +153,41 @@ const NodeSetup = () => {
         {/* Video and Description Section */}
         <motion.div
           variants={fadeIn("up", "tween", 0.3, 1)}
-          className="flex flex-col md:flex-row gap-8 mb-16"
+          className="flex flex-col lg:flex-row gap-8 mb-16"
         >
           {/* Video Section - Left Side */}
-          <div className="flex-1">
-            <video
-              width="100%"
-              height="100%"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="rounded-xl shadow-lg"
-            >
-              <source src="/video/ent-blockvid.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+          <div className="flex-1 w-full">
+            <div className="relative w-full aspect-video">
+              <video
+                width="100%"
+                height="100%"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="rounded-xl shadow-lg object-cover w-full h-full"
+              >
+                <source src="/video/ent-blockvid.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
 
           {/* Description Section - Right Side */}
-          <div className="flex-1 flex flex-col justify-center text-left">
-            <h2 className="text-3xl font-bold text-white mb-4">
+          <div className="flex-1 flex flex-col justify-center text-left px-4 lg:px-0">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               High Performance Blockchain Node Setup
             </h2>
-            <p className="text-gray-400 text-lg mb-6">
+            <p className="text-gray-400 text-base md:text-lg mb-6">
               Our enterprise-grade blockchain node solutions are designed for
               maximum performance and security. We ensure 24/7 uptime, proactive
               maintenance, and optimal configuration for your blockchain infrastructure.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+                onClick={() => window.location.href = '/schedule'}
               >
                 Get Started
               </Button>
@@ -190,6 +195,7 @@ const NodeSetup = () => {
                 size="lg"
                 variant="outline"
                 className="border-green-500 text-green-500 hover:bg-green-500/10"
+                onClick={() => window.location.href = '/blog'}
               >
                 Learn More
               </Button>
@@ -200,7 +206,7 @@ const NodeSetup = () => {
         {/* Other sections (Features, Client Says, Pricing, FAQ) */}
         <motion.div
           variants={fadeIn("up", "tween", 0.4, 1)}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 mb-16"
         >
           {features.map((feature, index) => (
             <div
@@ -234,10 +240,10 @@ const NodeSetup = () => {
         </motion.div>
 
         <motion.div variants={fadeIn("up", "tween", 0.4, 1)} className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
             Supported Blockchain Networks
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
             {technologies.map((tech, index) => (
               <div
                 key={index}
@@ -252,39 +258,39 @@ const NodeSetup = () => {
 
        {/* Client Testimonials Section */}
 <motion.div variants={fadeIn("up", "tween", 0.5, 1)} className="mb-16">
-  <h2 className="text-3xl font-bold text-center mb-8">What Our Clients Say</h2>
-  <div className="flex flex-wrap justify-center gap-8">
-    <div className="w-full sm:w-80 bg-zinc-900 p-6 rounded-xl shadow-xl">
-      <p className="text-gray-300 mb-4">
+  <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">What Our Clients Say</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="bg-zinc-900 p-6 rounded-xl shadow-xl">
+      <p className="text-gray-300 mb-4 text-sm md:text-base">
         "Their team provided exceptional blockchain node solutions for our
         enterprise. Our uptime and performance improved drastically!"
       </p>
       <h3 className="font-bold text-white">John Doe</h3>
-      <p className="text-gray-400">CTO, Tech Solutions Inc.</p>
+      <p className="text-gray-400 text-sm">CTO, Tech Solutions Inc.</p>
     </div>
-    <div className="w-full sm:w-80 bg-zinc-900 p-6 rounded-xl shadow-xl">
-      <p className="text-gray-300 mb-4">
+    <div className="bg-zinc-900 p-6 rounded-xl shadow-xl">
+      <p className="text-gray-300 mb-4 text-sm md:text-base">
         "We were able to implement a secure and high-performing blockchain
         infrastructure thanks to their expert advice and top-notch service."
       </p>
       <h3 className="font-bold text-white">Jane Smith</h3>
-      <p className="text-gray-400">Blockchain Architect, FinTech Ltd.</p>
+      <p className="text-gray-400 text-sm">Blockchain Architect, FinTech Ltd.</p>
     </div>
-    <div className="w-full sm:w-80 bg-zinc-900 p-6 rounded-xl shadow-xl">
-      <p className="text-gray-300 mb-4">
+    <div className="bg-zinc-900 p-6 rounded-xl shadow-xl">
+      <p className="text-gray-300 mb-4 text-sm md:text-base">
         "The blockchain node setup provided by this team helped streamline our
         operations. Their customer service is second to none and the platform is
         very reliable."
       </p>
       <h3 className="font-bold text-white">Mark Taylor</h3>
-      <p className="text-gray-400">CEO, Digital Innovations Corp.</p>
+      <p className="text-gray-400 text-sm">CEO, Digital Innovations Corp.</p>
     </div>
   </div>
 </motion.div>
 
         {/* Frequently Asked Questions Section */}
-        <motion.div variants={fadeIn("up", "tween", 0.7, 1)} className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+        <motion.div variants={fadeIn("up", "tween", 0.7, 1)} className="mb-16 px-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
           <Accordion type="single" collapsible>
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
