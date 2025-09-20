@@ -37,11 +37,22 @@ const AIChatBot = () => {
   }, []);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ 
+        behavior: "smooth", 
+        block: "end", 
+        inline: "nearest" 
+      });
+    }
   };
 
   useEffect(() => {
-    scrollToBottom();
+    // Small delay to ensure DOM is updated
+    const timer = setTimeout(() => {
+      scrollToBottom();
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, [messages]);
 
   // Comprehensive website information
@@ -330,7 +341,7 @@ const AIChatBot = () => {
             </div>
 
             {/* Messages Container */}
-            <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent scroll-smooth">
+            <div className="flex-1 overflow-y-auto overscroll-contain p-3 sm:p-4 space-y-3 chatbot-messages-container scroll-smooth" style={{ maxHeight: 'calc(100% - 120px)' }}>
               {messages.map((message, index) => (
                 <motion.div
                   key={index}
@@ -372,7 +383,7 @@ const AIChatBot = () => {
                   </div>
                 </motion.div>
               )}
-              <div ref={messagesEndRef} className="h-2" />
+              <div ref={messagesEndRef} className="h-4 w-full" />
             </div>
 
             {/* Premium Input Area */}

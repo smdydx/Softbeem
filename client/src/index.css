@@ -2290,6 +2290,50 @@ div[class*="group-hover/service:block"] > div::-webkit-scrollbar-thumb {
   background: transparent;
 }
 
+/* Enhanced chatbot scrolling */
+.chatbot-messages-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 197, 94, 0.4) transparent;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.chatbot-messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatbot-messages-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chatbot-messages-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgba(34, 197, 94, 0.4), rgba(34, 197, 94, 0.6));
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-messages-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgba(34, 197, 94, 0.6), rgba(34, 197, 94, 0.8));
+}
+
+/* Mobile scrolling optimization */
+@media (max-width: 768px) {
+  .chatbot-messages-container {
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  .chatbot-messages-container::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .chatbot-messages-container::-webkit-scrollbar-thumb {
+    background: rgba(34, 197, 94, 0.5);
+    border-radius: 2px;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
