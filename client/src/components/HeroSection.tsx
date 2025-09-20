@@ -183,80 +183,80 @@ const HeroSection = () => {
               navigate the digital transformation landscape.
             </p>
 
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start w-full max-w-md mx-auto lg:mx-0">
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-[#00FF00] to-[#004400] hover:from-[#008000] hover:to-[#006600] text-white border-none shadow-lg shadow-green-500/20 transition-all duration-300 hover:scale-105"
+                    className="bg-gradient-to-r from-[#00FF00] to-[#004400] hover:from-[#008000] hover:to-[#006600] text-white border-none shadow-lg shadow-green-500/20 transition-all duration-300 hover:scale-105 w-full sm:w-auto text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4"
                   >
-                    Start Your Project
-                    <ArrowRight className="h-4 w-4 ml-2" />
+                    <span className="truncate">Start Your Project</span>
+                    <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-2 flex-shrink-0" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-80 p-3 backdrop-blur-xl bg-black/80 border border-green-500/20">
-                  <div className="flex flex-col gap-2">
+                <PopoverContent className="w-[90vw] max-w-sm sm:max-w-md md:max-w-lg p-2 sm:p-3 backdrop-blur-xl bg-black/90 border border-green-500/20 mx-2">
+                  <div className="flex flex-col gap-1 sm:gap-2">
                     <Link
                       to="/services/it-services"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-500/10 transition-all duration-300 group"
+                      className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-blue-500/10 transition-all duration-300 group"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                        <Code className="h-5 w-5 text-white" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0">
+                        <Code className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </div>
-                      <div>
-                        <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">
+                      <div className="flex-1 min-w-0">
+                        <span className="font-semibold text-white group-hover:text-blue-400 transition-colors text-sm sm:text-base block">
                           IT Services
                         </span>
-                        <span className="block text-sm text-gray-400">
+                        <span className="block text-xs sm:text-sm text-gray-400 truncate">
                           Web Dev, Mobile Apps, Cloud Solutions
                         </span>
                       </div>
                     </Link>
                     <Link
                       to="/services/blockchain"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/10 transition-all duration-300 group"
+                      className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-green-500/10 transition-all duration-300 group"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                        <Database className="h-5 w-5 text-white" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center flex-shrink-0">
+                        <Database className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </div>
-                      <div>
-                        <span className="font-semibold text-white group-hover:text-green-400 transition-colors">
+                      <div className="flex-1 min-w-0">
+                        <span className="font-semibold text-white group-hover:text-green-400 transition-colors text-sm sm:text-base block">
                           Blockchain Services
                         </span>
-                        <span className="block text-sm text-gray-400">
+                        <span className="block text-xs sm:text-sm text-gray-400 truncate">
                           Smart Contracts, DApps, NFT Solutions
                         </span>
                       </div>
                     </Link>
                     <Link
                       to="/services/legal/compliance"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-yellow-500/10 transition-all duration-300 group"
+                      className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-yellow-500/10 transition-all duration-300 group"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
-                        <Scale className="h-5 w-5 text-white" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center flex-shrink-0">
+                        <Scale className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </div>
-                      <div>
-                        <span className="font-semibold text-white group-hover:text-yellow-400 transition-colors">
+                      <div className="flex-1 min-w-0">
+                        <span className="font-semibold text-white group-hover:text-yellow-400 transition-colors text-sm sm:text-base block">
                           Legal & Compliance
                         </span>
-                        <span className="block text-sm text-gray-400">
+                        <span className="block text-xs sm:text-sm text-gray-400 truncate">
                           Company Registration, Legal Support
                         </span>
                       </div>
                     </Link>
-                    <div className="border-t border-gray-600 my-2"></div>
+                    <div className="border-t border-gray-600 my-1 sm:my-2"></div>
                     <Link
                       to="/schedule"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-all duration-300 group"
+                      className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-purple-500/10 transition-all duration-300 group"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-                        <Rocket className="h-5 w-5 text-white" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center flex-shrink-0">
+                        <Rocket className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       </div>
-                      <div>
-                        <span className="font-semibold text-white group-hover:text-purple-400 transition-colors">
+                      <div className="flex-1 min-w-0">
+                        <span className="font-semibold text-white group-hover:text-purple-400 transition-colors text-sm sm:text-base block">
                           Schedule Consultation
                         </span>
-                        <span className="block text-sm text-gray-400">
+                        <span className="block text-xs sm:text-sm text-gray-400 truncate">
                           Book a meeting with our experts
                         </span>
                       </div>
@@ -269,9 +269,9 @@ const HeroSection = () => {
                 variant="outline"
                 size="lg"
                 onClick={() => window.location.href = '/contact'}
-                className="border-green-500/30 text-white hover:bg-green-500/10 shadow-lg"
+                className="border-green-500/30 text-white hover:bg-green-500/10 shadow-lg w-full sm:w-auto text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4"
               >
-                Get Started
+                <span className="truncate">Get Started</span>
               </Button>
             </div>
           </motion.div>
