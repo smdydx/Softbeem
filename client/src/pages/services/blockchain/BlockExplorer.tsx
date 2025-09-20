@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { staggerContainer, fadeIn } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
 import { Search, ArrowRight, Database, Shield, BarChart, Monitor, PlugZap } from "lucide-react";
-import { Calendar } from "lucide-react";
 
 
 const BlockExplorer = () => {
@@ -103,6 +102,7 @@ const BlockExplorer = () => {
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+                onClick={() => window.location.href = '/schedule'}
               >
                 Get Started
               </Button>
@@ -110,6 +110,7 @@ const BlockExplorer = () => {
                 size="lg"
                 variant="outline"
                 className="border-green-500 text-green-500 hover:bg-green-500/10"
+                onClick={() => window.location.href = '/contact'}
               >
                 Learn More
               </Button>
@@ -202,11 +203,11 @@ const BlockExplorer = () => {
         {/* Technologies Section */}
         <motion.div variants={fadeIn("up", "tween", 0.5, 1)} className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Technologies We Use</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4">
             {technologies.map((tech, index) => (
-              <div key={index} className="flex items-center justify-center p-4 rounded-lg bg-zinc-900/50 border border-green-500/10 hover:border-green-500/30 transition-all duration-300">
-                <span className="text-2xl mr-2">{tech.icon}</span>
-                <span className="font-medium">{tech.name}</span>
+              <div key={index} className="flex flex-col sm:flex-row items-center justify-center p-3 sm:p-4 rounded-lg bg-zinc-900/50 border border-green-500/10 hover:border-green-500/30 transition-all duration-300">
+                <span className="text-lg sm:text-2xl mb-1 sm:mb-0 sm:mr-2">{tech.icon}</span>
+                <span className="font-medium text-sm sm:text-base text-center">{tech.name}</span>
               </div>
             ))}
           </div>
@@ -233,7 +234,11 @@ const BlockExplorer = () => {
 
         {/* Call to Action */}
         <motion.div variants={fadeIn("up", "tween", 0.7, 1)} className="text-center">
-          <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+            onClick={() => window.location.href = '/schedule'}
+          >
             Get Demo <ArrowRight className="ml-2" />
           </Button>
         </motion.div>
