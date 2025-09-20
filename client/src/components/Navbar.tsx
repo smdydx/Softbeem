@@ -19,6 +19,8 @@ import {
   ShoppingCart,
   User,
   ArrowRight,
+  Code,
+  Scale,
 } from "lucide-react";
 import { servicesData } from "@/data/services";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -210,7 +212,7 @@ const Navbar = () => {
                     setQuickActionsOpen(!quickActionsOpen);
                   }}
                   aria-label="Quick Actions"
-                  className="relative p-3 bg-gradient-to-br from-zinc-800/50 via-zinc-900/80 to-black/90 backdrop-blur-md rounded-xl border border-green-500/30 shadow-lg hover:shadow-green-500/25 transition-all duration-300 min-w-[48px] min-h-[48px] flex items-center justify-center group overflow-hidden"
+                  className="relative p-3 bg-gradient-to-br from-zinc-800/50 via-zinc-900/80 to-black/90 backdrop-blur-md rounded-xl border border-green-500/30 shadow-lg hover:shadow-green-500/25 transition-all duration-300 min-w-[48px] min-h-[48px] flex items-center justify-center overflow-hidden"
                 >
                   {/* Animated background */}
                   <div className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-500/10 to-green-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -472,7 +474,7 @@ const Navbar = () => {
                 />
               )}
 
-              <Settings className={`h-4 w-4 mb-1 transition-colors ${
+              <Code className={`h-4 w-4 mb-1 transition-colors ${
                 activeTab === "services" ? "text-blue-400" : "text-gray-400 group-hover:text-white"
               }`} />
               <span className={`text-xs font-medium transition-colors ${
@@ -1032,19 +1034,19 @@ const Navbar = () => {
                             const getAboutIcon = (name: string) => {
                               switch (name) {
                                 case "Company Overview":
-                                  return Home;
+                                  return <Home className="h-4 w-4 text-green-400" />;
                                 case "Our Story":
-                                  return FileText;
+                                  return <FileText className="h-4 w-4 text-green-400" />;
                                 case "Vision & Mission":
-                                  return ChevronRight;
+                                  return <ChevronRight className="h-4 w-4 text-green-400" />;
                                 case "Core Values":
-                                  return Settings;
+                                  return <Settings className="h-4 w-4 text-green-400" />;
                                 case "Careers":
-                                  return Calendar;
+                                  return <Calendar className="h-4 w-4 text-green-400" />;
                                 case "Achievements":
-                                  return Award;
+                                  return <Award className="h-4 w-4 text-green-400" />;
                                 default:
-                                  return Settings;
+                                  return <Settings className="h-4 w-4 text-green-400" />;
                               }
                             };
 
@@ -1128,8 +1130,8 @@ const Navbar = () => {
                           <span className="text-sm font-medium text-blue-400">Call Now</span>
                         </a>
                       </div>
-                      
-                      
+
+
                     </div>
                     </div>
                   )}
@@ -1378,8 +1380,8 @@ const Navbar = () => {
                                 return <Home className="h-3 w-3 text-green-400" />;
                               case "Our Story":
                                 return <FileText className="h-3 w-3 text-green-400" />;
-                              // case "Leadership":
-                              //   return <Users className="h-3 w-3 text-green-400" />;
+                              case "Leadership":
+                                return <Users className="h-3 w-3 text-green-400" />;
                               case "Vision & Mission":
                                 return <ChevronRight className="h-3 w-3 text-green-400" />;
                               case "Core Values":
@@ -1421,7 +1423,7 @@ const Navbar = () => {
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                   </button>
 
-                  
+
                 </div>
               );
             })}
@@ -1606,15 +1608,11 @@ const Navbar = () => {
                                   className="w-full flex items-center justify-between px-8 py-3 hover:bg-zinc-700 transition-all"
                                 >
                                   <span className="text-green-400 font-medium text-xs capitalize">
-                                    {category === "tech"
-                                      ? "Technology Services"
-                                      : "Legal & Compliance Services"}
+                                    {category === "tech" ? "Technology Services" : "Legal & Compliance Services"}
                                   </span>
                                   <ChevronDown
                                     className={`h-4 w-4 text-gray-400 transition-transform duration-300 ${
-                                      mobileOpenCategories.includes(category)
-                                        ? "rotate-180"
-                                        : ""
+                                      mobileOpenCategories.includes(category) ? "rotate-180" : ""
                                     }`}
                                   />
                                 </button>
