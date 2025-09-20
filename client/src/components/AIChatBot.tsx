@@ -401,35 +401,7 @@ const AIChatBot = () => {
           </motion.div>
         )}
 
-        {/* Floating Chat Button - Bottom Left Position */}
-        {!isOpen && (
-          <motion.button
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="fixed bottom-6 left-6 w-16 h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 rounded-full text-white shadow-2xl shadow-green-500/40 border border-green-400/50 backdrop-blur-sm group overflow-hidden relative transition-all duration-300"
-            onClick={() => setIsOpen(true)}
-            style={{ 
-              zIndex: 45,
-              marginBottom: 'env(safe-area-inset-bottom, 0px)',
-              marginLeft: 'env(safe-area-inset-left, 0px)'
-            }}
-          >
-            {/* Animated background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-emerald-400/20 to-teal-400/20 rounded-full animate-pulse" />
-
-            <Bot className="h-8 w-8 md:h-9 md:w-9 lg:h-10 lg:w-10 relative z-10 group-hover:scale-110 transition-transform" />
-
-            {/* Premium status indicator */}
-            <div className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse flex items-center justify-center shadow-lg">
-              <Sparkles className="h-2.5 w-2.5 md:h-3 md:w-3 text-white" />
-            </div>
-
-            {/* Glow effect */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" />
-          </motion.button>
-        )}
+        
       </AnimatePresence>
     </div>
   );
