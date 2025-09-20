@@ -17,7 +17,7 @@ const AIChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([
     { 
       type: 'bot', 
-      text: '🙏 नमस्ते! मैं Softbeem का AI Assistant हूं। मैं आपकी मदद कर सकता हूं:\n\n🔷 हमारी सभी Services के बारे में जानकारी\n🔷 Company के बारे में\n🔷 Meeting Schedule करना\n🔷 Career Opportunities\n🔷 Pricing Information\n\nआप मुझसे कुछ भी पूछ सकते हैं!',
+      text: '🙏 नमस्ते! मैं Softbeem का AI Assistant हूं।\n\nमैं आपकी मदद कर सकता हूं:\n\n• हमारी सभी Services\n• Company के बारे में\n• Meeting Schedule\n• Career Opportunities\n• Pricing Information\n\nआप मुझसे कुछ भी पूछ सकते हैं!',
       timestamp: new Date()
     }
   ]);
@@ -250,8 +250,8 @@ const AIChatBot = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-20 left-4 sm:bottom-24 sm:left-6 md:bottom-32 md:left-8 w-[340px] sm:w-[380px] md:w-[420px] h-[500px] sm:h-[550px] md:h-[600px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden"
-            style={{ maxWidth: 'calc(100vw - 2rem)' }}
+            className="fixed bottom-20 left-4 sm:bottom-24 sm:left-6 md:bottom-32 md:left-8 w-[320px] sm:w-[380px] md:w-[420px] h-[480px] sm:h-[550px] md:h-[600px] bg-gradient-to-b from-zinc-900/98 via-zinc-900/95 to-black/98 backdrop-blur-2xl rounded-2xl border border-green-500/30 shadow-2xl shadow-green-500/20 overflow-hidden"
+            style={{ maxWidth: 'calc(100vw - 1.5rem)' }}
           >
             {/* Animated Background Pattern */}
             <div className="absolute inset-0 opacity-10">
@@ -330,7 +330,7 @@ const AIChatBot = () => {
             </div>
 
             {/* Messages Container */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent scroll-smooth">
+            <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 scrollbar-thin scrollbar-thumb-green-500/30 scrollbar-track-transparent scroll-smooth">
               {messages.map((message, index) => (
                 <motion.div
                   key={index}
@@ -339,12 +339,14 @@ const AIChatBot = () => {
                   transition={{ duration: 0.3, ease: "easeOut" }}
                   className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-[85%] p-3 rounded-2xl whitespace-pre-wrap text-sm leading-relaxed shadow-lg backdrop-blur-sm border ${
+                  <div className={`max-w-[90%] sm:max-w-[85%] p-2.5 sm:p-3 rounded-2xl shadow-lg backdrop-blur-sm border ${
                     message.type === 'user' 
                       ? 'bg-gradient-to-r from-green-500/30 to-emerald-500/30 text-white border-green-500/40 shadow-green-500/20' 
                       : 'bg-gradient-to-r from-zinc-800/80 to-zinc-900/80 text-gray-200 border-zinc-700/50 shadow-black/20'
                   }`}>
-                    <div className="mb-2 break-words font-medium chatbot-message-text">{message.text}</div>
+                    <div className="mb-2 text-xs sm:text-sm leading-relaxed font-medium break-words overflow-wrap-anywhere word-break-break-word hyphens-auto whitespace-pre-wrap">
+                      {message.text}
+                    </div>
                     <div className={`text-xs opacity-60 font-medium ${message.type === 'user' ? 'text-right text-green-200' : 'text-left text-gray-400'}`}>
                       {formatTime(message.timestamp)}
                     </div>
