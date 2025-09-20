@@ -194,53 +194,70 @@ const HeroSection = () => {
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-72 p-3 backdrop-blur-xl bg-black/80 border border-green-500/20">
+                <PopoverContent className="w-80 p-3 backdrop-blur-xl bg-black/80 border border-green-500/20">
                   <div className="flex flex-col gap-2">
                     <Link
-                      to="/schedule"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/10 transition-all duration-300 group"
+                      to="/services/it-services"
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-500/10 transition-all duration-300 group"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
                         <Code className="h-5 w-5 text-white" />
                       </div>
                       <div>
-                        <span className="font-semibold text-white group-hover:text-green-400 transition-colors">
-                          Schedule a Call
+                        <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">
+                          IT Services
                         </span>
                         <span className="block text-sm text-gray-400">
-                          Book a meeting with us
+                          Web Dev, Mobile Apps, Cloud Solutions
                         </span>
                       </div>
                     </Link>
                     <Link
-                      to="/blog"
+                      to="/services/blockchain"
                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/10 transition-all duration-300 group"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                        <ServerCog className="h-5 w-5 text-white" />
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <Database className="h-5 w-5 text-white" />
                       </div>
                       <div>
-                        <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">
-                          Read Our Blog
+                        <span className="font-semibold text-white group-hover:text-green-400 transition-colors">
+                          Blockchain Services
                         </span>
                         <span className="block text-sm text-gray-400">
-                          Latest insights and news
+                          Smart Contracts, DApps, NFT Solutions
                         </span>
                       </div>
                     </Link>
                     <Link
-                      to="/contact"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/10 transition-all duration-300 group"
+                      to="/services/legal/compliance"
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-yellow-500/10 transition-all duration-300 group"
                     >
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
                         <Scale className="h-5 w-5 text-white" />
                       </div>
                       <div>
                         <span className="font-semibold text-white group-hover:text-yellow-400 transition-colors">
-                          Get In Touch
+                          Legal & Compliance
                         </span>
                         <span className="block text-sm text-gray-400">
-                          Contact us for inquiries
+                          Company Registration, Legal Support
+                        </span>
+                      </div>
+                    </Link>
+                    <div className="border-t border-gray-600 my-2"></div>
+                    <Link
+                      to="/schedule"
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-all duration-300 group"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <Rocket className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <span className="font-semibold text-white group-hover:text-purple-400 transition-colors">
+                          Schedule Consultation
+                        </span>
+                        <span className="block text-sm text-gray-400">
+                          Book a meeting with our experts
                         </span>
                       </div>
                     </Link>
