@@ -28,7 +28,6 @@ import Careers from "@/pages/Careers";
 // Components
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AIChatBot from "@/components/AIChatBot";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard";
@@ -267,7 +266,6 @@ function App() {
           <Footer />
           <ScrollToTop />
           <CookieConsent />
-          <AIChatBot />
           <Toaster />
         </div>
       </SiteSettingsProvider>

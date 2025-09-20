@@ -1081,21 +1081,7 @@ const Navbar = () => {
                         </a>
                       </div>
                       
-                      {/* AI ChatBot Quick Action */}
-                      <div className="mt-3">
-                        <button
-                          onClick={() => {
-                            setIsMobileMenuOpen(false);
-                            // Trigger chatbot open
-                            const chatbotEvent = new CustomEvent('openChatbot');
-                            window.dispatchEvent(chatbotEvent);
-                          }}
-                          className="w-full flex items-center gap-3 p-3 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/30 hover:from-purple-500/20 hover:to-pink-500/20 transition-all"
-                        >
-                          <MessageCircle className="h-5 w-5 text-purple-400" />
-                          <span className="text-sm font-medium text-purple-400">Quick Chat</span>
-                        </button>
-                      </div>
+                      
                     </div>
                     </div>
                   )}
