@@ -365,39 +365,7 @@ const Navbar = () => {
                       </div>
                     </motion.a>
 
-                    {/* AI Chatbot */}
-                    <motion.button
-                      whileHover={{ scale: 1.02, x: 4 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => {
-                        setQuickActionsOpen(false);
-                        // Trigger chatbot open event
-                        window.dispatchEvent(new CustomEvent('openChatbot'));
-                      }}
-                      className="relative flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-zinc-800/50 to-zinc-900/50 hover:from-cyan-500/10 hover:to-blue-500/10 border border-transparent hover:border-cyan-500/20 transition-all duration-300 group overflow-hidden"
-                    >
-                      {/* Glow effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                      <div className="relative z-10 flex items-center gap-4">
-                        <div className="p-2 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-xl border border-cyan-500/30 group-hover:shadow-lg group-hover:shadow-cyan-500/25 transition-all duration-300">
-                          <svg className="h-5 w-5 text-cyan-400 group-hover:text-cyan-300 transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                            <path d="M13 10V7.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5V10"/>
-                            <circle cx="12" cy="13" r="1"/>
-                          </svg>
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="text-white group-hover:text-cyan-300 font-semibold text-sm transition-colors">AI Assistant</span>
-                          <span className="text-gray-400 text-xs group-hover:text-cyan-400/70 transition-colors">Get instant help</span>
-                        </div>
-                      </div>
-
-                      {/* Arrow indicator */}
-                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <ChevronRight className="h-4 w-4 text-cyan-400" />
-                      </div>
-                    </motion.button>
+                    
                   </div>
                 </div>
               </div>
@@ -1782,8 +1750,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      {/* AI Chatbot Component */}
-      <AIChatBot />
+      
     </header>
   );
 };
