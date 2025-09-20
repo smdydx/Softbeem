@@ -6,7 +6,6 @@ import CookieConsent from "@/components/CookieConsent";
 import { SiteSettingsProvider } from "@/contexts/SiteSettingsContext";
 import { useEffect, useState } from 'react';
 import { initMobileOptimizations } from '@/utils/mobile-optimizations';
-import LoadingScreen from "@/components/LoadingScreen";
 
 // Common Pages
 import NotFound from "@/pages/not-found";
@@ -150,9 +149,7 @@ function App() {
     }, 300);
   };
 
-  if (isLoading) {
-    return <LoadingScreen onComplete={handleLoadingComplete} />;
-  }
+  
 
   return (
     <QueryClientProvider client={queryClient}>
