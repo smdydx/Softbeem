@@ -146,7 +146,6 @@ function App() {
           <Navbar />
           <ScrollToTop />
           <main className="flex-grow pt-20 md:pt-24 pb-16">
-            <AIChatBot />
             <Routes>
               {/* Common */}
               <Route path="/" element={<Home />} />
