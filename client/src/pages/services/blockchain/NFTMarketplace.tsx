@@ -126,7 +126,7 @@ const NFTMarketplace = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="container mx-auto px-4 mt-20"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16 lg:mt-20"
       >
         {/* Hero Section */}
         <motion.div
@@ -142,21 +142,22 @@ const NFTMarketplace = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-black/40" />
           </div>
 
-          <div className="relative py-24 px-6">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 mb-8">
-              <Image className="w-10 h-10 text-green-400" />
+          <div className="relative py-16 sm:py-24 px-4 sm:px-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-green-500/10 mb-6 sm:mb-8">
+              <Image className="w-8 h-8 sm:w-10 sm:h-10 text-green-400" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent mb-4 sm:mb-6 leading-tight">
               NFT Marketplace Development
             </h1>
-            <p className="text-gray-300 max-w-3xl mx-auto text-xl mb-8">
+            <p className="text-gray-300 max-w-3xl mx-auto text-lg sm:text-xl mb-6 sm:mb-8 leading-relaxed">
               Build powerful NFT marketplaces with 100% customization, multi-chain support, and enterprise-grade security.
             </p>
-            <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
-                View Live Demo <ArrowRight className="ml-2" />
-              </Button>
-              <Button variant="outline" size="lg" className="border-green-500/30 text-green-400 hover:bg-green-500/10" onClick={() => window.location.href = '/schedule'}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+                onClick={() => window.location.href = '/schedule'}
+              >
                 Schedule Consultation <Calendar className="ml-2" />
               </Button>
               <Button
@@ -165,7 +166,7 @@ const NFTMarketplace = () => {
                 className="border-green-500 text-green-500 hover:bg-green-500/10"
                 onClick={() => window.location.href = '/blog'}
               >
-                View Case Studies
+                View Case Studies <ArrowRight className="ml-2" />
               </Button>
             </div>
           </div>
@@ -189,9 +190,9 @@ const NFTMarketplace = () => {
         </motion.div>
 
         {/* Key Features */}
-        <motion.div variants={fadeIn("up", "tween", 0.4, 1)} className="mb-24">
-          <h2 className="text-3xl font-bold text-center mb-12">Core Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <motion.div variants={fadeIn("up", "tween", 0.4, 1)} className="mb-16 sm:mb-24">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Core Features</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {features.map((feature, index) => (
               <div
                 key={index}
@@ -223,9 +224,9 @@ const NFTMarketplace = () => {
         </motion.div>
 
         {/* Technologies */}
-        <motion.div variants={fadeIn("up", "tween", 0.5, 1)} className="mb-24">
-          <h2 className="text-3xl font-bold text-center mb-12">Core Technologies</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+        <motion.div variants={fadeIn("up", "tween", 0.5, 1)} className="mb-16 sm:mb-24">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Core Technologies</h2>
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3 sm:gap-4">
             {technologies.map((tech, index) => (
               <div
                 key={index}
@@ -239,10 +240,10 @@ const NFTMarketplace = () => {
         </motion.div>
 
         {/* Services */}
-        <motion.div variants={fadeIn("up", "tween", 0.6, 1)} className="mb-24">
-          <div className="max-w-7xl mx-auto bg-zinc-900/50 border border-green-500/10 rounded-2xl p-12">
-            <h3 className="text-3xl font-bold text-center mb-12">Development Services</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <motion.div variants={fadeIn("up", "tween", 0.6, 1)} className="mb-16 sm:mb-24">
+          <div className="max-w-7xl mx-auto bg-zinc-900/50 border border-green-500/10 rounded-2xl p-6 sm:p-8 lg:p-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Development Services</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {services.map((service, index) => (
                 <div
                   key={index}
@@ -258,18 +259,27 @@ const NFTMarketplace = () => {
         </motion.div>
 
         {/* CTA Section */}
-        <motion.div variants={fadeIn("up", "tween", 0.7, 1)} className="mb-24">
-          <div className="bg-gradient-to-r from-green-500/10 to-emerald-600/10 border border-green-500/20 rounded-2xl p-12 text-center">
-            <h2 className="text-3xl font-bold mb-6">Start Your NFT Journey Today</h2>
-            <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+        <motion.div variants={fadeIn("up", "tween", 0.7, 1)} className="mb-16 sm:mb-24">
+          <div className="bg-gradient-to-r from-green-500/10 to-emerald-600/10 border border-green-500/20 rounded-2xl p-6 sm:p-8 lg:p-12 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Start Your NFT Journey Today</h2>
+            <p className="text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base">
               Get a free consultation with our blockchain experts to discuss your project requirements.
             </p>
-            <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+                onClick={() => window.location.href = '/contact'}
+              >
                 Contact Sales <MessageCircle className="ml-2" />
               </Button>
-              <Button variant="outline" size="lg" className="border-green-500/30 text-green-400 hover:bg-green-500/10">
-                Technical Support <Bot className="ml-2" />
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-green-500/30 text-green-400 hover:bg-green-500/10"
+                onClick={() => window.location.href = '/schedule'}
+              >
+                Schedule Meeting <Calendar className="ml-2" />
               </Button>
             </div>
           </div>
