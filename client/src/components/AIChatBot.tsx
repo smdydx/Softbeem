@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Bot, X, Send, Minimize2, Phone, Search, FileText, Calendar, Users, Building, Sparkles, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { servicesData } from '@/data/services';
+import { useNavigate } from 'react-router-dom';
 
 interface Message {
   type: 'user' | 'bot';
@@ -24,6 +24,7 @@ const AIChatBot = () => {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate(); // Added for navigation
 
   // Listen for hamburger menu chatbot open event
   useEffect(() => {
@@ -308,7 +309,7 @@ const AIChatBot = () => {
                     purple: "from-purple-500/20 to-purple-600/20 border-purple-500/30 text-purple-300 hover:from-purple-500/30 hover:to-purple-600/30",
                     orange: "from-orange-500/20 to-orange-600/20 border-orange-500/30 text-orange-300 hover:from-orange-500/30 hover:to-orange-600/30"
                   };
-                  
+
                   return (
                     <motion.button
                       key={index}
@@ -417,9 +418,9 @@ const AIChatBot = () => {
           >
             {/* Animated background */}
             <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-emerald-400/20 to-teal-400/20 rounded-full animate-pulse" />
-            
+
             <Bot className="h-8 w-8 md:h-9 md:w-9 lg:h-10 lg:w-10 relative z-10 group-hover:scale-110 transition-transform" />
-            
+
             {/* Premium status indicator */}
             <div className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse flex items-center justify-center shadow-lg">
               <Sparkles className="h-2.5 w-2.5 md:h-3 md:w-3 text-white" />
