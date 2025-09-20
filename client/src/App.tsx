@@ -135,26 +135,14 @@ import MerchantExporterGST from "./pages/services/legal/GstMerchantExporter";
 import ScrollToTop from "@/components/ScrollToTop";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [showContent, setShowContent] = useState(false);
-
   useEffect(() => {
     initMobileOptimizations();
   }, []);
 
-  const handleLoadingComplete = () => {
-    setIsLoading(false);
-    setTimeout(() => {
-      setShowContent(true);
-    }, 300);
-  };
-
-  
-
   return (
     <QueryClientProvider client={queryClient}>
       <SiteSettingsProvider>
-        <div className={`flex flex-col min-h-screen transition-opacity duration-1000 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="flex flex-col min-h-screen"
           <Navbar />
           <ScrollToTop />
           <main className="flex-grow pt-20 md:pt-24 pb-16">
