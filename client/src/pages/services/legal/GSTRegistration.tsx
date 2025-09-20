@@ -172,14 +172,20 @@ export default function GSTRegistration() {
         </div>
       </section>
 
-      {/* Trusted by Logos Section */}
+      {/* Trusted by Section */}
       <section className="py-12 bg-zinc-900/30">
         <div className="container mx-auto text-center px-4">
           <h2 className="text-3xl font-bold text-green-400 mb-6">Trusted by 1000+ Businesses</h2>
-          <div className="flex flex-wrap justify-center gap-6">
-            <img src="/logos/client1.png" alt="Client 1" className="h-12 grayscale hover:grayscale-0" />
-            <img src="/logos/client2.png" alt="Client 2" className="h-12 grayscale hover:grayscale-0" />
-            <img src="/logos/client3.png" alt="Client 3" className="h-12 grayscale hover:grayscale-0" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <div className="bg-zinc-800/50 p-4 rounded-lg border border-green-500/10">
+              <p className="text-gray-300 text-sm">✓ Startups</p>
+            </div>
+            <div className="bg-zinc-800/50 p-4 rounded-lg border border-green-500/10">
+              <p className="text-gray-300 text-sm">✓ SMEs</p>
+            </div>
+            <div className="bg-zinc-800/50 p-4 rounded-lg border border-green-500/10">
+              <p className="text-gray-300 text-sm">✓ Enterprises</p>
+            </div>
           </div>
         </div>
       </section>
