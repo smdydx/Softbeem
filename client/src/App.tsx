@@ -4,8 +4,9 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import CookieConsent from "@/components/CookieConsent";
 import { SiteSettingsProvider } from "@/contexts/SiteSettingsContext";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { initMobileOptimizations } from '@/utils/mobile-optimizations';
+import LoadingScreen from "@/components/LoadingScreen";
 
 // Common Pages
 import NotFound from "@/pages/not-found";
@@ -135,14 +136,28 @@ import MerchantExporterGST from "./pages/services/legal/GstMerchantExporter";
 import ScrollToTop from "@/components/ScrollToTop";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+
   useEffect(() => {
     initMobileOptimizations();
   }, []);
 
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+    setTimeout(() => {
+      setShowContent(true);
+    }, 300);
+  };
+
+  if (isLoading) {
+    return <LoadingScreen onComplete={handleLoadingComplete} />;
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <SiteSettingsProvider>
-        <div className="flex flex-col min-h-screen">
+        <div className={`flex flex-col min-h-screen transition-opacity duration-1000 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
           <Navbar />
           <ScrollToTop />
           <main className="flex-grow pt-20 md:pt-24 pb-16">
