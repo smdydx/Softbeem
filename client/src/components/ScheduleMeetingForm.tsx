@@ -112,14 +112,14 @@ const ScheduleMeetingForm = () => {
 
   if (isSubmitted) {
     return (
-      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
           <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 dark:from-green-950/50 dark:via-emerald-950/50 dark:to-green-900/50 border-green-200 dark:border-green-800">
-            <CardContent className="p-8 text-center">
+            <CardContent className="p-6 sm:p-8 text-center">
               <div className="mb-6">
                 <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-green-700 dark:text-green-300 mb-2">
@@ -152,29 +152,29 @@ const ScheduleMeetingForm = () => {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="grid lg:grid-cols-[1fr_0.9fr] gap-8"
+        className="grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-4 sm:gap-6 lg:gap-8"
       >
         {/* Main Form */}
         <Card className="relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-2 border-gray-200/50 dark:border-gray-800/50 shadow-2xl">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-green-500/5" />
-          <CardHeader className="relative">
-            <CardTitle className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+          <CardHeader className="relative p-4 sm:p-6">
+            <CardTitle className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
               Schedule Your Meeting
             </CardTitle>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground text-sm sm:text-base">
               Book a consultation with our experts to discuss your project requirements
             </p>
           </CardHeader>
-          <CardContent className="relative">
+          <CardContent className="relative p-4 sm:p-6">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                 {/* Name and Email Row */}
-                <div className="grid sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <FormField
                     control={form.control}
                     name="name"
@@ -188,7 +188,7 @@ const ScheduleMeetingForm = () => {
                           <div className="relative">
                             <Input
                               placeholder="Enter your full name"
-                              className="pl-10 h-12 border-2 focus:border-emerald-500 transition-all duration-200"
+                              className="pl-10 h-11 sm:h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
                               {...field}
                             />
                             <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -212,7 +212,7 @@ const ScheduleMeetingForm = () => {
                             <Input
                               placeholder="your.email@example.com"
                               type="email"
-                              className="pl-10 h-12 border-2 focus:border-emerald-500 transition-all duration-200"
+                              className="pl-10 h-11 sm:h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
                               {...field}
                             />
                             <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -240,7 +240,7 @@ const ScheduleMeetingForm = () => {
                             placeholder="+91 9876543210"
                             type="tel"
                             inputMode="tel"
-                            className="pl-10 h-12 border-2 focus:border-emerald-500 transition-all duration-200"
+                            className="pl-10 h-11 sm:h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
                             {...field}
                           />
                           <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -252,7 +252,7 @@ const ScheduleMeetingForm = () => {
                 />
 
                 {/* Date and Time Row */}
-                <div className="grid sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <FormField
                     control={form.control}
                     name="date"
@@ -268,7 +268,7 @@ const ScheduleMeetingForm = () => {
                               <Button
                                 variant={"outline"}
                                 className={cn(
-                                  "h-12 pl-10 text-left font-normal border-2 focus:border-emerald-500",
+                                  "h-11 sm:h-12 pl-10 text-left font-normal border-2 focus:border-emerald-500 text-base",
                                   !field.value && "text-muted-foreground"
                                 )}
                               >
@@ -306,7 +306,7 @@ const ScheduleMeetingForm = () => {
                         </FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger className="h-12 border-2 focus:border-emerald-500">
+                            <SelectTrigger className="h-11 sm:h-12 border-2 focus:border-emerald-500 text-base">
                               <SelectValue placeholder="Select a time" />
                             </SelectTrigger>
                           </FormControl>
@@ -338,7 +338,7 @@ const ScheduleMeetingForm = () => {
                         <div className="relative">
                           <Input
                             placeholder="Your company name"
-                            className="pl-10 h-12 border-2 focus:border-emerald-500 transition-all duration-200"
+                            className="pl-10 h-11 sm:h-12 border-2 focus:border-emerald-500 transition-all duration-200 text-base"
                             {...field}
                           />
                           <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -367,7 +367,7 @@ const ScheduleMeetingForm = () => {
                       <FormControl>
                         <Textarea
                           placeholder="Please describe the purpose of the meeting and what you'd like to discuss..."
-                          className="min-h-[120px] border-2 focus:border-emerald-500 transition-all duration-200 resize-none"
+                          className="min-h-[100px] sm:min-h-[120px] border-2 focus:border-emerald-500 transition-all duration-200 resize-none text-base"
                           {...field}
                         />
                       </FormControl>
@@ -385,7 +385,7 @@ const ScheduleMeetingForm = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 h-14 text-lg font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-emerald-500/25"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 h-12 sm:h-14 text-base sm:text-lg font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-emerald-500/25"
                   >
                     {isSubmitting ? (
                       <div className="flex items-center gap-2">
@@ -410,14 +410,14 @@ const ScheduleMeetingForm = () => {
         </Card>
         
         {/* Info Sidebar */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           <Card className="bg-gradient-to-br from-emerald-50 via-green-50 to-emerald-100 dark:from-emerald-950/50 dark:via-green-950/50 dark:to-emerald-900/50 border-emerald-200 dark:border-emerald-800">
-            <CardHeader>
-              <CardTitle className="text-lg text-emerald-700 dark:text-emerald-300">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-emerald-700 dark:text-emerald-300">
                 Business Hours
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-3 sm:space-y-4 p-4 sm:p-6 pt-0 sm:pt-0">
               <div className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-emerald-600" />
                 <div>
@@ -436,12 +436,12 @@ const ScheduleMeetingForm = () => {
           </Card>
           
           <Card className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 dark:from-blue-950/50 dark:via-indigo-950/50 dark:to-blue-900/50 border-blue-200 dark:border-blue-800">
-            <CardHeader>
-              <CardTitle className="text-lg text-blue-700 dark:text-blue-300">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-base sm:text-lg text-blue-700 dark:text-blue-300">
                 What to Expect
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-3 p-4 sm:p-6 pt-0 sm:pt-0">
               <div className="flex items-start gap-3">
                 <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5" />
                 <div>
@@ -467,7 +467,7 @@ const ScheduleMeetingForm = () => {
           </Card>
           
           <Card className="bg-gradient-to-br from-purple-50 via-violet-50 to-purple-100 dark:from-purple-950/50 dark:via-violet-950/50 dark:to-purple-900/50 border-purple-200 dark:border-purple-800">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="text-center">
                 <h3 className="font-semibold text-purple-700 dark:text-purple-300 mb-2">
                   Prefer to Call?

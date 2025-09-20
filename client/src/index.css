@@ -2038,36 +2038,71 @@ button, .button {
   }
 
   /* Schedule form mobile optimizations */
-  #meeting {
-    margin: 1rem !important;
-    width: calc(100% - 2rem) !important;
-    max-width: none !important;
+  .schedule-page {
+    padding-top: 4rem !important;
+    padding-bottom: 2rem !important;
   }
 
-  #meeting input, #meeting textarea {
+  .schedule-form-container {
+    padding: 0 0.75rem !important;
+  }
+
+  .schedule-form-card {
+    margin: 0 !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .schedule-form input, .schedule-form textarea, .schedule-form button {
     font-size: 16px !important; /* Prevents zoom on iOS */
-    height: 48px !important;
+    touch-action: manipulation !important;
+  }
+
+  .schedule-form input {
+    height: 44px !important;
     padding: 0.75rem !important;
   }
 
-  #meeting textarea {
-    height: 120px !important;
-    min-height: 120px !important;
+  .schedule-form textarea {
+    min-height: 100px !important;
+    padding: 0.75rem !important;
   }
 
-  #meeting button[type="submit"] {
-    height: 56px !important;
-    font-size: 1.125rem !important;
+  .schedule-form button[type="submit"] {
+    height: 48px !important;
+    font-size: 1rem !important;
   }
 
-  #meeting .grid {
+  .schedule-form .grid {
     grid-template-columns: 1fr !important;
     gap: 1rem !important;
   }
 
-  #meeting label {
+  .schedule-form label {
     font-size: 0.875rem !important;
     margin-bottom: 0.5rem !important;
+  }
+
+  /* Mobile sidebar optimization */
+  .schedule-sidebar {
+    margin-top: 1.5rem !important;
+  }
+
+  .schedule-sidebar .card {
+    padding: 1rem !important;
+  }
+
+  .schedule-sidebar h3 {
+    font-size: 1rem !important;
+  }
+
+  .schedule-sidebar p {
+    font-size: 0.875rem !important;
+  }
+
+  /* Form field icons mobile */
+  .schedule-form .relative svg {
+    width: 1rem !important;
+    height: 1rem !important;
   }
 }
 
