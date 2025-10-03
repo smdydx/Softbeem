@@ -18,12 +18,8 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 5001
+localPort = 38373
 externalPort = 3002
-
-[[ports]]
-localPort = 39443
-externalPort = 3000
 
 [[ports]]
 localPort = 45629
@@ -44,29 +40,14 @@ author = "agent"
 task = "workflow.run"
 args = "Start Game"
 
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Backend Server"
-
 [[workflows.workflow]]
 name = "Start Game"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
-
 [workflows.workflow.metadata]
 outputType = "webview"
-
-[[workflows.workflow]]
-name = "Backend Server"
-author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev:server"
-
-[workflows.workflow.metadata]
-outputType = "console"
+waitForPort = 5000

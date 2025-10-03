@@ -25,12 +25,23 @@ const JarvisGlobe = ({ size = 300 }: JarvisGlobeProps) => {
     camera.position.z = 5;
     cameraRef.current = camera;
 
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance',
-      preserveDrawingBuffer: false
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ 
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance',
+        preserveDrawingBuffer: false
+      });
+    } catch (error) {
+      console.error('WebGL not supported:', error);
+      return;
+    }
+    if (!renderer.getContext()) {
+      console.error('WebGL context not available');
+      return;
+    }
+    
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
     renderer.domElement.style.background = 'transparent';

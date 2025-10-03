@@ -84,7 +84,7 @@ app.set('io', io);
 
 // Register routes and start server
 registerRoutes(app, httpServer).then((server) => {
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 5000;
 
   // Graceful shutdown handling
   process.on('SIGTERM', () => {

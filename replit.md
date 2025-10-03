@@ -85,3 +85,32 @@ Preferred communication style: Simple, everyday language.
 - **SMTP Settings**: Email service configuration for notifications
 - **File Paths**: Configurable upload directories and static asset serving
 - **Development Tools**: Hot reloading, error overlays, and development logging
+
+## Replit Environment Setup
+
+### Development Workflow
+- **Command**: `npm run dev:server` - Starts the Express backend server which integrates Vite middleware for development
+- **Port**: 5000 - The server runs on port 5000 and serves both frontend and API endpoints
+- **Host**: 0.0.0.0 - Bound to all interfaces to work with Replit's proxy system
+- **Hot Reload**: Vite provides instant HMR for frontend changes
+
+### Architecture in Development
+The application uses a monolithic development setup where:
+1. Express server starts on port 5000
+2. Vite is integrated as Express middleware (via server/vite.ts)
+3. API routes are served at `/api/*`
+4. All other routes are handled by Vite for the React frontend
+5. Socket.io is integrated with the same HTTP server for real-time features
+
+### Production Build
+- **Build Command**: `npm run build` - Compiles both frontend (Vite) and backend (esbuild)
+- **Start Command**: `npm run start` - Runs the production server
+- **Static Files**: Frontend builds to `dist/public` and is served by Express in production
+
+### Database Configuration
+- **MongoDB**: Currently using MongoDB Atlas with connection string in code (should use environment variable)
+- **PostgreSQL**: Configured via Drizzle ORM for relational data (optional in this setup)
+
+### Known Issues
+- WebGL components (JarvisGlobe) require browser with GPU support
+- Error handling added for environments without WebGL context
