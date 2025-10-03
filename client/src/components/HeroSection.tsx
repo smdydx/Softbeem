@@ -74,7 +74,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black -mt-14 sm:-mt-16 lg:-mt-20 pt-14 sm:pt-16 lg:pt-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black -mt-14 sm:-mt-16 lg:-mt-20 pt-14 sm:pt-16 lg:pt-8"
     >
       {/* Video Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -140,7 +140,7 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10 mt-16 sm:mt-20 lg:mt-32">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 mt-16 sm:mt-20 lg:mt-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 lg:gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50, scale: 0.9 }}
@@ -280,9 +280,9 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col justify-center items-center mt-2 sm:mt-4 lg:mt-8"
+            className="flex flex-col justify-center items-center mt-2 sm:mt-4 lg:mt-0"
           >
-            <div className="mt-8 sm:mt-16 lg:mt-40">
+            <div className="mt-8 sm:mt-16 lg:mt-0">
               {globeLoaded ? (
                 <JarvisGlobe size={isMobile ? 300 : 400} />
               ) : (
