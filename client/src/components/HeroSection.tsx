@@ -282,7 +282,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col justify-center items-center mt-2 sm:mt-4 lg:mt-0"
           >
-            <div className="mt-8 sm:mt-16 lg:mt-32">
+            <div className="mt-8 sm:mt-16 lg:mt-40">
               {globeLoaded ? (
                 <JarvisGlobe size={isMobile ? 300 : 400} />
               ) : (
