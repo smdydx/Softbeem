@@ -15,7 +15,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd native-app && npm start"
+args = "cd native-app && npm run web"
 
 [[ports]]
 localPort = 8081
