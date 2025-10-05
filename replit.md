@@ -114,3 +114,16 @@ The application uses a monolithic development setup where:
 ### Known Issues
 - WebGL components (JarvisGlobe) require browser with GPU support
 - Error handling added for environments without WebGL context
+
+## Recent Changes (October 2025)
+
+### Replit Environment Configuration
+- **Server Configuration**: Fixed port configuration to use 5000 consistently for both development and production
+- **Vite Proxy**: Removed unnecessary API proxy configuration as backend integrates Vite middleware directly
+- **MongoDB Connection**: Configured to use MONGODB_URI environment variable for secure database connection
+- **Host Configuration**: Set to 0.0.0.0 to work with Replit's proxy system
+
+### Deployment Setup
+- **Target**: VM deployment for maintaining server state and WebSocket connections
+- **Build Process**: Compiles frontend with Vite and backend with esbuild
+- **Production Start**: Runs compiled Node.js server from dist directory
