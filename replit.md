@@ -2,9 +2,12 @@
 
 ## Overview
 
-This is a full-stack web application for Ramaera Legal InfoTech Private Limited, a technology consultancy that provides blockchain development, IT services, and legal compliance solutions. The platform serves as a comprehensive business website featuring service showcases, blog functionality, meeting scheduling, career applications, and admin management capabilities.
+This is a full-stack web and mobile application for Ramaera Legal InfoTech Private Limited, a technology consultancy that provides blockchain development, IT services, and legal compliance solutions. The platform includes:
 
-The application is built as a modern web platform with both client-facing features and administrative tools, targeting businesses seeking technology and legal solutions in blockchain, web development, mobile apps, and compliance services.
+1. **Web Application** - Comprehensive business website with service showcases, blog functionality, meeting scheduling, career applications, and admin management capabilities
+2. **Mobile Application** (softbeem) - Native mobile app built with Expo/React Native for cross-platform mobile experience
+
+The application is built as a modern platform with both client-facing features and administrative tools, targeting businesses seeking technology and legal solutions in blockchain, web development, mobile apps, and compliance services.
 
 ## User Preferences
 
@@ -115,15 +118,45 @@ The application uses a monolithic development setup where:
 - WebGL components (JarvisGlobe) require browser with GPU support
 - Error handling added for environments without WebGL context
 
+## Mobile App Architecture (Softbeem)
+
+### Framework & Technologies
+- **Framework**: Expo SDK 54 with React Native 0.81
+- **Routing**: Expo Router with file-based routing
+- **UI Components**: Custom components with platform-specific icons (iOS/Android)
+- **State Management**: React hooks and context
+- **Features**: Haptic feedback (iOS), edge-to-edge display (Android), dark mode support
+
+### Development & Testing
+- **Development Server**: Runs on port 8080 with Metro bundler
+- **Testing Options**:
+  - Expo Go app on physical device (instant testing)
+  - Web preview in browser
+  - APK builds via EAS Build for production testing
+- **Build Configuration**: EAS configured for APK generation (not AAB)
+
+### Deployment
+- **Build Service**: EAS Build (cloud-based)
+- **Output**: APK files for direct installation
+- **Distribution**: Google Play Store or direct APK distribution
+- **Guide**: Complete setup instructions in `softbeem/MOBILE_APP_GUIDE.md`
+
 ## Recent Changes (October 2025)
 
-### Replit Environment Configuration
+### Web Application Setup
 - **Server Configuration**: Fixed port configuration to use 5000 consistently for both development and production
 - **Vite Proxy**: Removed unnecessary API proxy configuration as backend integrates Vite middleware directly
 - **MongoDB Connection**: Configured to use MONGODB_URI environment variable for secure database connection
 - **Host Configuration**: Set to 0.0.0.0 to work with Replit's proxy system
 
+### Mobile Application Setup
+- **Expo Configuration**: Configured Expo app with tunnel support and ngrok
+- **EAS Build**: Set up eas.json for APK builds across all profiles (development, preview, production)
+- **Development Workflow**: Created "Mobile App" workflow running on port 8080
+- **Documentation**: Created comprehensive guide in MOBILE_APP_GUIDE.md for testing and APK builds
+
 ### Deployment Setup
-- **Target**: VM deployment for maintaining server state and WebSocket connections
+- **Web App Target**: VM deployment for maintaining server state and WebSocket connections
 - **Build Process**: Compiles frontend with Vite and backend with esbuild
 - **Production Start**: Runs compiled Node.js server from dist directory
+- **Mobile App**: EAS Build configured for cloud-based APK generation
