@@ -20,3 +20,7 @@ args = "cd native-app && npm run web"
 [[ports]]
 localPort = 8081
 externalPort = 80
+
+[[ports]]
+localPort = 8082
+externalPort = 3000
