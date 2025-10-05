@@ -53,6 +53,15 @@ args = "cd softbeem && npx expo start --port 8080"
 [workflows.workflow.metadata]
 outputType = "console"
 
+[[workflows.workflow]]
+name = "Mobile App (Tunnel)"
+author = 40724490
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd softbeem && npx expo start --tunnel --port 8080"
+
 [[ports]]
 localPort = 5000
 externalPort = 80
