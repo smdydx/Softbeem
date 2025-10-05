@@ -4,3 +4,15 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
+
+[workflows]
+runButton = "Start Native App"
+
+[[workflows.workflow]]
+name = "Start Native App"
+author = 40724490
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd native-app && npm start"
