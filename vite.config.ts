@@ -27,12 +27,6 @@ export default defineConfig({
       clientPort: 443,
     },
     allowedHosts: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true
-      }
-    },
   },
   resolve: {
     alias: {
